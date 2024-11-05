@@ -1,0 +1,111 @@
+2024-11-04 08:03:07,196 WARN [HikariPool-1 housekeeper] c.z.h.p.HikariPool [HikariPool.java:804] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2d14h22m35s38ms339µs200ns).
+2024-11-04 08:15:52,372 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/test/token
+Method: POST
+Class: UserController
+Method: someProtectedEndpoint
+Param: token=eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiKzJReDdYeVBQcWFHU2JDTm9TMUpGZz09Iiwib3BlbmlkIjoib0V0aEc1Q3hjMVB5RXVHYnhGMlJCdU1hTThnUSIsImlhdCI6MTczMDQ1Mjk2MCwiZXhwIjoxNzMwNTM5MzYwfQ.4JsJV4kWE0dIYkCQl4IvkYUr2yoiDQUfSia6KL3ST44
+Client IP: 127.0.0.1
+
+2024-11-04 08:15:52,376 ERROR [http-nio-8080-exec-6] c.g.u.e.GlobalExceptionHandler [GlobalExceptionHandler.java:20] 运行时异常：
+java.lang.IllegalArgumentException: No enum constant com.gasen.usercenterbackend.common.ErrorCode.Token无效或已过期，请重新登录
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.gasen.usercenterbackend.common.ErrorCode.valueOf(ErrorCode.java:8)
+	at com.gasen.usercenterbackend.controller.UserController.someProtectedEndpoint(UserController.java:102)
+	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:261)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:189)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-11-04 08:19:28,689 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2024-11-04 08:19:28,694 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2024-11-04 08:19:43,203 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 7672 (D:\IDEAProject\user-center-backend-master\target\classes started by GASEN in D:\IDEAProject\user-center-backend-master)
+2024-11-04 08:19:43,204 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2024-11-04 08:19:43,936 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-04 08:19:43,940 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-04 08:19:43,982 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 15 ms. Found 0 Redis repository interfaces.
+2024-11-04 08:19:44,530 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2024-11-04 08:19:44,539 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-04 08:19:44,540 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2024-11-04 08:19:44,540 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-11-04 08:19:44,598 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2024-11-04 08:19:44,599 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1368 ms
+2024-11-04 08:19:45,552 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2024-11-04 08:19:45,568 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2024-11-04 08:19:45,576 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.77 seconds (process running for 3.462)
+2024-11-04 08:36:16,151 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-04 08:36:16,151 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2024-11-04 08:36:16,153 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2024-11-04 08:36:16,184 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1Y9aGa1npgtI0HjwHa1rq3pj0Y9aG5
+Client IP: 127.0.0.1
+
+2024-11-04 08:36:17,473 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2024-11-04 08:36:17,632 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@46caff8e
+2024-11-04 08:36:17,634 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2024-11-04 08:36:54,708 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/test/token
+Method: POST
+Class: UserController
+Method: someProtectedEndpoint
+Param: token=eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiODFjZ0kySnYxblZzUkh4dXdiV0tvdz09Iiwib3BlbmlkIjoib0V0aEc1Q3hjMVB5RXVHYnhGMlJCdU1hTThnUSIsImlhdCI6MTczMDY4MDU3NywiZXhwIjoxNzMwNzY2OTc3fQ.4yZe9qORC7Gf_Vga4DwhiQ3poyfnIIkfiBJcfYcG7js
+Client IP: 127.0.0.1
+
+2024-11-04 08:37:30,885 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/test/token
+Method: POST
+Class: UserController
+Method: someProtectedEndpoint
+Param: token=eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiODFjZ0kySnYxblZzUkh4dXdiV0tvdz09Iiwib3BlbmlkIjoib0V0aEc1Q3hjMVB5RXVHYnhGMlJCdU1hTThnUSIsImlhdCI6MTczMDY4MDU3NywiZXhwIjoxNzMwNzY2OTc3fQ.4yZe9qORC7Gf_Vga4DwhiQ3poyfnIIkfiBJcfYcG7js
+Client IP: 127.0.0.1
+
+2024-11-04 09:43:16,874 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2024-11-04 09:43:16,892 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.

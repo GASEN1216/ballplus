@@ -1,0 +1,25 @@
+<view class="container">
+  <text class="title">编辑资料</text>
+  
+  <view class="form-group">
+    <text class="label">昵称</text>
+    <input class="input" placeholder="请输入昵称" bindinput="inputNickname" value="{{nickname}}" />
+  </view>
+  
+  <view class="form-group">
+    <text class="label">运动偏好</text>
+    <input class="input" placeholder="如：篮球，游泳" bindinput="inputHobby" value="{{hobby}}" />
+  </view>
+  
+  <view class="form-group">
+    <text class="label">技能水平</text>
+    <input class="input" placeholder="如：入门、中级、专业" bindinput="inputSkillLevel" value="{{skillLevel}}" />
+  </view>
+  
+  <view class="form-group">
+    <text class="label">可用时间</text>
+    <input class="input" placeholder="如：周末，平日晚间" bindinput="inputAvailability" value="{{availability}}" />
+  </view>
+  
+  <button class="save-button" bindtap="saveProfile">保存资料</button>
+</view>

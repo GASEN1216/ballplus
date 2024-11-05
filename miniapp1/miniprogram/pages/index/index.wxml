@@ -1,0 +1,20 @@
+<view class="container">
+  <view class="title">欢迎来到运动管理系统</view>
+
+  <!-- 用户资料区域 -->
+  <view wx:if="{{isLoggedin}}" class="profile">
+    <image class="profile-pic" src="{{profilePic}}" mode="aspectFill" />
+    <text class="nickname">{{nickname}}</text>
+  </view>
+
+  <!-- 登录按钮区域 -->
+  <view wx:else class="login-container">
+    <button class="login-button" bindtap="onLoginButtonClick">微信登录</button>
+  </view>
+
+    <!-- 验证token按钮 -->
+  <view wx:if="{{isLoggedin}}">
+    <button class="token-button" bindtap="onTokenButtonClick">验证Token</button>
+    <text class="token-status">{{tokenStatus}}</text>
+  </view>
+</view>

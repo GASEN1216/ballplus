@@ -1,0 +1,310 @@
+package com.gasen.usercenterbackend.controller;
+
+
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.gasen.usercenterbackend.common.BaseResponse;
+import com.gasen.usercenterbackend.common.ErrorCode;
+import com.gasen.usercenterbackend.common.ResultUtils;
+import com.gasen.usercenterbackend.config.WXConfig;
+import com.gasen.usercenterbackend.mapper.UserMapper;
+import com.gasen.usercenterbackend.model.Request.UserBannedDaysRequest;
+import com.gasen.usercenterbackend.model.Request.UserRegisterLoginRequest;
+import com.gasen.usercenterbackend.model.User;
+import com.gasen.usercenterbackend.service.IUserService;
+import com.gasen.usercenterbackend.utils.WechatUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import  java.util.concurrent.TimeUnit;
+
+import static com.gasen.usercenterbackend.common.ErrorCode.INVALID_TOKEN;
+import static com.gasen.usercenterbackend.common.ErrorCode.SIGNATURE_ERROR;
+import static com.gasen.usercenterbackend.constant.UserConstant.ADMIN;
+import static com.gasen.usercenterbackend.constant.UserConstant.USER_LOGIN_IN;
+
+/**
+ * <p>
+ * 用户信息 前端控制器
+ * </p>
+ *
+ * @author gasen
+ * @since 2024-02-22
+ */
+@Slf4j
+@RestController
+@RequestMapping("/user")
+public class UserController {
+
+    @Resource
+    private IUserService userService;
+
+    @Resource
+    private UserMapper userMapper;
+
+    private final WXConfig wxConfig;
+
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
+
+
+    @Autowired
+    public UserController(WXConfig wxConfig) {
+        this.wxConfig = wxConfig;
+    }
+
+    //TODO：ZSet做排行榜
+
+    /**
+     * 接收code并输出
+     */
+    @PostMapping("/receiveCode")
+    public BaseResponse<String> receiveCode(@RequestParam("code") String code) {
+        if (StringUtils.isBlank(code)) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "code为空");
+        }
+
+        // 输出接收到的code
+        log.info("Received code: " + code);
+
+        // 假设你想要返回接收到的code作为响应
+        return ResultUtils.success("Code received: " + code);
+    }
+
+    /**
+     * 验证微信小程序登录的token
+     * @param token 用户传入的token
+     * @return 是否有效的布尔值
+     */
+    public boolean validateToken(String token) {
+        // 从Redis中获取token对应的值
+        String storedValue = (String) redisTemplate.opsForValue().get(token);
+
+
+
+        // 检查token是否存在且有效
+        // 如果存在，token有效
+        return storedValue != null;
+        // 如果Redis中不存在该token，返回无效
+    }
+
+    @PostMapping("/test/token")
+    public BaseResponse someProtectedEndpoint(@RequestParam("token") String token) {
+        // 验证token
+        if (!validateToken(token)) {
+            return ResultUtils.error(INVALID_TOKEN);
+        }
+        // 处理受保护的逻辑
+        return ResultUtils.success("Token正确");
+    }
+
+
+    /**
+     * 微信小程序登录
+     */
+    @PostMapping("/wx/login")
+    public BaseResponse user_login(@RequestParam(value = "code", required = false) String code) {
+        // 1.接收小程序发送的code
+        // 2.开发者服务器 登录凭证校验接口 appi + appsecret + code
+        JSONObject SessionKeyOpenId = WechatUtil.getSessionKeyOrOpenId(code, wxConfig.getAppid(), wxConfig.getAppsecret());
+        // 3.接收微信接口服务 获取返回的参数
+        String openid = SessionKeyOpenId.getString("openid");
+        String sessionKey = SessionKeyOpenId.getString("session_key");
+
+        // 4. 将openid和sessionKey和随机数使用加密算法得到有效期为一天的token，存到redis中，key为token，value为openid+sessionKey
+        String token = WechatUtil.generateToken(openid, sessionKey, wxConfig.getSalt());
+        redisTemplate.opsForValue().set(token, openid + "+" + sessionKey, 1, TimeUnit.DAYS);
+
+        // 5.根据返回的User实体类，判断用户是否是新用户，是的话，将用户信息存到数据库；
+        LambdaQueryWrapper<User> lqw = Wrappers.lambdaQuery();
+        lqw.eq(User::getOpenId, openid);
+        User user = userService.getOne(lqw);
+        if (user == null) {
+            // 用户信息入库
+            user = new User(WechatUtil.generateRandomUsername(), "12345678");
+            user.setOpenId(openid);
+            userService.save(user);
+        }
+        User saftyUser = getSaftyUser(user);
+        saftyUser.setPassword(token);
+        return ResultUtils.success(saftyUser);
+    }
+
+    /**
+     * 更新用户
+     * User传进来要有id
+     * */
+    @Operation(summary = "更新用户信息")
+    @PostMapping("/update")
+    public BaseResponse updateUser(@RequestBody User user, HttpServletRequest request) {
+        //TODO：判断是否是用户自己，是的话也可以进入修改
+        //1.是否为管理员
+        if(isAdmin(request)) {
+            //2.判断用户是否存在
+            if(userService.lambdaQuery().eq(User::getId, user.getId()).exists()) {
+                //TODO：判断是否有更新信息，未更新直接返回
+                //3.更新用户信息
+                log.info("id为"+user.getId()+"的用户更新信息");
+                if(userService.updateById(user))
+                //4.返回更新后的用户信息
+                    return ResultUtils.success(getSaftyUser(user));
+                else return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"更新用户信息失败");
+            } else return ResultUtils.error(ErrorCode.USER_NOT_EXIST);
+        }else return ResultUtils.error(ErrorCode.USER_NOT_LOGIN_OR_NOT_ADMIN);
+    }
+
+    /**
+     * 删除用户
+     * */
+    @PostMapping("/delete")
+    public BaseResponse deleteUser(@RequestParam("id") int id, HttpServletRequest request) {
+        //1.是否为管理员
+        if(isAdmin(request)) {
+            //2.判断用户是否存在
+            if(userService.lambdaQuery().eq(User::getId, id).exists()) {
+                //3.删除用户
+                userMapper.deleteById(id);
+                log.info("id为"+id+"的用户删除成功");
+                return ResultUtils.success("id为"+id+"的用户删除成功");
+            } else return ResultUtils.error(ErrorCode.USER_NOT_EXIST);
+        }else return ResultUtils.error(ErrorCode.USER_NOT_LOGIN_OR_NOT_ADMIN);
+    }
+
+    /**
+     * 获取当前登录用户
+     */
+    @GetMapping("/current")
+    public BaseResponse getCurrentUser(HttpServletRequest request) {
+        //1.获取用户信息
+        User user = (User) request.getSession().getAttribute(USER_LOGIN_IN);
+        //2.不为null返回安全用户信息
+        if(user!=null) {
+            log.info("请求获取当前用户信息："+user.getUserAccount());
+            //获取最新的用户信息
+            User latestUser = getSaftyUser(userMapper.selectById(user.getId()));
+            return ResultUtils.success(latestUser);
+        }
+        //3.为null返回用户未登录
+        else return ResultUtils.error(ErrorCode.USER_NOT_LOGIN);
+    }
+
+    /**
+     * 获取所有用户信息
+     */
+    @GetMapping("/all")
+    public BaseResponse getAllUser(HttpServletRequest request) {
+        if(isAdmin(request)) {
+            log.info("请求获取所有用户信息");
+            List<User> users = userService.usersList();
+            // 使用 Java 8 Stream API 来处理用户列表并生成新的安全用户列表
+            List<User> safeUsers = users.stream()
+                    .map(UserController::getSaftyUser) // 对每个用户应用安全处理
+                    .toList(); // 收集处理后的用户到新的列表中
+            return ResultUtils.success(safeUsers);
+        }else return ResultUtils.error(ErrorCode.USER_NOT_LOGIN_OR_NOT_ADMIN);
+    }
+
+
+    /**
+     * 用户注册
+     * */
+    @PostMapping("/register")
+    public BaseResponse<Long> register(@RequestBody UserRegisterLoginRequest user) {
+        if(user==null) return ResultUtils.error(ErrorCode.PARAMETER_ERROR,"用户为空");
+        String userAccount = user.getUserAccount();
+        String password = user.getPassword();
+        userDetail(user,"注册");
+        if(StringUtils.isAnyBlank(userAccount,password)) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR,"账户名或密码为空");
+        }
+        long l = userService.userRegister(userAccount, password);
+        return ResultUtils.success(l);
+    }
+
+
+    /**
+     * 用户登录暨签到
+     * */
+    @PostMapping("/login")
+    public BaseResponse<?> login(@RequestBody UserRegisterLoginRequest user, HttpServletRequest request) {
+        if(user==null) return ResultUtils.error(ErrorCode.PARAMETER_ERROR,"用户为空");
+        String userAccount = user.getUserAccount();
+        String password = user.getPassword();
+        userDetail(user,"登录");
+        if(StringUtils.isAnyBlank(userAccount,password)) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR,"账户名或密码为空");
+        }
+        User user1 = userService.userLogin(userAccount, password, request);
+        if(user1.getUnblockingTime()!=null)
+            return ResultUtils.error(ErrorCode.BANNED_USER,user1.getUnblockingTime());
+        User saftyUser = getSaftyUser(user1);
+        return ResultUtils.success(saftyUser);
+    }
+
+    /**
+     * 用户登出
+     * */
+    @PostMapping("/logout")
+    public BaseResponse<Boolean> logout(HttpServletRequest request) {
+        boolean logout = userService.userLogout(request);
+        return ResultUtils.success(logout);
+    }
+
+    /**
+     * 用户封禁
+     * */
+    @PostMapping("/banned")
+    public BaseResponse banned(@RequestBody UserBannedDaysRequest userBannedDaysRequest, HttpServletRequest request) {
+        if(!isAdmin(request)) return ResultUtils.error(ErrorCode.USER_NOT_LOGIN_OR_NOT_ADMIN);
+        if(userBannedDaysRequest ==null) return ResultUtils.error(ErrorCode.PARAMETER_ERROR,"参数为空");
+        log.info("ID为"+userBannedDaysRequest.getId()+"的用户被封禁"+userBannedDaysRequest.getDays()+"天");
+        Boolean banned = userService.userBannedDays(userBannedDaysRequest);
+        return ResultUtils.success(banned);
+    }
+
+    /**
+     * 用户信息
+     * */
+    public void userDetail(UserRegisterLoginRequest user, String behavior) {
+        log.info("用户"+user.getUserAccount()+behavior+"："+ user);
+    }
+
+
+    /**
+     * 获取安全用户信息
+     * */
+    public static User getSaftyUser(User user) {
+        User saftyUser = new User();
+        saftyUser.setId(user.getId());
+        saftyUser.setUserAccount(user.getUserAccount());
+        saftyUser.setUserName(user.getUserName());
+        saftyUser.setAvatarUrl(user.getAvatarUrl());
+        saftyUser.setGender(user.getGender());
+        saftyUser.setGrade(user.getGrade());
+        saftyUser.setExp(user.getExp());
+        saftyUser.setState(user.getState());
+        saftyUser.setEmail(user.getEmail());
+        saftyUser.setPhone(user.getPhone());
+        saftyUser.setSignIn(user.getSignIn());
+        saftyUser.setUnblockingTime(user.getUnblockingTime());
+        return saftyUser;
+    }
+
+    /**
+     * 是否是管理员
+     * */
+    public boolean isAdmin(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute(USER_LOGIN_IN);
+        return user != null && user.getState() == ADMIN;
+    }
+}

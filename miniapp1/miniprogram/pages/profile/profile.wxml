@@ -1,0 +1,25 @@
+<view class="container">
+  <text class="title">个人资料</text>
+  
+  <view class="form-group">
+    <text class="label">昵称:</text>
+    <text>{{nickname}}</text>
+  </view>
+  
+  <view class="form-group">
+    <text class="label">运动偏好:</text>
+    <text>{{hobby}}</text>
+  </view>
+  
+  <view class="form-group">
+    <text class="label">技能水平:</text>
+    <text>{{skillLevel}}</text>
+  </view>
+  
+  <view class="form-group">
+    <text class="label">可用时间:</text>
+    <text>{{availability}}</text>
+  </view>
+  
+  <button class="edit-button" bindtap="editProfile">编辑资料</button>
+</view>
