@@ -39,26 +39,6 @@
   color: #666; /* 昵称颜色 */
 }
 
-.login-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 10rpx; /* 与上方用户资料区域的间距 */
-}
-
-.login-button {
-  background-color: #1aad19; /* 登录按钮背景色 */
-  color: white; /* 登录按钮字体颜色 */
-  font-size: 16px; /* 字体大小 */
-  padding: 10rpx 20rpx; /* 按钮内边距 */
-  border: none; /* 去掉边框 */
-  border-radius: 5px; /* 按钮圆角 */
-  transition: background-color 0.3s; /* 按钮背景色变化的过渡效果 */
-}
-
-.login-button:hover {
-  background-color: #139e15; /* 按钮悬停时背景色 */
-}
-
 .usermotto {
   margin-top: 200px; /* 这部分可以根据需要调整 */
   color: #aaa; /* 口号颜色 */
@@ -75,4 +55,11 @@
   margin-top: 10rpx;
   font-size: 28rpx;
   color: #333;
+}
+
+.info-link {
+  font-size: 16px;
+  color: #ADD8E6; /* 淡蓝色 */
+  margin-top: 10px;
+  cursor: pointer;
 }

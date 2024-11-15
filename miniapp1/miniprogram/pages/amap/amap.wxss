@@ -1,9 +1,7 @@
-.map_container{
-  position: absolute;
-  top: 0;
-  bottom: 80px;
-  left: 0;
-  right: 0;
+.map_container {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 .map{
   width: 100%;
@@ -56,4 +54,25 @@ text{
   border: none;
   border-radius: 5px;
   font-size: 12px;
+}
+
+.map_container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.movable-area {
+  width: 100%;
+  height: 300rpx; /* Adjust height as needed */
+  background-color: #f0f0f0;
+}
+
+.movable-view {
+  width: 100%;
+  height: 200rpx; /* Height of the movable content */
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  box-sizing: border-box;
+  padding: 20rpx;
 }

@@ -3,12 +3,16 @@
 <view class="search_container">
   <input class="search_input" placeholder="搜索地点" bindinput="onSearchInput" bindconfirm="onSearch" />
 </view>
-
-
   <map class="map" id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" show-location="true" markers="{{markers}}" bindmarkertap="makertap" style="position: relative; left: 0rpx; top: 0rpx"></map>
-</view>
-<view class="map_text">
-  <text class="h1">{{textData.name}}</text>
-  <text>{{textData.desc}}</text>
-  <button class="navigate-btn" bindtap="goMap" style="position: relative; left: 602rpx; top: -97rpx; width: 68rpx; display: inline-block; box-sizing: border-box; height: 87rpx">导航</button> <!-- 小长方形按钮 -->
+
+    <!-- 可拖动信息栏 -->
+    <movable-area class="movable-area">
+      <movable-view class="movable-view" direction="vertical" bindchange="onMovableChange">
+      <view class="map_text">
+        <text class="h1">{{textData.name}}</text>
+        <text>{{textData.desc}}</text>
+        <button class="navigate-btn" bindtap="goMap" style="position: relative; left: 602rpx; top: -97rpx; width: 68rpx; display: inline-block; box-sizing: border-box; height: 87rpx">导航</button>
+      </view>
+    </movable-view>
+  </movable-area>
 </view>

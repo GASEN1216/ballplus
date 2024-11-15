@@ -4,7 +4,8 @@
     "pages/amap/amap",
     "pages/friends/friends",
     "pages/profile/profile",
-    "pages/editProfile/editProfile"
+    "pages/editProfile/editProfile",
+    "pages/settings/settings"
   ],
   "permission": {
    		"scope.userLocation": {

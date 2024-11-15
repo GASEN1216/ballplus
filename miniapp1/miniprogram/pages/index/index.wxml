@@ -1,18 +1,24 @@
 <view class="container">
   <view class="title">欢迎来到运动管理系统</view>
 
-  <!-- 用户资料区域 -->
-  <view wx:if="{{isLoggedin}}" class="profile">
-    <image class="profile-pic" src="{{profilePic}}" mode="aspectFill" />
-    <text class="nickname">{{nickname}}</text>
+  <!-- 登录状态显示，固定在左上角 -->
+  <view wx:if="{{isLoggedin}}" style="position: absolute; top: 10px; left: 10px; display: flex; align-items: center;">
+    <!-- 头像在左边 -->
+    <image src="{{profilePic}}" style="width: 50px; height: 50px; border-radius: 50%;" />
+    <!-- 昵称在右边，留些间距 -->
+    <text style="margin-top: -20px; font-size: 16px;">{{nickname}}</text>
+    <!-- 个人信息链接 -->
+    <view class="info-link" style="margin-top: 20px; margin-left: -130px; font-size: 12px; color: #87CEFA; cursor: pointer;" bindtap="goToEditInfo">个人信息</view>
+  <!-- 缩小并调整位置的设置按钮 -->
+  <button class="settings-icon" bindtap="navigateToSettings" style="margin-left: 10px; width: 158rpx; height: 97rpx; position: relative; left: 389rpx; top: 9rpx; display: block; box-sizing: border-box">
+    <image src="../../icon/settings.png" style="width: 100%; height: 100%; position: relative; left: -33rpx; top: -16rpx" mode="aspectFit" />
+  </button>
   </view>
 
-  <!-- 登录按钮区域 -->
-  <view wx:else class="login-container">
-    <button class="login-button" bindtap="onLoginButtonClick">微信登录</button>
-  </view>
+  <!-- 登录按钮，仅在未登录时显示 -->
+  <button wx:if="{{!isLoggedin}}" bindtap="onLoginButtonClick">登录</button>
 
-    <!-- 验证token按钮 -->
+  <!-- 验证token按钮 -->
   <view wx:if="{{isLoggedin}}">
     <button class="token-button" bindtap="onTokenButtonClick">验证Token</button>
     <text class="token-status">{{tokenStatus}}</text>

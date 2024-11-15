@@ -22,7 +22,8 @@ Page({
     latitude: '',
     longitude: '',
     textData: {},
-    searchQuery: '' // 搜索内容
+    searchQuery: '', // 搜索内容
+    movableY: 300 // 初始的Y轴位置，可以根据需要调整
   },
 
   onLoad: function () {
@@ -37,16 +38,27 @@ Page({
     });
   },
 
-  // 搜索地点
-  onSearch: function () {
-    const query = this.data.searchQuery.trim();
-    if (query) {
+  onMovableChange: function(e: any) {
+    this.setData({
+      movableY: e.detail.y
+    });
+  },
+
+// 搜索地点
+onSearch: function () {
+  const query = this.data.searchQuery.trim();
+  if (query) {
+    if (query.includes("球")) {
       const myAmapFun = new amapFile.AMapWX({ key: '6509cb9d83b3c18f50d9d6a55a205997' });
       this.loadMarkers(myAmapFun, query);
     } else {
-      wx.showToast({ title: '请输入搜索内容', icon: 'none' });
+      wx.showToast({ title: '请确保搜索内容中包含“球”', icon: 'none' });
     }
-  },
+  } else {
+    wx.showToast({ title: '请输入搜索内容', icon: 'none' });
+  }
+},
+
 
   // 加载地图标记
   loadMarkers: function (myAmapFun: any, keywords: string) {
