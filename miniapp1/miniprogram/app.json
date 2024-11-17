@@ -5,7 +5,9 @@
     "pages/friends/friends",
     "pages/profile/profile",
     "pages/editProfile/editProfile",
-    "pages/settings/settings"
+    "pages/settings/settings",
+    "pages/activity_detail/activity_detail",
+    "pages/createActivity/createActivity"
   ],
   "permission": {
    		"scope.userLocation": {

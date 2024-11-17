@@ -1,0 +1,25 @@
+/* pages/activity_detail/activity_detail.wxss */
+.activity-detail-container {
+  padding: 20px;
+  background: #fff;
+}
+.activity-time,
+.activity-host,
+.activity-participants,
+.activity-content {
+  margin-top: 10px;
+  font-size: 14px;
+  display: block;
+}
+.join-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #0081ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.join-button[disabled] {
+  background-color: #ccc;
+}
