@@ -7,7 +7,8 @@
     "pages/editProfile/editProfile",
     "pages/settings/settings",
     "pages/activity_detail/activity_detail",
-    "pages/createActivity/createActivity"
+    "pages/createActivity/createActivity",
+    "pages/activities/activities"
   ],
   "permission": {
    		"scope.userLocation": {

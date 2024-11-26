@@ -1,0 +1,49 @@
+<view class="container">
+  <!-- 子标题 -->
+  <view class="tabs-container">
+    <view class="tabs">
+      <view 
+        class="tab {{activeTab === 'all' ? 'active' : ''}}" 
+        data-tab="all" 
+        bindtap="switchTab">
+        <text>所有活动</text>
+      </view>
+      <view 
+        class="tab {{activeTab === 'pendingDeparture' ? 'active' : ''}}" 
+        data-tab="pendingDeparture" 
+        bindtap="switchTab">
+        <text>待出发</text>
+      </view>
+      <view 
+        class="tab {{activeTab === 'pendingReview' ? 'active' : ''}}" 
+        data-tab="pendingReview" 
+        bindtap="switchTab">
+        <text>待评价</text>
+      </view>
+      <view 
+        class="tab {{activeTab === 'cancelled' ? 'active' : ''}}" 
+        data-tab="cancelled" 
+        bindtap="switchTab">
+        <text>取消活动</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 分隔条 -->
+  <view class="divider"></view>
+
+  <!-- 活动列表 -->
+  <view class="activity-list">
+    <block wx:for="{{filteredActivities}}" wx:key="id">
+      <view class="activity-item">
+        <view class="activity-info">
+          <text class="activity-name">{{item.name}}</text>
+          <text class="activity-time">{{item.time}}</text>
+        </view>
+        <view class="activity-status {{item.status}}">
+          <text>{{item.status === 'pendingDeparture' ? '待出发' : item.status === 'pendingReview' ? '待评价' : '取消活动'}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

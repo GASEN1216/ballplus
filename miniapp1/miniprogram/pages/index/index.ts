@@ -44,6 +44,13 @@ Page({
     });
   },
 
+    goToActivities(e: any) {
+      const tab = e.currentTarget.dataset.tab; // 获取按钮对应的标签
+      wx.navigateTo({
+        url: `/pages/activities/activities?tab=${tab}`, // 跳转并传递标签参数
+      });
+    },
+
   // 验证token方法
   onTokenButtonClick() {
     const token = app.globalData.token; // 获取全局token

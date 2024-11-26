@@ -1,0 +1,98 @@
+/* 容器样式 */
+.container {
+  padding: 20rpx;
+  background-color: #f8f9fa;
+}
+
+/* 顶部标签 */
+.tabs-container {
+  background-color: #ffffff;
+  margin-bottom: 20rpx;
+  width: 100%;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 30rpx;
+  color: #999999;
+}
+
+.tab.active {
+  color: #007aff;
+  font-weight: bold;
+  border-bottom: 4rpx solid #007aff;
+}
+
+/* 分隔条 */
+.divider {
+  height: 1rpx;
+  background-color: #dddddd;
+  margin: 10rpx 0;
+}
+
+/* 活动列表样式 */
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  width: 90%;
+}
+
+.activity-item {
+  width: 100%;
+  position: relative;
+  left: -30rpx;
+  background-color: #ffffff;
+  padding: 30rpx;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activity-info {
+  flex: 3;
+}
+
+.activity-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+}
+
+.activity-time {
+  font-size: 28rpx;
+  color: #666666;
+  margin-top: 10rpx;
+}
+
+.activity-status {
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: bold;
+  padding: 12rpx 20rpx;
+  border-radius: 10rpx;
+  color: #ffffff;
+}
+
+.activity-status.pendingDeparture {
+  background-color: #ffcc00;
+}
+
+.activity-status.pendingReview {
+  background-color: #ff6600;
+}
+
+.activity-status.cancelled {
+  background-color: #999999;
+}

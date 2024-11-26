@@ -61,6 +61,6 @@
   font-size: 12px;
   color: #44c1eb; /* 淡蓝色 */
   margin-top: 20px;
-  margin-left: -37%;
+  margin-left: -40%;
   cursor: pointer;
 }
