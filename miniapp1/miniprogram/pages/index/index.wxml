@@ -7,10 +7,12 @@
     <text style="margin-top: -20px; font-size: 16px;">{{nickname}}</text>
     <!-- 个人信息链接 -->
     <view class="info-link" bindtap="goToEditInfo">个人信息</view>
-  <!-- 缩小并调整位置的设置按钮 -->
-  <button class="settings-icon" bindtap="navigateToSettings" style="margin-left: 10px; width: 158rpx; height: 97rpx; position: relative; left: 389rpx; top: 9rpx; display: block; box-sizing: border-box">
-    <image src="../../icon/settings.png" style="width: 100%; height: 100%; position: relative; left: 0rpx; top: -16rpx" mode="aspectFit" />
-  </button>
+    
+  <!-- 添加客服按钮 -->
+  <button class="customer-service-btn" style="position: relative; left: 111rpx;" open-type="contact">客服</button>
+  <view style="position: relative; left: -100rpx;" bindtap="navigateToSettings">
+    <image src="../../icon/settings.png" style="width: 80rpx; height: 80rpx;" mode="aspectFit"/>
+  </view>
   </view>
 
   <view style="width: 95%; text-align: center; background-color: #ffffff; padding: 40rpx 0; position: relative; border-radius: 20rpx; border: 1rpx solid #ddd;">
