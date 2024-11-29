@@ -1,14 +1,26 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/amap/amap",
     "pages/friends/friends",
     "pages/profile/profile",
     "pages/editProfile/editProfile",
-    "pages/settings/settings",
-    "pages/activity_detail/activity_detail",
-    "pages/createActivity/createActivity",
-    "pages/activities/activities"
+    "pages/settings/settings"
+  ],
+  "subPackages": [
+    {
+      "root": "activities",
+      "pages": [
+        "pages/activity_detail/activity_detail",
+        "pages/createActivity/createActivity",
+        "pages/activities/activities"
+      ]
+    },
+    {
+      "root": "gdmap",
+      "pages": [
+        "pages/amap/amap"
+      ]
+    }
   ],
   "permission": {
    		"scope.userLocation": {
@@ -44,12 +56,6 @@
         "text": "好友管理",
         "iconPath": "icon/friends-icon.png", 
         "selectedIconPath": "icon/friends-icon-selected.png" 
-      },
-      {
-        "pagePath": "pages/amap/amap",
-        "text": "高德地图",
-        "iconPath": "icon/location.png", 
-        "selectedIconPath": "icon/location-selected.png" 
       }
     ]
   },

@@ -7,6 +7,8 @@ Page({
     nickname: '',
     profilePic: '',
     tokenStatus: '',
+    actPath: '../../activities',
+    gdmapPath: '../../gdmap' 
   },
   onLoad() {
     if (app.globalData.isLoggedin) {
@@ -47,7 +49,13 @@ Page({
     goToActivities(e: any) {
       const tab = e.currentTarget.dataset.tab; // 获取按钮对应的标签
       wx.navigateTo({
-        url: `/pages/activities/activities?tab=${tab}`, // 跳转并传递标签参数
+        url: `${this.data.actPath}/pages/activities/activities?tab=${tab}`, // 跳转并传递标签参数
+      });
+    },
+
+    toGdmap() {
+      wx.navigateTo({
+        url: `${this.data.gdmapPath}/pages/amap/amap`
       });
     },
 

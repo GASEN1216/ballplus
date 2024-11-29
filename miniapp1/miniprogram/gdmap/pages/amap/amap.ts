@@ -1,5 +1,6 @@
 // 引入 amap-wx.js 库
-const amapFile = require('../../libs/amap-wx.js');
+const amapFile = require('../../../libs/amap-wx.js');
+export const app = getApp<IAppOption>();
 // 定义 Marker 接口
 interface Marker {
   id: number;
@@ -36,6 +37,7 @@ Page({
     latitude: '',
     longitude: '',
     textData: {},
+    actPath: '../../../activities',
     searchQuery: '', // 搜索内容
     activities: activities // 约球活动信息
   },
@@ -67,8 +69,8 @@ onSearch: function () {
   // 加载地图标记
   loadMarkers: function (myAmapFun: any, keywords: string) {
     myAmapFun.getPoiAround({
-      iconPathSelected: '../../icon/marker_checked.png',
-      iconPath: '../../icon/marker.png',
+      iconPathSelected: '../../../icon/marker_checked.png',
+      iconPath: '../../../icon/marker.png',
       querykeywords: keywords,
       success: (data: { markers: Marker[] }) => {
         markersData = data.markers;
@@ -102,7 +104,7 @@ onSearch: function () {
   changeMarkerColor: function (data: Marker[], i: number) {
     const markers = data.map((marker, j) => ({
       ...marker,
-      iconPath: j === i ? "../../icon/marker_checked.png" : "../../icon/marker.png"
+      iconPath: j === i ? "../../../icon/marker_checked.png" : "../../../icon/marker.png"
     }));
     this.setData({ markers });
   },
@@ -119,12 +121,12 @@ onSearch: function () {
     const index = e.currentTarget.dataset.index;
     const activity = this.data.activities[index];
     wx.navigateTo({
-      url: `/pages/activity_detail/activity_detail?activity=${encodeURIComponent(JSON.stringify(activity))}`
+      url: `${this.data.actPath}/pages/activity_detail/activity_detail?activity=${encodeURIComponent(JSON.stringify(activity))}`
     });
   },
   createActivity: function() {
     wx.navigateTo({
-      url: '/pages/createActivity/createActivity'
+      url: `${this.data.actPath}/pages/createActivity/createActivity`
     });
   }
 });
