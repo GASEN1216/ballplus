@@ -23,6 +23,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -120,10 +121,20 @@ public class UserController {
         // 3.接收微信接口服务 获取返回的参数
         String openid = SessionKeyOpenId.getString("openid");
         String sessionKey = SessionKeyOpenId.getString("session_key");
+        String os = openid + "+" + sessionKey;
 
-        // 4. 将openid和sessionKey和随机数使用加密算法得到有效期为一天的token，存到redis中，key为token，value为openid+sessionKey
-        String token = WechatUtil.generateToken(openid, sessionKey, wxConfig.getSalt());
-        redisTemplate.opsForValue().set(token, openid + "+" + sessionKey, 1, TimeUnit.DAYS);
+        // 3.5 判断是否缓存里已有记录,已有直接取出token并更新过期时间
+        ValueOperations<String, Object> ops = redisTemplate.opsForValue();
+        String token = (String) ops.get(os);
+        if(token==null){
+            // 4. 将openid和sessionKey和随机数使用加密算法得到有效期为一天的token，存到redis中，key为token，value为openid+sessionKey
+            token = WechatUtil.generateToken(openid, sessionKey, wxConfig.getSalt());
+            ops.set(token, os, 1, TimeUnit.DAYS);
+            ops.set(os, token, 1, TimeUnit.DAYS);
+        }else {
+            redisTemplate.expire(token, 1, TimeUnit.DAYS);
+            redisTemplate.expire(os, 1, TimeUnit.DAYS);
+        }
 
         // 5.根据返回的User实体类，判断用户是否是新用户，是的话，将用户信息存到数据库；
         LambdaQueryWrapper<User> lqw = Wrappers.lambdaQuery();

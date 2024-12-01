@@ -1,10 +1,10 @@
 // app.ts
 App<IAppOption>({
   globalData: {
-    url: 'http://10.45.4.51:8080',
+    url: 'http://192.168.31.105:8080',
     isLoggedin: false,
     nickname: '',
-    profilePic: '',
+    profilePic: '', 
     token: '',
   },
 
@@ -52,14 +52,14 @@ App<IAppOption>({
               } else {
                 console.error('Unexpected response:', response.data);
                 wx.showToast({
-                  title: '数据错误',
+                  title: '登陆失败！服务器已爆炸',
                   icon: 'error',
                 });
               }
             },
             fail: (error) => {
               wx.showToast({
-                title: '登录失败',
+                title: '登陆失败！服务器已爆炸',
                 icon: 'error',
               });
               console.error('Failed to send login request:', error);
@@ -71,7 +71,7 @@ App<IAppOption>({
       },
       fail: (loginError) => {
         wx.showToast({
-          title: '登录失败',
+          title: '登陆失败！服务器已爆炸',
           icon: 'error',
         });
         console.error('Failed to execute wx.login:', loginError);

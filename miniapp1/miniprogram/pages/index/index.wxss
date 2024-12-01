@@ -61,14 +61,14 @@
   font-size: 12px;
   color: #44c1eb; /* 淡蓝色 */
   margin-top: 20px;
-  margin-left: -31%;
+  margin-left: -38%;
   cursor: pointer;
 }
 
 .customer-service-btn {
   position: absolute;
-  padding: 10px 15px;
-  background-color: #f5f5f5; /* 和默认背景色一致 */
+  padding: 0px 0px;
+  background-color: #ffffff; /* 和默认背景色一致 */
   border: none;
   border-radius: 5px;
   font-size: 18px;

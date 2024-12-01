@@ -1,4 +1,6 @@
 <view class="container">
+
+<view style="width: 100%; text-align: start; background-color: #ffffff; padding: 80rpx 0rpx; position: fixed;  top: 0;border: 1rpx solid #ffffff;">
   <!-- 登录状态显示，固定在左上角 -->
   <view wx:if="{{isLoggedin}}" style="position: absolute; top: 10px; left: 10px; display: flex; align-items: center;">
     <!-- 头像在左边 -->
@@ -9,11 +11,14 @@
     <view class="info-link" bindtap="goToEditInfo">个人信息</view>
 
     <!-- 添加客服按钮 -->
-    <button class="customer-service-btn" style="position: relative; left: 111rpx;" open-type="contact">客服</button>
-    <view style="position: relative; left: -100rpx;" bindtap="navigateToSettings">
+    <button class="customer-service-btn" style="position: relative; left: 200rpx; width: 79rpx; display: block; box-sizing: border-box; top: 0rpx" open-type="contact">客服</button>
+    <view style="position: relative; left: 140rpx;" bindtap="navigateToSettings">
       <image src="../../icon/settings.png" style="width: 80rpx; height: 80rpx;" mode="aspectFit" />
     </view>
   </view>
+</view>
+
+
 
 <view style="width: 95%; text-align: center; background-color: #ffffff; padding: 40rpx 0; position: relative; border-radius: 20rpx; border: 1rpx solid #ddd;">
     <view style="display: flex; justify-content: space-around; align-items: center; margin-top: 20rpx;">

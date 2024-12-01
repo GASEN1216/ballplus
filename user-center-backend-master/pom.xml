@@ -106,13 +106,6 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>1</groupId>
-            <artifactId>1</artifactId>
-            <scope>system</scope>
-            <version>1.0</version>
-            <systemPath>C:\\Users\\GASEN\\Downloads\\jad158g.win\\active-agt.jar</systemPath>
-        </dependency>
     </dependencies>
 
     <build>
