@@ -8,7 +8,13 @@ Page({
   inputFriend(e: WechatMiniprogram.Input) {
     this.setData({ friendName: e.detail.value });
   },
-
+  onShow() {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 2  //这个数字是当前页面在tabBar中list数组的索引
+      })
+    }
+  },
   addFriend() {
     const newFriend = this.data.friendName.trim();
     if (newFriend) {

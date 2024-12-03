@@ -58,7 +58,13 @@ Page({
         url: `${this.data.gdmapPath}/pages/amap/amap`
       });
     },
-
+    onShow() {
+      if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+        this.getTabBar().setData({
+          selected: 0  //这个数字是当前页面在tabBar中list数组的索引
+        })
+      }
+    },
   // 验证token方法
   onTokenButtonClick() {
     const token = app.globalData.token; // 获取全局token

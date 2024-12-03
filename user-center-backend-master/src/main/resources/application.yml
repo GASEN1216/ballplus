@@ -5,9 +5,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/xxx
-    username: database
-    password: password
+    url: jdbc:mysql://localhost:3306/sf
+    username: root
+    password: abcd4567.
   session:
     timeout: 86400
 
@@ -19,6 +19,6 @@ mybatis-plus:
       logic-not-delete-value: 0
 
 wx:
-  appid: 
-  appsecret: 
-  salt: 
+  appid: wx317f974906d46cc9
+  appsecret: 59e91abc334dfc64b8a6536db57df38b
+  salt: asdcaefevlnshgvihwoieunoviwVEDFXBNDHSDFdfsfsegsefasgaefaf

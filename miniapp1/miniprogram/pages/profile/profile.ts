@@ -13,6 +13,12 @@ Page({
 
   onShow() {
     this.loadProfileData(); // 每次显示页面时都加载数据
+
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 1  //这个数字是当前页面在tabBar中list数组的索引
+      })
+    }
   },
 
   loadProfileData() {

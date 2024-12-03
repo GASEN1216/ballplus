@@ -1,7 +1,7 @@
 // app.ts
 App<IAppOption>({
   globalData: {
-    url: 'http://192.168.31.105:8080',
+    url: 'http://10.45.4.51:8080',
     isLoggedin: false,
     nickname: '',
     profilePic: '', 
