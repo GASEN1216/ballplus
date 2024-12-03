@@ -17,6 +17,7 @@
     "strict": true,
     "strictPropertyInitialization": true,
     "lib": ["ES2020"],
+    "outDir": "dist",
     "typeRoots": [
       "./typings"
     ]
@@ -24,6 +25,7 @@
   "include": [
     "./**/*.ts",],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ]
 }

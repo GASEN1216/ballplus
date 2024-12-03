@@ -1,11 +1,18 @@
 // app.ts
+import GoEasy from './libs/goeasy-2.6.6.esm.min';
+
 App<IAppOption>({
   globalData: {
     url: 'http://10.45.4.51:8080',
     isLoggedin: false,
     nickname: '',
-    profilePic: '', 
+    profilePic: '',
     token: '',
+    currentUser: {
+      id: '',
+      name: "",
+      avatar: ""
+    }
   },
 
   // 获取完整URL的方法
@@ -13,7 +20,18 @@ App<IAppOption>({
     return `${this.globalData.url}${path}`;
   },
 
-  login(){
+  initializeGoEasy() {
+    wx.goEasy = GoEasy.getInstance({
+      host: 'hangzhou.goeasy.io', // 应用所在的区域地址
+      appkey: 'BC-d9ccbb5323994296b2255364532d3c2a', // common key
+      modules: ['im']
+    });
+    wx.GoEasy = GoEasy;
+
+    console.log('GoEasy initialized');
+  },
+
+  login() {
     // 先调用 wx.login 获取 code
     wx.login({
       success: (res) => {
@@ -39,6 +57,14 @@ App<IAppOption>({
                 // 保存 token 到全局变量
                 this.globalData.token = userData.password;
                 console.log(this.globalData.token);
+                // 设置用户im属性
+                this.globalData.currentUser.id = String(userData.id);
+                this.globalData.currentUser.name = this.globalData.nickname;
+                this.globalData.currentUser.avatar = this.globalData.profilePic;
+
+
+                // 调用封装的 GoEasy 初始化函数
+                this.initializeGoEasy();
 
                 // Notify pages after login
                 if (this.loginReadyCallback) {

@@ -1,0 +1,119 @@
+  <!-- 子标题 -->
+  <view class="tabs-container">
+    <view class="tabs">
+      <view 
+        class="tab {{activeTab === 'conversations' ? 'active' : ''}}" 
+        data-tab="conversations" 
+        bindtap="switchTab">
+        <text>会话</text>
+      </view>
+      <view 
+        class="tab {{activeTab === 'contacts' ? 'active' : ''}}" 
+        data-tab="contacts" 
+        bindtap="switchTab">
+        <text>联系人</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 分隔条 -->
+  <view class="divider"></view>
+
+
+
+
+
+
+
+
+
+
+<view wx:if="{{isConversation}}" class="conversations-container">
+    <scroll-view class="conversations" scroll-y="true" enable-flex="true">
+        <view wx:if="{{conversations.length}}">
+            <view class="scroll-item" wx:for="{{conversations}}" wx:for-item="conversation" wx:key="key">
+                <view class="item-head">
+                    <image src="{{conversation.data.avatar}}" class="head-icon"></image>
+                    <view wx:if="{{conversation.unread}}" class="item-head_unread">{{conversation.unread}}</view>
+                </view>
+                <view class="scroll-item_info" bindtap="chat" data-conversation="{{conversation}}">
+                    <view class="item-info-top">
+                        <text class="item-info-top_name">{{conversation.data.name}}</text>
+                        <view class="item-info-top_time">{{conversation.lastMessage.date}}</view>
+                    </view>
+                    <view class="item-info-bottom">
+                        <view class="item-info-bottom-item">
+                            <view class="item-info-top_content" wx:if="{{!conversation.lastMessage.recalled}}">
+                                <view class="unread-text">
+                                    {{conversation.lastMessage.read === false&&conversation.lastMessage.senderId === currentUser.id ? '[未读]' : ''}}
+                                </view>
+
+                                <view wx:if="{{conversation.lastMessage.senderId === currentUser.id}}">我: </view>
+                                <view wx:else>{{ conversation.type === 'group' ? conversation.lastMessage.senderData.name : conversation.data.name }}: </view>
+                                <view wx:if="{{conversation.lastMessage.type == 'text'}}">{{conversation.lastMessage.payload.text}}</view>
+                                <view wx:elif="{{conversation.lastMessage.type == 'video'}}">[视频消息]</view>
+                                <view wx:elif="{{conversation.lastMessage.type == 'audio'}}">[语音消息]</view>
+                                <view wx:elif="{{conversation.lastMessage.type == 'image'}}">[图片消息]</view>
+                                <view wx:elif="{{conversation.lastMessage.type == 'file'}}">[文件消息]</view>
+                                <view wx:elif="{{conversation.lastMessage.type == 'order'}}">[自定义消息:订单]</view>
+                                <view wx:else>[[未识别内容]]</view>
+                            </view>
+                            <view class="item-info-top_content" wx:else>
+                                <view wx:if="{{conversation.lastMessage.senderId === currentUser.id}}">
+                                    你撤回了一条消息
+                                </view>
+                                <view wx:else>
+                                    {{ conversation.type === 'group' ? conversation.lastMessage.senderData.name : conversation.data.name }}
+                                    撤回了一条消息
+                                </view>
+                            </view>
+                            <view class="item-info-bottom_action" catchtap="showAction" data-conversation="{{conversation}}">
+                                <image class="item-info-bottom_action-image" src="/friends/static/images/action.png"></image>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="no-conversation" wx:else>当前没有会话</view>
+        <view class="action-container" wx:if="{{actionPopup.visible}}">
+            <view class="layer" bindtap="closeMask"></view>
+            <view class="action-box">
+                <view class="action-item" bindtap="topConversation">
+                    {{actionPopup.conversation.top ? '取消置顶' : '置顶聊天'}}
+                </view>
+                <view class="action-item" bindtap="removeConversation">删除聊天</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+
+
+<!--contacts.wxml-->
+<view wx:if="{{!isConversation}}" class="contacts">
+    <view class="contacts-container">
+        <view class="user-list">
+            <view class="user-list-item" wx:for="{{groups || []}}" wx:key="key" wx:for-item="group" bindtap="chat"
+                  data-type="group" data-to="{{group}}">
+                <view class="user-item-avatar">
+                    <image src="{{group.avatar}}"></image>
+                </view>
+                <view class="user-item-info">
+                    <text class="user-item-info__name">{{group.name}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="contacts-title" v-if="friends && friends.length !=0">联系人</view>
+        <view class="user-list">
+            <view class="user-list-item" wx:for="{{friends || []}}" wx:for-item="friend" bindtap="chat"
+                  data-type="private" data-to="{{friend}}" wx:key="key">
+                <view class="user-item-avatar">
+                    <image src="{{friend.avatar}}"></image>
+                </view>
+                <view class="user-item-info">
+                    <text class="user-item-info__name">{{friend.name}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

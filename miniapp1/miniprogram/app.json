@@ -16,6 +16,15 @@
       ]
     },
     {
+      "root": "friends",
+      "pages": [
+        "pages/conversations/conversations",
+        "pages/chat/groupChat/groupChat",
+        "pages/chat/privateChat/privateChat",
+        "pages/chat/groupMember/groupMember"
+      ]
+    },
+    {
       "root": "gdmap",
       "pages": [
         "pages/amap/amap"
@@ -33,6 +42,7 @@
     "navigationBarTitleText": "Weixin",
     "navigationBarBackgroundColor": "#ffffff"
   },
+  "sitemapLocation": "sitemap.json",
   "tabBar": {
     "color": "#666666",
     "selectedColor": "#ff0000",

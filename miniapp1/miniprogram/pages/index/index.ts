@@ -8,7 +8,8 @@ Page({
     profilePic: '',
     tokenStatus: '',
     actPath: '../../activities',
-    gdmapPath: '../../gdmap' 
+    gdmapPath: '../../gdmap',
+    friPath: '../../friends'
   },
   onLoad() {
     if (app.globalData.isLoggedin) {
@@ -58,6 +59,13 @@ Page({
         url: `${this.data.gdmapPath}/pages/amap/amap`
       });
     },
+
+    toFriends() {
+      wx.navigateTo({
+        url: `${this.data.friPath}/pages/conversations/conversations`
+      });
+    },
+
     onShow() {
       if (typeof this.getTabBar === 'function' && this.getTabBar()) {
         this.getTabBar().setData({

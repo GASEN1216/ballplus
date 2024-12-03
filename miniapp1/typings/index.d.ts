@@ -7,8 +7,14 @@ interface IAppOption {
     nickname: "",
     profilePic: '',
     isLoggedin: boolean;
+    currentUser: {
+      id: string,
+      name: string,
+      avatar: string
+    }
   }
   loginReadyCallback?: () => void;
   getUrl: (path: string) => string;
   login: () => void;
+  initializeGoEasy: () => void;
 }

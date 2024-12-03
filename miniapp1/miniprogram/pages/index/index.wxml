@@ -26,6 +26,9 @@
   <view style="text-align: center;" bindtap="toGdmap">
     <image src="../../icon/location.png" style="width: 80rpx; height: 80rpx;" mode="aspectFit"/>
   </view>
+  <view style="text-align: center;" bindtap="toFriends">
+    <image src="../../icon/friends-icon.png" style="width: 80rpx; height: 80rpx;" mode="aspectFit"/>
+  </view>
     </view>
 </view>
 

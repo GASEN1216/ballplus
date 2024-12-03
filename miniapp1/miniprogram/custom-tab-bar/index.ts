@@ -29,7 +29,7 @@ Component({
   attached() {
   },
   methods: {
-    switchTab(e) {
+    switchTab(e:any) {
       const data = e.currentTarget.dataset; // 获取点击项的数据
       const url = data.path; // 目标页面路径
       const index = data.index; // 当前点击的索引
