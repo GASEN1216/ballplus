@@ -1,0 +1,75 @@
+<view class="post-detail-container">
+  <!-- 帖子详细内容 -->
+  <view class="post-header">
+    <image class="post-author-avatar" src="{{post.avatar}}" />
+    <view class="post-meta">
+      <text class="post-title">{{post.title}}</text>
+      <view class="post-author-info">
+        <text class="post-author">作者：{{post.name}}</text>
+        <text class="post-time">{{post.time}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 帖子内容 -->
+  <view class="post-content">
+    <text class="content-text">{{post.content}}</text>
+    <image wx:if="{{post.image}}" src="{{post.image}}" class="post-image" />
+  </view>
+
+  <view class="divider"></view>
+
+  <!-- 评论列表 -->
+  <view class="comments-container">
+    <block wx:for="{{visibleComments}}" wx:key="id">
+      <view class="comment-item">
+        <image class="comment-avatar" src="{{item.avatar}}" />
+        <view class="comment-info">
+          <text class="comment-name">{{item.name}}</text>
+          <text class="comment-content">{{item.content}}</text>
+        </view>
+
+        <!-- 子评论 -->
+        <view class="sub-comments">
+          <block wx:for="{{item.subComments.slice(0, 2)}}" wx:key="id">
+            <view class="sub-comment-item" bindtap="goToCommentDetail" data-id="{{item.parentId}}">
+              <text class="sub-comment-name">{{item.name}}</text>
+              <text class="sub-comment-content">{{item.content}}</text>
+            </view>
+          </block>
+          <view wx:if="{{item.subComments.length > 2}}" class="show-more-sub-comments" bindtap="goToCommentDetail" data-id="{{item.id}}">
+            显示更多回复
+          </view>
+        </view>
+      </view>
+    </block>
+    <view wx:if="{{showMore}}" class="show-more" bindtap="viewAllComments">显示更多</view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <input class="comment-input" placeholder="点我发评论" bindfocus="openReplyPopup" />
+    <view class="bottom-actions">
+      <view class="action-item">
+        <text class="action-icon">🔄</text>
+      </view>
+      <view class="action-item">
+        <text class="action-icon">💬</text>
+        <text class="action-number">{{post.comments || 0}}</text>
+      </view>
+      <view class="action-item">
+        <text class="action-icon">👍</text>
+        <text class="action-number">{{post.likes || 0}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 回复弹窗 -->
+  <view class="reply-popup" wx:if="{{showReplyPopup}}">
+    <view class="popup-content">
+      <text class="reply-title">回复 {{replyTo}}</text>
+      <input class="reply-input" bindinput="onReplyInput" />
+      <button class="send-button" bindtap="sendReply">发送</button>
+    </view>
+  </view>
+</view>

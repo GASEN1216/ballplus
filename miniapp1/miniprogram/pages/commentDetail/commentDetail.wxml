@@ -1,0 +1,32 @@
+<view class="comment-detail-container">
+  <!-- 标题部分 -->
+  <view class="title-container">
+    <text class="comment-title">主评论详情</text>
+  </view>
+
+  <!-- 主评论 -->
+  <view class="main-comment">
+    <image class="main-avatar" src="{{mainComment.avatar}}" />
+    <view class="main-info">
+      <text class="main-name">{{mainComment.name}}</text>
+      <text class="main-content">{{mainComment.content}}</text>
+    </view>
+  </view>
+
+  <!-- 分割线 -->
+  <view class="divider"></view>
+
+  <!-- 子评论 -->
+  <view class="sub-comments">
+    <text class="sub-comments-title">回复</text>
+    <block wx:for="{{mainComment.subComments}}" wx:key="id">
+      <view class="sub-comment-card">
+        <image class="sub-avatar" src="{{item.avatar}}" />
+        <view class="sub-info">
+          <text class="sub-name">{{item.name}}</text>
+          <text class="sub-content">{{item.content}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
