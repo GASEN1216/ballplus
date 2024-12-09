@@ -3,7 +3,7 @@ import GoEasy from './libs/goeasy-2.6.6.esm.min';
 
 App<IAppOption>({
   globalData: {
-    url: 'http://10.45.4.51:8080',
+    url: 'http://10.45.4.52:8080',
     isLoggedin: false,
     nickname: '',
     profilePic: '',

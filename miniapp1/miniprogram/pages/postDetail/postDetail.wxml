@@ -19,32 +19,34 @@
 
   <view class="divider"></view>
 
-  <!-- 评论列表 -->
-  <view class="comments-container">
-    <block wx:for="{{visibleComments}}" wx:key="id">
-      <view class="comment-item">
-        <image class="comment-avatar" src="{{item.avatar}}" />
-        <view class="comment-info">
-          <text class="comment-name">{{item.name}}</text>
-          <text class="comment-content">{{item.content}}</text>
-        </view>
+<!-- 评论列表 -->
+<view class="comments-container">
+  <block wx:for="{{visibleComments}}" wx:key="id">
+    <view class="comment-item">
+      <image class="comment-avatar" src="{{item.avatar}}" />
+      <view class="comment-info">
+        <text class="comment-name">{{item.name}}</text>
+        <text class="comment-content">{{item.content}}</text>
+      </view>
 
-        <!-- 子评论 -->
-        <view class="sub-comments">
-          <block wx:for="{{item.subComments.slice(0, 2)}}" wx:key="id">
-            <view class="sub-comment-item" bindtap="goToCommentDetail" data-id="{{item.parentId}}">
-              <text class="sub-comment-name">{{item.name}}</text>
-              <text class="sub-comment-content">{{item.content}}</text>
-            </view>
-          </block>
-          <view wx:if="{{item.subComments.length > 2}}" class="show-more-sub-comments" bindtap="goToCommentDetail" data-id="{{item.id}}">
-            显示更多回复
+      <!-- 子评论 -->
+      <view class="sub-comments" wx:if="{{item.subComments.length > 0}}">
+        <block wx:for="{{item.visibleSubComments}}" wx:key="id">
+          <view class="sub-comment-item">
+            <text class="sub-comment-name">{{item.name}}</text>
+            <text class="sub-comment-content">{{item.content}}</text>
           </view>
+        </block>
+
+        <!-- 显示更多子评论 -->
+        <view wx:if="{{item.subComments.length > 2}}" class="show-more-sub-comments" bindtap="goToCommentDetail" data-id="{{item.id}}">
+          显示更多回复
         </view>
       </view>
-    </block>
-    <view wx:if="{{showMore}}" class="show-more" bindtap="viewAllComments">显示更多</view>
-  </view>
+    </view>
+  </block>
+</view>
+
 
   <!-- 底部操作栏 -->
   <view class="bottom-bar">
