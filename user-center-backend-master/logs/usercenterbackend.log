@@ -1,84 +1,30 @@
-2024-12-09 08:22:50,639 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 25676 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
-2024-12-09 08:22:50,645 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
-2024-12-09 08:22:51,917 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
-2024-12-09 08:22:51,922 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2024-12-09 08:22:51,977 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 23 ms. Found 0 Redis repository interfaces.
-2024-12-09 08:22:53,398 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
-2024-12-09 08:22:53,420 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
-2024-12-09 08:22:53,424 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
-2024-12-09 08:22:53,425 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
-2024-12-09 08:22:53,549 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
-2024-12-09 08:22:53,550 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 2839 ms
-2024-12-09 08:22:55,042 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
-2024-12-09 08:22:55,062 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
-2024-12-09 08:22:55,072 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 5.156 seconds (process running for 12.178)
-2024-12-09 08:24:28,519 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2024-12-09 08:24:28,519 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
-2024-12-09 08:24:28,520 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
-2024-12-09 08:24:28,534 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2024-12-27 15:02:57,787 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 28664 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2024-12-27 15:02:57,794 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2024-12-27 15:02:58,687 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-27 15:02:58,690 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-27 15:02:58,721 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
+2024-12-27 15:02:59,383 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2024-12-27 15:02:59,395 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2024-12-27 15:02:59,397 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2024-12-27 15:02:59,397 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-12-27 15:02:59,468 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2024-12-27 15:02:59,470 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1627 ms
+2024-12-27 15:03:00,923 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2024-12-27 15:03:00,942 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2024-12-27 15:03:00,952 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 3.76 seconds (process running for 5.557)
+2024-12-27 15:03:26,801 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-27 15:03:26,801 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2024-12-27 15:03:26,802 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2024-12-27 15:03:26,821 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/login
 Method: POST
 Class: UserController
 Method: user_login
-Param: code=0e1jUwll2l9REe4G0fml2uI4eC4jUwlw
-Client IP: 10.45.4.52
+Param: code=0c1rFj200BBQoT1aNd200iMhJk3rFj2O
+Client IP: 10.45.4.53
 
-2024-12-09 08:24:29,624 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
-2024-12-09 08:24:29,756 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@60b0194
-2024-12-09 08:24:29,756 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
-2024-12-09 08:50:22,989 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0e1j2L100bBPiT1PEn200kbsc44j2L1i
-Client IP: 10.45.4.52
-
-2024-12-09 08:54:20,150 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0e14Z60006CtkT16Gs000vCrO214Z60N
-Client IP: 10.45.4.52
-
-2024-12-09 09:02:58,776 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0b1Qcill2SyvEe4DPlnl2lItOc3Qcilr
-Client IP: 10.45.4.52
-
-2024-12-09 09:18:25,511 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0e1e9jll2hgwEe4TYbml27deRK3e9jlc
-Client IP: 10.45.4.52
-
-2024-12-09 09:53:40,479 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0f1F2E2005g5nT12w44008w65c4F2E2k
-Client IP: 10.45.4.52
-
-2024-12-09 10:03:53,085 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0a17YCll2wTZEe4kChll2QFW7r27YClb
-Client IP: 10.45.4.52
-
-2024-12-09 10:15:47,247 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0c16HDll25nYEe4Cgyml2Htyux16HDla
-Client IP: 10.45.4.52
-
+2024-12-27 15:03:28,401 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2024-12-27 15:03:28,611 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1bb0826
+2024-12-27 15:03:28,614 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2024-12-27 15:26:27,986 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2024-12-27 15:26:27,996 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.

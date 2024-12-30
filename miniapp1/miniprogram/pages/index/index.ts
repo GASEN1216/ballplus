@@ -9,7 +9,8 @@ Page({
     tokenStatus: '',
     actPath: '../../activities',
     gdmapPath: '../../gdmap',
-    friPath: '../../friends'
+    friPath: '../../friends',
+    availableDates: [] as string[], // 存储用户标记的可用日期
   },
   onLoad() {
     if (app.globalData.isLoggedin) {
@@ -27,6 +28,56 @@ Page({
         });
       };
     }
+  },
+
+  // 发送通知提醒
+sendNotification(message: string) {
+  wx.showToast({
+    title: message,
+    icon: 'none',
+    duration: 3000,
+  });
+},
+
+// 模拟即将到来的活动提醒
+checkUpcomingActivities() {
+  const upcomingActivities = ['2024-12-15', '2024-07-05']; // 示例日期
+  const today = new Date().toISOString().split('T')[0];
+
+  if (upcomingActivities.includes(today)) {
+    this.sendNotification('您今天有活动安排，请准时参加！');
+  }
+},
+
+
+  // 选择日期并标记可用性
+  onDateChange(e: any) {
+    const selectedDate = e.detail.value;
+    let updatedDates = this.data.availableDates;
+
+    if (updatedDates.includes(selectedDate)) {
+      updatedDates = updatedDates.filter(date => date !== selectedDate);
+    } else {
+      updatedDates.push(selectedDate);
+    }
+
+    this.setData({
+      availableDates: updatedDates,
+    });
+
+    wx.showToast({
+      title: '日期已更新',
+      icon: 'success',
+    });
+  },
+
+  // 显示用户标记的可用时间
+  showAvailability() {
+    wx.showModal({
+      title: '您的可用时间',
+      content: this.data.availableDates.length > 0 ? this.data.availableDates.join(', ') : '尚未标记任何日期',
+      showCancel: false,
+    });
   },
 
   // 点击按钮调用登录函数
@@ -72,6 +123,7 @@ Page({
           selected: 0  //这个数字是当前页面在tabBar中list数组的索引
         })
       }
+      this.checkUpcomingActivities(); // 检查即将到来的活动
     },
   // 验证token方法
   onTokenButtonClick() {

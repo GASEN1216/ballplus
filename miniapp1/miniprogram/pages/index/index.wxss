@@ -77,3 +77,43 @@
 .customer-service-btn:active {
   background-color: #f5f5f5; /* 和默认背景色一致 */
 }
+
+.calendar-section {
+  width: 90%;
+  margin-top: 40rpx;
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.calendar-button,
+.availability-button {
+  margin-top: 20rpx;
+  padding: 10rpx 20rpx;
+  background-color: #1cbbb4;
+  color: #fff;
+  border-radius: 5rpx;
+}
+
+.notification-section {
+  width: 90%;
+  padding: 20rpx;
+  background-color: #fffae6;
+  border: 1rpx solid #ffd700;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  text-align: center;
+}
+
+.notification-text {
+  font-size: 28rpx;
+  color: #d88c00;
+}

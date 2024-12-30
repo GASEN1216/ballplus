@@ -29,6 +29,12 @@
         <text class="comment-content">{{item.content}}</text>
       </view>
 
+      <view class="comment-actions">
+          <image class="like-button" src="/icon/like.png" bindtap="likeComment" data-id="{{item.id}}" />
+          <text class="likes-count">{{item.likes}}</text>
+          <image class="reply-button" src="/icon/reply.png" bindtap="openReplyPopup" data-id="{{item.id}}" data-name="{{item.name}}" />
+      </view>
+
       <!-- 子评论 -->
       <view class="sub-comments" wx:if="{{item.subComments.length > 0}}">
         <block wx:for="{{item.visibleSubComments}}" wx:key="id">
@@ -52,25 +58,26 @@
   <view class="bottom-bar">
     <input class="comment-input" placeholder="点我发评论" bindfocus="openReplyPopup" />
     <view class="bottom-actions">
-      <view class="action-item">
-        <text class="action-icon">🔄</text>
+      <view class="action-item" bindtap="sharePost">
+        <image class="share-icon" src="/icon/share.png" />
       </view>
       <view class="action-item">
-        <text class="action-icon">💬</text>
+        <image class="comment-icon" src="/icon/reply.png" />
         <text class="action-number">{{post.comments || 0}}</text>
       </view>
       <view class="action-item">
-        <text class="action-icon">👍</text>
+        <image class="like-icon" src="/icon/like.png" />
         <text class="action-number">{{post.likes || 0}}</text>
       </view>
     </view>
   </view>
 
   <!-- 回复弹窗 -->
-  <view class="reply-popup" wx:if="{{showReplyPopup}}">
+  <view class="reply-popup" wx:if="{{showReplyPopup}}" catchtouchmove="preventTouchMove">
+    <view class="overlay" bindtap="closeReplyPopup"></view>
     <view class="popup-content">
       <text class="reply-title">回复 {{replyTo}}</text>
-      <input class="reply-input" bindinput="onReplyInput" />
+      <input class="reply-input" value="{{replyContent}}" bindinput="onReplyInput" />
       <button class="send-button" bindtap="sendReply">发送</button>
     </view>
   </view>

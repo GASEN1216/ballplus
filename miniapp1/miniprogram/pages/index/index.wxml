@@ -18,7 +18,20 @@
   </view>
 </view>
 
+<view style="width: 95%; text-align: center; background-color: #ffffff; padding: 40rpx 0; position: relative; border-radius: 20rpx; border: 1rpx solid #ddd;">
+<view class="calendar-section">
+  <text class="section-title">标记您的可用时间</text>
+  <picker mode="date" bindchange="onDateChange">
+    <button class="calendar-button">选择日期</button>
+  </picker>
+  <button class="availability-button" bindtap="showAvailability">查看可用时间</button>
+</view>
 
+<view class="notification-section">
+  <text class="notification-text">提醒：请留意您的活动和日程安排。</text>
+</view>
+
+</view>
 
 <view style="width: 95%; text-align: center; background-color: #ffffff; padding: 40rpx 0; position: relative; border-radius: 20rpx; border: 1rpx solid #ddd;">
     <view style="display: flex; justify-content: space-around; align-items: center; margin-top: 20rpx;">

@@ -12,6 +12,7 @@ interface Comment {
   content: string;
   subComments: SubComment[];
   visibleSubComments: SubComment[];
+  likes: number; // 新增字段用于记录点赞数
 }
 
 Page({
@@ -24,7 +25,8 @@ Page({
     replyContent: '',
     pageSize: 10, // 每次加载的评论数量
     currentPage: 1, // 当前加载的页数
-    isLoading: false // 是否正在加载中，防止重复加载
+    isLoading: false, // 是否正在加载中，防止重复加载
+    selectedCommentId: -1 // 新增字段用于记录选中的评论ID
   },
 
   onLoad(query: any) {
@@ -65,7 +67,8 @@ Page({
       name: `用户 ${i + 1}`,
       content: `主评论内容 ${i + 1}`,
       subComments: this.generateSubComments(i + 1),
-      visibleSubComments: [] as SubComment[] // 新增字段用于存放前两条子评论
+      visibleSubComments: [] as SubComment[], // 新增字段用于存放前两条子评论
+      likes: 0 // 初始化点赞数为0
     }));
   },
 
@@ -119,13 +122,21 @@ Page({
   },
 
   openReplyPopup(e: any) {
+    const commentId = e.currentTarget.dataset.id;
     const replyTo = e.currentTarget.dataset.name || '帖子';
     this.setData({
       showReplyPopup: true,
-      replyTo
+      replyTo,
+      selectedCommentId: commentId // 记录选中的评论ID
     });
   },
-
+  closeReplyPopup() {
+    this.setData({
+      showReplyPopup: false,
+      replyTo: '',
+      selectedCommentId: -1 // 清除选中的评论ID
+    });
+  },
   onReplyInput(e: any) {
     this.setData({
       replyContent: e.detail.value
@@ -139,10 +150,28 @@ Page({
       name: '当前用户',
       content: this.data.replyContent,
       subComments: [],
-      visibleSubComments: []
+      visibleSubComments: [],
+      likes: 0
     };
 
-    const updatedComments = [newComment, ...this.data.comments];
+    let updatedComments = [...this.data.comments];
+    if (this.data.selectedCommentId !== null) {
+      // 如果有选中的评论，则添加到该评论的子评论中
+      const parentIndex = updatedComments.findIndex(comment => comment.id === this.data.selectedCommentId);
+      if (parentIndex !== -1) {
+        const newSubComment: SubComment = {
+          id: Date.now(),
+          parentId: this.data.selectedCommentId,
+          name: '当前用户',
+          content: this.data.replyContent,
+        };
+        updatedComments[parentIndex].subComments.unshift(newSubComment as SubComment);
+        updatedComments[parentIndex].visibleSubComments.unshift(newSubComment as SubComment);
+      }
+    } else {
+      // 否则添加到主评论中
+      updatedComments.unshift(newComment as Comment);
+    }
 
     this.setData({
       comments: updatedComments,
@@ -150,5 +179,26 @@ Page({
       showReplyPopup: false,
       replyContent: ''
     });
+  },
+  likeComment(e: any) {
+    const commentId = e.currentTarget.dataset.id;
+    const updatedComments = this.data.comments.map(comment => {
+      if (comment.id === commentId) {
+        return {
+          ...comment,
+          likes: comment.likes + 1
+        };
+      }
+      return comment;
+    });
+
+    this.setData({
+      comments: updatedComments,
+      visibleComments: updatedComments.slice(0, this.data.pageSize*this.data.currentPage)
+    });
+  },
+  sharePost() {
+    // 这里可以添加分享逻辑
+    console.log('分享帖子');
   }
 });
