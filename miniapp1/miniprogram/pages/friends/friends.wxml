@@ -1,8 +1,0 @@
-<view class="container">
-  <text>好友管理</text>
-  <input placeholder="好友昵称" bindinput="inputFriend" />
-  <button bindtap="addFriend">添加好友</button>
-  <view wx:for="{{friends}}" wx:key="index">
-    <text>{{item}}</text>
-  </view>
-</view>

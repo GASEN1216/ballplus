@@ -1,0 +1,20 @@
+<view class="resources-container">
+  <!-- 分类标签 -->
+  <scroll-view class="category-tabs" scroll-x>
+    <button bindtap="filterResources" data-type="all">全部</button>
+    <button bindtap="filterResources" data-type="video">📹 视频</button>
+    <button bindtap="filterResources" data-type="text">📝 图文</button>
+    <button bindtap="filterResources" data-type="pdf">📄 文档</button>
+  </scroll-view>
+
+  <!-- 资源列表 -->
+  <scroll-view class="resources-list" scroll-y>
+    <block wx:for="{{filteredResources}}" wx:key="id">
+      <view class="resource-card" bindtap="goToDetail" data-id="{{item.id}}">
+        <image class="resource-cover" src="{{item.cover}}"></image>
+        <text class="resource-title">{{item.title}}</text>
+        <text class="resource-desc">{{item.description}}</text>
+      </view>
+    </block>
+  </scroll-view>
+</view>

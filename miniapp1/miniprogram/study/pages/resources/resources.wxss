@@ -1,0 +1,43 @@
+.resources-container {
+  padding: 10px;
+}
+
+/* 分类标签 */
+.category-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.category-tabs button {
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+/* 资源卡片 */
+.resource-card {
+  margin: 10px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.resource-cover {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.resource-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.resource-desc {
+  font-size: 14px;
+  color: #666;
+  margin: 5px;
+}

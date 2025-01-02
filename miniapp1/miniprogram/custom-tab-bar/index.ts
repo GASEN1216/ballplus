@@ -21,7 +21,7 @@ Component({
       {
         "pagePath": "../friends/friends",
         "text": "好友管理",
-        "iconPath": "../icon/friends-icon.png", 
+        "iconPath": "../icon/mine-icon.png", 
         "selectedIconPath": "../icon/friends-icon-selected.png" 
       }
     ]

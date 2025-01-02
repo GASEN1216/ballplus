@@ -1,30 +1,390 @@
-2024-12-27 15:02:57,787 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 28664 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
-2024-12-27 15:02:57,794 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
-2024-12-27 15:02:58,687 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
-2024-12-27 15:02:58,690 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2024-12-27 15:02:58,721 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 14 ms. Found 0 Redis repository interfaces.
-2024-12-27 15:02:59,383 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
-2024-12-27 15:02:59,395 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
-2024-12-27 15:02:59,397 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
-2024-12-27 15:02:59,397 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
-2024-12-27 15:02:59,468 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
-2024-12-27 15:02:59,470 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1627 ms
-2024-12-27 15:03:00,923 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
-2024-12-27 15:03:00,942 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
-2024-12-27 15:03:00,952 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 3.76 seconds (process running for 5.557)
-2024-12-27 15:03:26,801 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2024-12-27 15:03:26,801 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
-2024-12-27 15:03:26,802 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
-2024-12-27 15:03:26,821 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-01-02 14:27:19,573 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 43448 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-02 14:27:19,579 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-02 14:27:20,512 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-02 14:27:20,516 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-02 14:27:20,554 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 15 ms. Found 0 Redis repository interfaces.
+2025-01-02 14:27:21,147 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-02 14:27:21,155 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-02 14:27:21,157 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-02 14:27:21,158 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-02 14:27:21,211 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-02 14:27:21,211 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1575 ms
+2025-01-02 14:27:22,306 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-02 14:27:22,322 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-02 14:27:22,329 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 3.324 seconds (process running for 4.83)
+2025-01-02 14:27:23,837 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-02 14:27:23,837 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-02 14:27:23,838 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-02 14:27:23,855 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/login
 Method: POST
 Class: UserController
 Method: user_login
-Param: code=0c1rFj200BBQoT1aNd200iMhJk3rFj2O
+Param: code=0e1SNbGa1fgBNI0HU6Ja1SoRCX1SNbGt
 Client IP: 10.45.4.53
 
-2024-12-27 15:03:28,401 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
-2024-12-27 15:03:28,611 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1bb0826
-2024-12-27 15:03:28,614 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
-2024-12-27 15:26:27,986 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
-2024-12-27 15:26:27,996 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-02 14:27:25,014 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-02 14:27:25,154 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@f201908
+2025-01-02 14:27:25,155 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-02 14:27:28,724 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/test/token
+Method: POST
+Class: UserController
+Method: someProtectedEndpoint
+Param: token=eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiQU0vSnpFZ1JrMjZybGdzcllYSkhkdz09Iiwib3BlbmlkIjoib0V0aEc1Q3hjMVB5RXVHYnhGMlJCdU1hTThnUSIsImlhdCI6MTczNTc5OTI0NCwiZXhwIjoxNzM1ODg1NjQ0fQ.RUgZY5Lb9x3Q8l_kVp51lrIbwdeDnULoFok995Ux7Es
+Client IP: 10.45.4.53
+
+2025-01-02 14:35:58,038 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0e1HVk000L2ttT18BI000TgnW60HVk0Y
+Client IP: 10.45.4.53
+
+2025-01-02 14:36:52,075 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0f1IYO0w3cCe843SIa0w30xk3E3IYO0j
+Client IP: 10.45.4.53
+
+2025-01-02 14:40:27,658 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1kf61w37bp743gal2w3yt3bt4kf61d
+Client IP: 10.45.4.53
+
+2025-01-02 14:41:11,603 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0d1tiC000YVDsT1OlR300ZFmT14tiC0-
+Client IP: 10.45.4.53
+
+2025-01-02 14:42:14,424 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0d1B9lml2nthMe4U5Ool2BIwoy3B9lma
+Client IP: 10.45.4.53
+
+2025-01-02 14:44:44,417 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0a1vXKGa1pSaNI0UNPIa1BF2eb2vXKGS
+Client IP: 10.45.4.53
+
+2025-01-02 14:44:49,385 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/test/token
+Method: POST
+Class: UserController
+Method: someProtectedEndpoint
+Param: token=eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiQU0vSnpFZ1JrMjZybGdzcllYSkhkdz09Iiwib3BlbmlkIjoib0V0aEc1Q3hjMVB5RXVHYnhGMlJCdU1hTThnUSIsImlhdCI6MTczNTc5OTI0NCwiZXhwIjoxNzM1ODg1NjQ0fQ.RUgZY5Lb9x3Q8l_kVp51lrIbwdeDnULoFok995Ux7Es
+Client IP: 10.45.4.53
+
+2025-01-02 14:44:57,923 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1PFr100rausT1zQZ100jSQXz4PFr1H
+Client IP: 10.45.4.53
+
+2025-01-02 15:09:50,783 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0a1ZSDml2OixMe4VzFml2bycW60ZSDmw
+Client IP: 10.45.4.53
+
+2025-01-02 15:13:33,105 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0a1NgE000qFJsT1ld02003U2gC4NgE0q
+Client IP: 10.45.4.53
+
+2025-01-02 15:48:36,136 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0d1TNxGa1rBPMI0lnXFa1X4IKz1TNxGJ
+Client IP: 10.45.4.53
+
+2025-01-02 15:49:45,038 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0c1Upenl2hblQe4DRqol2SrNFs3Upen8
+Client IP: 10.45.4.53
+
+2025-01-02 15:49:57,268 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0c1nZKkl2yTRNe48FJml2ngmSZ1nZKk2
+Client IP: 10.45.4.53
+
+2025-01-02 15:50:35,921 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0f1lk40w3TDy843AYE0w31xs7w3lk40N
+Client IP: 10.45.4.53
+
+2025-01-02 15:50:45,809 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0a1v8jll2nPjNe4Eokll2LPOxk0v8jlB
+Client IP: 10.45.4.53
+
+2025-01-02 15:50:51,750 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b10lpml20DdMe4Pqmml2MOjPr10lpm8
+Client IP: 10.45.4.53
+
+2025-01-02 15:51:03,351 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0d11LrFa1UWVNI0skHHa1rzWQt31LrFA
+Client IP: 10.45.4.53
+
+2025-01-02 15:51:07,277 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0f17yvnl269wPe472ill2Zwirn47yvnK
+Client IP: 10.45.4.53
+
+2025-01-02 15:51:20,099 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0d1JgRll2zDLMe4BCUkl2DyuTe0JgRlK
+Client IP: 10.45.4.53
+
+2025-01-02 15:52:07,091 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0e1BCG000qqQsT1M3a200PmzTv0BCG0a
+Client IP: 10.45.4.53
+
+2025-01-02 15:58:55,185 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1TtPGa1MLfNI0VIQGa1bkmVC3TtPGm
+Client IP: 10.45.4.53
+
+2025-01-02 16:02:52,609 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0c1fP2ll2jVhOe4okSml2lt6ce1fP2lU
+Client IP: 10.45.4.53
+
+2025-01-02 16:06:43,586 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0c1Kp9000xrotT1x9q300QLNCo4Kp90m
+Client IP: 10.45.4.53
+
+2025-01-02 16:23:34,694 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1ADg100s8jsT1R5S2002b2873ADg11
+Client IP: 10.45.4.53
+
+2025-01-02 16:27:53,812 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0e1WWx100e7CsT1nZ61004YHWa4WWx11
+Client IP: 10.45.4.53
+
+2025-01-02 16:28:48,542 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0f1kUZ000GhatT1fRa400wVFuT2kUZ0h
+Client IP: 10.45.4.53
+
+2025-01-02 16:34:42,681 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0c1zINkl2Zu3Oe4NWzol2Pjwjk2zINkn
+Client IP: 10.45.4.53
+
+2025-01-02 16:35:08,553 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0d1dKNkl2Rs3Oe4hb0ol2LmTqK2dKNkr
+Client IP: 10.45.4.53
+
+2025-01-02 16:35:39,639 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0e1cP4ll2tskOe4Yp0pl2YYQka0cP4lU
+Client IP: 10.45.4.53
+
+2025-01-02 16:49:14,597 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0a1Dfz100fCBsT1Wpe200Z1x9t4Dfz1Z
+Client IP: 10.45.4.53
+
+2025-01-02 16:49:21,456 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0f10Imll27hvNe4nL7nl2yCBFq10ImlJ
+Client IP: 10.45.4.53
+
+2025-01-02 16:50:01,832 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1Afi100UuksT1nRQ1000iSRg2Afi1H
+Client IP: 10.45.4.53
+
+2025-01-02 16:50:20,612 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1PUbml238eNe4wxOnl2PTyxO1PUbmq
+Client IP: 10.45.4.53
+
+2025-01-02 16:52:13,539 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0d1UYUll2DZWMe4JIQml28dJCX1UYUlJ
+Client IP: 10.45.4.53
+
+2025-01-02 17:02:42,578 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0f1sVK0000iNsT1jX7400mbCo71sVK0u
+Client IP: 10.45.4.53
+
+2025-01-02 17:02:49,180 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0a1mJ80w3pGE843mqR1w3CS9lG3mJ80u
+Client IP: 10.45.4.53
+
+2025-01-02 17:03:28,485 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0e1nznll2HVpNe4XqJol2DO5N50nznlg
+Client IP: 10.45.4.53
+
+2025-01-02 17:03:37,515 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1UYK0005kNsT1hCS300yQUnX3UYK0i
+Client IP: 10.45.4.53
+
+2025-01-02 17:03:50,378 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1NDEll2r1HNe4sdenl2nHY0H2NDEl5
+Client IP: 10.45.4.53
+
+2025-01-02 17:06:25,479 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1wc2100J64tT1sEg400G65Mp4wc21t
+Client IP: 10.45.4.53
+
+2025-01-02 17:07:27,354 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0c1odL000d6NsT1X9n200QCk163odL0c
+Client IP: 10.45.4.53
+
+2025-01-02 17:09:16,544 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1mtA100oSvsT1wpr300QVFdH0mtA1x
+Client IP: 10.45.4.53
+
+2025-01-02 17:13:28,949 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0c1LwY0w3Unn843MD62w3RKf234LwY0e
+Client IP: 10.45.4.53
+
+2025-01-02 17:28:06,308 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0c1uw3100sC3tT14tO200Ay4nN1uw31O
+Client IP: 10.45.4.53
+
+2025-01-02 17:30:50,822 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-02 17:30:50,826 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.

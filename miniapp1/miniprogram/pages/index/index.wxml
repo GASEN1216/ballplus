@@ -1,89 +1,71 @@
-<view class="container">
+<view class="carousel-container">
+  <!-- 轮播图区域 -->
+  <swiper class="carousel" autoplay interval="3000" duration="500" circular>
+    <block wx:for="{{carouselImages}}" wx:key="index">
+      <swiper-item>
+        <image 
+          src="{{item.url}}" 
+          class="carousel-image"
+          bindtap="onCarouselItemClick"
+          data-link="{{item.link}}"
+        />
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
 
-<view style="width: 100%; text-align: start; background-color: #ffffff; padding: 80rpx 0rpx; position: fixed;  top: 0;border: 1rpx solid #ffffff;">
-  <!-- 登录状态显示，固定在左上角 -->
-  <view wx:if="{{isLoggedin}}" style="position: absolute; top: 10px; left: 10px; display: flex; align-items: center;">
-    <!-- 头像在左边 -->
-    <image src="{{profilePic}}" style="width: 50px; height: 50px; border-radius: 50%;" />
-    <!-- 昵称在右边，留些间距 -->
-    <text style="margin-top: -20px; font-size: 16px;">{{nickname}}</text>
-    <!-- 个人信息链接 -->
-    <view class="info-link" bindtap="goToEditInfo">个人信息</view>
+<!-- 匹配模块 -->
+<view class="match-section">
+  <button class="match-button" bind:tap="matchActivity">✨ 匹配活动</button>
+  <button class="match-button" bind:tap="goToStudy">学习资源</button>
+  <view class="tags">
+    <button>🏀篮球</button>
+    <button>⚽足球</button>
+    <button>🧘‍♀️瑜伽</button>
+  </view>
+</view>
 
-    <!-- 添加客服按钮 -->
-    <button class="customer-service-btn" style="position: relative; left: 200rpx; width: 79rpx; display: block; box-sizing: border-box; top: 0rpx" open-type="contact">客服</button>
-    <view style="position: relative; left: 140rpx;" bindtap="navigateToSettings">
-      <image src="../../icon/settings.png" style="width: 80rpx; height: 80rpx;" mode="aspectFit" />
+<!-- 活动展示区域 -->
+<!-- 搜索栏 -->
+<view class="search-section">
+  <input type="text" placeholder="搜索活动名称或类型" bindinput="onSearchInput" />
+  <button bindtap="onSearch">🔍 搜索</button>
+</view>
+
+<!-- 排序选项 -->
+<view class="sort-section">
+  <text>排序方式：</text>
+  <button bindtap="sortActivities" data-sort="distanceAsc">📍 距离最近</button>
+  <button bindtap="sortActivities" data-sort="distanceDesc">📍 距离最远</button>
+</view>
+
+<!-- 活动展示区域 -->
+<scroll-view class="activity-list" scroll-y>
+  <block wx:for="{{filteredActivities}}" wx:key="index">
+    <view class="activity-card">
+      <image class="activity-cover" src="{{item.cover}}" />
+      <view class="activity-info">
+        <text class="activity-title">{{item.name}}</text>
+        <text class="activity-time">📅 {{item.time}}</text>
+        <text class="activity-location">📍 {{item.location}}</text>
+        <text class="activity-participants">👥 已报名: {{item.participants}}</text>
+      </view>
+      <button class="activity-button" bindtap="viewActivityDetail" data-id="{{item.id}}">查看详情</button>
     </view>
-  </view>
+  </block>
+</scroll-view>
+
+<!-- 快捷功能入口 -->
+<view class="quick-access">
+  <button>📅 日历</button>
+  <button>💬 社区</button>
+  <button>🗺️ 场馆</button>
+  <button>🏆 积分</button>
 </view>
 
-<view style="width: 95%; text-align: center; background-color: #ffffff; padding: 40rpx 0; position: relative; border-radius: 20rpx; border: 1rpx solid #ddd;">
-<view class="calendar-section">
-  <text class="section-title">标记您的可用时间</text>
-  <picker mode="date" bindchange="onDateChange">
-    <button class="calendar-button">选择日期</button>
-  </picker>
-  <button class="availability-button" bindtap="showAvailability">查看可用时间</button>
-</view>
-
-<view class="notification-section">
-  <text class="notification-text">提醒：请留意您的活动和日程安排。</text>
-</view>
-
-</view>
-
-<view style="width: 95%; text-align: center; background-color: #ffffff; padding: 40rpx 0; position: relative; border-radius: 20rpx; border: 1rpx solid #ddd;">
-    <view style="display: flex; justify-content: space-around; align-items: center; margin-top: 20rpx;">
- <!-- 地图测试 -->
-  <view style="text-align: center;" bindtap="toGdmap">
-    <image src="../../icon/location.png" style="width: 80rpx; height: 80rpx;" mode="aspectFit"/>
-  </view>
-  <view style="text-align: center;" bindtap="toFriends">
-    <image src="../../icon/friends-icon.png" style="width: 80rpx; height: 80rpx;" mode="aspectFit"/>
-  </view>
-    </view>
-</view>
-
-  <view style="width: 95%; text-align: center; background-color: #ffffff; padding: 40rpx 0; position: relative; border-radius: 20rpx; border: 1rpx solid #ddd;">
-    <!-- 左上角的“活动”文字 -->
-    <text style="position: absolute; top: 10rpx; left: 10rpx; font-size: 30rpx; font-weight: bold; color: #333;">活动</text>
-
-    <!-- 中心内容 -->
-    <view style="display: flex; justify-content: space-around; align-items: center; margin-top: 20rpx;">
-      <!-- 我的活动 -->
-      <view style="text-align: center;" bindtap="goToActivities" data-tab="all">
-        <image src="../../icon/activities.png" style="width: 50rpx; height: 50rpx;" mode="aspectFit" />
-        <text style="display: block; margin-top: 10rpx; font-size: 28rpx; color: #333;">我的活动</text>
-      </view>
-      <!-- 待出发 -->
-      <view style="text-align: center;" bindtap="goToActivities" data-tab="pendingDeparture">
-        <image src="../../icon/departure.png" style="width: 50rpx; height: 50rpx;" mode="aspectFit" />
-        <text style="display: block; margin-top: 10rpx; font-size: 28rpx; color: #333;">待出发</text>
-      </view>
-      <!-- 待评价 -->
-      <view style="text-align: center;" bindtap="goToActivities" data-tab="pendingReview">
-        <image src="../../icon/review.png" style="width: 50rpx; height: 50rpx;" mode="aspectFit" />
-        <text style="display: block; margin-top: 10rpx; font-size: 28rpx; color: #333;">待评价</text>
-      </view>
-      <!-- 取消活动 -->
-      <view style="text-align: center;" bindtap="goToActivities" data-tab="cancelled">
-        <image src="../../icon/cancel.png" style="width: 50rpx; height: 50rpx;" mode="aspectFit" />
-        <text style="display: block; margin-top: 10rpx; font-size: 28rpx; color: #333;">取消活动</text>
-      </view>
-    </view>
-
-  </view>
-
-
-
-
-  <!-- 登录按钮，仅在未登录时显示 -->
-  <button wx:if="{{!isLoggedin}}" bindtap="onLoginButtonClick">登录</button>
-
-  <!-- 验证token按钮 -->
-  <view wx:if="{{isLoggedin}}">
-    <button class="token-button" bindtap="onTokenButtonClick">验证Token</button>
-    <text class="token-status">{{tokenStatus}}</text>
-  </view>
+<!-- 底部导航栏 -->
+<view class="tabbar">
+  <button>🏠 首页</button>
+  <button>📆 活动</button>
+  <button>🧑 我的</button>
 </view>

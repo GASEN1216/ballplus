@@ -1,0 +1,8 @@
+<view class="activity-detail">
+  <image class="activity-cover" src="{{activity.cover}}" mode="aspectFill"></image>
+  <text class="activity-title">{{activity.name}}</text>
+  <text class="activity-time">📅 时间：{{activity.time}}</text>
+  <text class="activity-location">📍 地点：{{activity.location}}</text>
+  <text class="activity-participants">👥 已报名: {{activity.participants}}</text>
+  <button class="join-button" bindtap="joinActivity">报名参加</button>
+</view>

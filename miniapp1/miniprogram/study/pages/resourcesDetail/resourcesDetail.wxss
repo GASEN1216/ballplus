@@ -1,0 +1,58 @@
+.resource-detail {
+  padding: 10px;
+}
+
+/* 封面图片 */
+.resource-cover {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* 标题 */
+.resource-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* 描述 */
+.resource-desc {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* 视频播放器 */
+.resource-video {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.resource-button {
+  margin-top: 10px;
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  padding: 10px 0;
+  font-size: 16px;
+}
+
+/* 动作按钮 */
+.resource-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.resource-actions button {
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 5px 10px;
+}

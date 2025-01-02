@@ -1,0 +1,119 @@
+/**mine.wxss**/
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* 垂直居中 */
+  background-color: #f5f5f5; /* 背景色 */
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx; /* 标题与用户资料的间距 */
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white; /* 用户资料背景色 */
+  border-radius: 10px; /* 圆角 */
+  padding: 20rpx; /* 内边距 */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+  margin-bottom: 20rpx; /* 用户资料与下方登录按钮的间距 */
+}
+
+.profile-pic {
+  width: 100px; /* 用户头像宽度 */
+  height: 100px; /* 用户头像高度 */
+  border-radius: 50%; /* 圆形头像 */
+  margin-bottom: 10rpx; /* 头像与昵称的间距 */
+}
+
+.nickname {
+  font-size: 20px; /* 昵称字体大小 */
+  color: #666; /* 昵称颜色 */
+}
+
+.usermotto {
+  margin-top: 200px; /* 这部分可以根据需要调整 */
+  color: #aaa; /* 口号颜色 */
+}
+.token-button {
+  margin-top: 20rpx;
+  padding: 10rpx 20rpx;
+  background-color: #1cbbb4;
+  color: #ffffff;
+  border-radius: 5rpx;
+}
+
+.token-status {
+  margin-top: 10rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+.info-link {
+  font-size: 12px;
+  color: #44c1eb; /* 淡蓝色 */
+  margin-top: 20px;
+  margin-left: -38%;
+  cursor: pointer;
+}
+
+.customer-service-btn {
+  position: absolute;
+  padding: 0px 0px;
+  background-color: #ffffff; /* 和默认背景色一致 */
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+}
+/* 禁用点击态的默认效果 */
+.customer-service-btn:active {
+  background-color: #f5f5f5; /* 和默认背景色一致 */
+}
+
+.calendar-section {
+  width: 90%;
+  margin-top: 40rpx;
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.calendar-button,
+.availability-button {
+  margin-top: 20rpx;
+  padding: 10rpx 20rpx;
+  background-color: #1cbbb4;
+  color: #fff;
+  border-radius: 5rpx;
+}
+
+.notification-section {
+  width: 90%;
+  padding: 20rpx;
+  background-color: #fffae6;
+  border: 1rpx solid #ffd700;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  text-align: center;
+}
+
+.notification-text {
+  font-size: 28rpx;
+  color: #d88c00;
+}

@@ -1,0 +1,32 @@
+<view class="resource-detail">
+  <!-- 封面图 -->
+  <image class="resource-cover" src="{{resource.cover}}" mode="aspectFill"></image>
+  
+  <!-- 标题 -->
+  <text class="resource-title">{{resource.title}}</text>
+  
+  <!-- 描述 -->
+  <text class="resource-desc">{{resource.description}}</text>
+  
+  <!-- 视频播放 -->
+  <view wx:if="{{resource.type === 'video'}}">
+    <video class="resource-video" src="{{resource.url}}" controls></video>
+  </view>
+  
+  <!-- 文章链接 -->
+<view wx:if="{{resource.type === 'text'}}">
+  <button class="resource-button" bindtap="openWebPage">阅读文章</button>
+</view>
+
+  
+  <!-- PDF 下载 -->
+  <view wx:if="{{resource.type === 'pdf'}}">
+    <button class="resource-button" bindtap="handleDownloadTip">下载 PDF</button>
+  </view>
+  
+  <!-- 点赞和收藏 -->
+  <view class="resource-actions">
+    <button bindtap="likeResource">👍 点赞 {{resource.likes}}</button>
+    <button bindtap="favoriteResource">⭐ 收藏 {{resource.favorites}}</button>
+  </view>
+</view>

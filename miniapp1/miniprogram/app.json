@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/friends/friends",
+    "pages/mine/mine",
     "pages/forum/forum",
     "pages/postDetail/postDetail",
     "pages/commentDetail/commentDetail",
@@ -29,6 +29,20 @@
       "root": "gdmap",
       "pages": [
         "pages/amap/amap"
+      ]
+    },
+    {
+      "root": "study",
+      "pages": [
+        "pages/webview/webview",
+        "pages/resources/resources",
+        "pages/resourcesDetail/resourcesDetail"
+      ]
+    },
+    {
+      "root": "match",
+      "pages": [
+        "pages/matchActivity/matchActivity"
       ]
     }
   ],
@@ -63,10 +77,10 @@
         "selectedIconPath": "icon/profile-icon-selected.png" 
       },
       {
-        "pagePath": "pages/friends/friends",
-        "text": "好友管理",
-        "iconPath": "icon/friends-icon.png", 
-        "selectedIconPath": "icon/friends-icon-selected.png" 
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "icon/mine-icon.png", 
+        "selectedIconPath": "icon/mine-icon-selected.png" 
       }
     ]
   },
