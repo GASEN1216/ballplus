@@ -5,7 +5,8 @@
     "pages/forum/forum",
     "pages/postDetail/postDetail",
     "pages/commentDetail/commentDetail",
-    "pages/settings/settings"
+    "pages/settings/settings",
+    "pages/editProfile/editProfile"
   ],
   "subPackages": [
     {
@@ -43,6 +44,12 @@
       "root": "match",
       "pages": [
         "pages/matchActivity/matchActivity"
+      ]
+    },
+    {
+      "root": "pointsMall",
+      "pages": [
+        "pages/pointsMall/pointsMall"
       ]
     }
   ],

@@ -22,3 +22,8 @@ wx:
   appid: wx317f974906d46cc9
   appsecret: 59e91abc334dfc64b8a6536db57df38b
   salt: asdcaefevlnshgvihwoieunoviwVEDFXBNDHSDFdfsfsegsefasgaefaf
+
+qiniu:
+  access-key: 75CwUTmoxCX0uuB7Wk7TllwblGynoSVTV6fcthdO
+  secret-key: TxhCul2aGZ78soJ6BzbfccE4qdLYwHiJZ4zSlv6N
+  bucket: ballplus

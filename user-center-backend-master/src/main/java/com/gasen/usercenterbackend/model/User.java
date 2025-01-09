@@ -6,10 +6,12 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serial;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 import java.util.Random;
 
+import com.gasen.usercenterbackend.model.respond.wxUser;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -121,9 +123,45 @@ public class User implements Serializable {
     @TableField(update = "now()")
     private LocalDateTime updateTime;
 
+    /**
+     * 生日
+     */
+    private LocalDate birthday;
+
+    /**
+     * 信誉值
+     */
+    private Integer credit;
+
+    /**
+     * 积分
+     */
+    private Integer score;
+
+    /**
+     * 个性签名
+     */
+    private String description;
+
+    /**
+     * 标签
+     */
+    private String label;
 
     public User(String userAccount, String password) {
         this.userAccount = userAccount;
         this.password = password;
+    }
+
+    // 将wxUser的内容填充到User中
+    public static User wxUserToUser(wxUser wxUser) {
+        return new User()
+                .setId(wxUser.getId())
+                .setUserAccount(wxUser.getUserAccount())
+                .setAvatarUrl(wxUser.getAvatarUrl())
+                .setGender(wxUser.getGender())
+                .setBirthday(wxUser.getBirthday())
+                .setDescription(wxUser.getDescription())
+                .setLabel(wxUser.getLabel());
     }
 }

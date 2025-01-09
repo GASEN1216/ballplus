@@ -125,6 +125,38 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return baseMapper.selectList(null);
     }
 
+    /**
+     * 登录增加经验
+     * 登录增加（当前经验+随机1-4）
+     * 连续登录增加（当前经验+随机1-4）*（1-3）
+     * 每级的上限为当前等级*10
+     * */
+    @Override
+    public void addExp(User user) {
+        LocalDateTime userSignIn = user.getSignIn();
+            LocalDate signIn = userSignIn.toLocalDate();
+            // 如果登录日期不在上次的后面说明是今天，一天只加一次
+            if(!LocalDate.now().isAfter(signIn))
+                return;
+            int exp = user.getExp();
+            int grade = user.getGrade();
+            Random random = new Random();
+            if( Period.between(signIn, LocalDate.now()).getDays() == 1) {
+                exp = exp + random.nextInt(1, 5)*random.nextInt(1,4);
+            }else{
+                exp = exp + random.nextInt(1, 5);
+            }
+        while(grade*10<=exp) {
+            exp -= grade*10;
+            grade++;
+        }
+        user.setExp(exp).setGrade(grade);
+        user.setSignIn(LocalDateTime.now());
+        //更新数据库
+        boolean b = this.updateById(user);
+        if(!b) throw new BusinessExcetion(ErrorCode.SYSTEM_ERROR,"增加经验失败");
+    }
+
 
     /**
      * 判断用户是否合法

@@ -1,53 +1,140 @@
-/**mine.wxss**/
-
+/* 全局容器 */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh; /* 垂直居中 */
-  background-color: #f5f5f5; /* 背景色 */
+  background-color: #f5f5f5;
+  min-height: 100vh; /* 防止页面塌陷 */
+  padding-top: env(safe-area-inset-top);
+  box-sizing: border-box;
 }
 
-.title {
-  font-size: 28px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20rpx; /* 标题与用户资料的间距 */
+/* 顶部固定栏 */
+.header {
+  width: 100%;
+  height: 100rpx;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  padding: 10rpx 40rpx;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.profile {
+/* 用户信息 */
+.user-info {
+  display: flex;
+  gap: 20rpx; /* 设置子元素之间的间距为 20rpx */
+  align-items: center;
+}
+
+/* 用户头像 */
+.avatar {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  margin-left: 30rpx; /* 头像向右移动 */
+}
+
+/* 用户文本信息（昵称和个人信息） */
+.user-text {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: white; /* 用户资料背景色 */
-  border-radius: 10px; /* 圆角 */
-  padding: 20rpx; /* 内边距 */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-  margin-bottom: 20rpx; /* 用户资料与下方登录按钮的间距 */
-}
-
-.profile-pic {
-  width: 100px; /* 用户头像宽度 */
-  height: 100px; /* 用户头像高度 */
-  border-radius: 50%; /* 圆形头像 */
-  margin-bottom: 10rpx; /* 头像与昵称的间距 */
+  justify-content: center;
 }
 
 .nickname {
-  font-size: 20px; /* 昵称字体大小 */
-  color: #666; /* 昵称颜色 */
+  font-size: 28rpx;
+  color: #333;
 }
 
-.usermotto {
-  margin-top: 200px; /* 这部分可以根据需要调整 */
-  color: #aaa; /* 口号颜色 */
+.settings-btn {
+  margin-left: auto;
+  padding-right: 20rpx; /* 右侧留白 */
 }
+
+.settings-icon {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+/* 日历部分 */
+.calendar-section {
+  width: 90%;
+  margin: 20rpx 0;
+  padding: 20rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  text-align: center;
+}
+
+/* 通知部分 */
+.notification-section {
+  width: 90%;
+  padding: 20rpx;
+  margin-top: 20rpx;
+  background-color: #fffae6;
+  border: 1rpx solid #ffd700;
+  border-radius: 10rpx;
+}
+
+/* 导航部分 */
+.navigation-section {
+  display: flex;
+  justify-content: space-around;
+  margin: 20rpx 0;
+  width: 90%;
+  background-color: #fff;
+  padding: 20rpx;
+  border-radius: 10rpx;
+}
+
+.nav-item {
+  text-align: center;
+}
+
+.nav-icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+/* 活动部分 */
+.activity-section {
+  width: 90%;
+  background-color: #fff;
+  padding: 20rpx;
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+}
+
+.activity-title {
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.activity-items {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20rpx;
+}
+
+.activity-item {
+  text-align: center;
+}
+
+.activity-icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+/* 按钮和状态 */
 .token-button {
   margin-top: 20rpx;
   padding: 10rpx 20rpx;
   background-color: #1cbbb4;
-  color: #ffffff;
+  color: #fff;
   border-radius: 5rpx;
 }
 
@@ -57,63 +144,69 @@
   color: #333;
 }
 
-.info-link {
-  font-size: 12px;
-  color: #44c1eb; /* 淡蓝色 */
-  margin-top: 20px;
-  margin-left: -38%;
-  cursor: pointer;
-}
 
-.customer-service-btn {
-  position: absolute;
-  padding: 0px 0px;
-  background-color: #ffffff; /* 和默认背景色一致 */
-  border: none;
-  border-radius: 5px;
-  font-size: 18px;
-}
-/* 禁用点击态的默认效果 */
-.customer-service-btn:active {
-  background-color: #f5f5f5; /* 和默认背景色一致 */
-}
-
-.calendar-section {
-  width: 90%;
-  margin-top: 40rpx;
-  padding: 20rpx;
-  background-color: #fff;
-  border-radius: 10rpx;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.section-title {
-  font-size: 30rpx;
+/* 等级文本 */
+.level-text {
+  font-size: 24rpx;
   font-weight: bold;
-  margin-bottom: 20rpx;
+  margin-left: 5rpx;
+  color: #0072ff; /* 字体颜色设置为蓝色 */
+  text-shadow: 0 2rpx 4rpx rgba(0, 114, 255, 0.2); /* 蓝色文字阴影，增加立体感 */
+  animation: float 2s infinite alternate; /* 保留浮动动画 */
 }
 
-.calendar-button,
-.availability-button {
-  margin-top: 20rpx;
-  padding: 10rpx 20rpx;
-  background-color: #1cbbb4;
-  color: #fff;
-  border-radius: 5rpx;
+/* 小牌子浮动动画 */
+@keyframes float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-5rpx);
+  }
+}
+/* 经验条容器 */
+.exp-bar-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 20rpx;
 }
 
-.notification-section {
-  width: 90%;
-  padding: 20rpx;
-  background-color: #fffae6;
-  border: 1rpx solid #ffd700;
+/* 经验值文本 */
+.exp-text {
+  font-size: 16rpx;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 5rpx;
+  text-align: right; /* 改为右对齐 */
+  align-self: flex-end; /* 对齐到容器右侧 */
+}
+
+/* 经验进度条 */
+.exp-bar {
+  width: 125%;
+  height: 6rpx;
+  background: #000; /* 黑色背景，表示未获得经验 */
   border-radius: 10rpx;
-  margin-top: 20rpx;
-  text-align: center;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.1);
 }
 
-.notification-text {
-  font-size: 28rpx;
-  color: #d88c00;
+/* 已获得经验部分 */
+.exp-progress {
+  height: 100%;
+  background: linear-gradient(to right, #4f9eff, #00c6ff); /* 蓝色渐变 */
+  width: 0%; /* 初始状态 */
+  transition: width 0.5s ease-in-out;
+  border-radius: 10rpx; /* 与父容器一致 */
+  z-index: 200;
+}
+/* 容器 - 等级和经验值 */
+.level-exp-container {
+  display: flex;
+  justify-content: space-between; /* 水平两端对齐 */
+  align-items: center; /* 垂直居中 */
+  
 }

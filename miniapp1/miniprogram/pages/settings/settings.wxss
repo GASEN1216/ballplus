@@ -10,3 +10,8 @@
 .arrow {
   color: #888;
 }
+.customer-service-btn {
+  margin-left: auto;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+}

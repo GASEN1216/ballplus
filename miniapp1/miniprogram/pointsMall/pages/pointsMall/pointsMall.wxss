@@ -1,0 +1,76 @@
+.mall-container {
+  padding: 20rpx;
+  background-color: #f9fafc;
+  box-sizing: border-box; /* 确保内边距不会撑破容器 */
+  overflow-x: hidden; /* 防止横向溢出 */
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: #888;
+  margin-top: 10rpx;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 两列布局 */
+  gap: 20rpx; /* 间隔 */
+  justify-content: center; /* 内容居中 */
+  align-items: center; /* 垂直居中 */
+  margin: 0 auto; /* 水平居中 */
+  width: 100%; /* 宽度自适应 */
+  box-sizing: border-box;
+}
+
+.product-card {
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  text-align: center;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  overflow: hidden; /* 防止内容溢出 */
+}
+
+.product-image {
+  width: 100rpx; /* 调整图片大小 */
+  height: 100rpx;
+  margin-bottom: 10rpx;
+  object-fit: cover; /* 保证图片不会变形 */
+}
+
+.product-name {
+  font-size: 24rpx;
+  color: #333;
+  margin-bottom: 5rpx;
+  white-space: nowrap; /* 防止名称换行 */
+  overflow: hidden; /* 防止溢出 */
+  text-overflow: ellipsis; /* 超出显示省略号 */
+}
+
+.product-price {
+  font-size: 20rpx;
+  color: #ff5722;
+  margin-bottom: 10rpx;
+}
+
+.redeem-button {
+  background-color: #1cbbb4;
+  color: white;
+  font-size: 24rpx;
+  border-radius: 5rpx;
+  padding: 5rpx 10rpx;
+  width: 80%; /* 按钮宽度限制 */
+  margin: 0 auto; /* 水平居中 */
+}

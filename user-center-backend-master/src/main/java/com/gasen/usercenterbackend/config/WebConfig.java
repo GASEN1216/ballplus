@@ -28,7 +28,7 @@ public class WebConfig implements WebMvcConfigurer {
         //全局请求拦截器
         registry.addInterceptor(new GlobalRequestInterceptor())
                 .addPathPatterns("/user/**")
-                .excludePathPatterns("/user/login", "/user/register", "/user/current", "/user/receiveCode", "/user/wx/login", "/user/test/token"); // 排除不需要检查session的路径
+                .excludePathPatterns("/user/login", "/user/register", "/user/current", "/user/receiveCode", "/user/wx/login", "/user/wx/update", "/user/test/token", "/user/test/uptoken"); // 排除不需要检查session的路径
     }
 
 }

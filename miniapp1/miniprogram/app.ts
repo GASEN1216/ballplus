@@ -1,18 +1,28 @@
 // app.ts
 import GoEasy from './libs/goeasy-2.6.6.esm.min';
+import { IAppOption } from '../typings';
 
 App<IAppOption>({
   globalData: {
+    qnurl: 'http://sunsetchat.top/',// 加个‘/’方便直接加图片名
     url: 'http://10.45.4.53:8080',
     isLoggedin: false,
-    nickname: '',
-    profilePic: '',
-    token: '',
     currentUser: {
       id: '',
-      name: "",
-      avatar: ""
-    }
+      name: '',
+      avatar: '',
+      token: '',
+      gender: 0,
+      exp: 0,
+      grade: 0,
+      state: 0,
+      unblockingTime: '',
+      birthday: '',
+      credit: 0,
+      score: 0,
+      description: '',
+      label: ''
+    },
   },
 
   // 获取完整URL的方法
@@ -51,17 +61,25 @@ App<IAppOption>({
               if (typeof response.data === 'object' && response.data !== null && 'data' in response.data && 'userAccount' in response.data.data) {
                 const userData = response.data.data; // 假设 user 数据直接在 response.data 中
 
-                this.globalData.isLoggedin = true,
-                  this.globalData.nickname = userData.userAccount || '用户',
-                  this.globalData.profilePic = userData.avatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0';
-                // 保存 token 到全局变量
-                this.globalData.token = userData.password;
-                console.log(this.globalData.token);
-                // 设置用户im属性
-                this.globalData.currentUser.id = String(userData.id);
-                this.globalData.currentUser.name = this.globalData.nickname;
-                this.globalData.currentUser.avatar = this.globalData.profilePic;
+                console.log(userData);
 
+                this.globalData.isLoggedin = true,
+                this.globalData.currentUser = Object.assign(this.globalData.currentUser || {}, {
+                  id: String(userData.id),
+                  name: userData.userAccount || '用户',
+                  avatar: userData.avatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0',
+                  token: userData.token,
+                  gender: userData.gender || 0,
+                  exp: userData.exp || 0,
+                  grade: userData.grade || 1,
+                  state: userData.state || 0,
+                  unblockingTime: userData.unblockingTime || '',
+                  birthday: userData.birthday || '',
+                  credit: userData.credit || 100,
+                  score: userData.score || 0,
+                  description: userData.description || '这个人很冷酷，什么都没留下...',
+                  label: userData.label || ''
+                });
 
                 // 调用封装的 GoEasy 初始化函数
                 this.initializeGoEasy();

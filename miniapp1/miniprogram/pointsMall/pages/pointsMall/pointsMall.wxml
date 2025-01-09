@@ -1,0 +1,17 @@
+<view class="mall-container">
+  <view class="header">
+    <text class="title">🏆 赛点商城</text>
+    <text class="subtitle">您的当前赛点：{{points}}</text>
+  </view>
+
+  <view class="products-grid">
+    <block wx:for="{{products}}" wx:key="id">
+      <view class="product-card">
+        <image src="{{item.image}}" class="product-image"></image>
+        <text class="product-name">{{item.name}}</text>
+        <text class="product-price">{{item.price}} 赛点</text>
+        <button class="redeem-button" bindtap="redeemItem" data-id="{{item.id}}">兑换</button>
+      </view>
+    </block>
+  </view>
+</view>

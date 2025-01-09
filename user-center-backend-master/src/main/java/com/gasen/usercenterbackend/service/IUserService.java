@@ -27,4 +27,6 @@ public interface IUserService extends IService<User> {
     Boolean userBannedDays(UserBannedDaysRequest userBannedDaysRequest);
 
     List<User> usersList();
+
+    void addExp(User user);
 }

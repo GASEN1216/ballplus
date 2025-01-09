@@ -1,30 +1,39 @@
+import { IAppOption, wxUser } from '../../../typings'
+
 // pages/mine/mine.ts
 const app = getApp<IAppOption>();
 
 Page({
   data: {
     isLoggedin: false,
-    nickname: '',
-    profilePic: '',
     tokenStatus: '',
     actPath: '../../activities',
     gdmapPath: '../../gdmap',
     friPath: '../../friends',
+    pointsMPath: '../../pointsMall',
+    userData: {} as wxUser,
+    expWidth: '0%', // 预设值
     availableDates: [] as string[], // 存储用户标记的可用日期
   },
   onLoad() {
+    const currentUser = app.globalData.currentUser;
+    const width = (currentUser.exp / (currentUser.grade * 10)) * 100;
     if (app.globalData.isLoggedin) {
       this.setData({
         isLoggedin: app.globalData.isLoggedin,
-        nickname: app.globalData.nickname,
-        profilePic: app.globalData.profilePic,
+        nickname: app.globalData.currentUser.name,
+        profilePic: app.globalData.currentUser.avatar,
+        userData: { ...currentUser },
+        expWidth: `${width}%`
       });
     } else {
       app.loginReadyCallback = () => {
         this.setData({
           isLoggedin: app.globalData.isLoggedin,
-          nickname: app.globalData.nickname,
-          profilePic: app.globalData.profilePic,
+          nickname: app.globalData.currentUser.name,
+          profilePic: app.globalData.currentUser.avatar,
+          userData: { ...currentUser },
+          expWidth: `${width}%`
         });
       };
     }
@@ -41,7 +50,7 @@ sendNotification(message: string) {
 
 // 模拟即将到来的活动提醒
 checkUpcomingActivities() {
-  const upcomingActivities = ['2024-12-15', '2024-07-05']; // 示例日期
+  const upcomingActivities = ['2025-01-08', '2024-07-05']; // 示例日期
   const today = new Date().toISOString().split('T')[0];
 
   if (upcomingActivities.includes(today)) {
@@ -117,17 +126,31 @@ checkUpcomingActivities() {
       });
     },
 
+    // 跳转到积分商城
+toPointsMall() {
+  wx.navigateTo({
+    url: `${this.data.pointsMPath}/pages/pointsMall/pointsMall`
+  });
+},
+
+
     onShow() {
       if (typeof this.getTabBar === 'function' && this.getTabBar()) {
         this.getTabBar().setData({
           selected: 0  //这个数字是当前页面在tabBar中list数组的索引
         })
       }
+      if (app.globalData.isLoggedin) {
+        this.setData({
+          nickname: app.globalData.currentUser.name,
+          profilePic: app.globalData.currentUser.avatar,
+        });
+      }
       this.checkUpcomingActivities(); // 检查即将到来的活动
     },
   // 验证token方法
   onTokenButtonClick() {
-    const token = app.globalData.token; // 获取全局token
+    const token = app.globalData.currentUser.token; // 获取全局token
     wx.request({
       url: app.getUrl('/user/test/token'), // 确保URL正确
       method: 'POST',

@@ -1,14 +1,8 @@
 <view class="settings-container">
-  <view class="settings-option" bindtap="goToAccountSettings">
-    <text>Account Settings</text>
-    <text class="arrow">></text>
+  <view class="settings-option">
+    <view class="info-link" bindtap="goToEditInfo">个人信息</view>
   </view>
-  <view class="settings-option" bindtap="goToPrivacySettings">
-    <text>Privacy Settings</text>
-    <text class="arrow">></text>
-  </view>
-  <view class="settings-option" bindtap="goToNotifications">
-    <text>Notification Preferences</text>
-    <text class="arrow">></text>
+  <view class="settings-option">
+    <button class="customer-service-btn" open-type="contact">客服</button>
   </view>
 </view>

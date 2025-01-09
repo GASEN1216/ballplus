@@ -1,36 +1,37 @@
 package com.gasen.usercenterbackend.controller;
 
 
-import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.gasen.usercenterbackend.common.BaseResponse;
 import com.gasen.usercenterbackend.common.ErrorCode;
 import com.gasen.usercenterbackend.common.ResultUtils;
+import com.gasen.usercenterbackend.config.QiniuConfig;
 import com.gasen.usercenterbackend.config.WXConfig;
 import com.gasen.usercenterbackend.mapper.UserMapper;
 import com.gasen.usercenterbackend.model.Request.UserBannedDaysRequest;
 import com.gasen.usercenterbackend.model.Request.UserRegisterLoginRequest;
 import com.gasen.usercenterbackend.model.User;
+import com.gasen.usercenterbackend.model.respond.wxUser;
 import com.gasen.usercenterbackend.service.IUserService;
 import com.gasen.usercenterbackend.utils.WechatUtil;
+import com.qiniu.util.Auth;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import  java.util.concurrent.TimeUnit;
 
 import static com.gasen.usercenterbackend.common.ErrorCode.INVALID_TOKEN;
-import static com.gasen.usercenterbackend.common.ErrorCode.SIGNATURE_ERROR;
 import static com.gasen.usercenterbackend.constant.UserConstant.ADMIN;
 import static com.gasen.usercenterbackend.constant.UserConstant.USER_LOGIN_IN;
 
@@ -55,16 +56,29 @@ public class UserController {
 
     private final WXConfig wxConfig;
 
+    private final QiniuConfig qiniuConfig;
+
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
 
     @Autowired
-    public UserController(WXConfig wxConfig) {
+    public UserController(WXConfig wxConfig, QiniuConfig qiniuConfig) {
         this.wxConfig = wxConfig;
+        this.qiniuConfig = qiniuConfig;
     }
 
     //TODO：ZSet做排行榜
+
+    @PostMapping("/test/uptoken")
+    public BaseResponse testupToken(@RequestParam("token") String token) {
+        if(!validateToken(token))
+            return ResultUtils.error(INVALID_TOKEN);
+        Auth auth = Auth.create(qiniuConfig.getAccessKey(), qiniuConfig.getSecretKey());
+        // 获取上传凭证
+        String upToken = auth.uploadToken(qiniuConfig.getBucket());
+        return ResultUtils.success(upToken);
+    }
 
     /**
      * 接收code并输出
@@ -144,11 +158,53 @@ public class UserController {
             // 用户信息入库
             user = new User(WechatUtil.generateRandomUsername(), "12345678");
             user.setOpenId(openid);
+            user.setSignIn(LocalDateTime.now());
             userService.save(user);
         }
-        User saftyUser = getSaftyUser(user);
-        saftyUser.setPassword(token);
+        if(user.getState()==-1)
+            return ResultUtils.error(ErrorCode.BANNED_USER, user.getUnblockingTime());
+        // 加经验
+        userService.addExp(user);
+        // 返回安全用户信息
+        wxUser saftyUser = getSaftywxUser(user);
+        saftyUser.setToken(token);
         return ResultUtils.success(saftyUser);
+    }
+
+    /**
+     * 更新用户
+     * User传进来要有id
+     * */
+    @Operation(summary = "更新wx用户信息")
+    @PostMapping("/wx/update")
+    public BaseResponse updatewxUser(@RequestBody wxUser user, HttpServletRequest request) {
+        // 判断token是否有效，无效则返回token失效
+        if(!validateToken(user.getToken()))
+            return ResultUtils.error(INVALID_TOKEN);
+
+        //如果有效，判断是否是用户自己，是的话也可以进入修改
+        //通过token从redis缓存中拿取openid+sessionid，然后分割字符串取得openid
+        String os = (String) redisTemplate.opsForValue().get(user.getToken());
+        if(os==null) return ResultUtils.error(INVALID_TOKEN);
+        String openid = os.split("\\+")[0];
+        //通过openid查询数据库得到用户的id，再和传过来的id进行比较，如果相同则可以修改，如果不同则不可以修改
+        LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        Integer id = userMapper.selectOne(userLambdaQueryWrapper.eq(User::getOpenId, openid)).getId();
+
+        //1.是否为管理员 or 是否是自己
+        if(isAdmin(request) || id.equals(user.getId())) {
+            //2.判断用户是否存在
+            if(userService.lambdaQuery().eq(User::getId, user.getId()).exists()) {
+                //TODO：判断是否有更新信息，未更新直接返回
+                //3.更新用户信息
+                log.info("id为'{}' name为'{}' 的用户更新信息", user.getId(), user.getUserAccount());
+                User updatedUser = User.wxUserToUser(user);
+                if(userService.updateById(updatedUser))
+                    //4.返回更新后的用户信息
+                    return ResultUtils.success(getSaftyUser(updatedUser));
+                else return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"更新用户信息失败");
+            } else return ResultUtils.error(ErrorCode.USER_NOT_EXIST);
+        }else return ResultUtils.error(ErrorCode.USER_NOT_LOGIN_OR_NOT_ADMIN);
     }
 
     /**
@@ -290,6 +346,27 @@ public class UserController {
         log.info("用户"+user.getUserAccount()+behavior+"："+ user);
     }
 
+
+    /**
+     * 获取安全wx用户信息
+     * */
+    public static wxUser getSaftywxUser(User user) {
+        wxUser safetyUser = new wxUser();
+        safetyUser.setId(user.getId())
+                .setUserAccount(user.getUserAccount())
+                .setAvatarUrl(user.getAvatarUrl())
+                .setGender(user.getGender())
+                .setGrade(user.getGrade())
+                .setExp(user.getExp())
+                .setState(user.getState())
+                .setUnblockingTime(user.getUnblockingTime())
+                .setBirthday(user.getBirthday())
+                .setCredit(user.getCredit())
+                .setScore(user.getScore())
+                .setDescription(user.getDescription())
+                .setLabel(user.getLabel());
+        return safetyUser;
+    }
 
     /**
      * 获取安全用户信息
