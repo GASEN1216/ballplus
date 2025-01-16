@@ -3,69 +3,43 @@
   <swiper class="carousel" autoplay interval="3000" duration="500" circular>
     <block wx:for="{{carouselImages}}" wx:key="index">
       <swiper-item>
-        <image 
-          src="{{item.url}}" 
-          class="carousel-image"
-          bindtap="onCarouselItemClick"
-          data-link="{{item.link}}"
-        />
+        <image src="{{item.url}}" class="carousel-image" bindtap="onCarouselItemClick" data-link="{{item.link}}" />
       </swiper-item>
     </block>
   </swiper>
 </view>
 
-<!-- 匹配模块 -->
-<view class="match-section">
-  <button class="match-button" bind:tap="matchActivity">✨ 匹配活动</button>
-  <button class="match-button" bind:tap="goToStudy">学习资源</button>
-  <view class="tags">
-    <button>🏀篮球</button>
-    <button>⚽足球</button>
-    <button>🧘‍♀️瑜伽</button>
+<view class="main-container">
+  <!-- 发起活动按钮 -->
+  <view class="create-activity-section">
+    <button class="create-activity-button" bindtap="createActivity">➕ 发起活动</button>
   </view>
-</view>
 
-<!-- 活动展示区域 -->
-<!-- 搜索栏 -->
-<view class="search-section">
-  <input type="text" placeholder="搜索活动名称或类型" bindinput="onSearchInput" />
-  <button bindtap="onSearch">🔍 搜索</button>
-</view>
+  <!-- 活动展示区域 -->
+  <view class="activity-list">
+    <!-- 判断是否有活动信息 -->
+    <block wx:if="{{filteredActivities.length > 0}}">
+      <block wx:for="{{filteredActivities}}" wx:key="index">
+        <view class="activity-card">
+          <!-- 头像 -->
+          <cover-image src="{{item.avatar}}" class="activity-avatar"></cover-image>
+          <!-- 活动信息 -->
+          <view class="activity-details">
+            <text class="activity-name">{{item.name}}</text>
+            <text class="activity-meta">📅 日期: {{item.eventDate}} {{item.weekDay}} {{item.eventTime}}-{{item.eventTimee}}</text>
+            <text class="activity-meta">📍 地点: {{item.location}}</text>
+            <text class="activity-meta">👥 人数: {{item.participants}}/{{item.totalParticipants}}</text>
+            <text class="activity-remarks">备注: {{item.remarks}}</text>
+          </view>
+        </view>
+      </block>
+    </block>
 
-<!-- 排序选项 -->
-<view class="sort-section">
-  <text>排序方式：</text>
-  <button bindtap="sortActivities" data-sort="distanceAsc">📍 距离最近</button>
-  <button bindtap="sortActivities" data-sort="distanceDesc">📍 距离最远</button>
-</view>
-
-<!-- 活动展示区域 -->
-<scroll-view class="activity-list" scroll-y>
-  <block wx:for="{{filteredActivities}}" wx:key="index">
-    <view class="activity-card">
-      <image class="activity-cover" src="{{item.cover}}" />
-      <view class="activity-info">
-        <text class="activity-title">{{item.name}}</text>
-        <text class="activity-time">📅 {{item.time}}</text>
-        <text class="activity-location">📍 {{item.location}}</text>
-        <text class="activity-participants">👥 已报名: {{item.participants}}</text>
+    <!-- 当没有活动信息时显示 -->
+    <block wx:else>
+      <view class="no-activity">
+        <text>暂时没有活动发布哦~</text>
       </view>
-      <button class="activity-button" bindtap="viewActivityDetail" data-id="{{item.id}}">查看详情</button>
-    </view>
-  </block>
-</scroll-view>
-
-<!-- 快捷功能入口 -->
-<view class="quick-access">
-  <button>📅 日历</button>
-  <button>💬 社区</button>
-  <button>🗺️ 场馆</button>
-  <button>🏆 积分</button>
-</view>
-
-<!-- 底部导航栏 -->
-<view class="tabbar">
-  <button>🏠 首页</button>
-  <button>📆 活动</button>
-  <button>🧑 我的</button>
+    </block>
+  </view>
 </view>

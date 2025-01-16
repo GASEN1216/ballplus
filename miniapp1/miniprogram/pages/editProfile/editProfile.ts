@@ -19,7 +19,7 @@ function initQiniu() {
      *  注意：此处的 region、domain 与生成 uploadToken 时提交的 bucket 对应，否则上传图片时可能出现 401 expired token
      */
     uptoken: '',
-    uptokenURL: 'http://10.45.4.53:8080/user/test/uptoken',
+    uptokenURL: 'http://10.45.4.53:8080/user/wx/uptoken',
     uptokenFunc: function () { return '' },
 
     // 后端生成 uploadToken 时使用的 bucket 所分配的域名。 https://portal.qiniu.com/kodo/bucket/overview?bucketName=cregskin-static-pictures
@@ -106,7 +106,7 @@ Page({
           options:
           {
             region: 'SCN', // 华北区
-            uptokenURL: 'http://10.45.4.53:8080/user/test/uptoken',
+            uptokenURL: 'http://10.45.4.53:8080/user/wx/uptoken',
             domain: 'https://portal.qiniu.com/kodo/bucket/resource-v2?bucketName=ballplus',
             shouldUseQiniuFileName: false,
             key: fileName,
@@ -171,15 +171,36 @@ Page({
       'userData.birthday': e.detail.value
     });
   },
+    /**
+   * 处理手机号输入
+   * @param e 小程序输入事件
+   */
+  handlePhoneInput(e: WechatMiniprogram.Input) {
+    let value = e.detail.value;
 
+    // 过滤非数字字符
+    value = value.replace(/\D/g, '');
+
+    // 更新手机号数据
+    this.setData({
+      'userData.phone': value
+    });
+  },
   /**
    * 保存用户信息
    */
   onSave() {
-    const { name, avatar } = this.data.userData;
+    const { name, avatar, phone } = this.data.userData;
     if (!name || !avatar) {
       wx.showToast({
         title: '昵称和头像为必填项',
+        icon: 'none'
+      });
+      return;
+    }
+    if(phone.length != 11){
+      wx.showToast({
+        title: '电话号码应该为11位',
         icon: 'none'
       });
       return;
@@ -199,6 +220,7 @@ Page({
         birthday: app.globalData.currentUser.birthday,
         description: app.globalData.currentUser.description,
         label: app.globalData.currentUser.label,
+        phone: app.globalData.currentUser.phone,
         token: app.globalData.currentUser.token
       },
       header: {
@@ -229,5 +251,34 @@ Page({
     });
 
     wx.navigateBack();
-  }
+  },
+  // 复制球号到剪贴板
+  copyBallNumber() {
+    const ballNumber = this.data.userData.ballNumber;
+
+    if (!ballNumber) {
+      wx.showToast({
+        title: '球号为空',
+        icon: 'none'
+      });
+      return;
+    }
+
+    wx.setClipboardData({
+      data: ballNumber,
+      success: () => {
+        wx.showToast({
+          title: '球号已复制',
+          icon: 'success'
+        });
+      },
+      fail: (err) => {
+        wx.showToast({
+          title: '复制失败',
+          icon: 'none'
+        });
+        console.error('Clipboard Error:', err);
+      }
+    });
+  },
 });

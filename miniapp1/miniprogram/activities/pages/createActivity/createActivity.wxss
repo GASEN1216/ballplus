@@ -1,19 +1,99 @@
-.container {
+/* 容器 */
+.form-container {
   padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-input, textarea {
-  width: 100%;
+/* 表单项 */
+.form-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 标签 */
+.form-label {
+  flex: 0 0 120px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333333;
+  margin-right: 10px;
+}
+
+/* 输入框、选择器、文本域 */
+.form-input,
+.form-textarea,
+.picker {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  color: #666666;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.picker:focus {
+  border-color: #007aff;
+}
+
+/* 文本域 */
+.form-textarea {
+  height: 100px;
+  resize: none;
+}
+
+/* 链接 */
+.form-link {
+  color: #007aff;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* 提交按钮 */
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #007aff;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 122, 255, 0.4);
+  transition: background-color 0.3s;
+}
+
+.submit-button:active {
+  background-color: #005bb5;
+}
+
+/* 切换更多设置 */
+.more-settings-toggle {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  color: #666666;
+  cursor: pointer;
+}
+
+.more-settings-toggle:hover {
+  color: #007aff;
+}
+
+/* 提示文字 */
+.helper-text {
+  font-size: 12px;
+  color: #999999;
+  margin-top: 5px;
 }

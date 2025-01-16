@@ -1,3 +1,10 @@
+create table items
+(
+    user_id int not null comment '用户id',
+    item_id int not null comment '物品id'
+)
+    comment '用户的物品表';
+
 create table user
 (
     id              int auto_increment comment '用户id'

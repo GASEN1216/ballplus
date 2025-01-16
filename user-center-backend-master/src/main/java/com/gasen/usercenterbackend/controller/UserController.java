@@ -1,6 +1,7 @@
 package com.gasen.usercenterbackend.controller;
 
 
+import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -12,8 +13,13 @@ import com.gasen.usercenterbackend.config.WXConfig;
 import com.gasen.usercenterbackend.mapper.UserMapper;
 import com.gasen.usercenterbackend.model.Request.UserBannedDaysRequest;
 import com.gasen.usercenterbackend.model.Request.UserRegisterLoginRequest;
+import com.gasen.usercenterbackend.model.Request.weChatAddItemRequest;
+import com.gasen.usercenterbackend.model.Request.weChatUseItemRequest;
 import com.gasen.usercenterbackend.model.User;
+import com.gasen.usercenterbackend.model.respond.goEasyUser;
 import com.gasen.usercenterbackend.model.respond.wxUser;
+import com.gasen.usercenterbackend.service.IFriendsService;
+import com.gasen.usercenterbackend.service.IItemsService;
 import com.gasen.usercenterbackend.service.IUserService;
 import com.gasen.usercenterbackend.utils.WechatUtil;
 import com.qiniu.util.Auth;
@@ -29,9 +35,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import  java.util.concurrent.TimeUnit;
 
 import static com.gasen.usercenterbackend.common.ErrorCode.INVALID_TOKEN;
+import static com.gasen.usercenterbackend.common.ErrorCode.SUCCESS;
 import static com.gasen.usercenterbackend.constant.UserConstant.ADMIN;
 import static com.gasen.usercenterbackend.constant.UserConstant.USER_LOGIN_IN;
 
@@ -52,6 +60,12 @@ public class UserController {
     private IUserService userService;
 
     @Resource
+    private IItemsService itemsService;
+
+    @Resource
+    private IFriendsService friendsService;
+
+    @Resource
     private UserMapper userMapper;
 
     private final WXConfig wxConfig;
@@ -70,10 +84,52 @@ public class UserController {
 
     //TODO：ZSet做排行榜
 
-    @PostMapping("/test/uptoken")
+    @Operation(summary = "获取用户的好友列表")
+    @PostMapping("/wx/getFriends")
+    public BaseResponse getFriends(@RequestParam(value = "userId") int userId){
+        List<Integer> friendsId = friendsService.getFriends(userId);
+        List<goEasyUser> friends = userService.getFriends(friendsId);
+        return ResultUtils.success(friends);
+    }
+
+    @Operation(summary = "获取指定用户的物品列表")
+    @PostMapping("/wx/getItems")
+    public BaseResponse getItems(@RequestParam(value = "userId") int userId){
+        List<Integer> items = itemsService.getItems(userId);
+        return ResultUtils.success(items);
+    }
+
+    /**
+     * 添加物品
+     */
+    @Operation(summary = "wx用户使用物品信息")
+    @PostMapping("/wx/useItem")
+    public BaseResponse useItem(@RequestBody weChatUseItemRequest weChatUseItemRequest) {
+        // 更新用户信息
+        userService.onlyUpdateAvatar(weChatUseItemRequest);
+        return ResultUtils.success(SUCCESS);
+    }
+
+    /**
+     * 添加物品
+     */
+    @Operation(summary = "更新wx用户物品信息")
+    @PostMapping("/wx/addItem")
+    public BaseResponse addItem(@RequestBody weChatAddItemRequest weChatAddItemRequest) {
+        // 添加物品
+        itemsService.addItem(weChatAddItemRequest.getUserId(), weChatAddItemRequest.getItemId());
+        // 更新用户信息
+        userService.updateAvatar(weChatAddItemRequest);
+        return ResultUtils.success(SUCCESS);
+    }
+
+    /**
+     * 获取上传凭证
+     * @param token
+     * @return
+     */
+    @PostMapping("/wx/uptoken")
     public BaseResponse testupToken(@RequestParam("token") String token) {
-        if(!validateToken(token))
-            return ResultUtils.error(INVALID_TOKEN);
         Auth auth = Auth.create(qiniuConfig.getAccessKey(), qiniuConfig.getSecretKey());
         // 获取上传凭证
         String upToken = auth.uploadToken(qiniuConfig.getBucket());
@@ -105,15 +161,13 @@ public class UserController {
         // 从Redis中获取token对应的值
         String storedValue = (String) redisTemplate.opsForValue().get(token);
 
-
-
         // 检查token是否存在且有效
         // 如果存在，token有效
         return storedValue != null;
         // 如果Redis中不存在该token，返回无效
     }
 
-    @PostMapping("/test/token")
+    @PostMapping("/wx/token")
     public BaseResponse someProtectedEndpoint(@RequestParam("token") String token) {
         // 验证token
         if (!validateToken(token)) {
@@ -159,6 +213,8 @@ public class UserController {
             user = new User(WechatUtil.generateRandomUsername(), "12345678");
             user.setOpenId(openid);
             user.setSignIn(LocalDateTime.now());
+            user.setUserName(user.getOnlyBallNumber());
+            user.setAvatarUrl("https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0");
             userService.save(user);
         }
         if(user.getState()==-1)
@@ -178,11 +234,7 @@ public class UserController {
     @Operation(summary = "更新wx用户信息")
     @PostMapping("/wx/update")
     public BaseResponse updatewxUser(@RequestBody wxUser user, HttpServletRequest request) {
-        // 判断token是否有效，无效则返回token失效
-        if(!validateToken(user.getToken()))
-            return ResultUtils.error(INVALID_TOKEN);
-
-        //如果有效，判断是否是用户自己，是的话也可以进入修改
+        //判断是否是用户自己，是的话也可以进入修改
         //通过token从redis缓存中拿取openid+sessionid，然后分割字符串取得openid
         String os = (String) redisTemplate.opsForValue().get(user.getToken());
         if(os==null) return ResultUtils.error(INVALID_TOKEN);
@@ -205,6 +257,15 @@ public class UserController {
                 else return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"更新用户信息失败");
             } else return ResultUtils.error(ErrorCode.USER_NOT_EXIST);
         }else return ResultUtils.error(ErrorCode.USER_NOT_LOGIN_OR_NOT_ADMIN);
+    }
+
+    @Operation(summary = "获取用户的手机号码")
+    @PostMapping("/wx/getPhone")
+    public BaseResponse getPhone(@RequestParam(value = "code") String code) {
+        String phoneNumber = WechatUtil.getPhoneNumber(code, wxConfig.getAppid(), wxConfig.getAppsecret());
+        if(phoneNumber==null || phoneNumber.isEmpty())
+            return ResultUtils.error(ErrorCode.PHONE_NUMBER_ERROR);
+        return ResultUtils.success(phoneNumber);
     }
 
     /**
@@ -353,6 +414,7 @@ public class UserController {
     public static wxUser getSaftywxUser(User user) {
         wxUser safetyUser = new wxUser();
         safetyUser.setId(user.getId())
+                .setBallNumber(user.getUserName())
                 .setUserAccount(user.getUserAccount())
                 .setAvatarUrl(user.getAvatarUrl())
                 .setGender(user.getGender())
@@ -364,7 +426,8 @@ public class UserController {
                 .setCredit(user.getCredit())
                 .setScore(user.getScore())
                 .setDescription(user.getDescription())
-                .setLabel(user.getLabel());
+                .setLabel(user.getLabel())
+                .setPhone(user.getPhone());
         return safetyUser;
     }
 

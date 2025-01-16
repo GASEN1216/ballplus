@@ -21,6 +21,11 @@ public class wxUser implements Serializable {
     private Integer id;
 
     /**
+     * 球号
+     */
+    private String ballNumber;
+
+    /**
      * 昵称
      */
     private String userAccount;
@@ -84,5 +89,7 @@ public class wxUser implements Serializable {
      * 标签
      */
     private String label;
+
+    private String phone;
 
 }

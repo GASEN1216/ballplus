@@ -1,35 +1,240 @@
+import { IAppOption } from '../../../typings'
+
+// pages/mine/mine.ts
+const app = getApp<IAppOption>();
+
 Page({
   data: {
-    time: '',
-    host: '',
-    currentParticipants: '',
-    maxParticipants: '',
-    content: ''
+    event: {
+      appId: null, // 发起人id直接赋值
+      avatar: '', // 发起人头像
+      name: '', // 活动名称
+      eventDate: '', // 开始日期
+      eventTime: '18:30', // 开始时间
+      eventTimee: '20:30', // 结束时间
+      location: '', // 地点
+      locationDetail: '', // 详细地点
+      totalParticipants: 2, // 活动总人数
+      phoneNumber: '', // 联系方式
+      type: 0, // 类型
+      remarks: '', // 备注
+      labels: '', // 标签
+      limits: 0, // 限制
+      visibility: true, // 可见性状态
+      level: 0, // 水平
+      feeMode: 0, // 费用模式
+      fee: 0.0, // 活动费用
+      penalty: true, // 爽约惩罚
+      isTemplate: false, // 是否模板
+    },
+    dateRange: [], // 日期选择范围
+    participantRange: [], // 活动总人数范围
+    showMore: false, // 是否显示更多设置
+    showFeeInput: false, // 控制活动费用输入框显示
+    editProPath: '../../../',
+    fromMap: false
   },
 
-  onLoad: function(options) {
-    if (options && options.time) {
+  onLoad(options: { location?: string; locationDetail?: string }) {
+    // 初始化日期范围（今天到未来30天）
+    const today = new Date();
+    const todayDate = today.toISOString().slice(0, 10); // 格式为 YYYY-MM-DD
+
+    // 获取今天是星期几
+    const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+    const todayWeek = weekDays[today.getDay()]; // 获取对应的星期名称
+    // 默认活动名称
+    const defaultName = `${todayWeek}晚`;
+
+    const dateRange = Array.from({ length: 30 }, (_, i) => {
+      const date = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
+      return date.toISOString().slice(0, 10);
+    });
+
+    // 初始化人数范围（2~100）
+    const participantRange = Array.from({ length: 99 }, (_, i) => i + 2);
+
+    // 检查 options 是否包含 location 或 locationDetail
+    const fromMap = !!(options.location || options.locationDetail);
+
+    this.setData({
+      'event.name': defaultName, // 默认设置为 "今天的星期 + 晚"
+      'event.appId': app.globalData.currentUser.id,
+      'event.avatar': app.globalData.currentUser.avatar,
+      'event.eventDate': todayDate, // 默认设置为今天的日期
+      'event.location': decodeURIComponent(options.location || ''), // 解码参数
+      'event.locationDetail': decodeURIComponent(options.locationDetail || ''),
+      fromMap, // 根据 options 判断是否从地图传入
+      dateRange,
+      participantRange
+    });
+  },
+  /**
+   * 选择地点
+   */
+  handleLocationSelect() {
+    wx.chooseLocation({
+      success: (res) => {
+        // 更新地点和详细地点
+        this.setData({
+          'event.location': res.name || '', // 地点名称
+          'event.locationDetail': res.address || '' // 详细地址
+        });
+      },
+      fail: (err) => {
+        console.error('选择地点失败:', err);
+        wx.showToast({
+          title: '未选择地点',
+          icon: 'none'
+        });
+      }
+    });
+  },
+
+
+  /**
+   * 输入地点
+   */
+  onLocationInput(e: WechatMiniprogram.Input) {
+    this.setData({
+      'event.location': e.detail.value
+    });
+  },
+
+  /**
+   * 输入详细地点
+   */
+  onLocationDetailInput(e: WechatMiniprogram.Input) {
+    this.setData({
+      'event.locationDetail': e.detail.value
+    });
+  },
+
+  // 获取手机号
+  handleGetPhoneNumber() {
+    const phone = app.globalData.currentUser.phone;
+
+    if (!phone) {
+      // 未填写手机号资料
+      wx.showModal({
+        title: '提示',
+        content: '请完善手机号资料',
+        success: (res) => {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/editProfile/editProfile', // 跳转到编辑信息页面
+            });
+          }
+        },
+      });
+    } else {
+      // 已有手机号
       this.setData({
-        time: options.time,
-        host: options.host,
-        currentParticipants: options.currentParticipants,
-        maxParticipants: options.maxParticipants,
-        content: options.content
+        'event.phoneNumber': phone, // 赋值给表单中的联系方式
+      });
+
+      wx.showToast({
+        title: '已获取手机号',
+        icon: 'success',
       });
     }
   },
 
-  formSubmit: function(e: { detail: { value: string } }) {
-    const formData = e.detail.value;
-    console.log('表单数据:', formData);
-    // 这里可以处理表单提交，例如保存到服务器
-    wx.showToast({
-      title: '活动创建成功',
-      icon: 'success',
-      duration: 2000
-    });
+  // 更新表单数据
+  handleInputChange(e: WechatMiniprogram.BaseEvent) {
+    const { field } = e.currentTarget.dataset;
+    const value = e.detail.value;
 
-    // 跳转回上一页或首页
-    wx.navigateBack();
-  }
+    // 限制活动名称字数
+    if (field === 'name' && value.length > 15) {
+      wx.showToast({ title: '活动名称最多15个字', icon: 'none' });
+      return;
+    }
+
+    // 限制备注字数
+    if (field === 'remarks' && value.length > 800) {
+      wx.showToast({ title: '备注最多800字', icon: 'none' });
+      return;
+    }
+
+    this.setData({
+      [`event.${field}`]: value,
+    });
+  },
+
+  // 更新费用模式
+  handleFeeModeChange(e: WechatMiniprogram.BaseEvent) {
+    const feeMode = parseInt(e.detail.value, 10);
+    this.setData({
+      'event.feeMode': feeMode,
+      showFeeInput: feeMode === 2, // 如果费用模式是AA制，显示费用输入框
+    });
+  },
+
+  // 显示/隐藏更多设置
+  toggleMoreSettings() {
+    this.setData({
+      showMore: !this.data.showMore,
+    });
+  },
+
+  // 提交表单
+  handleSubmit() {
+    const { event } = this.data;
+
+    // 必填项校验
+    const requiredFields = [
+      { field: 'name', label: '活动名称' },
+      { field: 'eventDate', label: '开始日期' },
+      { field: 'eventTime', label: '开始时间' },
+      { field: 'eventTimee', label: '结束时间' },
+      { field: 'location', label: '地点' },
+      { field: 'locationDetail', label: '详细地点' },
+      { field: 'totalParticipants', label: '活动总人数' },
+      { field: 'phoneNumber', label: '联系方式' },
+    ];
+
+    for (const { field, label } of requiredFields) {
+      if (!event[field]) {
+        wx.showToast({ title: `请填写${label}`, icon: 'none' });
+        return;
+      }
+    }
+
+    // 验证时间逻辑：结束时间不能小于开始时间
+    const startTimeParts = event.eventTime.split(':').map(Number); // 转换为 [小时, 分钟]
+    const endTimeParts = event.eventTimee.split(':').map(Number); // 转换为 [小时, 分钟]
+    const startMinutes = startTimeParts[0] * 60 + startTimeParts[1]; // 开始时间的总分钟数
+    const endMinutes = endTimeParts[0] * 60 + endTimeParts[1]; // 结束时间的总分钟数
+
+    if (endMinutes <= startMinutes) {
+      wx.showToast({ title: '结束时间必须大于开始时间', icon: 'none' });
+      return;
+    }
+
+    // 提交表单数据
+    wx.request({
+      url: `${app.globalData.url}/user/wx/createEvent`,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        'X-Token': app.globalData.currentUser.token
+      },
+      data: event,
+      success: (res) => {
+        if (res.statusCode === 200 && res.data.code === 0) {
+          wx.showToast({ title: '活动创建成功', icon: 'success', duration: 500 });
+
+          setTimeout(() => {
+            wx.navigateBack();
+          }, 500);
+        } else {
+          wx.showToast({ title: res.data.message || '活动创建失败', icon: 'none' });
+        }
+      },
+      fail: () => {
+        wx.showToast({ title: '请求失败，请检查网络', icon: 'none' });
+      },
+    });
+  },
 });

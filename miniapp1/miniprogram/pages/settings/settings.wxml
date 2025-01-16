@@ -1,8 +1,14 @@
 <view class="settings-container">
-  <view class="settings-option">
-    <view class="info-link" bindtap="goToEditInfo">个人信息</view>
+  <view class="settings-option" bindtap="goToEditInfo">
+    <text class="option-text">个人信息</text>
   </view>
   <view class="settings-option">
     <button class="customer-service-btn" open-type="contact">客服</button>
+  </view>
+  <view class="settings-option" bindtap="goToAddFriend">
+    <text class="option-text">添加好友</text>
+  </view>
+  <view class="settings-option" bindtap="viewFriendRequests">
+    <text class="option-text">好友申请</text>
   </view>
 </view>

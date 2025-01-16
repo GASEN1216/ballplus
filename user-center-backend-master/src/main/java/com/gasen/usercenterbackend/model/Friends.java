@@ -1,0 +1,26 @@
+package com.gasen.usercenterbackend.model;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName("friends")
+public class Friends {
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+    private Integer userId;
+    private Integer friendId;
+
+    public Friends(int userId, int friendId) {
+        this.userId = userId;
+        this.friendId = friendId;
+    }
+}

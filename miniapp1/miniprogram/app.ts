@@ -9,6 +9,7 @@ App<IAppOption>({
     isLoggedin: false,
     currentUser: {
       id: '',
+      ballNumber: '',
       name: '',
       avatar: '',
       token: '',
@@ -21,7 +22,8 @@ App<IAppOption>({
       credit: 0,
       score: 0,
       description: '',
-      label: ''
+      label: '',
+      phone: ''
     },
   },
 
@@ -66,6 +68,7 @@ App<IAppOption>({
                 this.globalData.isLoggedin = true,
                 this.globalData.currentUser = Object.assign(this.globalData.currentUser || {}, {
                   id: String(userData.id),
+                  ballNumber: userData.ballNumber,
                   name: userData.userAccount || '用户',
                   avatar: userData.avatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0',
                   token: userData.token,
@@ -78,9 +81,10 @@ App<IAppOption>({
                   credit: userData.credit || 100,
                   score: userData.score || 0,
                   description: userData.description || '这个人很冷酷，什么都没留下...',
-                  label: userData.label || ''
+                  label: userData.label || '',
+                  phone: userData.phone || ''
                 });
-
+                 
                 // 调用封装的 GoEasy 初始化函数
                 this.initializeGoEasy();
 

@@ -6,7 +6,8 @@
     "pages/postDetail/postDetail",
     "pages/commentDetail/commentDetail",
     "pages/settings/settings",
-    "pages/editProfile/editProfile"
+    "pages/editProfile/editProfile",
+    "pages/friendRequests/friendRequests"
   ],
   "subPackages": [
     {

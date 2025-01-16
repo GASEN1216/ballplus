@@ -16,6 +16,43 @@ import java.util.Random;
 
 @Service
 public class WechatUtil {
+    public static String getPhoneNumber(String code, String appid, String secret) {
+        // Step 1: 获取 Access Token
+        String tokenUrl = String.format(
+                "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s",
+                appid, secret
+        );
+
+        Map<String, String> tokenRequestParams = new HashMap<>();
+        String tokenResponse = HttpClientUtil.doGet(tokenUrl, tokenRequestParams);
+        JSONObject tokenJson = JSON.parseObject(tokenResponse);
+
+        if (!tokenJson.containsKey("access_token")) {
+            throw new RuntimeException("Failed to get access_token: " + tokenJson);
+        }
+
+        String accessToken = tokenJson.getString("access_token");
+
+        // Step 2: 调用微信手机号获取接口
+        String phoneUrl = String.format(
+                "https://api.weixin.qq.com/wxa/business/getuserphonenumber?access_token=%s",
+                accessToken
+        );
+
+        Map<String, String> phoneRequestParams = new HashMap<>();
+        phoneRequestParams.put("code", code);
+
+        String phoneResponse = HttpClientUtil.doPostJson(phoneUrl, JSON.toJSONString(phoneRequestParams));
+        JSONObject phoneJson = JSON.parseObject(phoneResponse);
+
+        if (!phoneJson.containsKey("phone_info")) {
+            throw new RuntimeException("Failed to get phone number: " + phoneJson);
+        }
+
+        // Step 3: 返回手机号
+        JSONObject phoneInfo = phoneJson.getJSONObject("phone_info");
+        return phoneInfo.getString("phoneNumber");
+    }
 
     public static JSONObject getSessionKeyOrOpenId(String code, String appid, String secret) {
         //System.out.println("code: "+ code + " appid: " + appid + " secret: " + secret);

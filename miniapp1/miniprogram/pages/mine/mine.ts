@@ -152,7 +152,7 @@ toPointsMall() {
   onTokenButtonClick() {
     const token = app.globalData.currentUser.token; // 获取全局token
     wx.request({
-      url: app.getUrl('/user/test/token'), // 确保URL正确
+      url: app.getUrl('/user/wx/token'), // 确保URL正确
       method: 'POST',
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'

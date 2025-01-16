@@ -1,43 +1,6 @@
+const app = getApp();
 class RestApi {
-  //用户数据示例
-  users = [{
-      id: '08c0a6ec-a42b-47b2-bb1e-15e0f5f9a19a',
-      name: 'Mattie',
-      password: '123',
-      avatar: '/friends/static/images/Avatar-1.png',
-      email: 'Mattie@goeasy.io',
-      phone: '138xxxxxxxx',
-    },
-    {
-      id: '3bb179af-bcc5-4fe0-9dac-c05688484649',
-      name: 'Wallace',
-      password: '123',
-      avatar: '/friends/static/images/Avatar-2.png',
-      email: 'Wallace@goeasy.io',
-      phone: '138xxxxxxxx',
-    },
-    {
-      id: 'fdee46b0-4b01-4590-bdba-6586d7617f95',
-      name: 'Tracy',
-      password: '123',
-      avatar: '/friends/static/images/Avatar-3.png',
-      email: 'Tracy@goeasy.io',
-      phone: '138xxxxxxxx',
-    },
-    {
-      id: '33c3693b-dbb0-4bc9-99c6-fa77b9eb763f',
-      name: 'Juanita',
-      password: '123',
-      avatar: '/friends/static/images/Avatar-4.png',
-      email: 'Juanita@goeasy.io',
-      phone: '138xxxxxxxx',
-    },
-    {
-      id: '9',
-      name: 'User_QNk0Zmv6',
-      avatar: 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
-    }
-  ];
+  users = [];
   //群数据示例
   groups = [{
       id: 'group-a42b-47b2-bb1e-15e0f5f9a19a',
@@ -96,8 +59,47 @@ class RestApi {
     return this.users;
   };
 
-  findFriends(user) {
-    return this.users.filter((v) => v.id !== user.id);
+  findFriends(user, callback) {
+    // 检查是否有有效的用户ID
+    if (!user || !user.id) {
+      console.error('Invalid user object');
+      return [];
+    }
+
+    // 初始化好友列表
+    this.users = [];
+
+    // 使用wx.request获取数据
+    wx.request({
+      url: `${app.globalData.url}` + '/user/wx/getFriends',
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-Token': app.globalData.currentUser.token
+      },
+      data: {
+        userId: app.globalData.currentUser.id
+      },
+      success: (res) => {
+        if (res.statusCode === 200 && res.data.data) {
+          // 将好友数据填充到 users 中
+          this.users = res.data.data.map(friend => ({
+            id: friend.userId,
+            name: friend.userName,
+            avatar: friend.avatar
+          }));
+          if (callback) {
+            callback(this.users); // 调用回调并传递数据
+          }
+        } else {
+          console.error('Failed to fetch friends:', res);
+        }
+      },
+      fail: (err) => {
+        console.error('Request failed:', err);
+      }
+    });
+    return this.users;
   }
 
   findGroups(user) {

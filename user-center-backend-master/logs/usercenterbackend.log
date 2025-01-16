@@ -1,125 +1,535 @@
-2025-01-09 08:04:43,719 WARN [HikariPool-1 housekeeper] c.z.h.p.HikariPool [HikariPool.java:804] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=14h30m13s886ms996µs900ns).
-2025-01-09 08:09:13,539 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-01-16 08:22:48,803 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 27292 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 08:22:48,808 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 08:22:49,515 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 08:22:49,518 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 08:22:49,545 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 13 ms. Found 0 Redis repository interfaces.
+2025-01-16 08:22:49,968 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 08:22:49,980 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 08:22:49,981 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 08:22:49,982 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 08:22:50,028 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 08:22:50,028 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1183 ms
+2025-01-16 08:22:50,611 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 08:22:50,611 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 08:22:51,280 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 08:22:51,294 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 08:22:51,302 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.907 seconds (process running for 4.359)
+2025-01-16 08:22:56,303 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 08:22:56,303 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 08:22:56,304 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 08:22:56,317 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/login
 Method: POST
 Class: UserController
 Method: user_login
-Param: code=0a1ztC100E0yuT19pT000poxxp1ztC1e
+Param: code=0b11yall21odTe4YOnnl2R0aat41yalL
 Client IP: 10.45.4.53
 
-2025-01-09 08:10:37,628 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
-2025-01-09 08:10:37,633 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
-2025-01-09 08:10:41,333 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 38344 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
-2025-01-09 08:10:41,335 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
-2025-01-09 08:10:41,840 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
-2025-01-09 08:10:41,842 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-01-09 08:10:41,860 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 9 ms. Found 0 Redis repository interfaces.
-2025-01-09 08:10:42,202 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
-2025-01-09 08:10:42,216 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
-2025-01-09 08:10:42,217 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
-2025-01-09 08:10:42,217 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
-2025-01-09 08:10:42,261 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
-2025-01-09 08:10:42,262 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 899 ms
-2025-01-09 08:10:43,028 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
-2025-01-09 08:10:43,040 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
-2025-01-09 08:10:43,046 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.049 seconds (process running for 2.486)
-2025-01-09 08:11:17,274 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-01-09 08:11:17,274 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
-2025-01-09 08:11:17,275 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
-2025-01-09 08:11:17,298 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-01-16 08:22:57,498 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 08:22:57,655 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1d749be
+2025-01-16 08:22:57,656 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 09:31:30,086 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/login
 Method: POST
 Class: UserController
 Method: user_login
-Param: code=0f1g09ll2TvgQe4giSkl2G5YWd3g09lY
+Param: code=0c1DknFa15cVSI0CS1Ia1SmI3i2DknF-
 Client IP: 10.45.4.53
 
-2025-01-09 08:11:18,647 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
-2025-01-09 08:11:18,952 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@51760fef
-2025-01-09 08:11:18,955 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
-2025-01-09 08:13:30,755 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-01-16 09:35:07,430 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/login
 Method: POST
 Class: UserController
 Method: user_login
-Param: code=0e1GAN000kunvT1RJl200iu7tA0GAN05
+Param: code=0d1och0w3ePOd43scf0w3JUyuC2och0R
 Client IP: 10.45.4.53
 
-2025-01-09 08:24:56,034 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-01-16 09:35:25,187 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getItems
+Method: POST
+Class: UserController
+Method: getItems
+Param: userId=9
+Client IP: 10.45.4.53
+
+2025-01-16 09:54:33,779 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/login
 Method: POST
 Class: UserController
 Method: user_login
-Param: code=0f1PMSkl2mBwQe4JExol2jwFAm2PMSkz
+Param: code=0b1Sni0w3khMd43Xxc1w3twHXd3Sni0A
 Client IP: 10.45.4.53
 
-2025-01-09 08:25:38,167 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-01-16 09:58:07,859 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/login
 Method: POST
 Class: UserController
 Method: user_login
-Param: code=0c1vS9ll25yfQe4WgVkl29JTtn4vS9lq
+Param: code=0e1q9vGa1gyYTI0EvgGa1fH7EF4q9vGB
 Client IP: 10.45.4.53
 
-2025-01-09 08:37:59,552 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-01-16 10:17:14,614 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/login
 Method: POST
 Class: UserController
 Method: user_login
-Param: code=0c1fGrll2SzYPe4Uraml2bgGQD0fGrlP
+Param: code=0e1KXp1w3ttPe43tuO1w3rlvtC2KXp1L
 Client IP: 10.45.4.53
 
-2025-01-09 08:39:59,067 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-01-16 10:27:48,898 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 10:27:48,902 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 10:28:00,486 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 17308 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 10:28:00,487 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 10:28:01,118 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 10:28:01,121 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 10:28:01,145 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 13 ms. Found 0 Redis repository interfaces.
+2025-01-16 10:28:01,584 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 10:28:01,592 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 10:28:01,593 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 10:28:01,595 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 10:28:01,650 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 10:28:01,650 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1131 ms
+2025-01-16 10:28:01,902 WARN [main] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext [AbstractApplicationContext.java:632] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'eventController': Injection of resource dependencies failed
+2025-01-16 10:28:01,914 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Stopping service [Tomcat]
+2025-01-16 10:28:01,924 INFO [main] o.s.b.a.l.ConditionEvaluationReportLogger [ConditionEvaluationReportLogger.java:82] 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-01-16 10:28:01,939 ERROR [main] o.s.b.d.LoggingFailureAnalysisReporter [LoggingFailureAnalysisReporter.java:40] 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+A component required a bean of type 'com.gasen.usercenterbackend.service.IEventService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.gasen.usercenterbackend.service.IEventService' in your configuration.
+
+2025-01-16 10:29:01,697 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 21440 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 10:29:01,700 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 10:29:02,331 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 10:29:02,333 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 10:29:02,355 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+2025-01-16 10:29:02,773 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 10:29:02,780 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 10:29:02,781 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 10:29:02,782 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 10:29:02,827 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 10:29:02,828 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1091 ms
+2025-01-16 10:29:03,258 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 10:29:03,258 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 10:29:03,779 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 10:29:03,792 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 10:29:03,800 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.5 seconds (process running for 2.909)
+2025-01-16 10:29:14,971 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 10:29:14,971 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 10:29:14,972 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 10:29:14,983 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 10:29:15,327 ERROR [http-nio-8080-exec-1] c.g.u.e.GlobalExceptionHandler [GlobalExceptionHandler.java:20] 运行时异常：
+org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.lang.Integer` from String "dwd": not a valid `java.lang.Integer` value
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:406)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:354)
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.readWithMessageConverters(AbstractMessageConverterMethodArgumentResolver.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.readWithMessageConverters(RequestResponseBodyMethodProcessor.java:159)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:134)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:225)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:178)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.lang.Integer` from String "dwd": not a valid `java.lang.Integer` value
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 1, column: 159] (through reference chain: com.gasen.usercenterbackend.model.Event["phoneNumber"])
+	at com.fasterxml.jackson.databind.exc.InvalidFormatException.from(InvalidFormatException.java:67)
+	at com.fasterxml.jackson.databind.DeserializationContext.weirdStringException(DeserializationContext.java:2002)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleWeirdStringValue(DeserializationContext.java:1230)
+	at com.fasterxml.jackson.databind.deser.std.StdDeserializer._parseInteger(StdDeserializer.java:844)
+	at com.fasterxml.jackson.databind.deser.std.StdDeserializer._parseInteger(StdDeserializer.java:824)
+	at com.fasterxml.jackson.databind.deser.std.NumberDeserializers$IntegerDeserializer.deserialize(NumberDeserializers.java:531)
+	at com.fasterxml.jackson.databind.deser.std.NumberDeserializers$IntegerDeserializer.deserialize(NumberDeserializers.java:506)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:392)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:185)
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:323)
+	at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2105)
+	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1481)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
+	... 51 common frames omitted
+2025-01-16 10:29:51,086 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 10:38:01,310 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/login
 Method: POST
 Class: UserController
 Method: user_login
-Param: code=0e1G6h000ZupvT197o0007IUYO2G6h0g
+Param: code=0e1GMill2XujTe44G9ol2behVC3GMilt
 Client IP: 10.45.4.53
 
-2025-01-09 08:41:53,695 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-01-16 10:38:02,133 INFO [http-nio-8080-exec-2] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 10:38:02,339 INFO [http-nio-8080-exec-2] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5ae1e1a
+2025-01-16 10:38:02,341 INFO [http-nio-8080-exec-2] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 10:38:31,798 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 10:42:29,325 INFO [http-nio-8080-exec-10] o.s.a.AbstractOpenApiResource [AbstractOpenApiResource.java:390] Init duration for springdoc-openapi is: 313 ms
+2025-01-16 10:42:52,339 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 10:42:52,343 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 10:42:56,548 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 27780 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 10:42:56,550 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 10:42:57,149 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 10:42:57,150 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 10:42:57,175 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 13 ms. Found 0 Redis repository interfaces.
+2025-01-16 10:42:57,559 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 10:42:57,566 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 10:42:57,567 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 10:42:57,568 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 10:42:57,625 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 10:42:57,626 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1041 ms
+2025-01-16 10:42:58,101 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 10:42:58,102 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 10:42:58,621 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 10:42:58,635 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 10:42:58,641 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.499 seconds (process running for 2.899)
+2025-01-16 10:43:10,861 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 10:43:10,861 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 10:43:10,862 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 10:43:10,883 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 10:43:11,331 ERROR [http-nio-8080-exec-1] c.g.u.e.GlobalExceptionHandler [GlobalExceptionHandler.java:20] 运行时异常：
+org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.lang.Boolean` from String "1": only "true" or "false" recognized
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:406)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:354)
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.readWithMessageConverters(AbstractMessageConverterMethodArgumentResolver.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.readWithMessageConverters(RequestResponseBodyMethodProcessor.java:159)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:134)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:225)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:178)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.lang.Boolean` from String "1": only "true" or "false" recognized
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 1, column: 225] (through reference chain: com.gasen.usercenterbackend.model.Event["visibility"])
+	at com.fasterxml.jackson.databind.exc.InvalidFormatException.from(InvalidFormatException.java:67)
+	at com.fasterxml.jackson.databind.DeserializationContext.weirdStringException(DeserializationContext.java:2002)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleWeirdStringValue(DeserializationContext.java:1230)
+	at com.fasterxml.jackson.databind.deser.std.StdDeserializer._parseBoolean(StdDeserializer.java:550)
+	at com.fasterxml.jackson.databind.deser.std.NumberDeserializers$BooleanDeserializer.deserialize(NumberDeserializers.java:227)
+	at com.fasterxml.jackson.databind.deser.std.NumberDeserializers$BooleanDeserializer.deserialize(NumberDeserializers.java:200)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:392)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:185)
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:323)
+	at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2105)
+	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1481)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
+	... 51 common frames omitted
+2025-01-16 10:46:24,046 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/login
 Method: POST
 Class: UserController
 Method: user_login
-Param: code=0e1Udh000NtpvT1voi200vK7sR0Udh0E
+Param: code=0d1Qxl0w3mIYd43fF03w3XIfJ84Qxl0C
 Client IP: 10.45.4.53
 
-2025-01-09 08:51:24,878 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-01-16 10:46:24,639 INFO [http-nio-8080-exec-3] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 10:46:24,764 INFO [http-nio-8080-exec-3] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3c8d36ba
+2025-01-16 10:46:24,766 INFO [http-nio-8080-exec-3] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 10:47:25,337 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 10:48:23,637 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/login
 Method: POST
 Class: UserController
 Method: user_login
-Param: code=0d1n3kFa1r1nQI03aIIa1UExdP0n3kFG
+Param: code=0e1lC40w3FCHd43m1i1w36X8hs2lC40F
 Client IP: 10.45.4.53
 
-2025-01-09 08:52:16,991 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/test/uptoken
-Method: POST
-Class: UserController
-Method: testupToken
-Param: token=eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiQjhFZ2tCanlZNVpMYjRzbWtabERpQT09Iiwib3BlbmlkIjoib0V0aEc1Q3hjMVB5RXVHYnhGMlJCdU1hTThnUSIsImlhdCI6MTczNjM4MTM1MywiZXhwIjoxNzM2NDY3NzUzfQ.1YuTGK8-Ov14x0SVkfznzsMQ_gTKCquvGO-zKlrSJLs
-Client IP: 10.45.4.53
-
-2025-01-09 08:52:17,834 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-01-16 10:48:40,886 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/login
 Method: POST
 Class: UserController
 Method: user_login
-Param: code=0b3fsUkl2Ax1Qe4wS0nl2wdp4u1fsUkV
-Client IP: 10.45.6.7
+Param: code=0a1UkLkl2TR0Te4Dr4nl27jtH11UkLkz
+Client IP: 10.45.4.53
 
-2025-01-09 08:52:18,128 ERROR [http-nio-8080-exec-6] c.g.u.e.GlobalExceptionHandler [GlobalExceptionHandler.java:20] 运行时异常：
-java.lang.NullPointerException: Cannot invoke "java.time.LocalDateTime.toLocalDate()" because "userSignIn" is null
-	at com.gasen.usercenterbackend.service.impl.UserServiceImpl.addExp(UserServiceImpl.java:137)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:713)
-	at com.gasen.usercenterbackend.service.impl.UserServiceImpl$$SpringCGLIB$$0.addExp(<generated>)
-	at com.gasen.usercenterbackend.controller.UserController.user_login(UserController.java:167)
+2025-01-16 10:48:52,996 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 10:49:09,084 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0a1Ksjll2hVyTe4Yy6nl230eQI1KsjlZ
+Client IP: 10.45.4.53
+
+2025-01-16 10:54:07,605 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0c14whGa1OVUTI0bWnFa1BOQfR24whG2
+Client IP: 10.45.4.53
+
+2025-01-16 10:56:01,605 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0e1OYRll2yR7Ue4yKLkl2d3Sbo3OYRlk
+Client IP: 10.45.4.53
+
+2025-01-16 10:58:39,144 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0e19im0w3KcZd43lDK3w3K1OtW19im0J
+Client IP: 10.45.4.53
+
+2025-01-16 11:13:03,326 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0d1DdE0w3kBee43bgl3w3uNYaI2DdE0D
+Client IP: 10.45.4.53
+
+2025-01-16 11:29:14,666 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 11:29:14,671 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 11:29:19,373 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 27264 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 11:29:19,374 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 11:29:19,896 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 11:29:19,898 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 11:29:19,918 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 11 ms. Found 0 Redis repository interfaces.
+2025-01-16 11:29:20,256 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 11:29:20,265 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 11:29:20,266 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 11:29:20,266 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 11:29:20,309 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 11:29:20,309 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 903 ms
+2025-01-16 11:29:20,686 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 11:29:20,687 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 11:29:21,145 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 11:29:21,156 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 11:29:21,163 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.132 seconds (process running for 2.535)
+2025-01-16 11:35:59,123 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 11:35:59,123 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 11:35:59,124 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 11:35:59,138 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0f1vUj2w3o0tb43Bhc1w38j2yG1vUj2g
+Client IP: 10.45.4.53
+
+2025-01-16 11:35:59,906 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 11:36:00,014 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@70b4620e
+2025-01-16 11:36:00,016 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 11:43:23,093 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0a1h4G0w3ya3e43scY3w3exLrZ0h4G06
+Client IP: 10.45.4.53
+
+2025-01-16 11:44:00,744 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0f17L5ll2ur5Te4QhEml2QCRtC27L5lh
+Client IP: 10.45.4.53
+
+2025-01-16 11:48:51,252 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 11:48:51,259 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 11:48:53,268 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 2368 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 11:48:53,270 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 11:48:53,829 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 11:48:53,831 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 11:48:53,853 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+2025-01-16 11:48:54,202 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 11:48:54,208 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 11:48:54,209 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 11:48:54,210 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 11:48:54,259 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 11:48:54,260 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 949 ms
+2025-01-16 11:48:54,662 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 11:48:54,663 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 11:48:55,155 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 11:48:55,170 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 11:48:55,177 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.437 seconds (process running for 2.829)
+2025-01-16 11:49:12,564 INFO [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 11:49:12,564 INFO [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 11:49:12,565 INFO [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 11:49:12,587 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPhone
+Method: POST
+Class: UserController
+Method: getPhone
+Param: code=0b1M7nll2bSmTe4kf2ll2PodQI1M7nla
+Client IP: 10.45.4.53
+
+2025-01-16 13:42:05,672 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 32108 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 13:42:05,673 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 13:42:06,211 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 13:42:06,213 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 13:42:06,234 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+2025-01-16 13:42:06,586 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 13:42:06,593 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 13:42:06,594 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 13:42:06,594 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 13:42:06,636 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 13:42:06,636 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 934 ms
+2025-01-16 13:42:07,043 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 13:42:07,044 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 13:42:07,523 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 13:42:07,537 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 13:42:07,544 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.174 seconds (process running for 2.962)
+2025-01-16 13:42:49,380 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 13:42:49,380 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 13:42:49,381 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 13:42:49,396 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1Rrl1w33v1f43kDh1w3BiIZ53Rrl15
+Client IP: 10.45.4.53
+
+2025-01-16 13:42:50,307 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 13:42:50,432 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@419e2b57
+2025-01-16 13:42:50,433 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 13:43:11,161 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPhone
+Method: POST
+Class: UserController
+Method: getPhone
+Param: code=0b1ynj000r2CyT1PWe400QDzK33ynj0t
+Client IP: 10.45.4.53
+
+2025-01-16 13:43:11,791 ERROR [http-nio-8080-exec-2] c.g.u.e.GlobalExceptionHandler [GlobalExceptionHandler.java:20] 运行时异常：
+java.lang.RuntimeException: Failed to get phone number: {"errcode":40029,"errmsg":"invalid code hint: [vgHaKFMre-.DRP5a] rid: 67889c70-7ee964fb-7b6eb981"}
+	at com.gasen.usercenterbackend.utils.WechatUtil.getPhoneNumber(WechatUtil.java:49)
+	at com.gasen.usercenterbackend.controller.UserController.getPhone(UserController.java:265)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -170,11 +580,1250 @@ java.lang.NullPointerException: Cannot invoke "java.time.LocalDateTime.toLocalDa
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:840)
-2025-01-09 08:53:13,751 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-01-16 13:51:18,441 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/update
+Method: POST
+Class: UserController
+Method: updatewxUser
+Client IP: 10.45.4.53
+
+2025-01-16 13:51:18,528 INFO [http-nio-8080-exec-9] c.g.u.c.UserController [UserController.java:252] id为'9' name为'撒个人' 的用户更新信息
+2025-01-16 13:53:03,164 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/update
+Method: POST
+Class: UserController
+Method: updatewxUser
+Client IP: 10.45.4.53
+
+2025-01-16 13:53:03,173 INFO [http-nio-8080-exec-3] c.g.u.c.UserController [UserController.java:252] id为'9' name为'撒个人' 的用户更新信息
+2025-01-16 13:53:11,943 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/update
+Method: POST
+Class: UserController
+Method: updatewxUser
+Client IP: 10.45.4.53
+
+2025-01-16 13:53:11,952 INFO [http-nio-8080-exec-7] c.g.u.c.UserController [UserController.java:252] id为'9' name为'撒个人' 的用户更新信息
+2025-01-16 13:53:45,978 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/update
+Method: POST
+Class: UserController
+Method: updatewxUser
+Client IP: 10.45.4.53
+
+2025-01-16 13:53:45,984 INFO [http-nio-8080-exec-8] c.g.u.c.UserController [UserController.java:252] id为'9' name为'撒个人' 的用户更新信息
+2025-01-16 13:53:50,217 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/update
+Method: POST
+Class: UserController
+Method: updatewxUser
+Client IP: 10.45.4.53
+
+2025-01-16 13:53:50,224 INFO [http-nio-8080-exec-4] c.g.u.c.UserController [UserController.java:252] id为'9' name为'撒个人' 的用户更新信息
+2025-01-16 13:56:07,118 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/login
 Method: POST
 Class: UserController
 Method: user_login
-Param: code=0f1aakFa1sDmQI0ZjZHa1LSks64aakFr
-Client IP: 10.45.5.128
+Param: code=0b1rak000q7ByT1s0z3003zquH3rak0k
+Client IP: 10.45.4.53
 
+2025-01-16 13:56:33,574 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/update
+Method: POST
+Class: UserController
+Method: updatewxUser
+Client IP: 10.45.4.53
+
+2025-01-16 13:56:33,581 INFO [http-nio-8080-exec-2] c.g.u.c.UserController [UserController.java:252] id为'9' name为'撒个人' 的用户更新信息
+2025-01-16 14:00:49,360 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 14:00:49,368 ERROR [http-nio-8080-exec-9] c.g.u.e.GlobalExceptionHandler [GlobalExceptionHandler.java:20] 运行时异常：
+org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Cannot deserialize value of type `java.lang.Integer` from String "11111111111": Overflow: numeric value (11111111111) out of range of `java.lang.Integer` (-2147483648 -2147483647)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:406)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.read(AbstractJackson2HttpMessageConverter.java:354)
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodArgumentResolver.readWithMessageConverters(AbstractMessageConverterMethodArgumentResolver.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.readWithMessageConverters(RequestResponseBodyMethodProcessor.java:159)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.resolveArgument(RequestResponseBodyMethodProcessor.java:134)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:225)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:178)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.lang.Integer` from String "11111111111": Overflow: numeric value (11111111111) out of range of `java.lang.Integer` (-2147483648 -2147483647)
+ at [Source: (org.springframework.util.StreamUtils$NonClosingInputStream); line: 1, column: 176] (through reference chain: com.gasen.usercenterbackend.model.Event["phoneNumber"])
+	at com.fasterxml.jackson.databind.exc.InvalidFormatException.from(InvalidFormatException.java:67)
+	at com.fasterxml.jackson.databind.DeserializationContext.weirdStringException(DeserializationContext.java:2002)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleWeirdStringValue(DeserializationContext.java:1230)
+	at com.fasterxml.jackson.databind.deser.std.StdDeserializer._parseInteger(StdDeserializer.java:836)
+	at com.fasterxml.jackson.databind.deser.std.StdDeserializer._parseInteger(StdDeserializer.java:824)
+	at com.fasterxml.jackson.databind.deser.std.NumberDeserializers$IntegerDeserializer.deserialize(NumberDeserializers.java:531)
+	at com.fasterxml.jackson.databind.deser.std.NumberDeserializers$IntegerDeserializer.deserialize(NumberDeserializers.java:506)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserializeFromObject(BeanDeserializer.java:392)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:185)
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:323)
+	at com.fasterxml.jackson.databind.ObjectReader._bindAndClose(ObjectReader.java:2105)
+	at com.fasterxml.jackson.databind.ObjectReader.readValue(ObjectReader.java:1481)
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.readJavaType(AbstractJackson2HttpMessageConverter.java:395)
+	... 51 common frames omitted
+2025-01-16 14:02:01,891 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 14:02:01,896 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 14:02:05,380 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 19664 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 14:02:05,382 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 14:02:05,901 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 14:02:05,903 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 14:02:05,924 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+2025-01-16 14:02:06,271 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 14:02:06,277 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 14:02:06,278 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 14:02:06,278 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 14:02:06,318 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 14:02:06,319 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 904 ms
+2025-01-16 14:02:06,710 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 14:02:06,710 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 14:02:07,160 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 14:02:07,172 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 14:02:07,178 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.117 seconds (process running for 2.453)
+2025-01-16 14:02:13,928 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 14:02:13,928 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 14:02:13,929 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 14:02:13,941 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 14:05:56,682 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b131nFa14WYSI0S7mGa1L6h6f331nFI
+Client IP: 10.45.4.53
+
+2025-01-16 14:05:59,035 INFO [http-nio-8080-exec-6] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 14:05:59,174 INFO [http-nio-8080-exec-6] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7bd54c2d
+2025-01-16 14:05:59,175 INFO [http-nio-8080-exec-6] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 14:07:26,265 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 14:07:26,270 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 14:07:29,695 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 28536 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 14:07:29,697 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 14:07:30,203 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 14:07:30,204 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 14:07:30,224 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 11 ms. Found 0 Redis repository interfaces.
+2025-01-16 14:07:30,551 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 14:07:30,557 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 14:07:30,558 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 14:07:30,558 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 14:07:30,598 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 14:07:30,598 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 871 ms
+2025-01-16 14:07:30,984 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 14:07:30,984 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 14:07:31,456 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 14:07:31,468 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 14:07:31,475 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.091 seconds (process running for 2.424)
+2025-01-16 14:07:42,575 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 14:07:42,576 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 14:07:42,576 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 0 ms
+2025-01-16 14:07:42,591 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/update
+Method: POST
+Class: UserController
+Method: updatewxUser
+Client IP: 10.45.4.53
+
+2025-01-16 14:07:43,065 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 14:07:43,277 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@646de995
+2025-01-16 14:07:43,278 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 14:07:43,334 INFO [http-nio-8080-exec-1] c.g.u.c.UserController [UserController.java:252] id为'9' name为'撒个人' 的用户更新信息
+2025-01-16 14:07:47,415 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 14:15:15,498 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0c11Gg200J0bwT12Am3005xzwa31Gg2t
+Client IP: 10.45.4.53
+
+2025-01-16 14:28:03,167 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1eLfll2ZzyTe4fCaol2cXMa44eLflX
+Client IP: 10.45.4.53
+
+2025-01-16 14:28:20,376 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0c1PwdGa1cLTTI0H5KFa1rpDOh4PwdGC
+Client IP: 10.45.4.53
+
+2025-01-16 14:29:28,453 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/update
+Method: POST
+Class: UserController
+Method: updatewxUser
+Client IP: 10.45.4.53
+
+2025-01-16 14:29:28,465 INFO [http-nio-8080-exec-9] c.g.u.c.UserController [UserController.java:252] id为'9' name为'撒个人' 的用户更新信息
+2025-01-16 14:30:13,038 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 14:30:13,042 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 14:30:14,685 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 33276 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 14:30:14,687 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 14:30:15,219 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 14:30:15,221 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 14:30:15,243 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+2025-01-16 14:30:15,600 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 14:30:15,607 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 14:30:15,609 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 14:30:15,609 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 14:30:15,650 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 14:30:15,650 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 933 ms
+2025-01-16 14:30:16,056 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 14:30:16,056 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 14:30:16,518 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 14:30:16,531 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 14:30:16,537 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.213 seconds (process running for 2.61)
+2025-01-16 14:30:32,525 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 14:30:32,526 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 14:30:32,527 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 14:30:32,544 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 14:31:01,895 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 14:31:09,255 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1tfz0w3Jafe43EWJ0w3rZEBm2tfz0h
+Client IP: 10.45.4.53
+
+2025-01-16 14:31:09,798 INFO [http-nio-8080-exec-3] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 14:31:09,913 INFO [http-nio-8080-exec-3] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@746940e2
+2025-01-16 14:31:09,914 INFO [http-nio-8080-exec-3] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 14:31:59,310 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0c183xll2isPTe4fBjll2Or6zG183xlR
+Client IP: 10.45.4.53
+
+2025-01-16 14:32:07,530 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/update
+Method: POST
+Class: UserController
+Method: updatewxUser
+Client IP: 10.45.4.53
+
+2025-01-16 14:32:07,570 INFO [http-nio-8080-exec-6] c.g.u.c.UserController [UserController.java:252] id为'9' name为'撒个人' 的用户更新信息
+2025-01-16 14:37:25,072 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0e19Dz0w3iwge43vM54w35sENV29Dz0A
+Client IP: 10.45.4.53
+
+2025-01-16 14:40:09,640 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0d1uKi0w3UyZd430TF1w3wsQAm2uKi0G
+Client IP: 10.45.4.53
+
+2025-01-16 14:43:20,775 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1sipFa1XX4TI0pMRHa1qo3WW2sipFd
+Client IP: 10.45.4.53
+
+2025-01-16 14:44:06,082 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1TJgll2TWyTe4D3Uol2Fb7zG1TJglz
+Client IP: 10.45.4.53
+
+2025-01-16 14:56:57,068 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 14:56:57,074 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 14:57:00,021 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 23296 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 14:57:00,023 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 14:57:00,559 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 14:57:00,560 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 14:57:00,581 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 11 ms. Found 0 Redis repository interfaces.
+2025-01-16 14:57:00,927 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 14:57:00,933 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 14:57:00,934 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 14:57:00,935 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 14:57:00,982 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 14:57:00,982 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 927 ms
+2025-01-16 14:57:01,382 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 14:57:01,383 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 14:57:01,850 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 14:57:01,863 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 14:57:01,870 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.168 seconds (process running for 2.513)
+2025-01-16 14:57:51,520 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 14:57:51,520 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 14:57:51,521 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 14:57:51,540 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1nhYFa1nxATI0BI3Ha19pWao3nhYFd
+Client IP: 10.45.4.53
+
+2025-01-16 14:57:52,553 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 14:57:52,666 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4309a379
+2025-01-16 14:57:52,667 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 14:58:02,283 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getKey
+Method: GET
+Class: MapController
+Method: getKey
+Client IP: 10.45.4.53
+
+2025-01-16 14:58:16,608 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getKey
+Method: GET
+Class: MapController
+Method: getKey
+Client IP: 10.45.4.53
+
+2025-01-16 15:19:50,193 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getKey
+Method: GET
+Class: MapController
+Method: getKey
+Client IP: 10.45.4.53
+
+2025-01-16 15:20:56,997 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getKey
+Method: GET
+Class: MapController
+Method: getKey
+Client IP: 10.45.4.53
+
+2025-01-16 15:21:00,806 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getKey
+Method: GET
+Class: MapController
+Method: getKey
+Client IP: 10.45.4.53
+
+2025-01-16 15:21:09,020 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getKey
+Method: GET
+Class: MapController
+Method: getKey
+Client IP: 10.45.4.53
+
+2025-01-16 15:21:11,578 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getKey
+Method: GET
+Class: MapController
+Method: getKey
+Client IP: 10.45.4.53
+
+2025-01-16 15:21:42,371 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getKey
+Method: GET
+Class: MapController
+Method: getKey
+Client IP: 10.45.4.53
+
+2025-01-16 15:23:26,241 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getKey
+Method: GET
+Class: MapController
+Method: getKey
+Client IP: 10.45.4.53
+
+2025-01-16 15:33:44,123 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 15:50:41,980 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 15:50:41,983 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 15:50:57,030 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 32204 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 15:50:57,032 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 15:50:57,535 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 15:50:57,536 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 15:50:57,556 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 11 ms. Found 0 Redis repository interfaces.
+2025-01-16 15:50:57,914 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 15:50:57,920 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 15:50:57,921 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 15:50:57,922 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 15:50:57,959 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 15:50:57,960 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 900 ms
+2025-01-16 15:50:58,372 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 15:50:58,373 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 15:50:58,838 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 15:50:58,849 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 15:50:58,855 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.163 seconds (process running for 2.524)
+2025-01-16 15:51:30,318 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 15:51:30,318 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 15:51:30,320 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 15:51:30,335 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 15:51:30,833 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 15:51:31,064 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7d960a30
+2025-01-16 15:51:31,065 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 15:51:31,285 ERROR [http-nio-8080-exec-1] c.g.u.e.GlobalExceptionHandler [GlobalExceptionHandler.java:20] 运行时异常：
+org.springframework.jdbc.BadSqlGrammarException: 
+### Error updating database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column 'fee_mode' in 'field list'
+### The error may exist in com/gasen/usercenterbackend/mapper/EventMapper.java (best guess)
+### The error may involve com.gasen.usercenterbackend.mapper.EventMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO event  ( app_id, name, event_data, event_time, event_timee, location, location_detail, total_participants,  phone_number, type, remarks, labels, limits, visibility, level, fee_mode, fee, penalty, is_template )  VALUES (  ?, ?, ?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?  )
+### Cause: java.sql.SQLSyntaxErrorException: Unknown column 'fee_mode' in 'field list'
+; bad SQL grammar []
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:246)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107)
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:92)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:439)
+	at jdk.proxy2/jdk.proxy2.$Proxy87.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:59)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:152)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
+	at jdk.proxy2/jdk.proxy2.$Proxy88.insert(Unknown Source)
+	at com.gasen.usercenterbackend.service.impl.EventServiceImpl.createEvent(EventServiceImpl.java:19)
+	at com.gasen.usercenterbackend.controller.EventController.createEvent(EventController.java:32)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:385)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
+	at com.gasen.usercenterbackend.controller.EventController$$SpringCGLIB$$0.createEvent(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:261)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:189)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: java.sql.SQLSyntaxErrorException: Unknown column 'fee_mode' in 'field list'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:912)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
+	... 73 common frames omitted
+2025-01-16 15:52:58,707 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 15:52:58,712 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 15:53:00,674 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 2224 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 15:53:00,676 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 15:53:01,160 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 15:53:01,161 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 15:53:01,182 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+2025-01-16 15:53:01,519 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 15:53:01,526 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 15:53:01,527 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 15:53:01,527 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 15:53:01,566 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 15:53:01,566 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 858 ms
+2025-01-16 15:53:01,954 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 15:53:01,955 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 15:53:02,439 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 15:53:02,452 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 15:53:02,458 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.092 seconds (process running for 2.447)
+2025-01-16 15:53:07,240 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 15:53:07,241 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 15:53:07,242 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 15:53:07,255 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 15:53:07,608 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 15:53:07,791 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3b0214ca
+2025-01-16 15:53:07,793 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 15:53:07,910 ERROR [http-nio-8080-exec-1] c.g.u.e.GlobalExceptionHandler [GlobalExceptionHandler.java:20] 运行时异常：
+org.springframework.jdbc.UncategorizedSQLException: 
+### Error updating database.  Cause: java.sql.SQLException: Incorrect integer value: '' for column 'remarks' at row 1
+### The error may exist in com/gasen/usercenterbackend/mapper/EventMapper.java (best guess)
+### The error may involve com.gasen.usercenterbackend.mapper.EventMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO event  ( app_id, name, event_data, event_time, event_timee, location, location_detail, total_participants,  phone_number, type, remarks, labels, limits, visibility, level, fee_mode, fee, penalty, is_template )  VALUES (  ?, ?, ?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?  )
+### Cause: java.sql.SQLException: Incorrect integer value: '' for column 'remarks' at row 1
+; uncategorized SQLException; SQL state [HY000]; error code [1366]; Incorrect integer value: '' for column 'remarks' at row 1
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:93)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:439)
+	at jdk.proxy2/jdk.proxy2.$Proxy87.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:59)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:152)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
+	at jdk.proxy2/jdk.proxy2.$Proxy88.insert(Unknown Source)
+	at com.gasen.usercenterbackend.service.impl.EventServiceImpl.createEvent(EventServiceImpl.java:19)
+	at com.gasen.usercenterbackend.controller.EventController.createEvent(EventController.java:32)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:385)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
+	at com.gasen.usercenterbackend.controller.EventController$$SpringCGLIB$$0.createEvent(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:261)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:189)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: java.sql.SQLException: Incorrect integer value: '' for column 'remarks' at row 1
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:130)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:912)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
+	... 73 common frames omitted
+2025-01-16 15:53:47,063 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 15:53:47,067 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 15:53:48,770 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 27608 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 15:53:48,772 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 15:53:49,287 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 15:53:49,288 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 15:53:49,310 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+2025-01-16 15:53:49,645 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 15:53:49,653 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 15:53:49,654 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 15:53:49,654 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 15:53:49,694 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 15:53:49,694 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 894 ms
+2025-01-16 15:53:50,097 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 15:53:50,098 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 15:53:50,553 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 15:53:50,565 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 15:53:50,571 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.146 seconds (process running for 2.503)
+2025-01-16 15:53:52,815 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 15:53:52,816 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 15:53:52,818 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 15:53:52,830 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 15:53:53,195 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 15:53:53,393 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1e88e807
+2025-01-16 15:53:53,394 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 16:15:10,755 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0a1gQy100XOCzT1Yty300qEajE1gQy1f
+Client IP: 10.45.4.53
+
+2025-01-16 16:15:16,035 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0c17Hd1w3t4Fe43ktv2w391o5V37Hd1I
+Client IP: 10.45.4.53
+
+2025-01-16 16:17:11,399 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1hFo0w3L0Qd43hJl1w3fdSKd0hFo0T
+Client IP: 10.45.4.53
+
+2025-01-16 16:24:28,438 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 16:24:28,441 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 16:24:31,695 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 3188 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 16:24:31,697 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 16:24:32,266 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 16:24:32,268 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 16:24:32,288 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 11 ms. Found 0 Redis repository interfaces.
+2025-01-16 16:24:32,663 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 16:24:32,670 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 16:24:32,671 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 16:24:32,671 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 16:24:32,710 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 16:24:32,710 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 972 ms
+2025-01-16 16:24:33,109 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 16:24:33,110 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 16:24:33,673 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 16:24:33,688 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 16:24:33,697 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.343 seconds (process running for 2.678)
+2025-01-16 16:24:38,897 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 16:24:38,897 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 16:24:38,898 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 0 ms
+2025-01-16 16:24:38,912 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0e1Zj1100q95zT1WMm2005y2ZO2Zj117
+Client IP: 10.45.4.53
+
+2025-01-16 16:24:39,822 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 16:24:39,943 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@44f496a5
+2025-01-16 16:24:39,944 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 16:25:41,023 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0a1SkK000d9OyT16Qc400yBFRo2SkK0G
+Client IP: 10.45.4.53
+
+2025-01-16 16:25:41,286 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 16:36:45,811 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 16:36:45,816 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 16:36:49,311 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 24780 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 16:36:49,313 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 16:36:49,822 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 16:36:49,824 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 16:36:49,844 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 12 ms. Found 0 Redis repository interfaces.
+2025-01-16 16:36:50,180 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 16:36:50,186 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 16:36:50,186 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 16:36:50,187 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 16:36:50,226 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 16:36:50,227 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 882 ms
+2025-01-16 16:36:50,597 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 16:36:50,597 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 16:36:51,038 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 16:36:51,051 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 16:36:51,057 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.087 seconds (process running for 2.464)
+2025-01-16 16:36:55,988 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 16:36:55,988 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 16:36:55,989 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 16:36:56,000 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1WmlGa1ozETI0YBnJa1GjzAr3WmlGR
+Client IP: 10.45.4.53
+
+2025-01-16 16:36:56,872 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 16:36:57,011 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1f828f13
+2025-01-16 16:36:57,013 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 16:36:57,121 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 16:37:11,856 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 16:37:11,861 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 16:37:14,898 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 28824 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 16:37:14,899 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 16:37:15,409 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 16:37:15,410 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 16:37:15,432 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 11 ms. Found 0 Redis repository interfaces.
+2025-01-16 16:37:15,824 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 16:37:15,831 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 16:37:15,832 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 16:37:15,832 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 16:37:15,879 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 16:37:15,879 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 952 ms
+2025-01-16 16:37:16,286 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 16:37:16,287 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 16:37:16,755 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 16:37:16,770 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 16:37:16,778 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.205 seconds (process running for 2.618)
+2025-01-16 16:37:55,861 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 16:37:55,862 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 16:37:55,863 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 16:37:55,880 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0a1Gn4Ga1SxnTI0d6xHa1uk6mB2Gn4GQ
+Client IP: 10.45.4.53
+
+2025-01-16 16:37:56,764 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 16:37:56,889 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@795564cd
+2025-01-16 16:37:56,890 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 16:37:57,000 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 16:40:53,270 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0a1mO6ll2482Te4vfzll2ufogs2mO6lo
+Client IP: 10.45.4.53
+
+2025-01-16 16:40:53,530 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 16:47:53,972 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0a1Tholl2bIjTe46K0pl2NjL5V3Tholb
+Client IP: 10.45.4.53
+
+2025-01-16 16:47:54,253 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 17:12:17,467 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 17:12:17,471 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-01-16 17:12:21,768 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 21624 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-01-16 17:12:21,770 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-01-16 17:12:22,356 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-16 17:12:22,359 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-16 17:12:22,392 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
+2025-01-16 17:12:22,855 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-01-16 17:12:22,864 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-01-16 17:12:22,865 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-01-16 17:12:22,866 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-01-16 17:12:22,919 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-01-16 17:12:22,919 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1120 ms
+2025-01-16 17:12:23,367 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-01-16 17:12:23,367 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-01-16 17:12:23,818 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-01-16 17:12:23,829 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-01-16 17:12:23,835 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 2.404 seconds (process running for 2.746)
+2025-01-16 17:12:46,020 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-16 17:12:46,021 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-01-16 17:12:46,022 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-01-16 17:12:46,042 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0d1Vil100XAhzT1kKy200rgGqK2Vil1-
+Client IP: 10.45.4.53
+
+2025-01-16 17:12:47,069 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-01-16 17:12:47,185 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@61a54c0
+2025-01-16 17:12:47,186 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-01-16 17:12:47,305 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 17:18:09,976 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0f1Twh1w3VsAe439Gx2w3HNOcl4Twh1u
+Client IP: 10.45.4.53
+
+2025-01-16 17:18:10,237 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 17:18:38,362 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 17:18:38,486 ERROR [http-nio-8080-exec-7] c.g.u.e.GlobalExceptionHandler [GlobalExceptionHandler.java:20] 运行时异常：
+org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: java.sql.SQLException: Field 'event_date' doesn't have a default value
+### The error may exist in com/gasen/usercenterbackend/mapper/EventMapper.java (best guess)
+### The error may involve com.gasen.usercenterbackend.mapper.EventMapper.insert-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO event  ( app_id, avatar, name,  event_time, event_timee, location, location_detail, total_participants,  phone_number, type, remarks, labels, limits, visibility, level, fee_mode, fee, penalty, is_template )  VALUES (  ?, ?, ?,  ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?  )
+### Cause: java.sql.SQLException: Field 'event_date' doesn't have a default value
+; Field 'event_date' doesn't have a default value
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:258)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107)
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:92)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:439)
+	at jdk.proxy2/jdk.proxy2.$Proxy90.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:272)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:59)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:152)
+	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
+	at jdk.proxy2/jdk.proxy2.$Proxy92.insert(Unknown Source)
+	at com.gasen.usercenterbackend.service.impl.EventServiceImpl.createEvent(EventServiceImpl.java:21)
+	at com.gasen.usercenterbackend.controller.EventController.createEvent(EventController.java:39)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:385)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
+	at com.gasen.usercenterbackend.controller.EventController$$SpringCGLIB$$0.createEvent(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:261)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:189)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: java.sql.SQLException: Field 'event_date' doesn't have a default value
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:130)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:912)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:61)
+	at jdk.proxy2/jdk.proxy2.$Proxy130.update(Unknown Source)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49)
+	at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:106)
+	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:59)
+	at jdk.proxy2/jdk.proxy2.$Proxy129.update(Unknown Source)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
+	... 73 common frames omitted
+2025-01-16 17:19:38,955 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0e10PT10094PzT1kNf300Oxxny30PT1E
+Client IP: 10.45.4.53
+
+2025-01-16 17:19:39,207 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 17:20:26,482 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1sC01w3ngje430Pz1w3OsyHb3sC01R
+Client IP: 10.45.4.53
+
+2025-01-16 17:20:26,756 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 17:21:30,130 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0e1ZqYll2SwTTe471Lll2RtS2H2ZqYlC
+Client IP: 10.45.4.53
+
+2025-01-16 17:21:30,428 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 17:22:04,019 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0e17VC100hWxzT1Om6300T82pt27VC1b
+Client IP: 10.45.4.53
+
+2025-01-16 17:22:04,280 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 17:23:02,057 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0b1DkSkl2ndNSe4fgJol2hIx922DkSkv
+Client IP: 10.45.4.53
+
+2025-01-16 17:23:02,453 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 17:23:15,562 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 10.45.4.53
+
+2025-01-16 17:29:13,799 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 17:29:43,900 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 17:29:44,235 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0e15lm100gPgzT1k2I100LdFsg15lm19
+Client IP: 10.45.4.53
+
+2025-01-16 17:29:44,511 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=1
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-01-16 17:40:54,772 WARN [HikariPool-1 housekeeper] c.z.h.p.HikariPool [HikariPool.java:804] HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m37s191ms968µs200ns).
+2025-01-16 18:48:34,873 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-01-16 18:48:34,879 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.

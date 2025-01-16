@@ -1,9 +1,15 @@
 package com.gasen.usercenterbackend.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.gasen.usercenterbackend.common.BaseResponse;
+import com.gasen.usercenterbackend.model.Event;
 import com.gasen.usercenterbackend.model.Request.UserBannedDaysRequest;
+import com.gasen.usercenterbackend.model.Request.weChatAddItemRequest;
+import com.gasen.usercenterbackend.model.Request.weChatUseItemRequest;
 import com.gasen.usercenterbackend.model.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.gasen.usercenterbackend.model.respond.goEasyUser;
+import com.gasen.usercenterbackend.model.respond.indexEvent;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
@@ -29,4 +35,10 @@ public interface IUserService extends IService<User> {
     List<User> usersList();
 
     void addExp(User user);
+
+    void updateAvatar(weChatAddItemRequest weChatAddItemRequest);
+
+    void onlyUpdateAvatar(weChatUseItemRequest weChatUseItemRequest);
+
+    List<goEasyUser> getFriends(List<Integer> friendsId);
 }

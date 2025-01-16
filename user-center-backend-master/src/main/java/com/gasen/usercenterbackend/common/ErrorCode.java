@@ -14,7 +14,9 @@ public enum ErrorCode {
     SYSTEM_ERROR(1005, "系统错误", ""),
     BANNED_USER(1006, "用户已被封禁", ""),
     SIGNATURE_ERROR(1007, "签名校验失败", ""),
-    INVALID_TOKEN(1008, "Token无效或已过期，请重新登录", "");
+    INVALID_TOKEN(1008, "Token无效或已过期，请重新登录", ""),
+    OPERATION_ERROR(1009, "插入数据库操作失败", ""),
+    PHONE_NUMBER_ERROR(1010, "获取手机号失败", "");
 
 
     private final int code;

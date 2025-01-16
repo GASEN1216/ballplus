@@ -1,16 +1,25 @@
 package com.gasen.usercenterbackend.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.gasen.usercenterbackend.common.BaseResponse;
 import com.gasen.usercenterbackend.common.ErrorCode;
+import com.gasen.usercenterbackend.common.ItemsEunm;
 import com.gasen.usercenterbackend.common.ResultUtils;
 import com.gasen.usercenterbackend.controller.UserController;
 import com.gasen.usercenterbackend.exception.BusinessExcetion;
+import com.gasen.usercenterbackend.model.Event;
+import com.gasen.usercenterbackend.model.Friends;
 import com.gasen.usercenterbackend.model.Request.UserBannedDaysRequest;
+import com.gasen.usercenterbackend.model.Request.weChatAddItemRequest;
+import com.gasen.usercenterbackend.model.Request.weChatUseItemRequest;
 import com.gasen.usercenterbackend.model.User;
 import com.gasen.usercenterbackend.mapper.UserMapper;
+import com.gasen.usercenterbackend.model.respond.goEasyUser;
+import com.gasen.usercenterbackend.model.respond.indexEvent;
 import com.gasen.usercenterbackend.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,10 +31,10 @@ import org.springframework.util.DigestUtils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static com.gasen.usercenterbackend.constant.UserConstant.*;
 
@@ -45,6 +54,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      * 盐值混淆密码
      * */
     private static final String SALT = "20240225";
+    private final UserMapper userMapper;
+
+    public UserServiceImpl(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
 
     @Override
     public long userRegister(String userAccount, String password) {
@@ -157,6 +171,69 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if(!b) throw new BusinessExcetion(ErrorCode.SYSTEM_ERROR,"增加经验失败");
     }
 
+    @Override
+    public void updateAvatar(weChatAddItemRequest weChatAddItemRequest) {
+        Integer userId = weChatAddItemRequest.getUserId();
+        Integer itemId = weChatAddItemRequest.getItemId();
+        String url = weChatAddItemRequest.getUrl();
+
+        // 使用 LambdaQueryWrapper 查询用户
+        User user = userMapper.selectOne(
+                new LambdaQueryWrapper<User>()
+                        .eq(User::getId, userId)
+        );
+
+        // 如果查询结果为空，抛出异常
+        if (user == null) {
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "用户不存在");
+        }
+        // 获取用户的当前赛点并计算新的值
+        int score = user.getScore() - ItemsEunm.getPrice(itemId);
+        // 确保扣分后分数不为负
+        if (score < 0) {
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "扣分后分数不能小于0");
+        }
+        // 更新用户信息
+        if(lambdaQuery().eq(User::getId, userId).exists()){
+            if(!lambdaUpdate().eq(User::getId, userId).set(User::getAvatarUrl, url).set(User::getScore, score).update(new User())){
+                throw new BusinessExcetion(ErrorCode.SYSTEM_ERROR,"更新头像失败");
+            }
+            return;
+        }
+        throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR,"用户不存在");
+    }
+
+    /**
+     * 更新用户头像
+     * @param weChatUseItemRequest
+     */
+    @Override
+    public void onlyUpdateAvatar(weChatUseItemRequest weChatUseItemRequest) {
+        Integer userId = weChatUseItemRequest.getUserId();
+        String url = weChatUseItemRequest.getUrl();
+
+        // 更新用户信息
+        if(lambdaQuery().eq(User::getId, userId).exists()){
+            if(!lambdaUpdate().eq(User::getId, userId).set(User::getAvatarUrl, url).update(new User())){
+                throw new BusinessExcetion(ErrorCode.SYSTEM_ERROR,"更新头像失败");
+            }
+            return;
+        }
+        throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR,"用户不存在");
+    }
+
+    /**
+     * 获取用户好友
+     * */
+    @Override
+    public List<goEasyUser> getFriends(List<Integer> friendsId) {
+        // 检查列表是否为空
+        if (friendsId == null || friendsId.isEmpty()) {
+            return Collections.emptyList(); // 返回空列表
+        }
+        List<User> users = userMapper.selectList(new LambdaQueryWrapper<User>().in(User::getId, friendsId));
+        return users.stream().map(User::toFriend).toList();
+    }
 
     /**
      * 判断用户是否合法

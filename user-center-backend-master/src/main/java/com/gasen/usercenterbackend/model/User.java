@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.io.Serializable;
 import java.util.Random;
 
+import com.gasen.usercenterbackend.model.respond.goEasyUser;
 import com.gasen.usercenterbackend.model.respond.wxUser;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -161,7 +162,23 @@ public class User implements Serializable {
                 .setAvatarUrl(wxUser.getAvatarUrl())
                 .setGender(wxUser.getGender())
                 .setBirthday(wxUser.getBirthday())
+                .setPhone(wxUser.getPhone())
                 .setDescription(wxUser.getDescription())
                 .setLabel(wxUser.getLabel());
     }
+
+    public goEasyUser toFriend(){
+        return new goEasyUser()
+                .setUserId(this.id)
+                .setUserName(this.userAccount)
+                .setAvatar(this.avatarUrl);
+    }
+
+    public String getOnlyBallNumber(){
+        // 获取当前时间戳，确保唯一性
+        long timestamp = System.currentTimeMillis();
+        // 返回时间戳字符串
+        return String.valueOf(timestamp);
+    }
+
 }

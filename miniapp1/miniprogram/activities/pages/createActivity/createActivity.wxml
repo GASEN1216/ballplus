@@ -1,25 +1,139 @@
-<view class="container">
-  <form bindsubmit="formSubmit">
-    <view class="form-group">
-      <label>时间:</label>
-      <input type="text" name="time" value="{{time}}" placeholder="请输入活动时间" />
+<view class="form-container">
+  <!-- 活动名称 -->
+  <view class="form-item">
+    <text class="form-label">活动名称</text>
+    <input class="form-input" value="{{event.name}}" data-field="name" bindinput="handleInputChange" />
+  </view>
+
+  <!-- 开始日期 -->
+  <view class="form-item">
+    <text class="form-label">开始日期</text>
+    <picker class="form-input" mode="date" start="{{dateRange[0]}}" end="{{dateRange[dateRange.length - 1]}}" data-field="eventDate" bindchange="handleInputChange">
+      <view>{{event.eventDate || '请选择开始日期'}}</view>
+    </picker>
+  </view>
+
+  <!-- 开始时间 -->
+  <view class="form-item">
+    <text class="form-label">开始时间</text>
+    <picker class="form-input" mode="time" data-field="eventTime" bindchange="handleInputChange">
+      <view>{{event.eventTime || '请选择开始时间'}}</view>
+    </picker>
+    <text class="time-divider">至</text>
+    <picker class="form-input" mode="time" data-field="eventTimee" bindchange="handleInputChange">
+      <view>{{event.eventTimee || '请选择结束时间'}}</view>
+    </picker>
+  </view>
+
+  <!-- 地点 -->
+  <view class="form-item">
+    <text class="form-label">地点</text>
+    <view class="form-input-container">
+      <input class="form-input" placeholder="请输入地点" value="{{event.location}}" bindinput="onLocationInput" disabled="{{fromMap}}" />
+      <text class="form-link blue-text" bindtap="handleLocationSelect" hidden="{{fromMap}}">
+        选择地点
+      </text>
     </view>
-    <view class="form-group">
-      <label>发起人:</label>
-      <input type="text" name="host" value="{{host}}" placeholder="请输入发起人" />
+  </view>
+
+  <!-- 详细地点 -->
+  <view class="form-item">
+    <text class="form-label">详细地点</text>
+    <input class="form-input" placeholder="请输入详细地点" value="{{event.locationDetail}}" bindinput="onLocationDetailInput" disabled="{{fromMap}}" />
+  </view>
+
+  <!-- 活动总人数 -->
+  <view class="form-item">
+    <text class="form-label">活动总人数</text>
+    <picker class="form-input" mode="selector" range="{{participantRange}}" data-field="totalParticipants" bindchange="handleInputChange">
+      <view>{{event.totalParticipants || '请选择人数'}}</view>
+    </picker>
+  </view>
+
+  <!-- 联系方式 -->
+  <view class="form-item">
+    <text class="form-label">联系方式</text>
+    <button class="form-button" bindtap="handleGetPhoneNumber">{{event.phoneNumber ? event.phoneNumber : '点击获取手机号码'}}</button>
+  </view>
+
+
+  <!-- 显示更多设置 -->
+  <view class="more-settings-toggle" bindtap="toggleMoreSettings">
+    <text>{{showMore ? '隐藏更多设置' : '显示更多设置'}}</text>
+  </view>
+
+  <!-- 更多设置 -->
+  <view wx:if="{{showMore}}">
+
+    <!-- 类型 -->
+    <view class="form-item">
+      <text class="form-label">类型</text>
+      <picker class="form-input" range="{{['娱乐', '训练', '对打', '比赛']}}" data-field="type" bindchange="handleInputChange">
+        <view>{{['娱乐', '训练', '对打', '比赛'][event.type]}}</view>
+      </picker>
     </view>
-    <view class="form-group">
-      <label>当前人数:</label>
-      <input type="number" name="currentParticipants" value="{{currentParticipants}}" placeholder="请输入当前人数" />
+
+    <!-- 备注 -->
+    <view class="form-item">
+      <text class="form-label">备注</text>
+      <textarea class="form-textarea" placeholder="最多800字" data-field="remarks" bindinput="handleInputChange"></textarea>
     </view>
-    <view class="form-group">
-      <label>最大人数:</label>
-      <input type="number" name="maxParticipants" value="{{maxParticipants}}" placeholder="请输入最大人数" />
+
+    <!-- 标签 -->
+    <view class="form-item">
+      <text class="form-label">标签</text>
+      <textarea class="form-textarea" placeholder="请输入标签" data-field="labels" bindinput="handleInputChange"></textarea>
     </view>
-    <view class="form-group">
-      <label>内容:</label>
-      <textarea name="content" value="{{content}}" placeholder="请输入活动内容"></textarea>
+
+    <view class="form-item">
+      <text class="form-label">限制</text>
+      <picker class="form-input" range="{{['无', '男', '女']}}" data-field="limits" bindchange="handleInputChange">
+        <view>{{['无', '男', '女'][event.limits]}}</view>
+      </picker>
     </view>
-    <button formType="submit">提交</button>
-  </form>
+
+    <view class="form-item">
+      <text class="form-label">可见性</text>
+      <picker class="form-input" range="{{['公开', '私人']}}" data-field="visibility" bindchange="handleInputChange">
+        <view>{{event.visibility ? '公开' : '私人'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">水平</text>
+      <picker class="form-input" range="{{['小白', '初学者', '业余', '中级', '高级', '专业']}}" data-field="level" bindchange="handleInputChange">
+        <view>{{['小白', '初学者', '业余', '中级', '高级', '专业'][event.level]}}</view>
+      </picker>
+    </view>
+
+    <!-- 费用模式 -->
+    <view class="form-item">
+      <text class="form-label">费用模式</text>
+      <picker class="form-input" range="{{['无', '大哥全包', 'AA制']}}" bindchange="handleFeeModeChange">
+        <view>{{['无', '大哥全包', 'AA制'][event.feeMode]}}</view>
+      </picker>
+    </view>
+
+    <!-- 活动费用 -->
+    <view class="form-item" wx:if="{{showFeeInput}}">
+      <text class="form-label">活动费用</text>
+      <input class="form-input" type="number" placeholder="请输入费用" data-field="fee" bindinput="handleInputChange" />
+    </view>
+
+    <!-- 爽约惩罚 -->
+    <view class="form-item">
+      <text class="form-label">爽约惩罚</text>
+      <switch checked="{{event.penalty}}" data-field="penalty" bindchange="handleInputChange"></switch>
+    </view>
+
+    <!-- 是否模板 -->
+    <view class="form-item">
+      <text class="form-label">是否模板</text>
+      <switch checked="{{event.isTemplate}}" data-field="isTemplate" bindchange="handleInputChange"></switch>
+    </view>
+  </view>
+
+  <view class="form-item">
+    <button class="submit-button" bindtap="handleSubmit">提交</button>
+  </view>
 </view>

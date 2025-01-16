@@ -10,10 +10,16 @@
     <image class="avatar" src="{{userData.avatar}}" bindtap="didPressChooesImage"></image>
   </view>
 
+  <!-- 球号 -->
+  <view class="form-item" bindtap="copyBallNumber">
+    <text class="label">球号</text>
+    <text class="ballNumber-value">{{userData.ballNumber}}</text>
+  </view>
+
   <!-- 昵称 -->
   <view class="form-item required">
     <text class="label">昵称</text>
-    <input class="input" placeholder="请输入昵称" value="{{userData.name}}" bindinput="onInputChange" data-field="name"/>
+    <input class="input" placeholder="请输入昵称" value="{{userData.name}}" bindinput="onInputChange" data-field="name" />
   </view>
 
   <!-- 性别 -->
@@ -32,6 +38,13 @@
     </picker>
   </view>
 
+  <!-- 填写手机号 -->
+  <view class="form-item">
+    <text class="label">手机号</text>
+    <input class="form-input" type="number" maxlength="11" placeholder="请输入11位手机号" value="{{userData.phone}}" bindinput="handlePhoneInput" />
+  </view>
+
+
   <!-- 个性签名 -->
   <view class="form-item">
     <text class="label">个性签名</text>
@@ -41,50 +54,47 @@
   <!-- 标签 -->
   <view class="form-item">
     <text class="label">标签</text>
-    <input class="input" placeholder="请输入标签" value="{{userData.label}}" bindinput="onInputChange" data-field="label"/>
+    <input class="input" placeholder="请输入标签" value="{{userData.label}}" bindinput="onInputChange" data-field="label" />
   </view>
 
-<!-- 信誉分 -->
-<view class="form-item score-item">
-  <text class="label">信誉分</text>
-  <view class="credit-bar">
-    <view class="credit-gradient" style="width: {{userData.credit}}"></view>
-    <text class="credit-text">{{userData.credit}}</text>
-  </view>
-</view>
-
-<!-- 赛点 -->
-<view class="form-item score-item">
-  <text class="label">赛点</text>
-  <view class="score-card">
-    <text class="score-desc">✨</text>
-    <text class="score-value">{{userData.score}}</text>
-    <text class="score-desc">✨</text>
-  </view>
-</view>
-
-<!-- 经验 - 长条进度条 -->
-<view class="form-item score-item">
-  <text class="label">经验</text>
-  <view class="exp-bar-container">
-    <text class="exp-text">{{userData.exp}} / {{userData.grade * 10}}</text>
-    <view class="exp-bar">
-      <view 
-        class="exp-progress"
-        style="width: {{expWidth}};"
-      ></view>
+  <!-- 信誉分 -->
+  <view class="form-item score-item">
+    <text class="label">信誉分</text>
+    <view class="credit-bar">
+      <view class="credit-gradient" style="width: {{userData.credit}}"></view>
+      <text class="credit-text">{{userData.credit}}</text>
     </view>
   </view>
-</view>
 
-
-<!-- 等级 - 小牌子 -->
-<view class="form-item score-item">
-  <text class="label">等级</text>
-  <view class="level-badge">
-    <text class="level-text">LV.{{userData.grade}}</text>
+  <!-- 赛点 -->
+  <view class="form-item score-item">
+    <text class="label">赛点</text>
+    <view class="score-card">
+      <text class="score-desc">✨</text>
+      <text class="score-value">{{userData.score}}</text>
+      <text class="score-desc">✨</text>
+    </view>
   </view>
-</view>
+
+  <!-- 经验 - 长条进度条 -->
+  <view class="form-item score-item">
+    <text class="label">经验</text>
+    <view class="exp-bar-container">
+      <text class="exp-text">{{userData.exp}} / {{userData.grade * 10}}</text>
+      <view class="exp-bar">
+        <view class="exp-progress" style="width: {{expWidth}};"></view>
+      </view>
+    </view>
+  </view>
+
+
+  <!-- 等级 - 小牌子 -->
+  <view class="form-item score-item">
+    <text class="label">等级</text>
+    <view class="level-badge">
+      <text class="level-text">LV.{{userData.grade}}</text>
+    </view>
+  </view>
 
 
 

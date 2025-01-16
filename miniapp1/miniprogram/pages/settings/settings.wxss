@@ -1,17 +1,38 @@
+/* 主容器样式 */
 .settings-container {
-  padding: 20px;
+  background-color: #f5f5f5;
+  padding: 20px 0;
 }
+
+/* 每个选项的样式 */
 .settings-option {
   display: flex;
   justify-content: space-between;
-  padding: 15px 0;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #ffffff;
   border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.2s;
 }
-.arrow {
-  color: #888;
+
+/* 鼠标悬停的效果 */
+.settings-option:hover {
+  background-color: #f0f0f0;
 }
+
+/* 选项文字样式 */
+.option-text {
+  font-size: 16px;
+  color: #333333;
+}
+
 .customer-service-btn {
   margin-left: auto;
   background-color: #ffffff;
   color: rgb(0, 0, 0);
+}
+
+/* 鼠标悬停按钮效果 */
+.customer-service-btn:hover {
+  background-color: #005bb5;
 }

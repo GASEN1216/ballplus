@@ -3,7 +3,7 @@
 <!-- 顶部固定栏 -->
 <view class="header">
   <view wx:if="{{isLoggedin}}" class="user-info">
-    <image src="{{profilePic}}" class="avatar" bindtap="goToEditInfo"></image>
+    <cover-image src="{{profilePic}}" class="avatar" bindtap="goToEditInfo"></cover-image>
       <!-- 用户文本信息 -->
       <view class="user-text">
         <text class="nickname" bindtap="goToEditInfo">{{nickname}}</text>

@@ -27,3 +27,6 @@ qiniu:
   access-key: 75CwUTmoxCX0uuB7Wk7TllwblGynoSVTV6fcthdO
   secret-key: TxhCul2aGZ78soJ6BzbfccE4qdLYwHiJZ4zSlv6N
   bucket: ballplus
+
+gd:
+  key: 6509cb9d83b3c18f50d9d6a55a205997

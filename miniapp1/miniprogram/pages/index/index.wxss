@@ -1,80 +1,84 @@
+/* 通用样式 */
+.main-container {
+  padding: 10px;
+}
+
 /* 轮播图样式 */
 .carousel-container {
   width: 100%;
   height: 200px;
   margin-bottom: 10px;
-  overflow: hidden;
-}
-
-.carousel {
-  width: 100%;
-  height: 100%;
 }
 
 .carousel-image {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
 }
 
-/* 匹配模块样式 */
-.match-section {
+/* 发起活动按钮 */
+.create-activity-section {
   text-align: center;
-  margin: 10px 0;
+  margin: 15px 0;
 }
 
-.match-button {
-  background-color: #4caf50;
+.create-activity-button {
+  background-color: #ff9800;
   color: white;
   border-radius: 5px;
   padding: 10px 20px;
-  margin-bottom: 10px;
-}
-
-.tags {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
-
-.tags button {
-  background-color: #f1f1f1;
-  border-radius: 5px;
-  padding: 5px 10px;
+  font-size: 16px;
+  border: none;
 }
 
 /* 活动列表样式 */
 .activity-list {
-  height: 400px;
-  overflow-y: scroll;
+  margin-top: 10px;
 }
 
 .activity-card {
   display: flex;
   gap: 10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  overflow: hidden;
+  padding: 10px;
+  margin-bottom: 15px;
   border: 1px solid #ddd;
-  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.activity-cover {
-  width: 100px;
-  height: 75px;
-  border-radius: 8px;
+/* 头像样式 */
+.activity-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  object-fit: cover;
 }
 
-.quick-access {
+/* 活动信息 */
+.activity-details {
+  flex: 1;
   display: flex;
-  justify-content: space-around;
-  margin: 20px 0;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.quick-access button {
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  padding: 10px;
+.activity-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.activity-meta {
+  font-size: 14px;
+  color: #666;
+}
+
+.activity-remarks {
+  font-size: 14px;
+  color: #888;
+  margin-top: 5px;
 }
 
 /* 底部导航栏 */
@@ -84,39 +88,20 @@
   background-color: #ffffff;
   border-top: 1px solid #e0e0e0;
   padding: 10px 0;
-}
-.search-section {
-  display: flex;
-  gap: 10px;
-  margin: 10px 0;
-}
-.search-section input {
-  flex: 1;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 5px;
-}
-.search-section button {
-  background-color: #4caf50;
-  color: white;
-  border-radius: 5px;
-}
-.sort-section {
-  display: flex;
-  gap: 10px;
-  margin: 10px 0;
-}
-.sort-section button {
-  background-color: #f1f1f1;
-  border-radius: 5px;
-  padding: 5px;
-}
-.activity-info {
-  flex: 1;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
-.activity-button {
-  background-color: #4caf50;
-  color: white;
-  border-radius: 5px;
+.tabbar button {
+  font-size: 14px;
+  color: #666;
+  background: none;
+  border: none;
+}
+.no-activity {
+  text-align: center;
+  color: #999;
+  margin-top: 20px;
+  font-size: 16px;
 }

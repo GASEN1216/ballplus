@@ -1,124 +1,185 @@
+import { IAppOption } from '../../../typings'
+
+// pages/mine/mine.ts
+const app = getApp<IAppOption>();
+
 Page({
   data: {
-    studyPath: '../../study',
-    matchActivityPath: '../../match',
-    // 轮播图图片数据
+    // 后端接口相关
+    apiUrl: `${app.globalData.url}/user/wx/getEvent`,
+    currentPage: 1, // 当前页码
+    pageSize: 5, // 每页大小
+    hasMoreData: true, // 是否还有更多数据
+
+    // 活动数据
+    activities: [] as any[], // 所有活动数据
+    filteredActivities: [] as any[], // 筛选后的活动数据
+
+    // 轮播图数据
     carouselImages: [
       { url: 'https://picsum.photos/1200/400?random=1', link: '/pages/mine/mine' },
       { url: 'https://picsum.photos/1200/400?random=2', link: '/pages/forum/forum' },
       { url: 'https://picsum.photos/1200/400?random=3', link: '/pages/settings/settings' }
     ],
-    // 活动数据
-    activities: [
-      { 
-        id: 1,
-        name: '篮球友谊赛',
-        time: '2024-01-10 18:00',
-        location: 'XX体育馆',
-        participants: '8/10',
-        skillLevel: '中级',
-        type: '篮球'
-      },
-      { 
-        id: 2,
-        name: '瑜伽课程',
-        time: '2024-01-12 10:00',
-        location: 'YY瑜伽馆',
-        participants: '5/10',
-        skillLevel: '初级',
-        type: '瑜伽'
-      }
-    ],
-    userPreferences: {
-      skillLevel: '初级',
-      preferredType: '瑜伽'
-    },
-    filteredActivities: [] as any[],
-    searchQuery: ''
+
+    // 路径配置
+    createActivityPath: '../../activities',
+    matchActivityPath: '../../match',
+    studyPath: '../../study',
+
+    // 搜索和过滤
+    searchQuery: '',
   },
 
+  // 页面加载时获取活动数据
   onLoad() {
+    app.loginReadyCallback = () => {
+      this.fetchActivities(); // 获取第一页活动数据
+    }
+  },
+
+  // 页面每次显示时触发
+  onShow() {
+    this.removeCurrentPageActivities(); // 移除当前页数据
+    this.fetchActivities(false); // 重新请求当前页数据
+  },
+
+  // 移除当前页数据
+  removeCurrentPageActivities() {
+    const { activities, currentPage, pageSize } = this.data;
+
+    // 计算当前页数据的开始和结束索引
+    const startIdx = (currentPage - 1) * pageSize;
+    const endIdx = currentPage * pageSize;
+
+    // 创建新数组，仅保留非当前页的数据
+    const updatedActivities = activities.filter((_, index) => index < startIdx || index >= endIdx);
+
     this.setData({
-      filteredActivities: this.data.activities
+      activities: updatedActivities,
+      filteredActivities: updatedActivities,
     });
   },
 
-  // 轮播图点击事件
-  onCarouselItemClick(e:any) {
-    const link = e.currentTarget.dataset.link;
-    if (link) {
-      wx.navigateTo({
-        url: link
-      });
-    }
-  },
-
-    goToStudy() {
-      wx.navigateTo({
-        url: `${this.data.studyPath}/pages/resources/resources`
-      });
-    },
-
-  // 匹配活动
-  matchActivity() {
-    const { activities, userPreferences } = this.data;
-
-    // 简单的匹配逻辑
-    const matchedActivity = activities.find(activity => 
-      activity.skillLevel === userPreferences.skillLevel &&
-      activity.type === userPreferences.preferredType
-    );
-
-    if (matchedActivity) {
-      wx.navigateTo({
-        url: `${this.data.matchActivityPath}/pages/matchActivity/matchActivity?id=${matchedActivity.id}`
-      });
-    } else {
+  // 获取活动数据
+  fetchActivities(isLoadMore = true) {
+    if (!this.data.hasMoreData && isLoadMore) {
       wx.showToast({
-        title: '未找到合适的活动',
-        icon: 'none'
+        title: '没有更多活动了',
+        icon: 'none',
       });
+      return;
     }
+
+    const { currentPage, pageSize, apiUrl } = this.data;
+
+    wx.request({
+      url: `${apiUrl}`,
+      method: 'GET',
+      header: {
+        'X-Token': app.globalData.currentUser.token,
+      },
+      data: {
+        page: currentPage,
+        size: pageSize,
+      },
+      success: (res) => {
+        if (res.statusCode === 200 && res.data.code === 0) {
+          let newActivities = res.data.data.records;
+
+          if (!newActivities || newActivities.length === 0) {
+            wx.showToast({
+              title: '暂时没有活动发布哦~',
+              icon: 'none',
+            });
+            this.setData({
+              hasMoreData: false, // 标记无更多数据
+            });
+            return; // 停止后续处理
+          }
+
+          // 格式化日期和时间
+          newActivities = newActivities.map((activity: any) => {
+            const eventDate = new Date(activity.eventDate);
+            const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+            const weekDay = weekDays[eventDate.getDay()]; // 获取周几
+
+            // 去掉 eventTime 的秒数
+            const eventTime = activity.eventTime.split(':').slice(0, 2).join(':');
+
+            return {
+              ...activity,
+              weekDay, // 添加周几信息
+              eventTime, // 格式化时间
+            };
+          });
+
+          if (newActivities.length < pageSize) {
+            this.setData({ hasMoreData: false }); // 如果返回的数据小于页面大小，说明没有更多数据了
+          }
+
+          this.setData({
+            activities: isLoadMore
+              ? [...this.data.activities, ...newActivities] // 追加新数据
+              : [
+                  ...this.data.activities.slice(0, (currentPage - 1) * pageSize), // 保留之前的数据
+                  ...newActivities, // 更新当前页数据
+                  ...this.data.activities.slice(currentPage * pageSize), // 保留之后的数据
+                ],
+            filteredActivities: isLoadMore
+              ? [...this.data.activities, ...newActivities]
+              : [
+                  ...this.data.activities.slice(0, (currentPage - 1) * pageSize),
+                  ...newActivities,
+                  ...this.data.activities.slice(currentPage * pageSize),
+                ],
+          });
+        } else {
+          wx.showToast({
+            title: '获取活动数据失败',
+            icon: 'none',
+          });
+        }
+      },
+      fail: () => {
+        wx.showToast({
+          title: '网络错误，请稍后重试',
+          icon: 'none',
+        });
+      },
+    });
   },
-    // 搜索活动
-    onSearchInput(e: any) {
-      this.setData({ searchQuery: e.detail.value });
-    },
-  
-    onSearch() {
-      const { activities, searchQuery } = this.data;
-      const filtered = activities.filter(item => 
-        item.name.includes(searchQuery) || item.type.includes(searchQuery)
-      );
-      this.setData({ filteredActivities: filtered });
-    },
-  
-    // 标签筛选
-    filterByTag(e: any) {
-      const tag = e.currentTarget.dataset.tag;
-      const filtered = this.data.activities.filter(activity => activity.type === tag);
-      this.setData({ filteredActivities: filtered });
-    },
-  
-    // 排序活动
-    sortActivities(e: any) {
-      const sortType = e.currentTarget.dataset.sort;
-      let sortedActivities = [...this.data.filteredActivities];
-  
-      if (sortType === 'distanceAsc') {
-        sortedActivities.sort((a, b) => a.distance - b.distance);
-      } else if (sortType === 'distanceDesc') {
-        sortedActivities.sort((a, b) => b.distance - a.distance);
-      }
-  
-      this.setData({ filteredActivities: sortedActivities });
-    },
-  
-    // 查看活动详情
-    viewActivityDetail(e: any) {
-      const activityId = e.currentTarget.dataset.id;
-      wx.navigateTo({
-        url: `${this.data.matchActivityPath}/pages/matchActivityPath/matchActivityPath?id=${activityId}`
-      });
-    }
+
+  // 监听用户滚动到底部
+  onReachBottom() {
+    this.fetchActivities(); // 请求下一页数据
+  },
+
+  // 发起活动
+  createActivity() {
+    wx.navigateTo({
+      url: `${this.data.createActivityPath}/pages/createActivity/createActivity`,
+    });
+  },
+
+  // 查看活动详情
+  viewActivityDetail(e: any) {
+    const activityId = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `${this.data.matchActivityPath}/pages/matchActivity/matchActivity?id=${activityId}`,
+    });
+  },
+
+  // 搜索活动
+  onSearchInput(e: any) {
+    this.setData({ searchQuery: e.detail.value });
+  },
+
+  onSearch() {
+    const { activities, searchQuery } = this.data;
+    const filtered = activities.filter((item) =>
+      item.name.includes(searchQuery) || item.location.includes(searchQuery)
+    );
+    this.setData({ filteredActivities: filtered });
+  },
 });

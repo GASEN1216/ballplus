@@ -43,7 +43,12 @@ Page({
         this.listenConversationUpdate(); //监听会话列表变化
         this.loadConversations(); //加载会话列表
 
-        let friends = restapi.findFriends(currentUser);
+        let friends = restapi.findFriends(currentUser, (friends) => {
+          console.log('Friends:', friends); // 使用返回的好友数据
+          this.setData({
+            friends: friends
+        });
+        });
         let groups = restapi.findGroups(currentUser);
         this.setData({
             friends: friends,
@@ -170,14 +175,15 @@ Page({
         this.closeMask();
     },
     renderConversations(conversations) {
+        const that = this; // 将 this 赋值给局部变量
         conversations.conversations && conversations.conversations.map((item) => {
             // 格式化时间格式
             item.lastMessage.date = formatDate(item.lastMessage.timestamp)
         });
-        this.setData({
+        that.setData({
             conversations: conversations.conversations
         });
-        this.setUnreadAmount(conversations.unreadTotal);
+        that.setUnreadAmount(conversations.unreadTotal);
     },
     setUnreadAmount(unreadTotal) {
         if (unreadTotal > 0) {

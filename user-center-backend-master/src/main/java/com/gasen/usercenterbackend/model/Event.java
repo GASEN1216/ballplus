@@ -1,0 +1,99 @@
+package com.gasen.usercenterbackend.model;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.gasen.usercenterbackend.model.respond.indexEvent;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName("event")
+public class Event implements Serializable {
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
+
+    private Integer appId;
+
+    private String avatar;
+
+    private String name;
+
+    private LocalDate eventDate;
+
+    private LocalTime eventTime;
+
+    private LocalTime eventTimee;
+
+    private String location;
+
+    private String locationDetail;
+
+    private Integer totalParticipants;
+
+    private Integer participants;
+
+    private String phoneNumber;
+
+    private Byte type;
+
+    private String remarks;
+
+    private  String labels;
+
+    private Byte limits;
+
+    private Boolean visibility;
+
+    private Byte level;
+
+    private Byte feeMode;
+
+    private Float fee;
+
+    private Boolean penalty;
+
+    private Boolean isTemplate;
+
+    private Byte state;
+
+    /**
+     * 逻辑删除
+     */
+    private Integer isDelete;
+
+    /**
+     * 创建账号时间
+     */
+    private LocalDateTime createTime;
+
+    /**
+     * 更新时间
+     */
+    @TableField(update = "now()")
+    private LocalDateTime updateTime;
+
+    public indexEvent toIndexEvent() {
+        return new indexEvent()
+                .setId(id)
+                .setAvatar(avatar)
+                .setName(name)
+                .setEventDate(eventDate)
+                .setEventTime(eventTime)
+                .setLocation(location)
+                .setParticipants(participants)
+                .setTotalParticipants(totalParticipants)
+                .setRemarks(remarks);
+    }
+}

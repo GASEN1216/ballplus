@@ -1,0 +1,65 @@
+<view class="tabs-container">
+  <view class="tabs">
+    <view 
+      class="tab {{activeTab === 'received' ? 'active' : ''}}" 
+      data-tab="received" 
+      bindtap="switchTab">
+      <text>收到的申请</text>
+    </view>
+    <view 
+      class="tab {{activeTab === 'sent' ? 'active' : ''}}" 
+      data-tab="sent" 
+      bindtap="switchTab">
+      <text>已发送的申请</text>
+    </view>
+  </view>
+</view>
+
+<!-- 分隔条 -->
+<view class="divider"></view>
+
+<view wx:if="{{activeTab === 'received'}}" class="requests-container">
+  <scroll-view class="requests" scroll-y="true" enable-flex="true">
+    <view wx:if="{{receivedRequests.length}}">
+      <view class="request-item" wx:for="{{receivedRequests}}" wx:key="id" wx:for-item="request">
+        <view class="request-avatar">
+          <cover-image src="{{request.avatar}}" class="request-avatar__image"></cover-image>
+        </view>
+        <view class="request-info">
+          <text class="request-info__name">{{request.name}}</text>
+          <view class="request-info__action">
+            <button 
+              class="accept-btn" 
+              bindtap="acceptRequest" 
+              data-id="{{request.id}}" 
+              wx:if="{{request.state === 0}}"
+            >
+              同意
+            </button>
+            <text class="accepted-text" wx:if="{{request.state === 1}}">已同意</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="no-request" wx:else>当前没有收到好友申请</view>
+  </scroll-view>
+</view>
+
+<view wx:if="{{activeTab === 'sent'}}" class="requests-container">
+  <scroll-view class="requests" scroll-y="true" enable-flex="true">
+    <view wx:if="{{sentRequests.length}}">
+      <view class="request-item" wx:for="{{sentRequests}}" wx:key="id" wx:for-item="request">
+        <view class="request-avatar">
+          <cover-image src="{{request.avatar}}" class="request-avatar__image"></cover-image>
+        </view>
+        <view class="request-info">
+          <text class="request-info__name">{{request.name}}</text>
+          <text class="request-info__status">
+            {{request.state === 0 ? '待验证' : '已同意'}}
+          </text>
+        </view>
+      </view>
+    </view>
+    <view class="no-request" wx:else>当前没有已发送好友申请</view>
+  </scroll-view>
+</view>
