@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -39,6 +40,9 @@ public class Event implements Serializable {
     private String location;
 
     private String locationDetail;
+
+    private BigDecimal latitude; // 纬度
+    private BigDecimal longitude; // 经度
 
     private Integer totalParticipants;
 
@@ -91,7 +95,10 @@ public class Event implements Serializable {
                 .setName(name)
                 .setEventDate(eventDate)
                 .setEventTime(eventTime)
+                .setEventTimee(eventTimee)
                 .setLocation(location)
+                .setLatitude(latitude)
+                .setLongitude(longitude)
                 .setParticipants(participants)
                 .setTotalParticipants(totalParticipants)
                 .setRemarks(remarks);

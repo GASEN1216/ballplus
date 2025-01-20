@@ -29,19 +29,77 @@ Page({
 
     // 搜索和过滤
     searchQuery: '',
+
+    dateRange: [], // 日期范围
+    selectedDateIndex: 0, // 选中的日期索引
+    sortOptions: ['距离排序', '日期排序', '人数排序', '综合排序'], // 排序选项
+    selectedSort: 0, // 当前选中的排序方式
+    isMapMode: false, // 是否切换到地图模式
+    order: 'asc', // 默认正序
   },
 
   // 页面加载时获取活动数据
   onLoad() {
+    this.initDateRange();
+
     app.loginReadyCallback = () => {
       this.fetchActivities(); // 获取第一页活动数据
-    }
+    },
+      app.jwReadyCallback = () => {
+        this.removeCurrentPageActivities(); // 移除当前页数据
+        this.fetchActivities(false); // 重新请求当前页数据
+      }
   },
 
   // 页面每次显示时触发
   onShow() {
-    this.removeCurrentPageActivities(); // 移除当前页数据
-    this.fetchActivities(false); // 重新请求当前页数据
+    if (app.globalData.isLoggedin) {
+      this.removeCurrentPageActivities(); // 移除当前页数据
+      this.fetchActivities(false); // 重新请求当前页数据
+    }
+  },
+
+  // 初始化日期范围
+  initDateRange() {
+    const today = new Date();
+    const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+
+    const dateRange = Array.from({ length: 5 }, (_, i) => {
+      const date = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
+      return {
+        date: date.getDate(), // 日期
+        week: weekDays[date.getDay()], // 周几
+      };
+    });
+
+    this.setData({ dateRange });
+  },
+
+  // 日期选择
+  handleDateSelect(e) {
+    const { index } = e.currentTarget.dataset;
+    this.setData({ selectedDateIndex: index });
+    // 可在此调用方法按日期筛选活动
+  },
+
+  // 切换排序菜单
+  toggleSortMenu() {
+    wx.showActionSheet({
+      itemList: this.data.sortOptions,
+      success: (res) => {
+        this.setData({ selectedSort: res.tapIndex });
+        this.filterActivities(); // 按新排序方式重新过滤
+      },
+    });
+  },
+
+  // 切换地图模式
+  toggleMapMode() {
+    this.setData({ isMapMode: !this.data.isMapMode });
+    wx.showToast({
+      title: this.data.isMapMode ? '地图模式开启' : '列表模式开启',
+      icon: 'none',
+    });
   },
 
   // 移除当前页数据
@@ -57,7 +115,6 @@ Page({
 
     this.setData({
       activities: updatedActivities,
-      filteredActivities: updatedActivities,
     });
   },
 
@@ -84,14 +141,11 @@ Page({
         size: pageSize,
       },
       success: (res) => {
+
         if (res.statusCode === 200 && res.data.code === 0) {
-          let newActivities = res.data.data.records;
+          let newActivities = res.data.data;
 
           if (!newActivities || newActivities.length === 0) {
-            wx.showToast({
-              title: '暂时没有活动发布哦~',
-              icon: 'none',
-            });
             this.setData({
               hasMoreData: false, // 标记无更多数据
             });
@@ -100,6 +154,12 @@ Page({
 
           // 格式化日期和时间
           newActivities = newActivities.map((activity: any) => {
+            const eventLatitude = activity.latitude; // 假设活动地点的纬度字段为 latitude
+            const eventLongitude = activity.longitude; // 假设活动地点的经度字段为 longitude
+
+            // 计算活动与用户之间的距离
+            const distance = app.cD(eventLatitude, eventLongitude);
+
             const eventDate = new Date(activity.eventDate);
             const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
             const weekDay = weekDays[eventDate.getDay()]; // 获取周几
@@ -107,10 +167,15 @@ Page({
             // 去掉 eventTime 的秒数
             const eventTime = activity.eventTime.split(':').slice(0, 2).join(':');
 
+            // 去掉 eventTimee 的秒数
+            const eventTimee = activity.eventTimee.split(':').slice(0, 2).join(':');
+
             return {
               ...activity,
               weekDay, // 添加周几信息
               eventTime, // 格式化时间
+              eventTimee,
+              distance, // 添加距离信息
             };
           });
 
@@ -122,18 +187,13 @@ Page({
             activities: isLoadMore
               ? [...this.data.activities, ...newActivities] // 追加新数据
               : [
-                  ...this.data.activities.slice(0, (currentPage - 1) * pageSize), // 保留之前的数据
-                  ...newActivities, // 更新当前页数据
-                  ...this.data.activities.slice(currentPage * pageSize), // 保留之后的数据
-                ],
-            filteredActivities: isLoadMore
-              ? [...this.data.activities, ...newActivities]
-              : [
-                  ...this.data.activities.slice(0, (currentPage - 1) * pageSize),
-                  ...newActivities,
-                  ...this.data.activities.slice(currentPage * pageSize),
-                ],
+                ...this.data.activities.slice(0, (currentPage - 1) * pageSize), // 保留之前的数据
+                ...newActivities, // 更新当前页数据
+                ...this.data.activities.slice(currentPage * pageSize), // 保留之后的数据
+              ],
+            currentPage: this.data.hasMoreData ? this.data.currentPage + 1 : this.data.currentPage, // 增加当前页码
           });
+          this.filterActivities(); // 按条件过滤数据
         } else {
           wx.showToast({
             title: '获取活动数据失败',
@@ -150,9 +210,46 @@ Page({
     });
   },
 
+  // 筛选活动数据
+  filterActivities() {
+    const { activities, selectedSort, order } = this.data;
+    const getDistanceValue = (distance: string): number => {
+      if (distance.endsWith('km')) {
+        return parseFloat(distance.replace('km', '')) * 1000; // 转为米
+      } else if (distance.endsWith('m')) {
+        return parseFloat(distance.replace('m', '')); // 保持米
+      }
+      return Infinity; // 无效值放在最后
+    };
+
+    let filtered = activities;
+
+    // 排序逻辑
+    filtered = filtered.sort((a, b) => {
+      let comparison = 0;
+      switch (selectedSort) {
+        case 0:
+          comparison = getDistanceValue(a.distance) - getDistanceValue(b.distance);
+          break;
+        case 1:
+          comparison = new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime();
+          break;
+        case 2:
+          comparison = a.totalParticipants - b.totalParticipants;
+          break;
+        case 3:
+          comparison = getDistanceValue(a.distance) - getDistanceValue(b.distance) || new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime();
+          break;
+      }
+      return order === 'asc' ? comparison : -comparison;
+    });
+
+    this.setData({ filteredActivities: filtered });
+  },
+
   // 监听用户滚动到底部
   onReachBottom() {
-    this.fetchActivities(); // 请求下一页数据
+    this.fetchActivities(true); // 请求下一页数据
   },
 
   // 发起活动
@@ -170,16 +267,18 @@ Page({
     });
   },
 
-  // 搜索活动
-  onSearchInput(e: any) {
-    this.setData({ searchQuery: e.detail.value });
+  // 日期筛选
+  handleDateFilterChange(e) {
+    const selectedDate = this.data.dateRange[e.detail.value];
+    this.setData({ selectedDate });
+    // TODO:按日期重新获取数据
   },
 
-  onSearch() {
-    const { activities, searchQuery } = this.data;
-    const filtered = activities.filter((item) =>
-      item.name.includes(searchQuery) || item.location.includes(searchQuery)
-    );
-    this.setData({ filteredActivities: filtered });
+  // 切换排序顺序
+  toggleOrder() {
+    const newOrder = this.data.order === 'asc' ? 'desc' : 'asc';
+    this.setData({ order: newOrder });
+    this.filterActivities(); // 按新顺序重新过滤
   },
+
 });

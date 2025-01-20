@@ -23,7 +23,7 @@
     ]
   },
   "include": [
-    "./**/*.ts",],
+    "./**/*.ts", "miniprogram/utils/util.ts",],
   "exclude": [
     "node_modules",
     "dist"

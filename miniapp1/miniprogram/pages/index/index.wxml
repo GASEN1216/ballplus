@@ -9,11 +9,43 @@
   </swiper>
 </view>
 
+<!-- 发起活动按钮 -->
+<view class="create-activity-section">
+  <button class="create-activity-button" bindtap="createActivity">➕ 发起活动</button>
+</view>
+
 <view class="main-container">
-  <!-- 发起活动按钮 -->
-  <view class="create-activity-section">
-    <button class="create-activity-button" bindtap="createActivity">➕ 发起活动</button>
+  <view class="filter-container">
+    <!-- 日期范围 -->
+    <scroll-view class="date-scroll" scroll-x="true">
+      <view wx:for="{{dateRange}}" wx:key="index" class="date-item" data-index="{{index}}" bindtap="handleDateSelect">
+        <view class="date-number {{selectedDateIndex === index ? 'selected' : ''}}">
+          {{item.date}}
+        </view>
+        <view class="date-week {{selectedDateIndex === index ? 'selected' : ''}}">
+          {{item.week}}
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 筛选和模式切换 -->
+    <view class="sort-options">
+      <view class="sort-dropdown">
+        <text bindtap="toggleSortMenu">{{sortOptions[selectedSort]}}</text>
+        <text class="dropdown-icon" bindtap="toggleSortMenu">{{isSortMenuOpen ? '▲' : '▼'}}</text>
+      </view>
+
+      <view class="order-toggle" bindtap="toggleOrder">
+        <text>{{order === 'asc' ? '正序' : '倒序'}}</text>
+        <text class="order-icon">{{order === 'asc' ? '▼' : '▲'}}</text>
+      </view>
+      <view class="map-mode" bindtap="toggleMapMode">
+        <text>地图模式</text>
+        <image src="/icon/location.png" class="map-icon" />
+      </view>
+    </view>
   </view>
+
 
   <!-- 活动展示区域 -->
   <view class="activity-list">
@@ -30,6 +62,10 @@
             <text class="activity-meta">📍 地点: {{item.location}}</text>
             <text class="activity-meta">👥 人数: {{item.participants}}/{{item.totalParticipants}}</text>
             <text class="activity-remarks">备注: {{item.remarks}}</text>
+          </view>
+          <!-- 距离 -->
+          <view class="activity-distance">
+            <text>{{item.distance}}</text> <!-- 显示与用户的距离 -->
           </view>
         </view>
       </block>

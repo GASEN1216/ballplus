@@ -15,10 +15,13 @@
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* 确保容器不超出父级 */
+  box-sizing: border-box;
 }
 
 /* 标签 */
 .form-label {
+  flex-shrink: 0; /* 保证标签宽度固定 */
   flex: 0 0 120px;
   font-size: 15px;
   font-weight: 600;
@@ -96,4 +99,36 @@
   font-size: 12px;
   color: #999999;
   margin-top: 5px;
+}
+
+.form-input-container {
+  flex: 1; /* 填满剩余空间 */
+  display: flex;
+  align-items: center;
+  overflow: hidden; /* 强制隐藏超出部分 */
+  width: 100%;
+}
+
+.form-display {
+  flex: 1; /* 占满剩余空间 */
+  font-size: 14px;
+  color: #333;
+  overflow: hidden; /* 超出隐藏 */
+  text-overflow: ellipsis; /* 显示省略号 */
+  white-space: nowrap; /* 禁止换行 */
+  max-width: 100%; /* 强制不超过容器宽度 */
+  line-height: 24px; /* 与文字高度一致 */
+  cursor: pointer; /* 鼠标显示为可点击 */
+}
+.form-disabled {
+  flex: 1; /* 占满剩余空间 */
+  font-size: 14px;
+  color: #333;
+  overflow: hidden; /* 超出隐藏 */
+  text-overflow: ellipsis; /* 显示省略号 */
+  white-space: nowrap; /* 禁止换行 */
+  max-width: 100%; /* 强制不超过容器宽度 */
+  line-height: 24px; /* 与文字高度一致 */
+  pointer-events: none; /* 禁用点击 */
+  cursor: not-allowed; /* 鼠标显示不可点击 */
 }

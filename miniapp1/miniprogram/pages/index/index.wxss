@@ -38,6 +38,7 @@
 
 .activity-card {
   display: flex;
+  position: relative;
   gap: 10px;
   padding: 10px;
   margin-bottom: 15px;
@@ -46,7 +47,13 @@
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
+.activity-distance {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 14px;
+  color: #666;
+}
 /* 头像样式 */
 .activity-avatar {
   width: 50px;
@@ -104,4 +111,92 @@
   color: #999;
   margin-top: 20px;
   font-size: 16px;
+}
+/* 外层容器 */
+.filter-container {
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0; /* 添加轻微边框，使容器更有层次感 */
+}
+
+/* 日期滚动区域 */
+.date-scroll {
+  display: flex;
+  justify-content: space-between; /* 通过间距填满屏幕 */
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* 日期项 */
+.date-item {
+  display: inline-block;
+  text-align: center;
+  width: 20%;
+}
+
+.date-number {
+  font-size: 16px;
+  color: #333;
+  width: 40px; /* 宽度固定 */
+  height: 40px; /* 高度固定，和宽度一致 */
+  line-height: 40px; /* 让文字垂直居中 */
+  border-radius: 50%; /* 圆形 */
+  margin: 0 auto; /* 居中 */
+  text-align: center;
+}
+
+.date-number.selected {
+  font-size: 17px;
+  background-color: rgb(211, 183, 183); /* 深灰色背景 */
+  color: #fff; /* 文字为白色 */
+  border: none; /* 移除边框 */
+}
+
+.date-week {
+  font-size: 12px;
+  color: #666; /* 中灰色字体 */
+  margin-top: 5px;
+}
+
+.date-week.selected {
+  font-size: 13px;
+  color: #333; /* 深灰色字体 */
+}
+
+/* 筛选和模式切换 */
+.sort-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.sort-dropdown {
+  position: relative; /* 定位父容器，为下拉菜单提供定位基础 */
+  z-index: 10; /* 高于 GIF */
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+
+.dropdown-icon {
+  margin-left: 5px;
+}
+
+.order-toggle,
+.map-mode {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.map-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 5px;
 }

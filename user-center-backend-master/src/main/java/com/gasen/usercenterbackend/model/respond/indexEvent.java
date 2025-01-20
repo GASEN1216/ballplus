@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -17,7 +18,10 @@ public class indexEvent implements Serializable {
     private String name;
     private LocalDate eventDate;
     private LocalTime eventTime;
+    private LocalTime eventTimee;
     private String location;
+    private BigDecimal latitude; // 纬度
+    private BigDecimal longitude; // 经度
     private Integer participants;
     private Integer totalParticipants;
     private String remarks;

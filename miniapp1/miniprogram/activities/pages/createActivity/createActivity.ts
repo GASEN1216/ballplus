@@ -14,6 +14,8 @@ Page({
       eventTimee: '20:30', // 结束时间
       location: '', // 地点
       locationDetail: '', // 详细地点
+      latitude: 0.0,   // 纬度
+      longitude: 0.0,   // 经度
       totalParticipants: 2, // 活动总人数
       phoneNumber: '', // 联系方式
       type: 0, // 类型
@@ -78,7 +80,9 @@ Page({
         // 更新地点和详细地点
         this.setData({
           'event.location': res.name || '', // 地点名称
-          'event.locationDetail': res.address || '' // 详细地址
+          'event.locationDetail': res.address || '', // 详细地址
+          'event.latitude': res.latitude || null, // 纬度
+          'event.longitude': res.longitude || null, // 经度
         });
       },
       fail: (err) => {
@@ -157,9 +161,21 @@ Page({
       return;
     }
 
-    this.setData({
-      [`event.${field}`]: value,
-    });
+    if (field === 'totalParticipants') {
+      // 选择人数时，根据索引获取实际的值
+      const selectedParticipants = this.data.participantRange[value]; // 获取实际选中的人数
+      this.setData({
+        [`event.${field}`]: selectedParticipants, // 更新活动的总人数
+      });
+    }else if(field === 'visibility') {
+      this.setData({
+        [`event.${field}`]: value === 0 ? false : true,
+      });
+    } else {
+      this.setData({
+        [`event.${field}`]: value,
+      });
+    }
   },
 
   // 更新费用模式

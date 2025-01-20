@@ -29,17 +29,24 @@
   <view class="form-item">
     <text class="form-label">地点</text>
     <view class="form-input-container">
-      <input class="form-input" placeholder="请输入地点" value="{{event.location}}" bindinput="onLocationInput" disabled="{{fromMap}}" />
-      <text class="form-link blue-text" bindtap="handleLocationSelect" hidden="{{fromMap}}">
+      <text class="{{fromMap ? 'form-disabled' : 'form-display'}}" bindtap="handleLocationSelect">{{event.location || '点我选择地点'}}</text>
+      <!-- <text class="form-link blue-text" bindtap="handleLocationSelect" hidden="{{fromMap}}">
         选择地点
-      </text>
+      </text> -->
     </view>
   </view>
 
   <!-- 详细地点 -->
   <view class="form-item">
     <text class="form-label">详细地点</text>
-    <input class="form-input" placeholder="请输入详细地点" value="{{event.locationDetail}}" bindinput="onLocationDetailInput" disabled="{{fromMap}}" />
+    <view class="form-input-container">
+      <view wx:if="{{fromMap}}">
+        <text class="form-disabled">{{event.locationDetail || '详细地点'}}</text>
+      </view>
+      <view wx:else>
+        <input class="form-input" placeholder="请输入详细地点" value="{{event.locationDetail}}" bindinput="onLocationDetailInput" disabled="{{fromMap}}" />
+      </view>
+    </view>
   </view>
 
   <!-- 活动总人数 -->

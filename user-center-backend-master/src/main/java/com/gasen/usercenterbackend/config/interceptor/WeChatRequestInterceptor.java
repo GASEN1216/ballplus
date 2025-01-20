@@ -38,7 +38,7 @@ public class WeChatRequestInterceptor implements HandlerInterceptor {
         // 获取请求中的 token（先从参数中获取）
         String token = request.getHeader("X-Token");
 
-        // 如果参数中没有 token，则尝试从请求头中获取
+        // 如果参数中没有 token，则尝试从请求体中获取
         if (token == null || token.isEmpty()) {
             token = extractTokenFromBody(request);
         }

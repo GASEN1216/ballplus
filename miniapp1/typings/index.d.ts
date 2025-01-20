@@ -51,6 +51,7 @@ interface IAppOption {
     isLoggedin: boolean
     currentUser: wxUser
   }
+  jwReadyCallback?: () => void;
   loginReadyCallback?: () => void;
   getUrl: (path: string) => string;
   login: () => void;
