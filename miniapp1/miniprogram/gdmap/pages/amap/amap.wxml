@@ -12,11 +12,31 @@
 
   <button class="create-activity-btn" bindtap="createActivity" style="display: inline-block;width: 80%">发起活动</button>
 
-  <view wx:for="{{activities}}" wx:key="index" class="activity_item"  bindtap="showActivityDetail" data-index="{{index}}">
-      <view class="divider"></view>
-    <text class="activity_time">{{item.time}}</text>
-    <text class="activity_host">发起人: {{item.host}}</text>
-    <text class="activity_participants">人数: {{item.currentParticipants}}/{{item.maxParticipants}}</text>
-    <text class="activity_content">内容: {{item.content}}</text>
+  <!-- 活动展示区域 -->
+  <view class="activity-list">
+    <!-- 判断是否有活动信息 -->
+    <block wx:if="{{activities.length > 0}}">
+      <block wx:for="{{activities}}" wx:key="index">
+        <view class="activity-card">
+          <!-- 头像 -->
+          <cover-image src="{{item.avatar}}" class="activity-avatar"></cover-image>
+          <!-- 活动信息 -->
+          <view class="activity-details">
+            <text class="activity-name">{{item.name}}</text>
+            <text class="activity-meta">📅 日期: {{item.eventDate}} {{item.weekDay}} {{item.eventTime}}-{{item.eventTimee}}</text>
+            <text class="activity-meta">📍 地点: {{item.location}}</text>
+            <text class="activity-meta">👥 人数: {{item.participants}}/{{item.totalParticipants}}</text>
+            <text class="activity-remarks">备注: {{item.remarks}}</text>
+          </view>
+        </view>
+      </block>
+    </block>
+
+    <!-- 当没有活动信息时显示 -->
+    <block wx:else>
+      <view class="no-activity">
+        <text>暂时没有活动发布哦~</text>
+      </view>
+    </block>
   </view>
 </view>

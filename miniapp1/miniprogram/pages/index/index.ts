@@ -26,6 +26,7 @@ Page({
     createActivityPath: '../../activities',
     matchActivityPath: '../../match',
     studyPath: '../../study',
+    gdmapPath: '../../gdmap',
 
     // 搜索和过滤
     searchQuery: '',
@@ -34,7 +35,6 @@ Page({
     selectedDateIndex: 0, // 选中的日期索引
     sortOptions: ['距离排序', '日期排序', '人数排序', '综合排序'], // 排序选项
     selectedSort: 0, // 当前选中的排序方式
-    isMapMode: false, // 是否切换到地图模式
     order: 'asc', // 默认正序
   },
 
@@ -66,9 +66,14 @@ Page({
 
     const dateRange = Array.from({ length: 5 }, (_, i) => {
       const date = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
+
+      // 获取 YYYY-MM-DD 格式的日期
+      const ymd = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+
       return {
         date: date.getDate(), // 日期
         week: weekDays[date.getDay()], // 周几
+        ymd: ymd//补充获取如2025-01-17的数据
       };
     });
 
@@ -80,6 +85,8 @@ Page({
     const { index } = e.currentTarget.dataset;
     this.setData({ selectedDateIndex: index });
     // 可在此调用方法按日期筛选活动
+    this.removeCurrentPageActivities(); // 移除当前页数据
+    this.fetchActivities(false); // 重新请求当前页数据
   },
 
   // 切换排序菜单
@@ -95,10 +102,8 @@ Page({
 
   // 切换地图模式
   toggleMapMode() {
-    this.setData({ isMapMode: !this.data.isMapMode });
-    wx.showToast({
-      title: this.data.isMapMode ? '地图模式开启' : '列表模式开启',
-      icon: 'none',
+    wx.navigateTo({
+      url: `${this.data.gdmapPath}/pages/amap/amap`
     });
   },
 
@@ -163,7 +168,7 @@ Page({
             const eventDate = new Date(activity.eventDate);
             const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
             const weekDay = weekDays[eventDate.getDay()]; // 获取周几
-
+            
             // 去掉 eventTime 的秒数
             const eventTime = activity.eventTime.split(':').slice(0, 2).join(':');
 
@@ -212,7 +217,8 @@ Page({
 
   // 筛选活动数据
   filterActivities() {
-    const { activities, selectedSort, order } = this.data;
+    const { activities, selectedSort, order, dateRange, selectedDateIndex } = this.data;
+    let ymd = dateRange[selectedDateIndex].ymd;
     const getDistanceValue = (distance: string): number => {
       if (distance.endsWith('km')) {
         return parseFloat(distance.replace('km', '')) * 1000; // 转为米
@@ -222,8 +228,9 @@ Page({
       return Infinity; // 无效值放在最后
     };
 
-    let filtered = activities;
-
+    // 若activity.eventDate和ymd不一样则过滤掉
+    let filtered = activities.filter(activity => activity.eventDate === ymd);
+    
     // 排序逻辑
     filtered = filtered.sort((a, b) => {
       let comparison = 0;

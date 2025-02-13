@@ -1,95 +1,92 @@
 <view class="container">
 
-<!-- 顶部固定栏 -->
-<view class="header">
-  <view wx:if="{{isLoggedin}}" class="user-info">
-    <cover-image src="{{profilePic}}" class="avatar" bindtap="goToEditInfo"></cover-image>
+  <!-- 顶部固定栏 -->
+  <view class="header">
+    <view wx:if="{{isLoggedin}}" class="user-info">
+      <cover-image src="{{profilePic}}" class="avatar" bindtap="goToEditInfo"></cover-image>
       <!-- 用户文本信息 -->
       <view class="user-text">
         <text class="nickname" bindtap="goToEditInfo">{{nickname}}</text>
         <view class="level-exp-container">
-            <!-- 等级 - 小牌子 经验值-->
-            <text class="level-text">LV.{{userData.grade}}</text>
-            <text class="exp-text">{{userData.exp}} / {{userData.grade * 10}}</text>
+          <!-- 等级 - 小牌子 经验值-->
+          <text class="level-text">LV.{{userData.grade}}</text>
+          <text class="exp-text">{{userData.exp}} / {{userData.grade * 10}}</text>
         </view>
         <!-- 经验 - 长条进度条 -->
-<view class="form-item score-item">
-  <view class="exp-bar-container">
-    <view class="exp-bar">
-      <view 
-        class="exp-progress"
-        style="width: {{expWidth}};"
-      ></view>
-    </view>
-  </view>
-</view>
+        <view class="form-item score-item">
+          <view class="exp-bar-container">
+            <view class="exp-bar">
+              <view class="exp-progress" style="width: {{expWidth}};"></view>
+            </view>
+          </view>
+        </view>
       </view>
-  </view>
-  <view class="settings-btn" bindtap="navigateToSettings">
+    </view>
+    <view class="settings-btn" bindtap="navigateToSettings">
       <image src="../../icon/settings.png" class="settings-icon" mode="aspectFit"></image>
-  </view>
-</view>
-
-<!-- 日历部分 -->
-<view class="calendar-section">
-  <text class="section-title">标记您的可用时间</text>
-  <picker mode="date" bindchange="onDateChange">
-    <button class="calendar-button">选择日期</button>
-  </picker>
-  <button class="availability-button" bindtap="showAvailability">查看可用时间</button>
-</view>
-
-<!-- 提醒部分 -->
-<view class="notification-section">
-  <text class="notification-text">提醒：请留意您的活动和日程安排。</text>
-</view>
-
-<!-- 地图和好友部分 -->
-<view class="navigation-section">
-  <view class="nav-item" bindtap="toGdmap">
-    <image src="../../icon/location.png" class="nav-icon" mode="aspectFit"/>
-    <text>地图</text>
-  </view>
-  <view class="nav-item" bindtap="toFriends">
-    <image src="../../icon/mine-icon.png" class="nav-icon" mode="aspectFit"/>
-    <text>好友</text>
-  </view>
-  <view class="nav-item" bindtap="toPointsMall">
-    <image src="../../icon/location.png" class="nav-icon" mode="aspectFit"/>
-    <text>赛点商城</text>
-  </view>
-</view>
-
-<!-- 活动部分 -->
-<view class="activity-section">
-  <text class="activity-title">活动</text>
-  <view class="activity-items">
-    <view class="activity-item" bindtap="goToActivities" data-tab="all">
-      <image src="../../icon/activities.png" class="activity-icon"></image>
-      <text>我的活动</text>
-    </view>
-    <view class="activity-item" bindtap="goToActivities" data-tab="pendingDeparture">
-      <image src="../../icon/departure.png" class="activity-icon"></image>
-      <text>待出发</text>
-    </view>
-    <view class="activity-item" bindtap="goToActivities" data-tab="pendingReview">
-      <image src="../../icon/review.png" class="activity-icon"></image>
-      <text>待评价</text>
-    </view>
-    <view class="activity-item" bindtap="goToActivities" data-tab="cancelled">
-      <image src="../../icon/cancel.png" class="activity-icon"></image>
-      <text>取消活动</text>
     </view>
   </view>
-</view>
 
-<!-- 登录按钮 -->
-<button wx:if="{{!isLoggedin}}" bindtap="onLoginButtonClick">登录</button>
+  <!-- 日历部分 -->
+  <view class="calendar-section">
+    <text class="section-title">标记您的可用时间</text>
+    <picker mode="date" bindchange="onDateChange">
+      <button class="calendar-button">选择日期</button>
+    </picker>
+    <button class="availability-button" bindtap="showAvailability">查看可用时间</button>
+  </view>
 
-<!-- Token 验证 -->
-<view wx:if="{{isLoggedin}}">
-  <button class="token-button" bindtap="onTokenButtonClick">验证Token</button>
-  <text class="token-status">{{tokenStatus}}</text>
-</view>
+  <!-- 提醒部分 -->
+  <view class="notification-section">
+    <text class="notification-text">提醒：请留意您的活动和日程安排。</text>
+  </view>
+
+  <!-- 地图和好友部分 -->
+  <view class="navigation-section">
+    <view class="nav-item" bindtap="toGdmap">
+      <image src="../../icon/location.png" class="nav-icon" mode="aspectFit" />
+      <text>地图</text>
+    </view>
+    <view class="nav-item" bindtap="toFriends">
+      <image src="../../icon/mine-icon.png" class="nav-icon" mode="aspectFit" />
+      <text>好友</text>
+    </view>
+    <view class="nav-item" bindtap="toPointsMall">
+      <image src="../../icon/location.png" class="nav-icon" mode="aspectFit" />
+      <text>赛点商城</text>
+    </view>
+  </view>
+
+  <!-- 活动部分 -->
+  <view class="activity-section">
+    <text class="activity-title">活动</text>
+    <view class="activity-items">
+      <view class="activity-item" bindtap="goToActivities" data-tab="all">
+        <image src="../../icon/activities.png" class="activity-icon"></image>
+        <text>我的活动</text>
+      </view>
+      <view class="activity-item" bindtap="goToActivities" data-tab="pendingDeparture">
+        <image src="../../icon/departure.png" class="activity-icon"></image>
+        <text>待出发</text>
+      </view>
+      <view class="activity-item" bindtap="goToActivities" data-tab="pendingReview">
+        <image src="../../icon/review.png" class="activity-icon"></image>
+        <text>已完成</text>
+      </view>
+      <view class="activity-item" bindtap="goToActivities" data-tab="cancelled">
+        <image src="../../icon/cancel.png" class="activity-icon"></image>
+        <text>取消活动</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 登录按钮 -->
+  <button wx:if="{{!isLoggedin}}" bindtap="onLoginButtonClick">登录</button>
+
+  <!-- Token 验证 -->
+  <view wx:if="{{isLoggedin}}">
+    <button class="token-button" bindtap="onTokenButtonClick">验证Token</button>
+    <text class="token-status">{{tokenStatus}}</text>
+  </view>
 
 </view>

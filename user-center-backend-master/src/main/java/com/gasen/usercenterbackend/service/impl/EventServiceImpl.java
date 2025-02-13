@@ -1,5 +1,6 @@
 package com.gasen.usercenterbackend.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gasen.usercenterbackend.mapper.EventMapper;
@@ -26,5 +27,11 @@ public class EventServiceImpl implements IEventService {
     public IPage<Event> page(Page<Event> eventPage) {
         // 调用 MyBatis-Plus 提供的分页查询方法, eventPage 为分页参数, null 为查询条件
         return eventMapper.selectPage(eventPage, null);
+    }
+
+    @Override
+    public IPage<Event> pageByLocation(Page<Event> eventPage, QueryWrapper<Event> queryWrapper) {
+        // 调用 MyBatis-Plus 提供的分页查询方法, eventPage 为分页参数, queryWrapper 为查询条件
+        return eventMapper.selectPage(eventPage, queryWrapper);
     }
 }

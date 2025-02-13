@@ -38,7 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
         //微信请求拦截器
         registry.addInterceptor(getWeChatRequestInterceptor)
                 .addPathPatterns("/user/wx/**")
-                .excludePathPatterns("/user/wx/login", "/user/wx/token", "/user/wx/update");
+                .excludePathPatterns("/user/wx/login", "/user/wx/token", "/user/wx/update");//update的在方法里进行检测
     }
 
 }

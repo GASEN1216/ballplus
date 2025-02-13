@@ -25,12 +25,6 @@ interface Activity {
 // 定义 markersData 的类型
 let markersData: Marker[] = [];
 
-let activities: Activity[] = [
-  { time: '周一 10:00', host: '张三', currentParticipants: 5, maxParticipants: 10, content: '羽毛球比赛' },
-  { time: '周二 14:00', host: '李四', currentParticipants: 8, maxParticipants: 15, content: '乒乓球友谊赛' },
-  { time: '周三 18:00', host: '王五', currentParticipants: 3, maxParticipants: 8, content: '篮球训练营' }
-];
-
 Page({
   data: {
     markers: [] as Marker[],
@@ -39,8 +33,16 @@ Page({
     textData: {},
     actPath: '../../../activities',
     searchQuery: '', // 搜索内容
-    activities: activities, // 约球活动信息
-    amapKey: '' // 存储后端返回的高德地图 key
+
+    amapKey: '', // 存储后端返回的高德地图 key
+        // 后端接口相关
+        apiUrl: `${app.globalData.url}/user/wx/getEventByMap`,
+        currentPage: 1, // 当前页码
+        pageSize: 5, // 每页大小
+        hasMoreData: true, // 是否还有更多数据
+    
+        // 活动数据
+        activities: [] as any[], // 所有活动数据
   },
   onLoad: function () {
     if (this.data.amapKey) {
@@ -56,7 +58,108 @@ Page({
       });
     }
   },
+    // 获取活动数据
+    fetchActivities(isLoadMore = true) {
+      if (!this.data.hasMoreData && isLoadMore) {
+        wx.showToast({
+          title: '没有更多活动了',
+          icon: 'none',
+        });
+        return;
+      }
   
+      const { currentPage, pageSize, apiUrl } = this.data;
+  
+      wx.request({
+        url: `${apiUrl}`,
+        method: 'POST',
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-Token': app.globalData.currentUser.token,
+        },
+        data: {
+          page: currentPage,
+          size: pageSize,
+          location: this.data.textData.name,
+        },
+        success: (res) => {
+  
+          if (res.statusCode === 200 && res.data.code === 0) {
+            let newActivities = res.data.data;
+  
+            if (!newActivities || newActivities.length === 0) {
+              this.setData({
+                hasMoreData: false, // 标记无更多数据
+              });
+              return; // 停止后续处理
+            }
+  
+            // 格式化日期和时间
+            newActivities = newActivities.map((activity: any) => {
+  
+              const eventDate = new Date(activity.eventDate);
+              const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+              const weekDay = weekDays[eventDate.getDay()]; // 获取周几
+  
+              // 去掉 eventTime 的秒数
+              const eventTime = activity.eventTime.split(':').slice(0, 2).join(':');
+  
+              // 去掉 eventTimee 的秒数
+              const eventTimee = activity.eventTimee.split(':').slice(0, 2).join(':');
+  
+              return {
+                ...activity,
+                weekDay, // 添加周几信息
+                eventTime, // 格式化时间
+                eventTimee,
+              };
+            });
+  
+            if (newActivities.length < pageSize) {
+              this.setData({ hasMoreData: false }); // 如果返回的数据小于页面大小，说明没有更多数据了
+            }
+  
+            this.setData({
+              activities: isLoadMore
+                ? [...this.data.activities, ...newActivities] // 追加新数据
+                : [
+                  ...this.data.activities.slice(0, (currentPage - 1) * pageSize), // 保留之前的数据
+                  ...newActivities, // 更新当前页数据
+                  ...this.data.activities.slice(currentPage * pageSize), // 保留之后的数据
+                ],
+              currentPage: this.data.hasMoreData ? this.data.currentPage + 1 : this.data.currentPage, // 增加当前页码
+            });
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // 确保时间从当天00:00:00开始
+            
+            let filtered = this.data.activities.filter(activity => {
+                const activityDate = new Date(activity.eventDate);
+                activityDate.setHours(0, 0, 0, 0); // 统一时间为00:00:00，防止时间影响比较
+                return activityDate.getTime() >= today.getTime(); // 只保留今天及以后的活动
+            });
+            
+            this.setData({ activities: filtered });
+            
+          } else {
+            wx.showToast({
+              title: '获取活动数据失败',
+              icon: 'none',
+            });
+          }
+        },
+        fail: () => {
+          wx.showToast({
+            title: '网络错误，请稍后重试',
+            icon: 'none',
+          });
+        },
+      });
+    },
+      // 监听用户滚动到底部
+  onReachBottom() {
+    this.fetchActivities(true); // 请求下一页数据
+  },
   /**
    * 从后端获取高德地图 key
    */
@@ -133,6 +236,11 @@ onSearch: function () {
     });
   },
   makertap: function (e: { markerId: number }) {
+    this.setData({
+      hasMoreData: true,
+      activities: []
+    });
+    
     const id = e.markerId;
     this.showMarkerInfo(markersData, id);
     this.changeMarkerColor(markersData, id);
@@ -146,6 +254,9 @@ onSearch: function () {
         desc: data[i]?.address || ''
       }
     });
+
+    // 向后端拿取活动数据
+    this.fetchActivities(); // 获取第一页活动数据
   },
   changeMarkerColor: function (data: Marker[], i: number) {
     const markers = data.map((marker, j) => ({

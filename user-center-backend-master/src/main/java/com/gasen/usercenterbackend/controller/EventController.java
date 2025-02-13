@@ -1,5 +1,6 @@
 package com.gasen.usercenterbackend.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gasen.usercenterbackend.common.BaseResponse;
@@ -43,7 +44,7 @@ public class EventController {
         return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"创建活动失败！");
     }
 
-    @Operation(summary = "分页获取活动信息")
+    @Operation(summary = "列表模式分页获取活动信息")
     @GetMapping("/getEvent")
     public BaseResponse getEvent(
             @RequestParam(value = "page", defaultValue = "1") int page,
@@ -52,6 +53,32 @@ public class EventController {
             // 使用 MyBatis-Plus 的分页功能获取活动数据
             Page<Event> eventPage = new Page<>(page, size);
             IPage<Event> eventIPage = eventService.page(eventPage);
+
+            // 对查询结果的每个 Event 对象执行 toindexEvent
+            List<indexEvent> res = eventIPage.getRecords().stream()
+                    .map(Event::toIndexEvent)
+                    .collect(Collectors.toList());
+
+            return ResultUtils.success(res);
+        } catch (Exception e) {
+            log.error("获取活动信息失败: {}", e.getMessage(), e);
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"获取活动信息失败，请稍后重试！");
+        }
+    }
+
+    @Operation(summary = "地图模式分页获取活动信息")
+    @PostMapping("/getEventByMap")
+    public BaseResponse getEventByMap(
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "5") int size,
+            @RequestParam(value = "location") String location) {
+        try {
+            // 使用 MyBatis-Plus 的分页功能获取活动数据
+            Page<Event> eventPage = new Page<>(page, size);
+            QueryWrapper<Event> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("location", location);
+
+            IPage<Event> eventIPage = eventService.pageByLocation(eventPage, queryWrapper);
 
             // 对查询结果的每个 Event 对象执行 toindexEvent
             List<indexEvent> res = eventIPage.getRecords().stream()

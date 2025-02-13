@@ -18,7 +18,7 @@
         class="tab {{activeTab === 'pendingReview' ? 'active' : ''}}" 
         data-tab="pendingReview" 
         bindtap="switchTab">
-        <text>待评价</text>
+        <text>已完成</text>
       </view>
       <view 
         class="tab {{activeTab === 'cancelled' ? 'active' : ''}}" 
@@ -41,7 +41,7 @@
           <text class="activity-time">{{item.time}}</text>
         </view>
         <view class="activity-status {{item.status}}">
-          <text>{{item.status === 'pendingDeparture' ? '待出发' : item.status === 'pendingReview' ? '待评价' : '取消活动'}}</text>
+          <text>{{item.status === 'pendingDeparture' ? '待出发' : item.status === 'pendingReview' ? '已完成' : '取消活动'}}</text>
         </view>
       </view>
     </block>
