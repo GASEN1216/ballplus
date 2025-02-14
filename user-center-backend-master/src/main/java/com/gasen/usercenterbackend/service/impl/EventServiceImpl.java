@@ -28,8 +28,8 @@ public class EventServiceImpl implements IEventService {
 
     @Override
     public IPage<Event> page(Page<Event> eventPage) {
-        // 调用 MyBatis-Plus 提供的分页查询方法, eventPage 为分页参数, null 为查询条件
-        return eventMapper.selectPage(eventPage, null);
+        // 调用 MyBatis-Plus 提供的分页查询方法, eventPage 为分页参数
+        return eventMapper.selectPage(eventPage, new QueryWrapper<Event>().eq("state", 0));
     }
 
     @Override

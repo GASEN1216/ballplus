@@ -81,7 +81,7 @@ public class EventController {
             // 使用 MyBatis-Plus 的分页功能获取活动数据
             Page<Event> eventPage = new Page<>(page, size);
             QueryWrapper<Event> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("location", location);
+            queryWrapper.eq("location", location).eq("state", 0);
 
             IPage<Event> eventIPage = eventService.pageByLocation(eventPage, queryWrapper);
 

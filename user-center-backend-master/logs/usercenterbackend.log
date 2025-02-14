@@ -2694,3 +2694,118 @@ Param: page=3
 Param: size=5
 Client IP: 10.45.4.53
 
+2025-02-14 14:08:52,538 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/token
+Method: POST
+Class: UserController
+Method: someProtectedEndpoint
+Param: token=eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiMUJZTGZpYnJrSHQzQjBWQjZzMUR6Zz09Iiwib3BlbmlkIjoib0V0aEc1Q3hjMVB5RXVHYnhGMlJCdU1hTThnUSIsImlhdCI6MTczOTUwMTQ5OSwiZXhwIjoxNzM5NTg3ODk5fQ.Uke8GrgZul_qlmpnzhdtOgFFMVPLipCeRXro25jnSGE
+Client IP: 10.45.4.53
+
+2025-02-14 14:08:57,625 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getFriendsRequest
+Method: POST
+Class: FriendsController
+Method: getFriendsRequest
+Param: userId=9
+Param: type=0
+Client IP: 10.45.4.53
+
+2025-02-14 14:09:12,317 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getFriends
+Method: POST
+Class: UserController
+Method: getFriends
+Param: userId=9
+Client IP: 10.45.4.53
+
+2025-02-14 14:09:27,358 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getFriends
+Method: POST
+Class: UserController
+Method: getFriends
+Param: userId=9
+Client IP: 10.45.4.53
+
+2025-02-14 14:09:53,491 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getFriends
+Method: POST
+Class: UserController
+Method: getFriends
+Param: userId=9
+Client IP: 10.45.4.53
+
+2025-02-14 14:10:11,303 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=3
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-02-14 14:10:39,105 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=3
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-02-14 14:14:39,231 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=3
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-02-14 14:14:41,570 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Param: page=3
+Param: size=5
+Client IP: 10.45.4.53
+
+2025-02-14 14:14:43,659 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEventByPer
+Method: POST
+Class: EventController
+Method: getEventByPer
+Param: page=1
+Param: size=5
+Param: userId=9
+Client IP: 10.45.4.53
+
+2025-02-14 14:14:54,582 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEventByPer
+Method: POST
+Class: EventController
+Method: getEventByPer
+Param: page=1
+Param: size=5
+Param: userId=9
+Client IP: 10.45.4.53
+
+2025-02-14 14:20:35,604 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-02-14 14:20:35,614 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
+2025-02-14 14:20:41,266 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 11336 (C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in C:\Users\GASEN\Documents\GitHub\wx-miniprogram\user-center-backend-master)
+2025-02-14 14:20:41,268 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-02-14 14:20:42,105 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-02-14 14:20:42,109 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-02-14 14:20:42,147 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 26 ms. Found 0 Redis repository interfaces.
+2025-02-14 14:20:42,854 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-02-14 14:20:42,867 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-02-14 14:20:42,869 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-02-14 14:20:42,869 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-02-14 14:20:42,939 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-02-14 14:20:42,939 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1625 ms
+2025-02-14 14:20:44,039 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-02-14 14:20:44,040 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-02-14 14:20:45,197 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-02-14 14:20:45,243 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-02-14 14:20:45,256 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 4.491 seconds (process running for 5.011)
