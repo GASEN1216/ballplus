@@ -15,7 +15,8 @@
       "pages": [
         "pages/activity_detail/activity_detail",
         "pages/createActivity/createActivity",
-        "pages/activities/activities"
+        "pages/activities/activities",
+        "pages/selectTemplate/selectTemplate"
       ]
     },
     {

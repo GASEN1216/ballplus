@@ -13,15 +13,6 @@ interface Marker {
   address?: string;
 }
 
-// 定义 Activity 接口
-interface Activity {
-  time: string;
-  host: string;
-  currentParticipants: number;
-  maxParticipants: number;
-  content: string;
-}
-
 // 定义 markersData 的类型
 let markersData: Marker[] = [];
 
@@ -283,9 +274,11 @@ onSearch: function () {
   },
   createActivity: function() {
     const { name, desc } = this.data.textData; // 获取当前的 textData
+    const { latitude, longitude } = this.data; // 从 this.data 中获取 latitude 和 longitude
     wx.navigateTo({
-      url: `${this.data.actPath}/pages/createActivity/createActivity?location=${encodeURIComponent(name)}&locationDetail=${encodeURIComponent(desc)}`
+      url: `${this.data.actPath}/pages/createActivity/createActivity?location=${encodeURIComponent(name)}&locationDetail=${encodeURIComponent(desc)}&latitude=${encodeURIComponent(latitude)}&longitude=${encodeURIComponent(longitude)}`
     });
   }
+  
   
 });

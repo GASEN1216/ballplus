@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.gasen.usercenterbackend.model.respond.eventTemplates;
 import com.gasen.usercenterbackend.model.respond.indexEvent;
+import com.gasen.usercenterbackend.model.respond.indexEventWithState;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -102,5 +104,45 @@ public class Event implements Serializable {
                 .setParticipants(participants)
                 .setTotalParticipants(totalParticipants)
                 .setRemarks(remarks);
+    }
+
+    public indexEventWithState toIndexEventWithState() {
+        return new indexEventWithState()
+                .setId(id)
+                .setAvatar(avatar)
+                .setName(name)
+                .setEventDate(eventDate)
+                .setEventTime(eventTime)
+                .setEventTimee(eventTimee)
+                .setLocation(location)
+                .setLatitude(latitude)
+                .setLongitude(longitude)
+                .setParticipants(participants)
+                .setTotalParticipants(totalParticipants)
+                .setRemarks(remarks)
+                .setState(state);
+    }
+
+    public eventTemplates toEventTemplates() {
+        return new eventTemplates()
+                .setId(id)
+                .setName(name)
+                .setEventTime(eventTime)
+                .setEventTimee(eventTimee)
+                .setLocation(location)
+                .setTotalParticipants(totalParticipants)
+                .setRemarks(remarks)
+                .setLabels(labels)
+                .setLocationDetail(locationDetail)
+                .setPhoneNumber(phoneNumber)
+                .setType(type)
+                .setLimits(limits)
+                .setVisibility(visibility)
+                .setLevel(level)
+                .setFeeMode(feeMode)
+                .setFee(fee)
+                .setPenalty(penalty)
+                .setLatitude(latitude)
+                .setLongitude(longitude);
     }
 }

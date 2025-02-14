@@ -9,22 +9,22 @@
         <text>所有活动</text>
       </view>
       <view 
-        class="tab {{activeTab === 'pendingDeparture' ? 'active' : ''}}" 
-        data-tab="pendingDeparture" 
+        class="tab {{activeTab === '0' ? 'active' : ''}}" 
+        data-tab="0" 
         bindtap="switchTab">
         <text>待出发</text>
       </view>
       <view 
-        class="tab {{activeTab === 'pendingReview' ? 'active' : ''}}" 
-        data-tab="pendingReview" 
+        class="tab {{activeTab === '1' ? 'active' : ''}}" 
+        data-tab="1" 
         bindtap="switchTab">
         <text>已完成</text>
       </view>
       <view 
-        class="tab {{activeTab === 'cancelled' ? 'active' : ''}}" 
-        data-tab="cancelled" 
+        class="tab {{activeTab === '2' ? 'active' : ''}}" 
+        data-tab="2" 
         bindtap="switchTab">
-        <text>取消活动</text>
+        <text>已取消</text>
       </view>
     </view>
   </view>
@@ -33,16 +33,30 @@
   <view class="divider"></view>
 
   <!-- 活动列表 -->
+  <!-- 活动展示区域 -->
   <view class="activity-list">
-    <block wx:for="{{filteredActivities}}" wx:key="id">
-      <view class="activity-item">
-        <view class="activity-info">
-          <text class="activity-name">{{item.name}}</text>
-          <text class="activity-time">{{item.time}}</text>
+    <!-- 判断是否有活动信息 -->
+    <block wx:if="{{filteredActivities.length > 0}}">
+      <block wx:for="{{filteredActivities}}" wx:key="index">
+        <view class="activity-card">
+          <!-- 头像 -->
+          <cover-image src="{{item.avatar}}" class="activity-avatar"></cover-image>
+          <!-- 活动信息 -->
+          <view class="activity-details">
+            <text class="activity-name">{{item.name}}</text>
+            <text class="activity-meta">📅 日期: {{item.eventDate}} {{item.weekDay}} {{item.eventTime}}-{{item.eventTimee}}</text>
+            <text class="activity-meta">📍 地点: {{item.location}}</text>
+            <text class="activity-meta">👥 人数: {{item.participants}}/{{item.totalParticipants}}</text>
+            <text class="activity-remarks">备注: {{item.remarks}}</text>
+          </view>
         </view>
-        <view class="activity-status {{item.status}}">
-          <text>{{item.status === 'pendingDeparture' ? '待出发' : item.status === 'pendingReview' ? '已完成' : '取消活动'}}</text>
-        </view>
+      </block>
+    </block>
+
+    <!-- 当没有活动信息时显示 -->
+    <block wx:else>
+      <view class="no-activity">
+        <text>暂时没有活动发布哦~</text>
       </view>
     </block>
   </view>

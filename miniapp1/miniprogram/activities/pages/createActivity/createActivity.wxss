@@ -14,7 +14,19 @@
   padding: 10px;
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* 确保容器不超出父级 */
+  box-sizing: border-box;
+}
+
+/* 表单项 */
+.form-item2 {
+  display: flex;
+  flex-direction: column;  /* 改为上下排列 */
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 8px;
   width: 100%; /* 确保容器不超出父级 */
   box-sizing: border-box;
 }
@@ -131,4 +143,9 @@
   line-height: 24px; /* 与文字高度一致 */
   pointer-events: none; /* 禁用点击 */
   cursor: not-allowed; /* 鼠标显示不可点击 */
+}
+.info-link {
+  font-size: 14px;
+  color: #37d0ff; /* 淡蓝色 */
+  transform: translateY(-5px);
 }

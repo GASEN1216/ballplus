@@ -1,0 +1,9 @@
+<view class="container">
+  <view class="template-list">
+    <block wx:for="{{templates}}" wx:key="index">
+      <view class="template-item" bindtap="selectTemplate" data-template="{{item}}">
+        <text>{{item.name}}</text>
+      </view>
+    </block>
+  </view>
+</view>

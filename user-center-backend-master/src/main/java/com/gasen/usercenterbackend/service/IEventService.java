@@ -5,10 +5,16 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gasen.usercenterbackend.model.Event;
 
+import java.util.List;
+
 public interface IEventService {
     Long createEvent(Event event);
 
     IPage<Event> page(Page<Event> eventPage);
 
     IPage<Event> pageByLocation(Page<Event> eventPage, QueryWrapper<Event> queryWrapper);
+
+    List<Event> listByIds(List<Long> eventIdLists);
+
+    List<Event> findTemplates(Integer userId);
 }

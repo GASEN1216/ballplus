@@ -65,17 +65,17 @@
         <image src="../../icon/activities.png" class="activity-icon"></image>
         <text>我的活动</text>
       </view>
-      <view class="activity-item" bindtap="goToActivities" data-tab="pendingDeparture">
+      <view class="activity-item" bindtap="goToActivities" data-tab="0">
         <image src="../../icon/departure.png" class="activity-icon"></image>
         <text>待出发</text>
       </view>
-      <view class="activity-item" bindtap="goToActivities" data-tab="pendingReview">
+      <view class="activity-item" bindtap="goToActivities" data-tab="1">
         <image src="../../icon/review.png" class="activity-icon"></image>
         <text>已完成</text>
       </view>
-      <view class="activity-item" bindtap="goToActivities" data-tab="cancelled">
+      <view class="activity-item" bindtap="goToActivities" data-tab="2">
         <image src="../../icon/cancel.png" class="activity-icon"></image>
-        <text>取消活动</text>
+        <text>已取消</text>
       </view>
     </view>
   </view>

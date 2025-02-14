@@ -37,7 +37,13 @@ Page({
     fromMap: false
   },
 
-  onLoad(options: { location?: string; locationDetail?: string }) {
+  onLoad(options) {
+    // 从 URL 中接收传递的参数
+    const location = decodeURIComponent(options.location || ''); // 地点名称
+    const locationDetail = decodeURIComponent(options.locationDetail || ''); // 详细地址
+    const latitude = decodeURIComponent(options.latitude || ''); // 纬度
+    const longitude = decodeURIComponent(options.longitude || ''); // 经度
+
     // 初始化日期范围（今天到未来30天）
     const today = new Date();
     const todayDate = today.toISOString().slice(0, 10); // 格式为 YYYY-MM-DD
@@ -64,12 +70,24 @@ Page({
       'event.appId': app.globalData.currentUser.id,
       'event.avatar': app.globalData.currentUser.avatar,
       'event.eventDate': todayDate, // 默认设置为今天的日期
-      'event.location': decodeURIComponent(options.location || ''), // 解码参数
-      'event.locationDetail': decodeURIComponent(options.locationDetail || ''),
+      'event.location': location, // 解码参数
+      'event.locationDetail': locationDetail,
+      'event.latitude': latitude,
+      'event.longitude': longitude,
       fromMap, // 根据 options 判断是否从地图传入
       dateRange,
       participantRange
     });
+  },
+  onShow() {
+    const pages = getCurrentPages();
+    const prevPage = pages[pages.length - 2]; // 获取上一页
+    if (prevPage && prevPage.data.event) {
+      // 如果返回的数据有 event 字段（即模板数据），则更新表单内容
+      this.setData({
+        event: { ...this.data.event, ...prevPage.data.event }
+      });
+    }
   },
   /**
    * 选择地点
@@ -167,7 +185,7 @@ Page({
       this.setData({
         [`event.${field}`]: selectedParticipants, // 更新活动的总人数
       });
-    }else if(field === 'visibility') {
+    } else if (field === 'visibility') {
       this.setData({
         [`event.${field}`]: value === 0 ? false : true,
       });
@@ -191,6 +209,12 @@ Page({
   toggleMoreSettings() {
     this.setData({
       showMore: !this.data.showMore,
+    });
+  },
+  // 跳转到选择模板页面
+  useTemplate() {
+    wx.navigateTo({
+      url: '../selectTemplate/selectTemplate', // 跳转到选择模板页面
     });
   },
 

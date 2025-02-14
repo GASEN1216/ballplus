@@ -63,7 +63,6 @@
     <button class="form-button" bindtap="handleGetPhoneNumber">{{event.phoneNumber ? event.phoneNumber : '点击获取手机号码'}}</button>
   </view>
 
-
   <!-- 显示更多设置 -->
   <view class="more-settings-toggle" bindtap="toggleMoreSettings">
     <text>{{showMore ? '隐藏更多设置' : '显示更多设置'}}</text>
@@ -140,7 +139,8 @@
     </view>
   </view>
 
-  <view class="form-item">
+  <view class="form-item2">
+    <view class="info-link" bindtap="useTemplate">使用模板</view>
     <button class="submit-button" bindtap="handleSubmit">提交</button>
   </view>
 </view>

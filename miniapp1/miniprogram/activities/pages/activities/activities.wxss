@@ -40,59 +40,56 @@
 
 /* 活动列表样式 */
 .activity-list {
+  margin-top: 10px;
+}
+
+.activity-card {
+  display: flex;
+  position: relative;
+  gap: 10px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+/* 头像样式 */
+.activity-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  object-fit: cover;
+}
+
+/* 活动信息 */
+.activity-details {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 20rpx;
-  width: 90%;
-}
-
-.activity-item {
-  width: 100%;
-  position: relative;
-  left: -30rpx;
-  background-color: #ffffff;
-  padding: 30rpx;
-  border-radius: 16rpx;
-  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.activity-info {
-  flex: 3;
+  gap: 5px;
 }
 
 .activity-name {
-  font-size: 32rpx;
+  font-size: 16px;
   font-weight: bold;
-  color: #333333;
+  color: #333;
 }
 
-.activity-time {
-  font-size: 28rpx;
-  color: #666666;
-  margin-top: 10rpx;
+.activity-meta {
+  font-size: 14px;
+  color: #666;
 }
 
-.activity-status {
-  flex: 1;
+.activity-remarks {
+  font-size: 14px;
+  color: #888;
+  margin-top: 5px;
+}
+.no-activity {
   text-align: center;
-  font-size: 28rpx;
-  font-weight: bold;
-  padding: 12rpx 20rpx;
-  border-radius: 10rpx;
-  color: #ffffff;
-}
-
-.activity-status.pendingDeparture {
-  background-color: #ffcc00;
-}
-
-.activity-status.pendingReview {
-  background-color: #ff6600;
-}
-
-.activity-status.cancelled {
-  background-color: #999999;
+  color: #999;
+  margin-top: 20px;
+  font-size: 16px;
 }
