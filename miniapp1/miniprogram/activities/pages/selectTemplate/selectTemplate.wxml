@@ -1,7 +1,12 @@
 <view class="container">
+  <!-- 显示提示信息 -->
+  <view wx:if="{{templates.length === 0}}">
+    <text>未拥有模板</text>
+  </view>
+
   <view class="template-list">
     <block wx:for="{{templates}}" wx:key="index">
-      <view class="template-item" bindtap="selectTemplate" data-template="{{item}}">
+      <view class="template-item" bindtap="selectTemplate" data-template="{{item}}" bindlongtap="onLongTapTemplate">
         <text>{{item.name}}</text>
       </view>
     </block>

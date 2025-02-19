@@ -20,4 +20,6 @@ public interface IEventService {
 
 
     Event getNearestEvent(List<Long> eventIds);
+
+    Boolean deleteTemplateByPer(Integer userId, Integer templateId);
 }

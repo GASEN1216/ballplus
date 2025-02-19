@@ -55,5 +55,10 @@ public class EventServiceImpl implements IEventService {
         return eventMapper.selectOne(new QueryWrapper<Event>().in("id", eventIds).eq("state", 0).ge("event_date", LocalDate.now()).orderByAsc("event_date").orderByAsc("event_time").orderByAsc("id"));
     }
 
+    @Override
+    public Boolean deleteTemplateByPer(Integer userId, Integer templateId) {
+        return eventMapper.update(new Event().setIsTemplate(false), new QueryWrapper<Event>().eq("app_id", userId).eq("id", templateId)) > 0;
+    }
+
 
 }

@@ -144,6 +144,18 @@ public class EventController {
         return ResultUtils.success(res);
     }
 
+    @Operation(summary = "删除个人活动模板")
+    @PostMapping("/deleteTemplateByPer")
+    public BaseResponse deleteTemplateByPer(@RequestParam(value = "userId") Integer userId,
+                                            @RequestParam(value = "templateId") Integer templateId){
+        if (userId == null || templateId == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
+        Boolean isSuccess = eventService.deleteTemplateByPer(userId, templateId);
+        if(!isSuccess)
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"删除活动模板失败！");
+        return ResultUtils.success("删除活动模板成功！");
+    }
+
     @Operation(summary = "获取个人最近的一次活动")
     @PostMapping("/getNearestEvent")
     public BaseResponse getNearestEvent(@RequestParam(value = "userId") Integer userId){
