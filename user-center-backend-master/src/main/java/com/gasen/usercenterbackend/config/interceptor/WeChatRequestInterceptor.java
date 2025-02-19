@@ -6,6 +6,7 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -23,6 +24,7 @@ import static com.gasen.usercenterbackend.constant.UserConstant.USER_LOGIN_IN;
  * @classType description
  */
 @Component
+@Slf4j
 public class WeChatRequestInterceptor implements HandlerInterceptor {
 
     @Resource
@@ -91,8 +93,18 @@ public class WeChatRequestInterceptor implements HandlerInterceptor {
             while ((line = reader.readLine()) != null) {
                 body.append(line);
             }
+            // 确保请求体不为空
+            if (body.isEmpty()) {
+                log.error("Request body is empty");
+                return null;
+            }
             // 使用 FastJSON 解析请求体
             JSONObject jsonObject = JSONObject.parseObject(body.toString());
+            // 确保解析后的对象不为 null
+            if (jsonObject == null) {
+                log.error("Failed to parse request body as JSON");
+                return null;
+            }
             return jsonObject.getString("token");
         } catch (Exception e) {
             e.printStackTrace();

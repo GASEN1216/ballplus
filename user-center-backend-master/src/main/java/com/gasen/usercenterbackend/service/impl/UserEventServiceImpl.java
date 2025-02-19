@@ -10,6 +10,8 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class UserEventServiceImpl implements IUserEventService {
@@ -26,5 +28,10 @@ public class UserEventServiceImpl implements IUserEventService {
     public IPage<UserEvent> pageByUserId(Page<UserEvent> userEventPage, QueryWrapper<UserEvent> queryWrapper) {
         // 调用 MyBatis-Plus 提供的分页查询方法, eventPage 为分页参数, queryWrapper 为查询条件
         return userEventMapper.selectPage(userEventPage, queryWrapper);
+    }
+
+    @Override
+    public List<Long> getAllEventIdsByUserId(Integer userId) {
+        return userEventMapper.selectList(new QueryWrapper<UserEvent>().eq("user_id", userId)).stream().map(UserEvent::getEventId).toList();
     }
 }

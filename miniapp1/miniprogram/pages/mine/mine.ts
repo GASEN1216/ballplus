@@ -13,7 +13,10 @@ Page({
     pointsMPath: '../../pointsMall',
     userData: {} as wxUser,
     expWidth: '0%', // 预设值
-    availableDates: [] as string[], // 存储用户标记的可用日期
+    // 后端接口相关
+    apiUrl: `${app.globalData.url}/user/wx/getNearestEvent`,
+    // 活动数据
+    activities: [] as any[], // 所有活动数据
   },
   onLoad() {
     const currentUser = app.globalData.currentUser;
@@ -26,6 +29,7 @@ Page({
         userData: { ...currentUser },
         expWidth: `${width}%`
       });
+      this.fetchActivities();
     } else {
       app.loginReadyCallback = () => {
         this.setData({
@@ -35,57 +39,100 @@ Page({
           userData: { ...currentUser },
           expWidth: `${width}%`
         });
+        this.fetchActivities();
       };
     }
   },
 
-  // 发送通知提醒
-sendNotification(message: string) {
-  wx.showToast({
-    title: message,
-    icon: 'none',
-    duration: 3000,
-  });
-},
+  // 获取活动数据
+  fetchActivities() {
 
-// 模拟即将到来的活动提醒
-checkUpcomingActivities() {
-  const upcomingActivities = ['2025-01-08', '2024-07-05']; // 示例日期
-  const today = new Date().toISOString().split('T')[0];
+    const { apiUrl } = this.data;
 
-  if (upcomingActivities.includes(today)) {
-    this.sendNotification('您今天有活动安排，请准时参加！');
-  }
-},
+    wx.request({
+      url: `${apiUrl}`,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-Token': app.globalData.currentUser.token,
+      },
+      data: {
+        userId: app.globalData.currentUser.id,
+      },
+      success: (res) => {
+        if (res.statusCode === 200 && res.data.code === 0) {
 
+          let newActivities = res.data.data;
 
-  // 选择日期并标记可用性
-  onDateChange(e: any) {
-    const selectedDate = e.detail.value;
-    let updatedDates = this.data.availableDates;
+          if (!newActivities || newActivities.length === 0) {
+            return; // 停止后续处理
+          }
 
-    if (updatedDates.includes(selectedDate)) {
-      updatedDates = updatedDates.filter(date => date !== selectedDate);
-    } else {
-      updatedDates.push(selectedDate);
-    }
+          // 格式化日期和时间
+          newActivities = newActivities.map((activity: any) => {
+            const eventLatitude = activity.latitude; // 假设活动地点的纬度字段为 latitude
+            const eventLongitude = activity.longitude; // 假设活动地点的经度字段为 longitude
 
-    this.setData({
-      availableDates: updatedDates,
-    });
+            // 计算活动与用户之间的距离
+            const distance = app.cD(eventLatitude, eventLongitude);
 
-    wx.showToast({
-      title: '日期已更新',
-      icon: 'success',
-    });
-  },
+            const eventDate = new Date(activity.eventDate);
+            const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+            const weekDay = weekDays[eventDate.getDay()]; // 获取周几
 
-  // 显示用户标记的可用时间
-  showAvailability() {
-    wx.showModal({
-      title: '您的可用时间',
-      content: this.data.availableDates.length > 0 ? this.data.availableDates.join(', ') : '尚未标记任何日期',
-      showCancel: false,
+            // 去掉 eventTime 的秒数
+            const eventTime = activity.eventTime.split(':').slice(0, 2).join(':');
+
+            // 去掉 eventTimee 的秒数
+            const eventTimee = activity.eventTimee.split(':').slice(0, 2).join(':');
+
+            // 计算活动与当前时间的差异
+            const currentTime = new Date();
+            // 将 eventDate 和 eventTime 合并，得到完整的活动时间
+            // 拼接成一个完整的日期字符串
+            const eventTime2 = activity.eventTime.split(':'); // ['18', '30', '00'] 
+            const eventDateTimeString = `${activity.eventDate}T${eventTime2[0]}:${eventTime2[1]}:00`; //'2025-02-18T18:30:00'
+            // 创建完整的活动日期时间对象
+            const eventDate2 = new Date(eventDateTimeString);
+
+            const timeDiff = eventDate2.getTime() - currentTime.getTime(); // 获取时间差（毫秒）
+            let remainingTime = '';
+
+            if (timeDiff < 86400000) { // 如果差值小于1天（24小时），显示小时数
+              const remainingHours = Math.floor(timeDiff / (1000 * 60 * 60)); // 小时数 
+              remainingTime = `离本次活动开始还剩 ${remainingHours} 小时`;
+            } else { // 否则显示天数
+              const remainingDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); // 天数
+              remainingTime = `离本次活动开始还剩 ${remainingDays} 天`;
+            }
+
+            return {
+              ...activity,
+              weekDay, // 添加周几信息
+              eventTime, // 格式化时间
+              eventTimee,
+              distance, // 添加距离信息
+              remainingTime, // 添加剩余时间信息
+            };
+          });
+
+          this.setData({
+            activities: [...newActivities] // 新数据,
+          });
+
+        } else {
+          wx.showToast({
+            title: '获取活动数据失败',
+            icon: 'none',
+          });
+        }
+      },
+      fail: () => {
+        wx.showToast({
+          title: '网络错误，请稍后重试',
+          icon: 'none',
+        });
+      },
     });
   },
 
@@ -107,47 +154,47 @@ checkUpcomingActivities() {
     });
   },
 
-    goToActivities(e: any) {
-      const tab = e.currentTarget.dataset.tab; // 获取按钮对应的标签
-      wx.navigateTo({
-        url: `${this.data.actPath}/pages/activities/activities?tab=${tab}`, // 跳转并传递标签参数
+  goToActivities(e: any) {
+    const tab = e.currentTarget.dataset.tab; // 获取按钮对应的标签
+    wx.navigateTo({
+      url: `${this.data.actPath}/pages/activities/activities?tab=${tab}`, // 跳转并传递标签参数
+    });
+  },
+
+  toGdmap() {
+    wx.navigateTo({
+      url: `${this.data.gdmapPath}/pages/amap/amap`
+    });
+  },
+
+  toFriends() {
+    wx.navigateTo({
+      url: `${this.data.friPath}/pages/conversations/conversations`
+    });
+  },
+
+  // 跳转到积分商城
+  toPointsMall() {
+    wx.navigateTo({
+      url: `${this.data.pointsMPath}/pages/pointsMall/pointsMall`
+    });
+  },
+
+
+  onShow() {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 0  //这个数字是当前页面在tabBar中list数组的索引
+      })
+    }
+    if (app.globalData.isLoggedin) {
+      this.setData({
+        nickname: app.globalData.currentUser.name,
+        profilePic: app.globalData.currentUser.avatar,
       });
-    },
-
-    toGdmap() {
-      wx.navigateTo({
-        url: `${this.data.gdmapPath}/pages/amap/amap`
-      });
-    },
-
-    toFriends() {
-      wx.navigateTo({
-        url: `${this.data.friPath}/pages/conversations/conversations`
-      });
-    },
-
-    // 跳转到积分商城
-toPointsMall() {
-  wx.navigateTo({
-    url: `${this.data.pointsMPath}/pages/pointsMall/pointsMall`
-  });
-},
-
-
-    onShow() {
-      if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-        this.getTabBar().setData({
-          selected: 0  //这个数字是当前页面在tabBar中list数组的索引
-        })
-      }
-      if (app.globalData.isLoggedin) {
-        this.setData({
-          nickname: app.globalData.currentUser.name,
-          profilePic: app.globalData.currentUser.avatar,
-        });
-      }
-      this.checkUpcomingActivities(); // 检查即将到来的活动
-    },
+      this.fetchActivities();
+    }
+  },
   // 验证token方法
   onTokenButtonClick() {
     const token = app.globalData.currentUser.token; // 获取全局token

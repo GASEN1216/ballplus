@@ -27,19 +27,47 @@
     </view>
   </view>
 
-  <!-- 日历部分 -->
-  <view class="calendar-section">
-    <text class="section-title">标记您的可用时间</text>
-    <picker mode="date" bindchange="onDateChange">
-      <button class="calendar-button">选择日期</button>
-    </picker>
-    <button class="availability-button" bindtap="showAvailability">查看可用时间</button>
+  <!-- 包裹所有内容的白板 -->
+  <view class="whiteboard">
+  <!-- 显示剩余时间 -->
+  <view wx:if="{{activities[0].remainingTime}}">
+    <text class="activity-remaining-time">{{activities[0].remainingTime}}</text>
   </view>
 
-  <!-- 提醒部分 -->
-  <view class="notification-section">
-    <text class="notification-text">提醒：请留意您的活动和日程安排。</text>
+
+  <!-- 活动展示区域 -->
+  <view class="activity-list">
+    <!-- 判断是否有活动信息 -->
+    <block wx:if="{{activities.length > 0}}">
+      <block wx:for="{{activities}}" wx:key="index">
+        <view class="activity-card">
+          <!-- 头像 -->
+          <cover-image src="{{item.avatar}}" class="activity-avatar"></cover-image>
+          <!-- 活动信息 -->
+          <view class="activity-details">
+            <text class="activity-name">{{item.name}}</text>
+            <text class="activity-meta">📅 日期: {{item.eventDate}} {{item.weekDay}} {{item.eventTime}}-{{item.eventTimee}}</text>
+            <text class="activity-meta">📍 地点: {{item.location}}</text>
+            <text class="activity-meta">👥 人数: {{item.participants}}/{{item.totalParticipants}}</text>
+            <text class="activity-remarks">备注: {{item.remarks}}</text>
+          </view>
+          <!-- 距离 -->
+          <view class="activity-distance">
+            <text>{{item.distance}}</text> <!-- 显示与用户的距离 -->
+          </view>
+        </view>
+      </block>
+    </block>
+
+    <!-- 当没有活动信息时显示 -->
+    <block wx:else>
+      <view class="no-activity">
+        <text>快去参加活动吧~</text>
+      </view>
+    </block>
   </view>
+
+</view>
 
   <!-- 地图和好友部分 -->
   <view class="navigation-section">
@@ -84,9 +112,9 @@
   <button wx:if="{{!isLoggedin}}" bindtap="onLoginButtonClick">登录</button>
 
   <!-- Token 验证 -->
-  <view wx:if="{{isLoggedin}}">
+  <!-- <view wx:if="{{isLoggedin}}">
     <button class="token-button" bindtap="onTokenButtonClick">验证Token</button>
     <text class="token-status">{{tokenStatus}}</text>
-  </view>
+  </view> -->
 
 </view>

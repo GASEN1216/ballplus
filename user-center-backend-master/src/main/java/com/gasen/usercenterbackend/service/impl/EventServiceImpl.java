@@ -10,6 +10,7 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -47,4 +48,12 @@ public class EventServiceImpl implements IEventService {
     public List<Event> findTemplates(Integer userId) {
         return eventMapper.selectList(new QueryWrapper<Event>().eq("app_id", userId).eq("is_template", 1));
     }
+
+    @Override
+    public Event getNearestEvent(List<Long> eventIds) {
+        // 查询在eventIds里的所有活动，并且要求活动日期在当天之后，只返回一条最近的活动，都在当天比时间，时间都一样比id大小
+        return eventMapper.selectOne(new QueryWrapper<Event>().in("id", eventIds).eq("state", 0).ge("event_date", LocalDate.now()).orderByAsc("event_date").orderByAsc("event_time").orderByAsc("id"));
+    }
+
+
 }

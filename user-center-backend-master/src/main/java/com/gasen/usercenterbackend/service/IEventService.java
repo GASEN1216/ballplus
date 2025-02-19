@@ -17,4 +17,7 @@ public interface IEventService {
     List<Event> listByIds(List<Long> eventIdLists);
 
     List<Event> findTemplates(Integer userId);
+
+
+    Event getNearestEvent(List<Long> eventIds);
 }

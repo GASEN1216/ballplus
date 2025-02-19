@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -140,6 +141,26 @@ public class EventController {
             return ResultUtils.success(null);
 
         List<eventTemplates> res = events.stream().map(Event::toEventTemplates).toList();
+        return ResultUtils.success(res);
+    }
+
+    @Operation(summary = "获取个人最近的一次活动")
+    @PostMapping("/getNearestEvent")
+    public BaseResponse getNearestEvent(@RequestParam(value = "userId") Integer userId){
+        if (userId == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
+
+        List<Long> eventIds = userEventService.getAllEventIdsByUserId(userId);
+        if(eventIds.isEmpty())
+            return ResultUtils.success("");
+
+        Event event = eventService.getNearestEvent(eventIds);
+
+        if (event == null)
+            return ResultUtils.success("");
+
+        List<indexEvent> res = new ArrayList<>();
+        res.add(event.toIndexEvent());
         return ResultUtils.success(res);
     }
 

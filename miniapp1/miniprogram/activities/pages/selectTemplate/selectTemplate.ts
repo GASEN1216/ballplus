@@ -62,6 +62,17 @@ Page({
     const templateData = e.currentTarget.dataset.template;  // 获取选中的模板数据
     const pages = getCurrentPages();  // 获取当前页面栈
     const prevPage = pages[pages.length - 2];  // 获取上一页（即活动表单页）
+    
+    const location = prevPage.data.event.location;
+    const locationDetail = prevPage.data.event.locationDetail;
+    const latitude = prevPage.data.event.latitude;
+    const longitude = prevPage.data.event.longitude;
+    if(prevPage.data.fromMap) {
+      templateData.location = location;
+      templateData.locationDetail = locationDetail;
+      templateData.latitude = latitude;
+      templateData.longitude = longitude;
+    }
 
     // 将模板数据传递给表单页
     prevPage.setData({
