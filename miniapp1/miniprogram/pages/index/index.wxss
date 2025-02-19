@@ -87,6 +87,7 @@
   -webkit-box-orient: vertical; /* 设置伸缩方向为纵向 */
   overflow: hidden;            /* 隐藏溢出部分 */
   text-overflow: ellipsis;     /* 超出部分显示省略号 */
+  -webkit-line-clamp: 2;           /* 限制最多显示两行 */
   white-space: normal;         /* 允许文本换行 */
   line-height: 1.5;            /* 设置行高（可根据需要调整） */
   max-height: 3.3em;           /* 设置最大高度（可根据需要调整） */
