@@ -157,6 +157,12 @@ viewActivityDetail(e: any) {
     });
   },
 
+  goToInfo() {
+    wx.navigateTo({
+      url: `/pages/profile/profile?userId=${this.data.userData.id}`,
+    });
+  },
+
   navigateToSettings() {
     wx.navigateTo({
       url: '/pages/settings/settings'

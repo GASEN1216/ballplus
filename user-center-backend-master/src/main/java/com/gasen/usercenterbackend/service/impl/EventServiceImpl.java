@@ -52,7 +52,7 @@ public class EventServiceImpl implements IEventService {
     @Override
     public Event getNearestEvent(List<Long> eventIds) {
         // 查询在eventIds里的所有活动，并且要求活动日期在当天之后，只返回一条最近的活动，都在当天比时间，时间都一样比id大小
-        return eventMapper.selectOne(new QueryWrapper<Event>().in("id", eventIds).eq("state", 0).ge("event_date", LocalDate.now()).orderByAsc("event_date").orderByAsc("event_time").orderByAsc("id"));
+        return eventMapper.selectList(new QueryWrapper<Event>().in("id", eventIds).eq("state", 0).ge("event_date", LocalDate.now()).orderByAsc("event_date").orderByAsc("event_time").orderByAsc("id")).get(0);
     }
 
     @Override
@@ -78,6 +78,11 @@ public class EventServiceImpl implements IEventService {
     @Override
     public boolean addParticipants(Long eventId) {
         return eventMapper.update(new Event().setParticipants(eventMapper.selectById(eventId).getParticipants() + 1), new QueryWrapper<Event>().eq("id", eventId)) > 0;
+    }
+
+    @Override
+    public int scheduleUpdateEventState() {
+        return eventMapper.update(new Event().setState((byte) 1), new QueryWrapper<Event>().eq("state", 0).lt("event_date", LocalDate.now()));
     }
 
 

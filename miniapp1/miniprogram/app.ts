@@ -5,7 +5,7 @@ import { IAppOption } from '../typings';
 App<IAppOption>({
   globalData: {
     qnurl: 'http://sunsetchat.top/',// 加个‘/’方便直接加图片名
-    url: 'https://wechat.sunsetchat.top',
+    url: 'http://10.45.4.53:8080',
     isLoggedin: false,
     latitude: 23.108649,
     longitude: 113.324646,

@@ -32,10 +32,10 @@
                         <view
                             class="{{message.senderId === currentUser.id ? 'message-item-content self' : 'message-item-content'}}">
                             <view class="avatar" wx:if="{{message.senderId === currentUser.id}}">
-                                <image src="{{currentUser.avatar}}"></image>
+                                <image src="{{currentUser.avatar}}" bindtap="goToInfo" data-userid="{{currentUser.id}}"></image>
                             </view>
                             <view class="avatar" wx:else>
-                                <image src="{{friend.avatar}}"></image>
+                                <image src="{{friend.avatar}}" bindtap="goToInfo" data-userid="{{message.senderId}}"></image>
                             </view>
                             <view class="content" data-messageid="{{message.messageId}}"
                                   bindlongpress="showActionPopup">

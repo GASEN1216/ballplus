@@ -8,9 +8,6 @@ Page({
     // 后端接口相关
     apiUrl: `${app.globalData.url}/user/wx/getEvent`,
     toEventDetailsPath: "../../activities",
-    currentPage: 1, // 当前页码
-    pageSize: 5, // 每页大小
-    hasMoreData: true, // 是否还有更多数据
 
     // 活动数据
     activities: [] as any[], // 所有活动数据
@@ -42,56 +39,50 @@ Page({
   // 页面加载时获取活动数据
   onLoad() {
     this.initDateRange();
-
+    this.fetchActivities(); 
     app.loginReadyCallback = () => {
-      this.fetchActivities(); // 获取第一页活动数据
+      this.fetchActivities(); 
     },
       app.jwReadyCallback = () => {
-        this.removeCurrentPageActivities(); // 移除当前页数据
-        this.fetchActivities(false); // 重新请求当前页数据
+        this.fetchActivities(); 
       }
+  },
+
+  onUnload() {
+    // 强制刷新数据
+    this.setData({
+      activities: [],    // 清空原有数据，避免数据不一致
+      filteredActivities: []
+    });
   },
 
   // 页面每次显示时触发
   onShow() {
     if (app.globalData.isLoggedin) {
-      this.removeCurrentPageActivities(); // 移除当前页数据
-      this.fetchActivities(false); // 重新请求当前页数据
+      this.fetchActivities(); // 重新拉取数据
     }
   },
 
-
-  // 根据活动 ID 移除活动
-  removeActivityById(activityId: number) {
-    const updatedActivities = this.data.activities.filter(activity => Number(activity.id) !== activityId);
-    const updatedFilteredActivities = this.data.filteredActivities.filter(activity => Number(activity.id) !== activityId);
-    
-    this.setData({
-      activities: updatedActivities,
-      filteredActivities: updatedFilteredActivities, // 确保同时更新筛选后的数据
-    });
+  // 轮播图点击事件
+  onCarouselItemClick(e: any) {
+    const link = e.currentTarget.dataset.link; // 获取 data-link 的值
+    if (!link) {
+      wx.showToast({
+        title: '链接无效',
+        icon: 'none'
+      });
+      return;
+    }
+    wx.navigateTo({ url: link });
   },
 
-    // 轮播图点击事件
-    onCarouselItemClick(e: any) {
-      const link = e.currentTarget.dataset.link; // 获取 data-link 的值
-      if (!link) {
-        wx.showToast({
-          title: '链接无效',
-          icon: 'none'
-        });
-        return;
-      }
-      wx.navigateTo({ url: link });
-    },
-
   // 查看活动详情
-viewActivityDetail(e: any) {
-  const activityId = e.currentTarget.dataset.id; // 获取活动ID
-  wx.navigateTo({
-    url: `${this.data.toEventDetailsPath}/pages/activityDetail/activityDetail?id=${activityId}`, // 跳转到活动详情页
-  });
-},
+  viewActivityDetail(e: any) {
+    const activityId = e.currentTarget.dataset.id; // 获取活动ID
+    wx.navigateTo({
+      url: `${this.data.toEventDetailsPath}/pages/activityDetail/activityDetail?id=${activityId}`, // 跳转到活动详情页
+    });
+  },
 
 
   // 初始化日期范围
@@ -120,8 +111,7 @@ viewActivityDetail(e: any) {
     const { index } = e.currentTarget.dataset;
     this.setData({ selectedDateIndex: index });
     // 可在此调用方法按日期筛选活动
-    this.removeCurrentPageActivities(); // 移除当前页数据
-    this.fetchActivities(false); // 重新请求当前页数据
+    this.fetchActivities(); // 重新请求当前页数据
   },
 
   // 切换排序菜单
@@ -142,53 +132,20 @@ viewActivityDetail(e: any) {
     });
   },
 
-  // 移除当前页数据
-  removeCurrentPageActivities() {
-    const { activities, currentPage, pageSize } = this.data;
-
-    // 计算当前页数据的开始和结束索引
-    const startIdx = (currentPage - 1) * pageSize;
-    const endIdx = currentPage * pageSize;
-
-    // 创建新数组，仅保留非当前页的数据
-    const updatedActivities = activities.filter((_, index) => index < startIdx || index >= endIdx);
-
-    this.setData({
-      activities: updatedActivities,
-    });
-  },
-
   // 获取活动数据
-  fetchActivities(isLoadMore = true) {
-    if (!this.data.hasMoreData && isLoadMore) {
-      wx.showToast({
-        title: '没有更多活动了',
-        icon: 'none',
-      });
-      return;
-    }
+  fetchActivities() {
 
-    const { currentPage, pageSize, apiUrl } = this.data;
+    const { apiUrl } = this.data;
 
     wx.request({
       url: `${apiUrl}`,
       method: 'GET',
-      header: {
-        'X-Token': app.globalData.currentUser.token,
-      },
-      data: {
-        page: currentPage,
-        size: pageSize,
-      },
       success: (res) => {
 
         if (res.statusCode === 200 && res.data.code === 0) {
           let newActivities = res.data.data;
 
           if (!newActivities || newActivities.length === 0) {
-            this.setData({
-              hasMoreData: false, // 标记无更多数据
-            });
             return; // 停止后续处理
           }
 
@@ -203,7 +160,7 @@ viewActivityDetail(e: any) {
             const eventDate = new Date(activity.eventDate);
             const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
             const weekDay = weekDays[eventDate.getDay()]; // 获取周几
-            
+
             // 去掉 eventTime 的秒数
             const eventTime = activity.eventTime.split(':').slice(0, 2).join(':');
 
@@ -219,19 +176,10 @@ viewActivityDetail(e: any) {
             };
           });
 
-          if (newActivities.length < pageSize) {
-            this.setData({ hasMoreData: false }); // 如果返回的数据小于页面大小，说明没有更多数据了
-          }
-
           this.setData({
-            activities: isLoadMore
-              ? [...this.data.activities, ...newActivities] // 追加新数据
-              : [
-                ...this.data.activities.slice(0, (currentPage - 1) * pageSize), // 保留之前的数据
+            activities: [
                 ...newActivities, // 更新当前页数据
-                ...this.data.activities.slice(currentPage * pageSize), // 保留之后的数据
               ],
-            currentPage: this.data.hasMoreData ? this.data.currentPage + 1 : this.data.currentPage, // 增加当前页码
           });
           this.filterActivities(); // 按条件过滤数据
         } else {
@@ -265,7 +213,7 @@ viewActivityDetail(e: any) {
 
     // 若activity.eventDate和ymd不一样则过滤掉
     let filtered = activities.filter(activity => activity.eventDate === ymd);
-    
+
     // 排序逻辑
     filtered = filtered.sort((a, b) => {
       let comparison = 0;
@@ -289,11 +237,6 @@ viewActivityDetail(e: any) {
     this.setData({ filteredActivities: filtered });
   },
 
-  // 监听用户滚动到底部
-  onReachBottom() {
-    this.fetchActivities(true); // 请求下一页数据
-  },
-
   // 发起活动
   createActivity() {
     wx.navigateTo({
@@ -305,7 +248,6 @@ viewActivityDetail(e: any) {
   handleDateFilterChange(e) {
     const selectedDate = this.data.dateRange[e.detail.value];
     this.setData({ selectedDate });
-    // TODO:按日期重新获取数据
   },
 
   // 切换排序顺序

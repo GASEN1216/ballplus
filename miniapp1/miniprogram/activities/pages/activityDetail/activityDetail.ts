@@ -11,7 +11,9 @@ Page({
     feeModeText: '',
     typeText: '',
     limitsText: '',
-    levelText: ''
+    levelText: '',
+    isPastEvent: false, // 是否是过去的活动
+    isStateTwo: false,  // 活动是否 state === 2
   },
 
   onLoad(options) {
@@ -55,6 +57,15 @@ Page({
           const levelMapping = ['🌱 小白', '🎓 初学者', '🎭 业余', '🏅 中级', '🥇 高级', '🏆 专业'];
           const levelText = levelMapping[activity.level] || '未知';
 
+          // 获取今天的日期 (YYYY-MM-DD)
+          const today = new Date().toISOString().split('T')[0];
+
+          // 检查活动日期是否早于今天
+          const isPastEvent = activity.eventDate < today;
+
+          // 检查活动状态是否是 2
+          const isStateTwo = activity.state === 2;
+
           this.setData({
             activity,
             isCreator,
@@ -62,7 +73,9 @@ Page({
             feeModeText,
             typeText,
             limitsText,
-            levelText
+            levelText,
+            isPastEvent, // 存储过去的活动状态
+            isStateTwo,
           });
         } else {
           wx.showToast({
@@ -116,16 +129,6 @@ Page({
             title: '活动已取消',
             icon: 'success',
           });
-
-          
-          // 获取页面栈
-          const pages = getCurrentPages();
-          if (pages.length > 1) {
-            // 上一个页面实例
-            const prevPage = pages[pages.length - 2];
-            // 调用上一个页面的更新方法
-            prevPage.removeActivityById(Number(activity.id));
-          }
 
           wx.navigateBack(); // 返回上一页
         } else {
@@ -247,6 +250,13 @@ Page({
           icon: 'none',
         });
       },
+    });
+  },
+
+  goToInfo(e:any) {
+    const userId = e.currentTarget.dataset.userid; // 获取传递的id
+    wx.navigateTo({
+      url: `../../../pages/profile/profile?userId=${userId}`, 
     });
   },
 });

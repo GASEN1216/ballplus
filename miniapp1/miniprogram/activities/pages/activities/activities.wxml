@@ -38,15 +38,15 @@
     <!-- 判断是否有活动信息 -->
     <block wx:if="{{filteredActivities.length > 0}}">
       <block wx:for="{{filteredActivities}}" wx:key="index">
-        <view class="activity-card">
+        <view class="activity-card" bindtap="viewActivityDetail" data-id="{{item.id}}">
           <!-- 头像 -->
           <cover-image src="{{item.avatar}}" class="activity-avatar"></cover-image>
           <!-- 活动信息 -->
           <view class="activity-details">
             <text class="activity-name">{{item.name}}</text>
-            <text class="activity-meta">📅 日期: {{item.eventDate}} {{item.weekDay}} {{item.eventTime}}-{{item.eventTimee}}</text>
-            <text class="activity-meta">📍 地点: {{item.location}}</text>
-            <text class="activity-meta">👥 人数: {{item.participants}}/{{item.totalParticipants}}</text>
+            <text class="activity-meta">📅 {{item.eventDate}} {{item.weekDay}} {{item.eventTime}}-{{item.eventTimee}}</text>
+            <text class="activity-meta">📍 {{item.location}}</text>
+            <text class="activity-meta">👥 {{item.participants}}/{{item.totalParticipants}}</text>
             <text class="activity-remarks">备注: {{item.remarks}}</text>
           </view>
         </view>

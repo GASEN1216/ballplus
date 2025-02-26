@@ -30,4 +30,6 @@ public interface IEventService {
     boolean reduceParticipants(Long eventId);
 
     boolean addParticipants(Long eventId);
+
+    int scheduleUpdateEventState();
 }

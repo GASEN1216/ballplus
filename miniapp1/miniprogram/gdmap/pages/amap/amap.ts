@@ -29,9 +29,6 @@ Page({
         // 后端接口相关
         apiUrl: `${app.globalData.url}/user/wx/getEventByMap`,
         toEventDetailsPath: "../../../activities",
-        currentPage: 1, // 当前页码
-        pageSize: 5, // 每页大小
-        hasMoreData: true, // 是否还有更多数据
     
         // 活动数据
         activities: [] as any[], // 所有活动数据
@@ -50,17 +47,23 @@ Page({
       });
     }
   },
+
+  // 页面每次显示时触发
+  onShow() {
+    if (app.globalData.isLoggedin) {
+      // 强制刷新数据
+      this.setData({
+        activities: [],    // 清空原有数据，避免数据不一致
+      });
+
+      this.fetchActivities(); // 重新拉取数据
+    }
+  },
+
     // 获取活动数据
-    fetchActivities(isLoadMore = true) {
-      if (!this.data.hasMoreData && isLoadMore) {
-        wx.showToast({
-          title: '没有更多活动了',
-          icon: 'none',
-        });
-        return;
-      }
+    fetchActivities() {
   
-      const { currentPage, pageSize, apiUrl } = this.data;
+      const { apiUrl } = this.data;
   
       wx.request({
         url: `${apiUrl}`,
@@ -70,8 +73,6 @@ Page({
           'X-Token': app.globalData.currentUser.token,
         },
         data: {
-          page: currentPage,
-          size: pageSize,
           location: this.data.textData.name,
         },
         success: (res) => {
@@ -80,9 +81,6 @@ Page({
             let newActivities = res.data.data;
   
             if (!newActivities || newActivities.length === 0) {
-              this.setData({
-                hasMoreData: false, // 标记无更多数据
-              });
               return; // 停止后续处理
             }
   
@@ -107,19 +105,10 @@ Page({
               };
             });
   
-            if (newActivities.length < pageSize) {
-              this.setData({ hasMoreData: false }); // 如果返回的数据小于页面大小，说明没有更多数据了
-            }
-  
             this.setData({
-              activities: isLoadMore
-                ? [...this.data.activities, ...newActivities] // 追加新数据
-                : [
-                  ...this.data.activities.slice(0, (currentPage - 1) * pageSize), // 保留之前的数据
+              activities:[
                   ...newActivities, // 更新当前页数据
-                  ...this.data.activities.slice(currentPage * pageSize), // 保留之后的数据
                 ],
-              currentPage: this.data.hasMoreData ? this.data.currentPage + 1 : this.data.currentPage, // 增加当前页码
             });
 
             const today = new Date();
@@ -148,10 +137,6 @@ Page({
         },
       });
     },
-      // 监听用户滚动到底部
-  onReachBottom() {
-    this.fetchActivities(true); // 请求下一页数据
-  },
 
   // 查看活动详情
   viewActivityDetail(e: any) {
@@ -257,7 +242,7 @@ onSearch: function () {
     });
 
     // 向后端拿取活动数据
-    this.fetchActivities(); // 获取第一页活动数据
+    this.fetchActivities(); 
   },
   changeMarkerColor: function (data: Marker[], i: number) {
     const markers = data.map((marker, j) => ({

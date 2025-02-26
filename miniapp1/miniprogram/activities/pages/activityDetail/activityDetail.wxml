@@ -3,12 +3,12 @@
   <view class="activity-detail">
     <cover-image src="{{activity.avatar}}" class="activity-cover"></cover-image>
     <text class="activity-title">{{activity.name}}</text>
-    <text class="activity-meta">📅 日期: {{activity.eventDate}} {{activity.weekDay}} {{activity.eventTime}}-{{activity.eventTimee}}</text>
-    <text class="activity-meta">📍 地点: {{activity.location}}</text>
-    <text class="activity-meta location-detail">📍 详细地址: {{activity.locationDetail}}</text>
-    <text class="activity-meta">👥 人数: {{activity.participants}}/{{activity.totalParticipants}}</text>
-    <text class="activity-remarks">📢 备注: {{activity.remarks}}</text>
-    <text class="activity-meta">📞 联系方式: {{activity.phoneNumber}}</text>
+    <text class="activity-meta">📅 {{activity.eventDate}} {{activity.weekDay}} {{activity.eventTime}}-{{activity.eventTimee}}</text>
+    <text class="activity-meta">📍 {{activity.location}}</text>
+    <text class="activity-meta location-detail">📍 {{activity.locationDetail}}</text>
+    <text class="activity-meta">👥 {{activity.participants}}/{{activity.totalParticipants}}</text>
+    <text class="activity-remarks">📢 {{activity.remarks}}</text>
+    <text class="activity-meta">📞 {{activity.phoneNumber}}</text>
     <!-- 消费模式 -->
     <text class="activity-meta" wx:if="{{activity.feeMode !== 0}}">
       💰 {{feeModeText}} {{activity.feeMode === 2 ? activity.fee + '元' : ''}}
@@ -28,14 +28,14 @@
     <view class="participants-container">
       <block wx:for="{{activity.persons}}" wx:key="index">
         <view class="participant-box">
-          <cover-image src="{{item.avatar}}" class="participant-avatar"></cover-image>
+          <cover-image src="{{item.avatar}}" class="participant-avatar"  bindtap="goToInfo" data-userid="{{item.userId}}"></cover-image>
         </view>
       </block>
     </view>
   </view>
 
   <!-- 底部按钮 -->
-  <view class="action-buttons">
+  <view class="action-buttons" wx:if="{{!isPastEvent && !isStateTwo}}">
     <button wx:if="{{isCreator}}" bindtap="cancelActivity">我要取消</button>
     <button wx:if="{{!isCreator && isJoined}}" bindtap="exitActivity">我要退出</button>
     <button wx:if="{{!isCreator && !isJoined}}" bindtap="joinActivity">我要参加</button>

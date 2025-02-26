@@ -6,6 +6,7 @@
     "pages/postDetail/postDetail",
     "pages/commentDetail/commentDetail",
     "pages/settings/settings",
+    "pages/profile/profile",
     "pages/editProfile/editProfile",
     "pages/friendRequests/friendRequests"
   ],

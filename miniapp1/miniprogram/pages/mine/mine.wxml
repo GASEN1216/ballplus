@@ -3,10 +3,10 @@
   <!-- 顶部固定栏 -->
   <view class="header">
     <view wx:if="{{isLoggedin}}" class="user-info">
-      <cover-image src="{{profilePic}}" class="avatar" bindtap="goToEditInfo"></cover-image>
+      <cover-image src="{{profilePic}}" class="avatar" bindtap="goToInfo"></cover-image>
       <!-- 用户文本信息 -->
       <view class="user-text">
-        <text class="nickname" bindtap="goToEditInfo">{{nickname}}</text>
+        <text class="nickname" bindtap="goToInfo">{{nickname}}</text>
         <view class="level-exp-container">
           <!-- 等级 - 小牌子 经验值-->
           <text class="level-text">LV.{{userData.grade}}</text>
@@ -46,9 +46,9 @@
           <!-- 活动信息 -->
           <view class="activity-details">
             <text class="activity-name">{{item.name}}</text>
-            <text class="activity-meta">📅 日期: {{item.eventDate}} {{item.weekDay}} {{item.eventTime}}-{{item.eventTimee}}</text>
-            <text class="activity-meta">📍 地点: {{item.location}}</text>
-            <text class="activity-meta">👥 人数: {{item.participants}}/{{item.totalParticipants}}</text>
+            <text class="activity-meta">📅 {{item.eventDate}} {{item.weekDay}} {{item.eventTime}}-{{item.eventTimee}}</text>
+            <text class="activity-meta">📍 {{item.location}}</text>
+            <text class="activity-meta">👥 {{item.participants}}/{{item.totalParticipants}}</text>
             <text class="activity-remarks">备注: {{item.remarks}}</text>
           </view>
           <!-- 距离 -->

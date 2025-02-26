@@ -4,6 +4,7 @@ package com.gasen.usercenterbackend.controller;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.gasen.usercenterbackend.common.BaseResponse;
 import com.gasen.usercenterbackend.common.ErrorCode;
@@ -24,6 +25,7 @@ import com.gasen.usercenterbackend.service.IUserService;
 import com.gasen.usercenterbackend.utils.WechatUtil;
 import com.qiniu.util.Auth;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -398,6 +400,18 @@ public class UserController {
         log.info("ID为"+userBannedDaysRequest.getId()+"的用户被封禁"+userBannedDaysRequest.getDays()+"天");
         Boolean banned = userService.userBannedDays(userBannedDaysRequest);
         return ResultUtils.success(banned);
+    }
+
+    @Operation(summary = "通过用户id获取用户展示信息")
+    @PostMapping("/wx/getUserInfoByUserId")
+    public BaseResponse getUserInfoByUserId(@RequestParam("userId") Integer userId) {
+        if (userId == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "用户id为空");
+        User user = userService.getOne(new QueryWrapper<User>().eq("id", userId));
+        if (user == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "用户不存在");
+        else
+            return ResultUtils.success(getSaftywxUser(user));
     }
 
     /**
