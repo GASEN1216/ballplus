@@ -13,4 +13,8 @@ public interface IUserEventService {
     IPage<UserEvent> pageByUserId(Page<UserEvent> userEventPage, QueryWrapper<UserEvent> queryWrapper);
 
     List<Long> getAllEventIdsByUserId(Integer userId);
+
+    List<Integer> getUserIdsByEventId(Long eventId);
+
+    boolean quitEvent(Integer userId, Long eventId);
 }

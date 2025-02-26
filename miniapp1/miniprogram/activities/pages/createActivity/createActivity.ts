@@ -265,9 +265,7 @@ Page({
         if (res.statusCode === 200 && res.data.code === 0) {
           wx.showToast({ title: '活动创建成功', icon: 'success', duration: 500 });
 
-          setTimeout(() => {
-            wx.navigateBack();
-          }, 500);
+          wx.navigateBack();
         } else {
           wx.showToast({ title: res.data.message || '活动创建失败', icon: 'none' });
         }

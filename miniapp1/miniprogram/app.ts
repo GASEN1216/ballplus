@@ -5,7 +5,7 @@ import { IAppOption } from '../typings';
 App<IAppOption>({
   globalData: {
     qnurl: 'http://sunsetchat.top/',// 加个‘/’方便直接加图片名
-    url: 'http://10.45.4.53:8080',
+    url: 'https://wechat.sunsetchat.top',
     isLoggedin: false,
     latitude: 23.108649,
     longitude: 113.324646,
@@ -27,6 +27,7 @@ App<IAppOption>({
       label: '',
       phone: ''
     },
+    myEvents: [] // 添加 myEvents 数组来保存当前用户的活动 ID
   },
 
   // 获取完整URL的方法
@@ -110,6 +111,9 @@ App<IAppOption>({
                 // 调用封装的 GoEasy 初始化函数
                 this.initializeGoEasy();
 
+                // 请求获取用户的所有活动 ID
+                this.fetchMyEvents();
+
                 // Notify pages after login
                 if (this.loginReadyCallback) {
                   this.loginReadyCallback();
@@ -149,6 +153,40 @@ App<IAppOption>({
     });
 
   },
+
+    // 获取用户的所有活动 ID
+    fetchMyEvents() {
+      const userId = this.globalData.currentUser.id;
+  
+      wx.request({
+        url: this.getUrl('/user/wx/getAllMyEvents'), // 后端接口URL
+        method: 'POST',
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-Token': this.globalData.currentUser.token,
+        },
+        data: {
+          userId: userId,
+        },
+        success: (res) => {
+          if (res.statusCode === 200 && res.data.code === 0) {
+            // 将获取到的活动 ID 数组保存到 myEvents
+            this.globalData.myEvents = res.data.data || [];
+          } else {
+            wx.showToast({
+              title: '获取活动列表失败',
+              icon: 'none',
+            });
+          }
+        },
+        fail: () => {
+          wx.showToast({
+            title: '网络错误，请稍后重试',
+            icon: 'none',
+          });
+        }
+      });
+    },
 
   onLaunch() {
     this.login();

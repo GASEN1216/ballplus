@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.gasen.usercenterbackend.model.respond.detailEvent;
 import com.gasen.usercenterbackend.model.respond.eventTemplates;
 import com.gasen.usercenterbackend.model.respond.indexEvent;
 import com.gasen.usercenterbackend.model.respond.indexEventWithState;
@@ -144,5 +145,29 @@ public class Event implements Serializable {
                 .setPenalty(penalty)
                 .setLatitude(latitude)
                 .setLongitude(longitude);
+    }
+
+    public detailEvent toDetailEvent() {
+        return new detailEvent()
+                .setId(id)
+                .setAppId(appId)
+                .setAvatar(avatar)
+                .setName(name)
+                .setEventDate(eventDate)
+                .setEventTime(eventTime)
+                .setEventTimee(eventTimee)
+                .setLocation(location)
+                .setLocationDetail(locationDetail)
+                .setLatitude(latitude)
+                .setLongitude(longitude)
+                .setParticipants(participants)
+                .setTotalParticipants(totalParticipants)
+                .setPhoneNumber(phoneNumber)
+                .setType(type)
+                .setLimits(limits)
+                .setLevel(level)
+                .setFeeMode(feeMode)
+                .setFee(fee)
+                .setRemarks(remarks);
     }
 }

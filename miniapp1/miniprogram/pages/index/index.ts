@@ -7,6 +7,7 @@ Page({
   data: {
     // 后端接口相关
     apiUrl: `${app.globalData.url}/user/wx/getEvent`,
+    toEventDetailsPath: "../../activities",
     currentPage: 1, // 当前页码
     pageSize: 5, // 每页大小
     hasMoreData: true, // 是否还有更多数据
@@ -17,9 +18,9 @@ Page({
 
     // 轮播图数据
     carouselImages: [
-      { url: 'https://picsum.photos/1200/400?random=1', link: '/pages/mine/mine' },
-      { url: 'https://picsum.photos/1200/400?random=2', link: '/pages/forum/forum' },
-      { url: 'https://picsum.photos/1200/400?random=3', link: '/pages/settings/settings' }
+      { url: 'https://picsum.photos/1200/400?random=1', link: '../../study/pages/resources/resources' },
+      { url: 'https://picsum.photos/1200/400?random=2', link: '../../study/pages/resources/resources' },
+      { url: 'https://picsum.photos/1200/400?random=3', link: '../../study/pages/resources/resources' }
     ],
 
     // 路径配置
@@ -58,6 +59,40 @@ Page({
       this.fetchActivities(false); // 重新请求当前页数据
     }
   },
+
+
+  // 根据活动 ID 移除活动
+  removeActivityById(activityId: number) {
+    const updatedActivities = this.data.activities.filter(activity => Number(activity.id) !== activityId);
+    const updatedFilteredActivities = this.data.filteredActivities.filter(activity => Number(activity.id) !== activityId);
+    
+    this.setData({
+      activities: updatedActivities,
+      filteredActivities: updatedFilteredActivities, // 确保同时更新筛选后的数据
+    });
+  },
+
+    // 轮播图点击事件
+    onCarouselItemClick(e: any) {
+      const link = e.currentTarget.dataset.link; // 获取 data-link 的值
+      if (!link) {
+        wx.showToast({
+          title: '链接无效',
+          icon: 'none'
+        });
+        return;
+      }
+      wx.navigateTo({ url: link });
+    },
+
+  // 查看活动详情
+viewActivityDetail(e: any) {
+  const activityId = e.currentTarget.dataset.id; // 获取活动ID
+  wx.navigateTo({
+    url: `${this.data.toEventDetailsPath}/pages/activityDetail/activityDetail?id=${activityId}`, // 跳转到活动详情页
+  });
+},
+
 
   // 初始化日期范围
   initDateRange() {
@@ -263,14 +298,6 @@ Page({
   createActivity() {
     wx.navigateTo({
       url: `${this.data.createActivityPath}/pages/createActivity/createActivity`,
-    });
-  },
-
-  // 查看活动详情
-  viewActivityDetail(e: any) {
-    const activityId = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: `${this.data.matchActivityPath}/pages/matchActivity/matchActivity?id=${activityId}`,
     });
   },
 

@@ -17,7 +17,7 @@
     <!-- 判断是否有活动信息 -->
     <block wx:if="{{activities.length > 0}}">
       <block wx:for="{{activities}}" wx:key="index">
-        <view class="activity-card">
+        <view class="activity-card" bindtap="viewActivityDetail" data-id="{{item.id}}">
           <!-- 头像 -->
           <cover-image src="{{item.avatar}}" class="activity-avatar"></cover-image>
           <!-- 活动信息 -->

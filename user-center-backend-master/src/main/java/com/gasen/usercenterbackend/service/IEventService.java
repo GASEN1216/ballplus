@@ -22,4 +22,12 @@ public interface IEventService {
     Event getNearestEvent(List<Long> eventIds);
 
     Boolean deleteTemplateByPer(Integer userId, Integer templateId);
+
+    Event getById(Long eventId);
+
+    boolean cancelEvent(Integer userId, Long eventId);
+
+    boolean reduceParticipants(Long eventId);
+
+    boolean addParticipants(Long eventId);
 }

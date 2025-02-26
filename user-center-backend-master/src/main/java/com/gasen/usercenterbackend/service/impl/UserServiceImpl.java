@@ -20,6 +20,7 @@ import com.gasen.usercenterbackend.model.User;
 import com.gasen.usercenterbackend.mapper.UserMapper;
 import com.gasen.usercenterbackend.model.respond.goEasyUser;
 import com.gasen.usercenterbackend.model.respond.indexEvent;
+import com.gasen.usercenterbackend.model.userIdAndAvatar;
 import com.gasen.usercenterbackend.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -233,6 +234,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
         List<User> users = userMapper.selectList(new LambdaQueryWrapper<User>().in(User::getId, friendsId));
         return users.stream().map(User::toFriend).toList();
+    }
+
+    @Override
+    public List<userIdAndAvatar> getAvatarByUserIds(List<Integer> userIds) {
+        return userMapper.selectList(new LambdaQueryWrapper<User>().in(User::getId, userIds)).stream().map(user -> new userIdAndAvatar(user.getId(), user.getAvatarUrl())).toList();
     }
 
     /**

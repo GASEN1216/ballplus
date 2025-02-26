@@ -60,5 +60,25 @@ public class EventServiceImpl implements IEventService {
         return eventMapper.update(new Event().setIsTemplate(false), new QueryWrapper<Event>().eq("app_id", userId).eq("id", templateId)) > 0;
     }
 
+    @Override
+    public Event getById(Long eventId) {
+        return eventMapper.selectById(eventId);
+    }
+
+    @Override
+    public boolean cancelEvent(Integer userId, Long eventId) {
+        return eventMapper.update(new Event().setState((byte) 2), new QueryWrapper<Event>().eq("app_id", userId).eq("id", eventId)) > 0;
+    }
+
+    @Override
+    public boolean reduceParticipants(Long eventId) {
+        return eventMapper.update(new Event().setParticipants(eventMapper.selectById(eventId).getParticipants() - 1), new QueryWrapper<Event>().eq("id", eventId)) > 0;
+    }
+
+    @Override
+    public boolean addParticipants(Long eventId) {
+        return eventMapper.update(new Event().setParticipants(eventMapper.selectById(eventId).getParticipants() + 1), new QueryWrapper<Event>().eq("id", eventId)) > 0;
+    }
+
 
 }

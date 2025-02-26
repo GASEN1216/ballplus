@@ -28,6 +28,7 @@ Page({
     amapKey: '', // 存储后端返回的高德地图 key
         // 后端接口相关
         apiUrl: `${app.globalData.url}/user/wx/getEventByMap`,
+        toEventDetailsPath: "../../../activities",
         currentPage: 1, // 当前页码
         pageSize: 5, // 每页大小
         hasMoreData: true, // 是否还有更多数据
@@ -151,6 +152,15 @@ Page({
   onReachBottom() {
     this.fetchActivities(true); // 请求下一页数据
   },
+
+  // 查看活动详情
+  viewActivityDetail(e: any) {
+    const activityId = e.currentTarget.dataset.id; // 获取活动ID
+    wx.navigateTo({
+      url: `${this.data.toEventDetailsPath}/pages/activityDetail/activityDetail?id=${activityId}`, // 跳转到活动详情页
+    });
+  },
+
   /**
    * 从后端获取高德地图 key
    */
@@ -263,13 +273,6 @@ onSearch: function () {
       latitude,
       longitude,
       scale: 18
-    });
-  },
-  showActivityDetail: function (e: WechatMiniprogram.BaseEvent<{ index: number }>) {
-    const index = e.currentTarget.dataset.index;
-    const activity = this.data.activities[index];
-    wx.navigateTo({
-      url: `${this.data.actPath}/pages/activity_detail/activity_detail?activity=${encodeURIComponent(JSON.stringify(activity))}`
     });
   },
   createActivity: function() {

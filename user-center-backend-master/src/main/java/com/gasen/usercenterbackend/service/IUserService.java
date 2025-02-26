@@ -10,6 +10,7 @@ import com.gasen.usercenterbackend.model.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.gasen.usercenterbackend.model.respond.goEasyUser;
 import com.gasen.usercenterbackend.model.respond.indexEvent;
+import com.gasen.usercenterbackend.model.userIdAndAvatar;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
@@ -41,4 +42,6 @@ public interface IUserService extends IService<User> {
     void onlyUpdateAvatar(weChatUseItemRequest weChatUseItemRequest);
 
     List<goEasyUser> getFriends(List<Integer> friendsId);
+
+    List<userIdAndAvatar> getAvatarByUserIds(List<Integer> userIds);
 }

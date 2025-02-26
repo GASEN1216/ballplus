@@ -10,6 +10,7 @@ Page({
     actPath: '../../activities',
     gdmapPath: '../../gdmap',
     friPath: '../../friends',
+    toEventDetailsPath: "../../activities",
     pointsMPath: '../../pointsMall',
     userData: {} as wxUser,
     expWidth: '0%', // 预设值
@@ -140,6 +141,14 @@ Page({
   onLoginButtonClick() {
     app.login();
   },
+
+    // 查看活动详情
+viewActivityDetail(e: any) {
+  const activityId = e.currentTarget.dataset.id; // 获取活动ID
+  wx.navigateTo({
+    url: `${this.data.toEventDetailsPath}/pages/activityDetail/activityDetail?id=${activityId}`, // 跳转到活动详情页
+  });
+},
 
   // 点击“个人信息”跳转到填写信息页面
   goToEditInfo() {

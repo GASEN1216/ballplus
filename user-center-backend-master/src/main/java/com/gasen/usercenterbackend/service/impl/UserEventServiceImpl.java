@@ -34,4 +34,14 @@ public class UserEventServiceImpl implements IUserEventService {
     public List<Long> getAllEventIdsByUserId(Integer userId) {
         return userEventMapper.selectList(new QueryWrapper<UserEvent>().eq("user_id", userId)).stream().map(UserEvent::getEventId).toList();
     }
+
+    @Override
+    public List<Integer> getUserIdsByEventId(Long eventId) {
+        return userEventMapper.selectList(new QueryWrapper<UserEvent>().eq("event_id", eventId)).stream().map(UserEvent::getUserId).toList();
+    }
+
+    @Override
+    public boolean quitEvent(Integer userId, Long eventId) {
+        return userEventMapper.delete(new QueryWrapper<UserEvent>().eq("user_id", userId).eq("event_id", eventId)) > 0;
+    }
 }

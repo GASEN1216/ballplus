@@ -1,8 +1,0 @@
-<!-- pages/activity_detail/activity_detail.wxml -->
-<view class="activity-detail-container">
-  <text class="activity-time">时间: {{activity.time}}</text>
-  <text class="activity-host">发起人: {{activity.host}}</text>
-  <text class="activity-participants">人数: {{activity.currentParticipants}}/{{activity.maxParticipants}}</text>
-  <text class="activity-content">内容: {{activity.content}}</text>
-  <button class="join-button" bindtap="applyForActivity" disabled="{{isApplying || isJoined}}">{{isApplying ? '申请中...' : isJoined ? '已加入' : '申请加入'}}</button>
-</view>

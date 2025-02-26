@@ -13,10 +13,10 @@
     {
       "root": "activities",
       "pages": [
-        "pages/activity_detail/activity_detail",
         "pages/createActivity/createActivity",
         "pages/activities/activities",
-        "pages/selectTemplate/selectTemplate"
+        "pages/selectTemplate/selectTemplate",
+        "pages/activityDetail/activityDetail"
       ]
     },
     {

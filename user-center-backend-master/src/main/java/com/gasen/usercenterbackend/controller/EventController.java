@@ -8,9 +8,11 @@ import com.gasen.usercenterbackend.common.ErrorCode;
 import com.gasen.usercenterbackend.common.ResultUtils;
 import com.gasen.usercenterbackend.model.Event;
 import com.gasen.usercenterbackend.model.UserEvent;
+import com.gasen.usercenterbackend.model.respond.detailEvent;
 import com.gasen.usercenterbackend.model.respond.eventTemplates;
 import com.gasen.usercenterbackend.model.respond.indexEvent;
 import com.gasen.usercenterbackend.model.respond.indexEventWithState;
+import com.gasen.usercenterbackend.model.userIdAndAvatar;
 import com.gasen.usercenterbackend.service.IEventService;
 import com.gasen.usercenterbackend.service.IUserEventService;
 import com.gasen.usercenterbackend.service.IUserService;
@@ -46,6 +48,44 @@ public class EventController {
         if(isSuccess)
             return ResultUtils.success("创建活动成功！");
         return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"创建活动失败！");
+    }
+
+    @Operation(summary = "取消一个活动")
+    @PostMapping("/cancelEvent")
+    public BaseResponse cancelEvent(
+            @RequestParam(value = "userId") Integer userId,
+            @RequestParam(value = "eventId") Long eventId){
+        if (userId == null || eventId == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
+        if (eventService.cancelEvent(userId, eventId))
+            return ResultUtils.success("取消活动成功！");
+        return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"取消活动失败！");
+    }
+
+    @Operation(summary = "退出活动")
+    @PostMapping("/quitEvent")
+    @Transactional
+    public BaseResponse quitEvent(
+            @RequestParam(value = "userId") Integer userId,
+            @RequestParam(value = "eventId") Long eventId){
+        if (userId == null || eventId == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
+        if (userEventService.quitEvent(userId, eventId) && eventService.reduceParticipants(eventId))
+            return ResultUtils.success("退出活动成功！");
+        return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"退出活动失败！");
+    }
+
+    @Operation(summary = "参加活动")
+    @PostMapping("/joinEvent")
+    @Transactional
+    public BaseResponse joinEvent(
+            @RequestParam(value = "userId") Integer userId,
+            @RequestParam(value = "eventId") Long eventId){
+        if (userId == null || eventId == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
+        if (userEventService.createUserEvent(userId, eventId) && eventService.addParticipants(eventId))
+            return ResultUtils.success("参加活动成功！");
+        return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"参加活动失败！");
     }
 
     @Operation(summary = "列表模式分页获取活动信息")
@@ -173,6 +213,32 @@ public class EventController {
 
         List<indexEvent> res = new ArrayList<>();
         res.add(event.toIndexEvent());
+        return ResultUtils.success(res);
+    }
+
+    @Operation(summary = "获取自己所有参加的活动")
+    @PostMapping("getAllMyEvents")
+    public BaseResponse getAllMyEvents(@RequestParam(value = "userId") Integer userId){
+        if (userId == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
+        List<Long> eventIds = userEventService.getAllEventIdsByUserId(userId);
+        return ResultUtils.success(eventIds);
+    }
+
+    @Operation(summary = "获取活动详细数据")
+    @GetMapping("/getEventDetailById")
+    public BaseResponse getEventDetailById(@RequestParam(value = "eventId") Long eventId){
+        if (eventId == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
+        Event event = eventService.getById(eventId);
+        if(event == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR,"活动不存在！");
+        detailEvent res = event.toDetailEvent();
+        // 找出所有参加这个活动的人
+        List<Integer> userIds = userEventService.getUserIdsByEventId(eventId);
+        // 找出他们的头像url
+        List<userIdAndAvatar> userIdAndAvatars = userService.getAvatarByUserIds(userIds);
+        res.setPersons(userIdAndAvatars);
         return ResultUtils.success(res);
     }
 
