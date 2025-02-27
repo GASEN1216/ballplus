@@ -214,7 +214,7 @@ Page({
   // 跳转到选择模板页面
   useTemplate() {
     wx.navigateTo({
-      url: '../selectTemplate/selectTemplate', // 跳转到选择模板页面
+      url: '../selectTemp/selectTemp', // 跳转到选择模板页面
     });
   },
 

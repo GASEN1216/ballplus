@@ -16,7 +16,9 @@ public enum ErrorCode {
     SIGNATURE_ERROR(1007, "签名校验失败", ""),
     INVALID_TOKEN(1008, "Token无效或已过期，请重新登录", ""),
     OPERATION_ERROR(1009, "插入数据库操作失败", ""),
-    PHONE_NUMBER_ERROR(1010, "获取手机号失败", "");
+    PHONE_NUMBER_ERROR(1010, "获取手机号失败", ""),
+    NO_EVENTS(1011, "还没有活动哦，快去创建吧！", ""),
+    MATCH_NO_EVENTS(1012, "没有匹配的活动", "");
 
 
     private final int code;

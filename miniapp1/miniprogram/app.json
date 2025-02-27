@@ -16,7 +16,7 @@
       "pages": [
         "pages/createActivity/createActivity",
         "pages/activities/activities",
-        "pages/selectTemplate/selectTemplate",
+        "pages/selectTemp/selectTemp",
         "pages/activityDetail/activityDetail"
       ]
     },
@@ -90,7 +90,7 @@
         "pagePath": "pages/mine/mine",
         "text": "我的",
         "iconPath": "icon/mine-icon.png", 
-        "selectedIconPath": "icon/mine-icon-selected.png" 
+        "selectedIconPath": "icon/mine-icon-selected.png"
       }
     ]
   },

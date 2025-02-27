@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gasen.usercenterbackend.model.Event;
+import com.gasen.usercenterbackend.model.User;
 
 import java.util.List;
 
@@ -32,4 +33,8 @@ public interface IEventService {
     boolean addParticipants(Long eventId);
 
     int scheduleUpdateEventState();
+
+    List<Event> getAllEvents();
+
+    Long matchEvent(User user, Float latitude, Float longitude);
 }

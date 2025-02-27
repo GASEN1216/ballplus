@@ -7,7 +7,9 @@ Page({
   data: {
     // 后端接口相关
     apiUrl: `${app.globalData.url}/user/wx/getEvent`,
+    matchApiUrl: `${app.globalData.url}/user/wx/matchEvent`,
     toEventDetailsPath: "../../activities",
+    showAnimation: false, // 是否显示匹配动画
 
     // 活动数据
     activities: [] as any[], // 所有活动数据
@@ -21,7 +23,7 @@ Page({
     ],
 
     // 路径配置
-    createActivityPath: '../../activities',
+    activityPath: '../../activities',
     matchActivityPath: '../../match',
     studyPath: '../../study',
     gdmapPath: '../../gdmap',
@@ -240,7 +242,7 @@ Page({
   // 发起活动
   createActivity() {
     wx.navigateTo({
-      url: `${this.data.createActivityPath}/pages/createActivity/createActivity`,
+      url: `${this.data.activityPath}/pages/createActivity/createActivity`,
     });
   },
 
@@ -256,5 +258,59 @@ Page({
     this.setData({ order: newOrder });
     this.filterActivities(); // 按新顺序重新过滤
   },
+
+    // 匹配活动
+    matchActivity() {
+      this.setData({ showAnimation: true }); // 开始播放动画
+  
+      setTimeout(() => {
+        wx.request({
+          url: this.data.matchApiUrl,
+          method: 'POST',
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-Token': app.globalData.currentUser.token,
+          },
+          data: {
+            userId: app.globalData.currentUser.id,
+            latitude: app.globalData.latitude,
+            longitude: app.globalData.longitude
+          },
+          success: (res) => {
+            if (res.statusCode === 200 && res.data.code === 0) {
+              const matchedEventId = res.data.data;
+              if (!isNaN(matchedEventId)) {
+                // 关闭动画
+                this.setData({ showAnimation: false });
+                
+                // 跳转到活动详情页
+                wx.navigateTo({
+                  url: `${this.data.activityPath}/pages/activityDetail/activityDetail?id=${matchedEventId}`,
+                });
+              } else {
+                wx.showToast({
+                  title: res.data.data,
+                  icon: 'none',
+                });
+                this.setData({ showAnimation: false }); // 关闭动画
+              }
+            } else {
+              wx.showToast({
+                title: '匹配失败，请稍后再试',
+                icon: 'none',
+              });
+              this.setData({ showAnimation: false }); // 关闭动画
+            }
+          },
+          fail: () => {
+            wx.showToast({
+              title: '网络错误，请稍后再试',
+              icon: 'none',
+            });
+            this.setData({ showAnimation: false }); // 关闭动画
+          },
+        });
+      }, 1000); // 动画时间
+    },
 
 });

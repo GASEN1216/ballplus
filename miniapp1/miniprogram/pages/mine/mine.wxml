@@ -27,13 +27,10 @@
     </view>
   </view>
 
-  <!-- 包裹所有内容的白板 -->
-  <view class="whiteboard">
-  <!-- 显示剩余时间 -->
-  <view wx:if="{{activities[0].remainingTime}}">
+    <!-- 显示剩余时间 -->
+  <view wx:if="{{activities[0].remainingTime}}" class="activity-banner">
     <text class="activity-remaining-time">{{activities[0].remainingTime}}</text>
   </view>
-
 
   <!-- 活动展示区域 -->
   <view class="activity-list">
@@ -62,12 +59,10 @@
     <!-- 当没有活动信息时显示 -->
     <block wx:else>
       <view class="no-activity">
-        <text>快去参加活动吧~</text>
+        <text>这里空空的，但美好正在路上 🌿</text>
       </view>
     </block>
   </view>
-
-</view>
 
   <!-- 地图和好友部分 -->
   <view class="navigation-section">

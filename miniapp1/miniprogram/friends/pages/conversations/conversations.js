@@ -258,4 +258,10 @@ Page({
             ['actionPopup.visible']: false
         })
     },
+    goToInfo(e) {
+      const userId = e.currentTarget.dataset.userid; // 获取传递的 userId
+      wx.navigateTo({
+        url: `../../../pages/profile/profile?userId=${userId}`, 
+      });
+    },
 })

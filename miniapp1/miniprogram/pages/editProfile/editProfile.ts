@@ -140,7 +140,7 @@ Page({
 
     if (!isValid) {
       wx.showToast({
-        title: '请输入至少2个字符，且不能包含非法字符',
+        title: '至少2字，最多15字,不包含非法字符哦',
         icon: 'none'
       });
       return;

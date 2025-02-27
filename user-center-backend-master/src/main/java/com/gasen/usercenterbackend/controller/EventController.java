@@ -8,6 +8,7 @@ import com.gasen.usercenterbackend.common.ErrorCode;
 import com.gasen.usercenterbackend.common.ResultUtils;
 import com.gasen.usercenterbackend.mapper.EventMapper;
 import com.gasen.usercenterbackend.model.Event;
+import com.gasen.usercenterbackend.model.User;
 import com.gasen.usercenterbackend.model.UserEvent;
 import com.gasen.usercenterbackend.model.respond.detailEvent;
 import com.gasen.usercenterbackend.model.respond.eventTemplates;
@@ -95,9 +96,6 @@ public class EventController {
 
     /**
      * 分页获取
-     * @param page
-     * @param size
-     * @return
      */
 //    @Operation(summary = "列表模式分页获取活动信息")
 //    @GetMapping("/getEvent")
@@ -125,7 +123,7 @@ public class EventController {
     @GetMapping("/getEvent")
     public BaseResponse getEvent() {
         try {
-            List<Event> events = eventMapper.selectList(new QueryWrapper<Event>().eq("state", 0).ge("event_date", LocalDate.now()));
+            List<Event> events = eventService.getAllEvents();
 
             // 对查询结果的每个 Event 对象执行 toindexEvent
             List<indexEvent> res = events.stream()
@@ -292,6 +290,26 @@ public class EventController {
         List<userIdAndAvatar> userIdAndAvatars = userService.getAvatarByUserIds(userIds);
         res.setPersons(userIdAndAvatars);
         return ResultUtils.success(res);
+    }
+
+    @Operation(summary = "匹配活动")
+    @PostMapping("/matchEvent")
+    public BaseResponse matchEvent(@RequestParam(value = "userId") Integer userId,
+                                   @RequestParam(value = "latitude") Float latitude,
+                                   @RequestParam(value = "longitude") Float longitude){
+        if (userId == null || latitude == null || longitude == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
+
+        // 拿取个人信息
+        User user = userService.getById(userId);
+
+        // 匹配活动
+        Long eventId = eventService.matchEvent(user, latitude, longitude);
+
+        if(eventId == null)
+            return ResultUtils.success("没有匹配的活动");
+
+        return ResultUtils.success(eventId);
     }
 
 }

@@ -132,6 +132,9 @@ public class UserController {
      */
     @PostMapping("/wx/uptoken")
     public BaseResponse testupToken(@RequestParam("token") String token) {
+        if(!validateToken(token)) {
+            return ResultUtils.error(INVALID_TOKEN, "无效的token");
+        }
         Auth auth = Auth.create(qiniuConfig.getAccessKey(), qiniuConfig.getSecretKey());
         // 获取上传凭证
         String upToken = auth.uploadToken(qiniuConfig.getBucket());

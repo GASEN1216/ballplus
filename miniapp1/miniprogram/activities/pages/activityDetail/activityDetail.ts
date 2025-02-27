@@ -204,6 +204,26 @@ Page({
   joinActivity() {
     if (this.data.isJoined) return;
 
+    // 校验性别
+    if (this.data.activity.limits !== 0) { // 0 表示无限制
+      if (this.data.activity.limits === 1 && app.globalData.currentUser.gender !== 2) {
+        // 活动为 "男士专场"，但当前用户不是男生（2）
+        wx.showToast({
+          title: '该活动仅限男士参加',
+          icon: 'none',
+        });
+        return;
+      }
+      if (this.data.activity.limits === 2 && app.globalData.currentUser.gender !== 1) {
+        // 活动为 "女士专场"，但当前用户不是女生（1）
+        wx.showToast({
+          title: '该活动仅限女士参加',
+          icon: 'none',
+        });
+        return;
+      }
+    }
+
     wx.showModal({
       title: '参加活动',
       content: '确定要参加这个活动吗？',
@@ -253,10 +273,10 @@ Page({
     });
   },
 
-  goToInfo(e:any) {
+  goToInfo(e: any) {
     const userId = e.currentTarget.dataset.userid; // 获取传递的id
     wx.navigateTo({
-      url: `../../../pages/profile/profile?userId=${userId}`, 
+      url: `../../../pages/profile/profile?userId=${userId}`,
     });
   },
 });

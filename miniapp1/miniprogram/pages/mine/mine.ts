@@ -44,7 +44,19 @@ Page({
       };
     }
   },
+  onUnload() {
+    // 强制刷新数据
+    this.setData({
+      activities: [],    // 清空原有数据，避免数据不一致
+    });
+  },
 
+  // 页面每次显示时触发
+  onShow() {
+    if (app.globalData.isLoggedin) {
+      this.fetchActivities(); // 重新拉取数据
+    }
+  },
   // 获取活动数据
   fetchActivities() {
 

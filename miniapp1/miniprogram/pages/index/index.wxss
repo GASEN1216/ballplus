@@ -6,7 +6,7 @@
 /* 轮播图样式 */
 .carousel-container {
   width: 100%;
-  height: 200px;
+  height: 150px;
   margin-bottom: 10px;
 }
 
@@ -207,4 +207,60 @@
   width: 16px;
   height: 16px;
   margin-left: 5px;
+}
+
+.animation-container {
+  position: fixed;
+  top: 35%;
+  left: 5%;
+  width: 90%;
+  height: 150rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 9999;
+}
+
+.player-one, .player-two {
+  width: 150rpx;
+  height: 150rpx;
+  position: absolute;
+  top: 25rpx; /* 调整这个值，使人物下移 */
+}
+
+.player-one {
+  position: absolute;
+  left: 0;
+}
+
+.player-two {
+  position: absolute;
+  right: 0;
+}
+
+.basketball {
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  left: 10%;
+  top: 45%;
+  animation: passBall 1s linear forwards; /* 1秒匀速动画 */
+}
+
+@keyframes passBall {
+  0% {
+    transform: translateX(0) translateY(0); /* 从传球者手中出发 */
+  }
+  25% {
+    transform: translateX(15vw) translateY(-20rpx); /* 稍微上升 */
+  }
+  50% {
+    transform: translateX(30vw) translateY(-50rpx); /* 最高点 */
+  }
+  75% {
+    transform: translateX(45vw) translateY(-20rpx); /* 开始下降 */
+  }
+  100% {
+    transform: translateX(60vw) translateY(0); /* 传到接球者手中 */
+  }
 }

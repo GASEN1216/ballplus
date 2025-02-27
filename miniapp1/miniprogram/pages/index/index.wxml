@@ -12,6 +12,14 @@
 <!-- 发起活动按钮 -->
 <view class="create-activity-section">
   <button class="create-activity-button" bindtap="createActivity">➕ 发起活动</button>
+  <button class="match-activity-button" bindtap="matchActivity">🏀 匹配活动</button>
+</view>
+
+<!-- 过场动画 -->
+<view class="animation-container" wx:if="{{showAnimation}}">
+  <image class="player-one" src="/icon/player1.png"></image>
+  <image class="basketball" src="/icon/basketball.png"></image>
+  <image class="player-two" src="/icon/player2.png"></image>
 </view>
 
 <view class="main-container">
