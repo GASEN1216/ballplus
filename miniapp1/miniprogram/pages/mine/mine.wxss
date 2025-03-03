@@ -69,7 +69,6 @@ page {
   text-align: center; /* 文字居中 */
   font-size: 16rpx; /* 字体大小 */
   font-weight: bold;
-  color: #FF4C4C; /* 红色字体，突出警示 */
   box-shadow: 0 2rpx 5rpx rgba(0, 0, 0, 0.1); /* 轻微阴影，让它像浮起来 */
   margin: 0 auto; /* 水平居中 */
   display: flex;
@@ -83,6 +82,7 @@ page {
 
 /* 活动列表样式 */
 .activity-list {
+  width: 100%;
   margin-top: 5px;
 }
 
@@ -175,6 +175,43 @@ page {
   padding: 8px 12px;         /* 增加内边距，避免内容粘边 */
   background-color: #fff; /* 背景色，浅红色让文字突出 */
   text-align: center;        /* 居中文本 */
+}
+
+.activity-remaining-time2 {
+  font-size: 16px;           /* 比活动时间大2px，保持视觉层级 */
+  color: #5A7D9C;            /* 改为青天色值，取自"青天无片云"意象 */
+  font-weight: 600;          /* 中等加粗，避免过度强硬 */
+  margin: 12px 0;            /* 扩大留白，模拟中国画题诗空间感 */
+  padding: 10px 16px;        
+  background: linear-gradient(
+    to right, 
+    #F0F6FF 20%,            /* 左浅蓝模拟天际渐变 */
+    #FFFFFF 80%              /* 右留白呼应"无片云" */
+  );
+  text-align: center;
+  border-radius: 4px;        /* 圆角暗合古籍装帧特征 */
+  box-shadow: 0 2px 8px rgba(88,129,164,0.1); /* 青天投影效果 */
+  font-family: '霞鹜文楷', sans-serif; /* 推荐开源书法字体 */
+}
+
+/* 在原有样式基础上新增 */
+.activity-card.empty-card {
+  background: #f8f9fa; /* 素绢色背景 */
+  min-height: 180px; /* 保持与正常卡片等高 */
+  width: 100%;
+}
+
+.poetic-state {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  color: #5a7d9c;
+  text-align: center;
+  white-space: nowrap; /* 禁止换行 */
+  font-family: 'LXGW WenKai', sans-serif;
+  z-index: 2;
 }
 
 /* 导航部分 */

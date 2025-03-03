@@ -15,10 +15,29 @@ Page({
     isPastEvent: false, // 是否是过去的活动
     isStateTwo: false,  // 活动是否 state === 2
   },
+  // 请求订阅消息授权
+  requestSubscribeMessage() {
+    const templateIds = ['LVVo1OQ_oe6-hFSJ1yZtsB8odWdA4B8Qg5OdwBVVYWc', '0y74iVIHCLCJJeS-zFL1Q90cFJNjNqQv8TzjMw-cuIQ']; // 替换为你的模板 ID
+    wx.requestSubscribeMessage({
+      tmplIds: templateIds,
+      success(res) {
+        if (res[templateIds[0]] === 'accept') {
+          console.log('用户同意订阅消息');
+        } else {
+          console.log('用户拒绝订阅消息');
+        }
+      },
+      fail(err) {
+        console.error('订阅消息授权失败', err);
+      }
+    });
+  },
 
   onLoad(options) {
     const { id } = options; // 获取活动ID
     this.fetchActivityDetail(Number(id));
+    // 请求订阅消息授权
+    this.requestSubscribeMessage();
   },
 
   // 获取活动详情

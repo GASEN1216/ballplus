@@ -32,6 +32,11 @@
     <text class="activity-remaining-time">{{activities[0].remainingTime}}</text>
   </view>
 
+  <!-- 没有活动时显示其他文案 -->
+<view wx:else class="activity-banner">
+  <text class="activity-remaining-time2">「此刻 青天无片云」</text>
+</view>
+
   <!-- 活动展示区域 -->
   <view class="activity-list">
     <!-- 判断是否有活动信息 -->
@@ -56,12 +61,12 @@
       </block>
     </block>
 
-    <!-- 当没有活动信息时显示 -->
     <block wx:else>
-      <view class="no-activity">
-        <text>这里空空的，但美好正在路上 🌿</text>
-      </view>
-    </block>
+    <!-- 空状态卡片 -->
+    <view class="activity-card empty-card">
+      <text class="poetic-state">「若无闲事挂心头，便是人间好时节」</text>
+    </view>
+  </block>
   </view>
 
   <!-- 地图和好友部分 -->
