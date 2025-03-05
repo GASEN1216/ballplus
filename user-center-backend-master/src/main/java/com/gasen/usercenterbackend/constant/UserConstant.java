@@ -9,4 +9,8 @@ public interface UserConstant {
     int USER = 0;
 
     int banned = -1;
+
+    int MAX_RETRY_COUNT = 3; // 发送通知最大重试次数
+
+    String UNKNOWN_LOCATION = "未知";
 }

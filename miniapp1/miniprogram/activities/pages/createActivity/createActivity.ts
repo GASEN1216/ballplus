@@ -264,7 +264,7 @@ Page({
       success: (res) => {
         if (res.statusCode === 200 && res.data.code === 0) {
           wx.showToast({ title: '活动创建成功', icon: 'success', duration: 500 });
-
+          this.requestSubscribeMessage(Number(res.data.data));
           wx.navigateBack();
         } else {
           wx.showToast({ title: res.data.message || '活动创建失败', icon: 'none' });
@@ -273,6 +273,43 @@ Page({
       fail: () => {
         wx.showToast({ title: '请求失败，请检查网络', icon: 'none' });
       },
+    });
+  },
+  // 请求订阅消息授权
+  requestSubscribeMessage(eventId:Number) {
+    const templateIds = ['0y74iVIHCLCJJeS-zFL1Q90cFJNjNqQv8TzjMw-cuIQ', 'LVVo1OQ_oe6-hFSJ1yZtsB8odWdA4B8Qg5OdwBVVYWc'];
+    wx.requestSubscribeMessage({
+      tmplIds: templateIds,
+      success(res) {
+        // 发送报名成功消息
+        if (res[templateIds[0]] === 'accept') {
+          wx.request({
+            url: `${app.globalData.url}/user/wx/sendJoinEventNotification`,
+            method: 'POST',
+            header: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'X-Token': app.globalData.currentUser.token,
+            },
+            data: {
+              userId: Number(app.globalData.currentUser.id),
+              eventId: eventId
+            },
+            success: (res) => {
+              if (res.statusCode === 200 && res.data.code === 0) {
+                console.error('参加活动通知发送成功！');
+              } else {
+                console.error('参加活动通知发送失败！');
+              }
+            },
+            fail: () => {
+              console.error('网络问题，参加活动通知发送失败！');
+            },
+          });
+        }
+      },
+      fail(err) {
+        console.error('订阅消息授权失败', err);
+      }
     });
   },
 });

@@ -17,7 +17,7 @@ public class EventStateUpdateTask {
     /**
      * 每天 15:30 运行，更新 event 表中 eventDate 早于今天的活动状态
      */
-    @Scheduled(cron = "0 30 15 * * ?")
+    @Scheduled(cron = "0 21 10 * * ?")
     public void updateEventState() {
         int count = eventService.scheduleUpdateEventState();
         if (count > 0) {

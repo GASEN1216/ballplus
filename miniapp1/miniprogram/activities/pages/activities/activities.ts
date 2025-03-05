@@ -99,6 +99,7 @@ updateFilteredActivities() {
   this.setData({
     filteredActivities: activities.filter(activity => activeTab === 'all' || activity.state === Number(activeTab)),
   });
+  console.log(this.data.filteredActivities);
 },
 
   // 查看活动详情

@@ -17,14 +17,35 @@ Page({
   },
   // 请求订阅消息授权
   requestSubscribeMessage() {
-    const templateIds = ['LVVo1OQ_oe6-hFSJ1yZtsB8odWdA4B8Qg5OdwBVVYWc', '0y74iVIHCLCJJeS-zFL1Q90cFJNjNqQv8TzjMw-cuIQ']; // 替换为你的模板 ID
+    const { activity, userId } = this.data;
+    const templateIds = ['0y74iVIHCLCJJeS-zFL1Q90cFJNjNqQv8TzjMw-cuIQ', 'LVVo1OQ_oe6-hFSJ1yZtsB8odWdA4B8Qg5OdwBVVYWc'];
     wx.requestSubscribeMessage({
       tmplIds: templateIds,
       success(res) {
+        // 发送报名成功消息
         if (res[templateIds[0]] === 'accept') {
-          console.log('用户同意订阅消息');
-        } else {
-          console.log('用户拒绝订阅消息');
+          wx.request({
+            url: `${app.globalData.url}/user/wx/sendJoinEventNotification`,
+            method: 'POST',
+            header: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'X-Token': app.globalData.currentUser.token,
+            },
+            data: {
+              userId,
+              eventId: activity.id
+            },
+            success: (res) => {
+              if (res.statusCode === 200 && res.data.code === 0) {
+                console.error('参加活动通知发送成功！');
+              } else {
+                console.error('参加活动通知发送失败！');
+              }
+            },
+            fail: () => {
+              console.error('网络问题，参加活动通知发送失败！');
+            },
+          });
         }
       },
       fail(err) {
@@ -36,8 +57,6 @@ Page({
   onLoad(options) {
     const { id } = options; // 获取活动ID
     this.fetchActivityDetail(Number(id));
-    // 请求订阅消息授权
-    this.requestSubscribeMessage();
   },
 
   // 获取活动详情
@@ -249,6 +268,8 @@ Page({
       success: (res) => {
         if (res.confirm) {
           this.addParticipant(); // 参加活动
+          // 请求订阅消息授权
+          this.requestSubscribeMessage();
         }
       }
     });

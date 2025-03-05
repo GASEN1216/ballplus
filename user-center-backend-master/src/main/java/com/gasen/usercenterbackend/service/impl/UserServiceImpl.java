@@ -241,6 +241,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return userMapper.selectList(new LambdaQueryWrapper<User>().in(User::getId, userIds)).stream().map(user -> new userIdAndAvatar(user.getId(), user.getAvatarUrl())).toList();
     }
 
+    @Override
+    public String getOpenIdByUserId(Integer userId) {
+        User user = userMapper.selectById(userId);
+        if (user == null)
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "用户不存在");
+        return user.getOpenId();
+    }
+
+    @Override
+    public List<String> getOpenIdByUserIds(List<Integer> useridList) {
+        return userMapper.selectList(new LambdaQueryWrapper<User>().in(User::getId, useridList)).stream().map(User::getOpenId).toList();
+    }
+
     /**
      * 判断用户是否合法
      * */

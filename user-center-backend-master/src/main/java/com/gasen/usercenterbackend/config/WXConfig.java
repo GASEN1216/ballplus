@@ -13,6 +13,7 @@ public class WXConfig {
     private String appid;
     private String appsecret;
     private String salt;
-
+    private String signUpTemplateId;
+    private String startReminderTemplateId;
 
 }

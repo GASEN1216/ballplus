@@ -44,4 +44,8 @@ public interface IUserService extends IService<User> {
     List<goEasyUser> getFriends(List<Integer> friendsId);
 
     List<userIdAndAvatar> getAvatarByUserIds(List<Integer> userIds);
+
+    String getOpenIdByUserId(Integer userId);
+
+    List<String> getOpenIdByUserIds(List<Integer> useridList);
 }

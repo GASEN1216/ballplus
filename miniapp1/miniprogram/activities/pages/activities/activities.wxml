@@ -56,7 +56,7 @@
     <!-- 当没有活动信息时显示 -->
     <block wx:else>
       <view class="no-activity">
-        <text>暂时没有活动发布哦~</text>
+        <text>去赴一场时光的盛宴，让美好在指间绽放</text>
       </view>
     </block>
   </view>

@@ -21,6 +21,8 @@ mybatis-plus:
 wx:
   appid: wx317f974906d46cc9
   appsecret: 59e91abc334dfc64b8a6536db57df38b
+  signUpTemplateId: 0y74iVIHCLCJJeS-zFL1Q90cFJNjNqQv8TzjMw-cuIQ
+  startReminderTemplateId: LVVo1OQ_oe6-hFSJ1yZtsB8odWdA4B8Qg5OdwBVVYWc
   salt: asdcaefevlnshgvihwoieunoviwVEDFXBNDHSDFdfsfsegsefasgaefaf
 
 qiniu:

@@ -1,3 +1,6 @@
+page {
+  background-color: #f8f9fa;
+}
 /* 容器样式 */
 .container {
   padding: 20rpx;

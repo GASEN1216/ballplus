@@ -18,6 +18,7 @@ import com.gasen.usercenterbackend.model.userIdAndAvatar;
 import com.gasen.usercenterbackend.service.IEventService;
 import com.gasen.usercenterbackend.service.IUserEventService;
 import com.gasen.usercenterbackend.service.IUserService;
+import com.gasen.usercenterbackend.utils.WechatUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -52,7 +53,7 @@ public class EventController {
         Long eventId = eventService.createEvent(event);
         Boolean isSuccess = userEventService.createUserEvent(event.getAppId(), eventId);
         if(isSuccess)
-            return ResultUtils.success("创建活动成功！");
+            return ResultUtils.success(eventId);
         return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"创建活动失败！");
     }
 
@@ -310,6 +311,57 @@ public class EventController {
             return ResultUtils.success("没有匹配的活动");
 
         return ResultUtils.success(eventId);
+    }
+
+    @Operation(summary = "活动报名成功通知")
+    @PostMapping("/sendJoinEventNotification")
+    public BaseResponse sendJoinEventNotification(@RequestParam(value = "userId") Integer userId,
+                                                  @RequestParam(value = "eventId") Long eventId) {
+        if (userId == null || eventId == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
+
+        // 获取用户 openid
+        String openid = userService.getOpenIdByUserId(userId);
+        if (openid == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "用户未绑定微信");
+
+        // 获取活动信息
+        Event event = eventService.getById(eventId);
+        if (event == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "活动不存在");
+
+        // 发送订阅消息
+        boolean isSuccess = WechatUtil.sendJoinEventNotification(openid, event);
+        if (isSuccess)
+            return ResultUtils.success("活动报名成功通知已发送！");
+        return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "通知发送失败");
+    }
+
+
+    @Operation(summary = "活动即将开始通知")
+    @PostMapping("/sendEventStartNotification")
+    public BaseResponse sendEventStartNotification(@RequestParam(value = "eventId") Long eventId) {
+        if (eventId == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
+
+        Event event = eventService.getById(eventId);
+        if (event == null)
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "活动不存在");
+
+        List<Integer> useridList = userEventService.getUserIdsByEventId(eventId);
+
+        if (useridList.isEmpty())
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "数据库错误");
+
+        List<String> openidList = userService.getOpenIdByUserIds(useridList);
+
+        if (openidList.isEmpty())
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"数据库错误");
+
+        boolean isSuccess = WechatUtil.sendEventStartNotification(openidList, event);
+        if (isSuccess)
+            return ResultUtils.success("活动即将开始通知已发送！");
+        return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "通知发送失败");
     }
 
 }
