@@ -10,8 +10,8 @@ Page({
       avatar: '', // 发起人头像
       name: '', // 活动名称
       eventDate: '', // 开始日期
-      eventTime: '18:30', // 开始时间
-      eventTimee: '20:30', // 结束时间
+      eventTime: '', // 开始时间
+      eventTimee: '', // 结束时间
       location: '', // 地点
       locationDetail: '', // 详细地点
       latitude: 0.0,   // 纬度
@@ -34,7 +34,8 @@ Page({
     showMore: false, // 是否显示更多设置
     showFeeInput: false, // 控制活动费用输入框显示
     editProPath: '../../../',
-    fromMap: false
+    fromMap: false,
+    currentTime: '', // 用于存储当前时间
   },
 
   onLoad(options) {
@@ -53,6 +54,16 @@ Page({
     const todayWeek = weekDays[today.getDay()]; // 获取对应的星期名称
     // 默认活动名称
     const defaultName = `${todayWeek}晚`;
+
+        // 获取当前时间并格式化
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const currentTime = `${hours}:${minutes}`;
+    
+        this.setData({
+          currentTime: currentTime
+        });
 
     const dateRange = Array.from({ length: 30 }, (_, i) => {
       const date = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
@@ -296,7 +307,7 @@ Page({
             },
             success: (res) => {
               if (res.statusCode === 200 && res.data.code === 0) {
-                console.error('参加活动通知发送成功！');
+                console.log('参加活动通知发送成功！');
               } else {
                 console.error('参加活动通知发送失败！');
               }

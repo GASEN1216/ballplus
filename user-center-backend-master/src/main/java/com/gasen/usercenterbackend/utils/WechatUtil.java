@@ -18,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -38,10 +39,13 @@ public class WechatUtil {
 
     private static RedisTemplate<String, Object> redisTemplate;
 
-    @Resource
-    private RestTemplate restTemplate;
+    private static final RestTemplate restTemplate = new RestTemplate();
 
     private static WXConfig wxConfig;
+
+    static {
+        restTemplate.setRequestFactory(new BufferingClientHttpRequestFactory(restTemplate.getRequestFactory()));
+    }
 
     @Resource
     public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
@@ -101,7 +105,7 @@ public class WechatUtil {
 
         message.setTouser(openid);
         message.setTemplate_id(wxConfig.getSignUpTemplateId());// 报名成功通知的模板ID
-        message.setPage("activities/pages/activityDetail/activityDetail?eventId=" + event.getId());
+        message.setPage("activities/pages/activityDetail/activityDetail?id=" + event.getId());
         message.setMiniprogram_state("developer");
 
         Map<String, TemplateData> data = new HashMap<>(4);

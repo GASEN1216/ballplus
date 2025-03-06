@@ -140,6 +140,15 @@ Page({
       content: '确定要取消这个活动吗？',
       success: (res) => {
         if (res.confirm) {
+          // 查找活动 ID 的索引
+          const index = app.globalData.myEvents.indexOf(this.data.activity.id);
+
+          if (index !== -1) {
+            // 移除该活动 ID
+            app.globalData.myEvents.splice(index, 1);
+          } else {
+            console.log('未找到指定的活动 ID，取消活动失败');
+          }
           this.deleteActivity(); // 删除活动
         }
       }
@@ -194,6 +203,15 @@ Page({
       content: '确定要退出这个活动吗？',
       success: (res) => {
         if (res.confirm) {
+          // 查找活动 ID 的索引
+          const index = app.globalData.myEvents.indexOf(this.data.activity.id);
+
+          if (index !== -1) {
+            // 移除该活动 ID
+            app.globalData.myEvents.splice(index, 1);
+          } else {
+            console.log('未找到指定的活动 ID，退出活动失败');
+          }
           this.removeParticipant(); // 退出活动
         }
       }
@@ -242,9 +260,11 @@ Page({
   joinActivity() {
     if (this.data.isJoined) return;
 
+    const activity = this.data.activity;
+
     // 校验性别
-    if (this.data.activity.limits !== 0) { // 0 表示无限制
-      if (this.data.activity.limits === 1 && app.globalData.currentUser.gender !== 2) {
+    if (activity.limits !== 0) { // 0 表示无限制
+      if (activity.limits === 1 && app.globalData.currentUser.gender !== 2) {
         // 活动为 "男士专场"，但当前用户不是男生（2）
         wx.showToast({
           title: '该活动仅限男士参加',
@@ -252,7 +272,7 @@ Page({
         });
         return;
       }
-      if (this.data.activity.limits === 2 && app.globalData.currentUser.gender !== 1) {
+      if (activity.limits === 2 && app.globalData.currentUser.gender !== 1) {
         // 活动为 "女士专场"，但当前用户不是女生（1）
         wx.showToast({
           title: '该活动仅限女士参加',
@@ -267,6 +287,8 @@ Page({
       content: '确定要参加这个活动吗？',
       success: (res) => {
         if (res.confirm) {
+          // 参加了，将app.globalData.myEvents添加该活动activity.id
+          app.globalData.myEvents.push(activity.id);
           this.addParticipant(); // 参加活动
           // 请求订阅消息授权
           this.requestSubscribeMessage();
