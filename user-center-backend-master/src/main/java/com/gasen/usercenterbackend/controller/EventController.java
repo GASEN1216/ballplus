@@ -23,6 +23,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -54,26 +55,46 @@ public class EventController {
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
+    @Resource
+    @Qualifier("stringRedisTemplate") // 指定使用名为 longRedisTemplate 的 Bean
+    private RedisTemplate<String, String> stringRedisTemplate;
+
     @Operation(summary = "创建一个新的活动")
     @PostMapping("/createEvent")
     @Transactional(rollbackFor = Exception.class)
     public BaseResponse createEvent(@RequestBody Event event) {
+        // 创建活动
         Long eventId = eventService.createEvent(event);
         Boolean isSuccess = userEventService.createUserEvent(event.getAppId(), eventId);
-        if (isSuccess) {
-            // 计算时间戳（基于 event.date 和 event.time）
-            String dateTimeString = event.getEventDate() + " " + event.getEventTime(); // 拼接日期和时间
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            LocalDateTime localDateTime = LocalDateTime.parse(dateTimeString, formatter);
-            long timestamp = localDateTime.toEpochSecond(ZoneOffset.UTC); // 转换为时间戳（秒）
 
-            // 插入 Redis ZSET
-            String redisKey = "events:sorted";
-            redisTemplate.opsForZSet().add(redisKey, eventId, timestamp);
-
-            return ResultUtils.success(eventId);
+        if (!isSuccess) {
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "创建活动失败！");
         }
-        return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"创建活动失败！");
+
+        // 计算时间戳（基于 event.date 和 event.time）
+        String dateTimeString = event.getEventDate() + " " + event.getEventTime(); // 拼接日期和时间
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime eventDateTime = LocalDateTime.parse(dateTimeString, formatter);
+        long timestamp = eventDateTime.toEpochSecond(ZoneOffset.UTC); // 转换为时间戳（秒）
+
+        // 检查活动时间是否在半小时以内
+        LocalDateTime now = LocalDateTime.now();
+        long nowTimestamp = now.toEpochSecond(ZoneOffset.UTC);
+        long halfHourInSeconds = 30 * 60; // 半小时的秒数
+
+        String redisKey = "ballplus:events:sorted";
+
+        if (timestamp - nowTimestamp <= halfHourInSeconds) {
+            // 如果活动时间在半小时以内，发送通知
+            Boolean flag = eventService.sendEventStartNotification(eventId);
+            if(!flag)
+                return ResultUtils.error(ErrorCode.SEND_NOTIFICATION_FAILED);
+        } else {
+            // 否则，将活动 ID 插入 Redis ZSET
+            redisTemplate.opsForZSet().add(redisKey, eventId, timestamp);
+        }
+
+        return ResultUtils.success(eventId);
     }
 
     @Operation(summary = "取消一个活动")
@@ -348,6 +369,10 @@ public class EventController {
         Event event = eventService.getById(eventId);
         if (event == null)
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "活动不存在");
+
+        // 将 openid 存入 Redis List
+        String redisKey = "ballplus:events:" + eventId;
+        stringRedisTemplate.opsForList().rightPush(redisKey, openid);
 
         // 发送订阅消息
         boolean isSuccess = WechatUtil.sendJoinEventNotification(openid, event);

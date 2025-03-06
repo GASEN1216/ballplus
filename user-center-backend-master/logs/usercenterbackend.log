@@ -3454,3 +3454,184 @@ Client IP: 10.45.4.69
 2025-03-06 19:18:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 今天没有活动需要更新
 2025-03-06 19:19:00,002 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 今天没有活动需要更新
 2025-03-06 19:20:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 今天没有活动需要更新
+2025-03-06 21:53:57,554 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 25164 (D:\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in D:\wx-miniprogram\user-center-backend-master)
+2025-03-06 21:53:57,556 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-03-06 21:53:58,297 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-03-06 21:53:58,299 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-03-06 21:53:58,329 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 15 ms. Found 0 Redis repository interfaces.
+2025-03-06 21:53:58,850 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-03-06 21:53:58,861 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-06 21:53:58,862 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-03-06 21:53:58,862 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-03-06 21:53:58,922 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-03-06 21:53:58,922 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1327 ms
+2025-03-06 21:53:59,517 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.Items".
+2025-03-06 21:53:59,517 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-03-06 21:54:00,120 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-03-06 21:54:00,136 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-03-06 21:54:00,146 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 3.064 seconds (process running for 3.877)
+2025-03-06 21:55:00,066 INFO [scheduling-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
+2025-03-06 21:55:00,427 INFO [scheduling-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1bfbf0ba
+2025-03-06 21:55:00,430 INFO [scheduling-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
+2025-03-06 21:55:00,459 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:24] 更新了 1 条活动状态
+2025-03-06 21:55:03,866 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-06 21:55:03,866 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-03-06 21:55:03,867 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-03-06 21:55:03,883 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-03-06 21:55:04,109 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0f1CKell2X5lbf4KKGkl2o9rVb1CKelD
+Client IP: 192.168.31.105
+
+2025-03-06 21:55:04,518 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-03-06 21:55:05,109 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getAllMyEvents
+Method: POST
+Class: EventController
+Method: getAllMyEvents
+Param: userId=1
+Client IP: 192.168.31.105
+
+2025-03-06 21:55:05,110 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-03-06 21:56:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 21:57:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 21:58:00,002 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 21:59:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:00:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:01:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:02:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:03:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:04:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:05:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:06:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:07:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:08:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:09:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:10:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:11:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:12:00,017 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:13:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:14:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:15:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:16:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:17:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:18:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:19:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:20:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:21:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:22:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:23:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:24:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:25:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:26:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:27:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:28:00,002 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:29:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:30:00,017 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:31:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:32:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:33:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:34:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:35:00,018 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:36:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:37:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:38:00,018 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:39:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:40:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:41:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:42:00,002 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:43:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:44:00,002 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:45:00,017 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:46:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:47:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:48:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:49:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:50:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:51:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:52:00,019 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:53:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:54:00,022 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:55:00,019 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:56:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:57:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:58:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 22:59:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:00:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:01:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:02:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:03:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:04:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:05:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:06:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:07:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:08:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:09:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:10:00,001 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:11:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:12:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:13:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:14:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:15:00,000 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:16:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:17:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:18:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:19:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:20:00,018 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:21:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:22:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:23:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:24:00,025 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:25:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:26:00,019 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:27:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:28:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:29:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:30:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:31:00,033 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:32:00,017 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:33:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:34:00,017 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:35:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:36:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:37:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:38:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:39:00,021 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:40:00,002 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:41:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:42:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:43:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:44:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:45:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:46:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:47:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:48:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:49:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:50:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:51:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:52:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:53:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:54:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:26] 没有活动需要更新
+2025-03-06 23:54:13,247 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
+2025-03-06 23:54:13,253 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.

@@ -6,8 +6,12 @@ import com.gasen.usercenterbackend.mapper.EventMapper;
 import com.gasen.usercenterbackend.model.Event;
 import com.gasen.usercenterbackend.model.User;
 import com.gasen.usercenterbackend.service.IEventService;
+import com.gasen.usercenterbackend.utils.WechatUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,6 +19,7 @@ import java.time.LocalTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ThreadPoolExecutor;
 
 @Service
 @Slf4j
@@ -22,6 +27,13 @@ public class EventServiceImpl implements IEventService {
 
     @Resource
     private EventMapper eventMapper;
+
+    @Resource
+    private ThreadPoolExecutor threadPoolExecutor;
+
+    @Resource
+    @Qualifier("stringRedisTemplate") // 指定使用名为 longRedisTemplate 的 Bean
+    private RedisTemplate<String, String> stringRedisTemplate;
 
     @Override
     public Long createEvent(Event event) {
@@ -117,9 +129,50 @@ public class EventServiceImpl implements IEventService {
         return closestEvent.map(Event::getId).orElse(null);
     }
 
+    @Override
+    public Boolean sendEventStartNotification(Long eventId) {
+        Event event = eventMapper.selectById(eventId);
+        if (event == null) {
+            log.error("活动id: {} 不存在", eventId);
+            return false;
+        }
+
+        // 构建 Redis 列表的 key
+        String redisKey = "ballplus:events:" + eventId;
+
+        // 从 Redis 列表中获取所有 OpenID
+        List<String> openIds = stringRedisTemplate.opsForList().range(redisKey, 0, -1);
+
+        if (openIds == null || openIds.isEmpty()) {
+            log.error("查找活动id: {} 的人失败", eventId);
+            return false;
+        }
+
+        // 删除 Redis 列表
+        stringRedisTemplate.delete(redisKey);
+
+        // 提交任务到线程池，异步发送通知
+        threadPoolExecutor.execute(() -> {
+            try {
+                // 调用 WechatUtil 发送通知
+                boolean success = WechatUtil.sendEventStartNotification(openIds, event);
+                if (!success) {
+                    log.error("eventId: {} 的活动开始通知未全部发送", eventId);
+                }
+            } catch (Exception e) {
+                // 记录日志或处理异常
+                log.error("线程{}发送活动开始通知失败", Thread.currentThread().getName(), e);
+            }
+        });
+
+        return true;
+    }
+
+
     /**
      * 计算用户性别和活动的匹配关系
-     * @param event 活动
+     *
+     * @param event      活动
      * @param userGender 用户性别 (0: 未知, 1: 女, 2: 男)
      * @return 是否匹配
      */

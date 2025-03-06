@@ -30,4 +30,6 @@ public interface IEventService {
     List<Event> getAllEvents();
 
     Long matchEvent(User user, Float latitude, Float longitude);
+
+    Boolean sendEventStartNotification(Long eventId);
 }
