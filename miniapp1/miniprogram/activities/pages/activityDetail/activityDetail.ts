@@ -140,15 +140,6 @@ Page({
       content: '确定要取消这个活动吗？',
       success: (res) => {
         if (res.confirm) {
-          // 查找活动 ID 的索引
-          const index = app.globalData.myEvents.indexOf(this.data.activity.id);
-
-          if (index !== -1) {
-            // 移除该活动 ID
-            app.globalData.myEvents.splice(index, 1);
-          } else {
-            console.log('未找到指定的活动 ID，取消活动失败');
-          }
           this.deleteActivity(); // 删除活动
         }
       }
@@ -176,6 +167,15 @@ Page({
             title: '活动已取消',
             icon: 'success',
           });
+          // 查找活动 ID 的索引
+          const index = app.globalData.myEvents.indexOf(this.data.activity.id);
+
+          if (index !== -1) {
+            // 移除该活动 ID
+            app.globalData.myEvents.splice(index, 1);
+          } else {
+            console.log('未找到指定的活动 ID，取消活动失败');
+          }
 
           wx.navigateBack(); // 返回上一页
         } else {
@@ -203,15 +203,6 @@ Page({
       content: '确定要退出这个活动吗？',
       success: (res) => {
         if (res.confirm) {
-          // 查找活动 ID 的索引
-          const index = app.globalData.myEvents.indexOf(this.data.activity.id);
-
-          if (index !== -1) {
-            // 移除该活动 ID
-            app.globalData.myEvents.splice(index, 1);
-          } else {
-            console.log('未找到指定的活动 ID，退出活动失败');
-          }
           this.removeParticipant(); // 退出活动
         }
       }
@@ -239,6 +230,17 @@ Page({
             title: '已退出活动',
             icon: 'success',
           });
+
+          // 查找活动 ID 的索引
+          const index = app.globalData.myEvents.indexOf(this.data.activity.id);
+
+          if (index !== -1) {
+            // 移除该活动 ID
+            app.globalData.myEvents.splice(index, 1);
+          } else {
+            console.log('未找到指定的活动 ID，退出活动失败');
+          }
+
           wx.navigateBack(); // 返回上一页
         } else {
           wx.showToast({
@@ -287,8 +289,6 @@ Page({
       content: '确定要参加这个活动吗？',
       success: (res) => {
         if (res.confirm) {
-          // 参加了，将app.globalData.myEvents添加该活动activity.id
-          app.globalData.myEvents.push(activity.id);
           this.addParticipant(); // 参加活动
           // 请求订阅消息授权
           this.requestSubscribeMessage();
@@ -318,6 +318,8 @@ Page({
             title: '已参加活动',
             icon: 'success',
           });
+          // 参加了，将app.globalData.myEvents添加该活动activity.id
+          app.globalData.myEvents.push(activity.id);
           wx.navigateBack(); // 返回上一页
         } else {
           wx.showToast({

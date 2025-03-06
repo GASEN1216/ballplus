@@ -23,7 +23,7 @@ public class EventStateUpdateTask {
         if (count > 0) {
             log.info("更新了 {} 条活动状态", count);
         } else {
-            log.info("今天没有活动需要更新");
+            log.info("没有活动需要更新");
         }
     }
 }

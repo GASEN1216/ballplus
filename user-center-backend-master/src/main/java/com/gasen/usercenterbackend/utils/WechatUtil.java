@@ -23,6 +23,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -101,6 +104,12 @@ public class WechatUtil {
             location = UNKNOWN_LOCATION;
         }
 
+        // **格式化活动时间**
+        LocalDate eventDate = event.getEventDate(); // 获取日期
+        LocalTime eventTime = event.getEventTime(); // 获取时间
+        String formattedDateTime = eventDate.format(DateTimeFormatter.ofPattern("yyyy年M月d日")) + " " +
+                eventTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+
         wxNotificationRequest message = new wxNotificationRequest();
 
         message.setTouser(openid);
@@ -110,7 +119,7 @@ public class WechatUtil {
 
         Map<String, TemplateData> data = new HashMap<>(4);
         data.put("thing2", new TemplateData(event.getName()));  // 活动名称
-        data.put("date4", new TemplateData(event.getEventDate().toString()));  // 活动时间
+        data.put("date4", new TemplateData(formattedDateTime));  // 活动时间
         data.put("thing3", new TemplateData(location));  // 活动场馆
         data.put("phone_number7", new TemplateData(event.getPhoneNumber()));  // 联系电话
 

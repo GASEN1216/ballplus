@@ -23,10 +23,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,8 +47,12 @@ public class EventController {
 
     @Resource
     private IUserEventService userEventService;
+
     @Autowired
     private EventMapper eventMapper;
+
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Operation(summary = "创建一个新的活动")
     @PostMapping("/createEvent")
@@ -52,8 +60,19 @@ public class EventController {
     public BaseResponse createEvent(@RequestBody Event event) {
         Long eventId = eventService.createEvent(event);
         Boolean isSuccess = userEventService.createUserEvent(event.getAppId(), eventId);
-        if(isSuccess)
+        if (isSuccess) {
+            // 计算时间戳（基于 event.date 和 event.time）
+            String dateTimeString = event.getEventDate() + " " + event.getEventTime(); // 拼接日期和时间
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime localDateTime = LocalDateTime.parse(dateTimeString, formatter);
+            long timestamp = localDateTime.toEpochSecond(ZoneOffset.UTC); // 转换为时间戳（秒）
+
+            // 插入 Redis ZSET
+            String redisKey = "events:sorted";
+            redisTemplate.opsForZSet().add(redisKey, eventId, timestamp);
+
             return ResultUtils.success(eventId);
+        }
         return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"创建活动失败！");
     }
 

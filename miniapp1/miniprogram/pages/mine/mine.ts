@@ -44,19 +44,6 @@ Page({
       };
     }
   },
-  onUnload() {
-    // 强制刷新数据
-    this.setData({
-      activities: [],    // 清空原有数据，避免数据不一致
-    });
-  },
-
-  // 页面每次显示时触发
-  onShow() {
-    if (app.globalData.isLoggedin) {
-      this.fetchActivities(); // 重新拉取数据
-    }
-  },
   // 获取活动数据
   fetchActivities() {
 
@@ -154,13 +141,13 @@ Page({
     app.login();
   },
 
-    // 查看活动详情
-viewActivityDetail(e: any) {
-  const activityId = e.currentTarget.dataset.id; // 获取活动ID
-  wx.navigateTo({
-    url: `${this.data.toEventDetailsPath}/pages/activityDetail/activityDetail?id=${activityId}`, // 跳转到活动详情页
-  });
-},
+  // 查看活动详情
+  viewActivityDetail(e: any) {
+    const activityId = e.currentTarget.dataset.id; // 获取活动ID
+    wx.navigateTo({
+      url: `${this.data.toEventDetailsPath}/pages/activityDetail/activityDetail?id=${activityId}`, // 跳转到活动详情页
+    });
+  },
 
   // 点击“个人信息”跳转到填写信息页面
   goToEditInfo() {
@@ -209,6 +196,10 @@ viewActivityDetail(e: any) {
 
 
   onShow() {
+    // 强制刷新数据
+    this.setData({
+      activities: [],    // 清空原有数据，避免数据不一致
+    });
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({
         selected: 0  //这个数字是当前页面在tabBar中list数组的索引

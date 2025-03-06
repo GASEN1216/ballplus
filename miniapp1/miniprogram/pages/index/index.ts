@@ -41,25 +41,22 @@ Page({
   // 页面加载时获取活动数据
   onLoad() {
     this.initDateRange();
-    this.fetchActivities(); 
+    this.fetchActivities();
     app.loginReadyCallback = () => {
-      this.fetchActivities(); 
+      this.fetchActivities();
     },
       app.jwReadyCallback = () => {
-        this.fetchActivities(); 
+        this.fetchActivities();
       }
   },
 
-  onUnload() {
+  // 页面每次显示时触发
+  onShow() {
     // 强制刷新数据
     this.setData({
       activities: [],    // 清空原有数据，避免数据不一致
       filteredActivities: []
     });
-  },
-
-  // 页面每次显示时触发
-  onShow() {
     if (app.globalData.isLoggedin) {
       this.fetchActivities(); // 重新拉取数据
     }
@@ -180,8 +177,8 @@ Page({
 
           this.setData({
             activities: [
-                ...newActivities, // 更新当前页数据
-              ],
+              ...newActivities, // 更新当前页数据
+            ],
           });
           this.filterActivities(); // 按条件过滤数据
         } else {
@@ -259,58 +256,58 @@ Page({
     this.filterActivities(); // 按新顺序重新过滤
   },
 
-    // 匹配活动
-    matchActivity() {
-      this.setData({ showAnimation: true }); // 开始播放动画
-  
-      setTimeout(() => {
-        wx.request({
-          url: this.data.matchApiUrl,
-          method: 'POST',
-          header: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'X-Token': app.globalData.currentUser.token,
-          },
-          data: {
-            userId: app.globalData.currentUser.id,
-            latitude: app.globalData.latitude,
-            longitude: app.globalData.longitude
-          },
-          success: (res) => {
-            if (res.statusCode === 200 && res.data.code === 0) {
-              const matchedEventId = res.data.data;
-              if (!isNaN(matchedEventId)) {
-                // 关闭动画
-                this.setData({ showAnimation: false });
-                
-                // 跳转到活动详情页
-                wx.navigateTo({
-                  url: `${this.data.activityPath}/pages/activityDetail/activityDetail?id=${matchedEventId}`,
-                });
-              } else {
-                wx.showToast({
-                  title: res.data.data,
-                  icon: 'none',
-                });
-                this.setData({ showAnimation: false }); // 关闭动画
-              }
+  // 匹配活动
+  matchActivity() {
+    this.setData({ showAnimation: true }); // 开始播放动画
+
+    setTimeout(() => {
+      wx.request({
+        url: this.data.matchApiUrl,
+        method: 'POST',
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-Token': app.globalData.currentUser.token,
+        },
+        data: {
+          userId: app.globalData.currentUser.id,
+          latitude: app.globalData.latitude,
+          longitude: app.globalData.longitude
+        },
+        success: (res) => {
+          if (res.statusCode === 200 && res.data.code === 0) {
+            const matchedEventId = res.data.data;
+            if (!isNaN(matchedEventId)) {
+              // 关闭动画
+              this.setData({ showAnimation: false });
+
+              // 跳转到活动详情页
+              wx.navigateTo({
+                url: `${this.data.activityPath}/pages/activityDetail/activityDetail?id=${matchedEventId}`,
+              });
             } else {
               wx.showToast({
-                title: '匹配失败，请稍后再试',
+                title: res.data.data,
                 icon: 'none',
               });
               this.setData({ showAnimation: false }); // 关闭动画
             }
-          },
-          fail: () => {
+          } else {
             wx.showToast({
-              title: '网络错误，请稍后再试',
+              title: '匹配失败，请稍后再试',
               icon: 'none',
             });
             this.setData({ showAnimation: false }); // 关闭动画
-          },
-        });
-      }, 1000); // 动画时间
-    },
+          }
+        },
+        fail: () => {
+          wx.showToast({
+            title: '网络错误，请稍后再试',
+            icon: 'none',
+          });
+          this.setData({ showAnimation: false }); // 关闭动画
+        },
+      });
+    }, 1000); // 动画时间
+  },
 
 });
