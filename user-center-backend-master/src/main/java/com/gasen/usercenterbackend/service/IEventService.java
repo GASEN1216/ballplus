@@ -32,4 +32,6 @@ public interface IEventService {
     Long matchEvent(User user, Float latitude, Float longitude);
 
     Boolean sendEventStartNotification(Long eventId);
+
+    Boolean sendEventInOneHourStartNotification(Event event);
 }

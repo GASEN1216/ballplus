@@ -3,9 +3,11 @@ package com.gasen.usercenterbackend.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.gasen.usercenterbackend.mapper.EventMapper;
+import com.gasen.usercenterbackend.mapper.UserMapper;
 import com.gasen.usercenterbackend.model.Event;
 import com.gasen.usercenterbackend.model.User;
 import com.gasen.usercenterbackend.service.IEventService;
+import com.gasen.usercenterbackend.service.IUserService;
 import com.gasen.usercenterbackend.utils.WechatUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +36,11 @@ public class EventServiceImpl implements IEventService {
 
     @Resource
     private RedisTemplate<String, String> stringRedisTemplate;
+
+    @Resource
+    private IUserService userService;
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public Long createEvent(Event event) {
@@ -143,12 +151,48 @@ public class EventServiceImpl implements IEventService {
         List<String> openIds = stringRedisTemplate.opsForList().range(redisKey, 0, -1);
 
         if (openIds == null || openIds.isEmpty()) {
-            log.error("查找活动id: {} 的人失败", eventId);
+            log.error("查找活动id: {} 的人失败，openids为空", eventId);
             return false;
         }
 
         // 删除 Redis 列表
         stringRedisTemplate.delete(redisKey);
+
+        // 提交任务到线程池，异步发送通知
+        threadPoolExecutor.execute(() -> {
+            try {
+                // 调用 WechatUtil 发送通知
+                boolean success = WechatUtil.sendEventStartNotification(openIds, event);
+                if (!success) {
+                    log.error("eventId: {} 的活动开始通知未全部发送", eventId);
+                }
+            } catch (Exception e) {
+                // 记录日志或处理异常
+                log.error("线程{}发送活动开始通知失败", Thread.currentThread().getName(), e);
+            }
+        });
+
+        return true;
+    }
+
+    @Override
+    public Boolean sendEventInOneHourStartNotification(Event event) {
+        if (event == null) {
+            log.error("活动不存在");
+            return false;
+        }
+
+        Long eventId = event.getId();
+
+        String openId = userService.getOpenIdByUserId(event.getAppId());
+
+        if (openId == null || openId.isEmpty()) {
+            log.error("查找id: {} 的人失败，openid为空", event.getAppId());
+            return false;
+        }
+
+        List<String> openIds = new ArrayList<>();
+        openIds.add(openId);
 
         // 提交任务到线程池，异步发送通知
         threadPoolExecutor.execute(() -> {

@@ -77,22 +77,9 @@ public class EventController {
         LocalDateTime eventDateTime = LocalDateTime.parse(dateTimeString, formatter);
         long timestamp = eventDateTime.toEpochSecond(ZoneOffset.UTC); // 转换为时间戳（秒）
 
-        // 检查活动时间是否在半小时以内
-        LocalDateTime now = LocalDateTime.now();
-        long nowTimestamp = now.toEpochSecond(ZoneOffset.UTC);
-        long halfHourInSeconds = 30 * 60; // 半小时的秒数
-
         String redisKey = "ballplus:events:sorted";
 
-        if (timestamp - nowTimestamp <= halfHourInSeconds) {
-            // 如果活动时间在半小时以内，发送通知
-            Boolean flag = eventService.sendEventStartNotification(eventId);
-            if(!flag)
-                return ResultUtils.error(ErrorCode.SEND_NOTIFICATION_FAILED);
-        } else {
-            // 否则，将活动 ID 插入 Redis ZSET
-            redisTemplate.opsForZSet().add(redisKey, eventId, timestamp);
-        }
+        redisTemplate.opsForZSet().add(redisKey, eventId, timestamp);
 
         return ResultUtils.success(eventId);
     }
