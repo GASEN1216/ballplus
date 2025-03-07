@@ -28,7 +28,6 @@ public class EventStateUpdateTask {
     private ThreadPoolExecutor threadPoolExecutor;
 
     @Resource
-    @Qualifier("stringRedisTemplate") // 指定使用名为 longRedisTemplate 的 Bean
     private RedisTemplate<String, String> stringRedisTemplate;
 
     /**

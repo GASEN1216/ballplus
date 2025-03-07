@@ -19,17 +19,4 @@ public class RedisConfig {
     template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
     return template;
   }
-
-  @Bean(name = "stringRedisTemplate")
-  public RedisTemplate<String, String> stringRedisTemplate(RedisConnectionFactory connectionFactory) {
-    RedisTemplate<String, String> template = new RedisTemplate<>();
-    template.setConnectionFactory(connectionFactory);
-
-    // 设置 key 的序列化器为 StringRedisSerializer
-    template.setKeySerializer(new StringRedisSerializer());
-    // 设置 value 的序列化器为 GenericToStringSerializer
-    template.setValueSerializer(new StringRedisSerializer());
-
-    return template;
-  }
 }

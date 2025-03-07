@@ -292,6 +292,8 @@ Page({
     wx.requestSubscribeMessage({
       tmplIds: templateIds,
       success(res) {
+        console.log(res);
+        
         // 发送报名成功消息
         if (res[templateIds[0]] === 'accept') {
           wx.request({

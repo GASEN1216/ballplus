@@ -32,7 +32,6 @@ public class EventServiceImpl implements IEventService {
     private ThreadPoolExecutor threadPoolExecutor;
 
     @Resource
-    @Qualifier("stringRedisTemplate") // 指定使用名为 longRedisTemplate 的 Bean
     private RedisTemplate<String, String> stringRedisTemplate;
 
     @Override

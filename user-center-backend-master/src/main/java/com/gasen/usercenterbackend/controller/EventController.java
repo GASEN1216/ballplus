@@ -73,7 +73,7 @@ public class EventController {
 
         // 计算时间戳（基于 event.date 和 event.time）
         String dateTimeString = event.getEventDate() + " " + event.getEventTime(); // 拼接日期和时间
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime eventDateTime = LocalDateTime.parse(dateTimeString, formatter);
         long timestamp = eventDateTime.toEpochSecond(ZoneOffset.UTC); // 转换为时间戳（秒）
 
