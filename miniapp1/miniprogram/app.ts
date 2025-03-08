@@ -5,7 +5,7 @@ import { IAppOption } from '../typings';
 App<IAppOption>({
   globalData: {
     qnurl: 'http://sunsetchat.top/',// 加个‘/’方便直接加图片名
-    url: 'http://192.168.31.105:8080',
+    url: 'http://192.168.1.10:8080',
     isLoggedin: false,
     latitude: 23.108649,
     longitude: 113.324646,
@@ -60,11 +60,20 @@ App<IAppOption>({
           this.jwReadyCallback();
         }
       },
-      fail: () => {
-        wx.showToast({
-          title: '无法获取位置',
-          icon: 'none',
-        });
+      fail: (err) => {
+        // 区分位置获取失败的原因
+        if (err.errMsg.includes('auth deny') || err.errMsg.includes('auth denied')) {
+          wx.showToast({
+            title: '获取位置失败：请授权位置权限',
+            icon: 'none',
+          });
+        } else {
+          wx.showToast({
+            title: '获取位置失败：请检查网络或定位服务',
+            icon: 'none',
+          });
+        }
+        console.error('获取位置失败:', err);
       }
     });
     // 先调用 wx.login 获取 code
@@ -118,36 +127,51 @@ App<IAppOption>({
                 if (this.loginReadyCallback) {
                   this.loginReadyCallback();
                 }
-
-                wx.showToast({
-                  title: '登录成功',
-                  icon: 'success',
-                });
               } else {
                 console.error('Unexpected response:', response.data);
                 wx.showToast({
-                  title: '登陆失败！服务器已爆炸',
+                  title: '登录失败：服务器返回数据异常',
                   icon: 'error',
                 });
               }
             },
             fail: (error) => {
-              wx.showToast({
-                title: '登陆失败！服务器已爆炸',
-                icon: 'error',
-              });
+              // 区分请求失败的原因
+              if (error.errMsg.includes('timeout')) {
+                wx.showToast({
+                  title: '登录失败：请求超时，请检查网络',
+                  icon: 'none',
+                });
+              } else {
+                wx.showToast({
+                  title: '登录失败：服务器错误',
+                  icon: 'none',
+                });
+              }
               console.error('Failed to send login request:', error);
             },
           });
         } else {
           console.error('Login failed:', res.errMsg);
+          wx.showToast({
+            title: '登录失败：获取 code 失败',
+            icon: 'none',
+          });
         }
       },
       fail: (loginError) => {
-        wx.showToast({
-          title: '登陆失败！服务器已爆炸',
-          icon: 'error',
-        });
+        // 区分 wx.login 失败的原因
+        if (loginError.errMsg.includes('network error')) {
+          wx.showToast({
+            title: '登录失败：网络错误，请检查网络连接',
+            icon: 'none',
+          });
+        } else {
+          wx.showToast({
+            title: '登录失败：未知错误',
+            icon: 'none',
+          });
+        }
         console.error('Failed to execute wx.login:', loginError);
       }
     });

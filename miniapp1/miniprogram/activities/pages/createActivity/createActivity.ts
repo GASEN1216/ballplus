@@ -275,7 +275,9 @@ Page({
       success: (res) => {
         if (res.statusCode === 200 && res.data.code === 0) {
           wx.showToast({ title: '活动创建成功', icon: 'success', duration: 500 });
-          this.requestSubscribeMessage(Number(res.data.data));
+          const eventId = Number(res.data.data);
+          this.requestSubscribeMessage(eventId);
+          app.globalData.myEvents.push(eventId);
           wx.navigateBack();
         } else {
           wx.showToast({ title: res.data.message || '活动创建失败', icon: 'none' });
@@ -292,7 +294,6 @@ Page({
     wx.requestSubscribeMessage({
       tmplIds: templateIds,
       success(res) {
-        console.log(res);
         
         // 发送报名成功消息
         if (res[templateIds[0]] === 'accept') {

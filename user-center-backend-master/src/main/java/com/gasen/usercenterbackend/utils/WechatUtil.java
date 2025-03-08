@@ -199,7 +199,7 @@ public class WechatUtil {
         Map<String, Object> message = new HashMap<>();
         message.put("touser", openid);
         message.put("template_id", wxConfig.getStartReminderTemplateId());
-        message.put("page", "activities/pages/activityDetail/activityDetail?eventId=" + event.getId());
+        message.put("page", "activities/pages/activityDetail/activityDetail?id=" + event.getId());
         message.put("miniprogram_state", "developer");
 
         Map<String, Object> data = new HashMap<>();
