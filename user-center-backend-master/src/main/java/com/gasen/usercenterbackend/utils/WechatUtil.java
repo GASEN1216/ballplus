@@ -200,6 +200,7 @@ public class WechatUtil {
         message.put("touser", openid);
         message.put("template_id", wxConfig.getStartReminderTemplateId());
         message.put("page", "activities/pages/activityDetail/activityDetail?eventId=" + event.getId());
+        message.put("miniprogram_state", "developer");
 
         Map<String, Object> data = new HashMap<>();
         data.put("thing4", Map.of("value", event.getName()));  // 活动名称

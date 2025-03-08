@@ -91,8 +91,18 @@ public class EventController {
             @RequestParam(value = "eventId") Long eventId){
         if (userId == null || eventId == null)
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
-        if (eventService.cancelEvent(userId, eventId))
+        if (eventService.cancelEvent(userId, eventId)){
+            String redisKey = "ballplus:events:" + eventId;
+            // 先查询redis里有没有这个键名，如果没有就没事，如果有就删除
+            if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(redisKey))) {
+                stringRedisTemplate.delete(redisKey);
+            }
+            String redisKey2 = "ballplus:events:sorted";
+            if (Boolean.TRUE.equals(redisTemplate.hasKey(redisKey2))) {
+                redisTemplate.delete(redisKey2);
+            }
             return ResultUtils.success("取消活动成功！");
+        }
         return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"取消活动失败！");
     }
 
@@ -104,8 +114,15 @@ public class EventController {
             @RequestParam(value = "eventId") Long eventId){
         if (userId == null || eventId == null)
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
-        if (userEventService.quitEvent(userId, eventId) && eventService.reduceParticipants(eventId))
+        if (userEventService.quitEvent(userId, eventId) && eventService.reduceParticipants(eventId)){
+            String redisKey = "ballplus:events:" + eventId;
+            // 先查询redis里有没有这个键名，如果没有就没事，如果有就删除list里的openid
+            if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(redisKey))) {
+                String openid = userService.getOpenIdByUserId(userId);
+                stringRedisTemplate.opsForList().remove(redisKey, 0, openid);
+            }
             return ResultUtils.success("退出活动成功！");
+        }
         return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"退出活动失败！");
     }
 
@@ -119,6 +136,7 @@ public class EventController {
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
         if (userEventService.createUserEvent(userId, eventId) && eventService.addParticipants(eventId))
             return ResultUtils.success("参加活动成功！");
+
         return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"参加活动失败！");
     }
 
