@@ -28,6 +28,8 @@ Page({
       fee: 0.0, // 活动费用
       penalty: true, // 爽约惩罚
       isTemplate: false, // 是否模板
+      startTimeIndex: 0,
+      endTimeIndex: 0,
     },
     dateRange: [], // 日期选择范围
     participantRange: [], // 活动总人数范围
@@ -35,7 +37,6 @@ Page({
     showFeeInput: false, // 控制活动费用输入框显示
     editProPath: '../../../',
     fromMap: false,
-    currentTime: '', // 用于存储当前时间
   },
 
   onLoad(options) {
@@ -55,14 +56,15 @@ Page({
     // 默认活动名称
     const defaultName = `${todayWeek}晚`;
 
-        // 获取当前时间并格式化
-        const now = new Date();
-        const hours = now.getHours().toString().padStart(2, '0');
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        const currentTime = `${hours}:${minutes}`;
+  // 生成时间选项数组，每半小时一次
+  const timeOptions = [];
+  for (let hour = 0; hour < 24; hour++) {
+    timeOptions.push(`${hour.toString().padStart(2, '0')}:00`);
+    timeOptions.push(`${hour.toString().padStart(2, '0')}:30`);
+  }
     
         this.setData({
-          currentTime: currentTime
+          timeOptions: timeOptions
         });
 
     const dateRange = Array.from({ length: 30 }, (_, i) => {
@@ -203,6 +205,64 @@ Page({
     } else {
       this.setData({
         [`event.${field}`]: value,
+      });
+    }
+
+    if (field === 'eventDate') {
+      const today = new Date().toISOString().slice(0, 10);
+      const isToday = value === today;
+  
+      // 如果是今天，则开始时间必须基于当前时间
+      if (isToday) {
+        const now = new Date();
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+        const currentTime = currentHour * 60 + currentMinute;
+  
+        // 找到第一个大于当前时间的时间选项
+        const timeOptions = this.data.timeOptions;
+        let startIndex = 0;
+        for (let i = 0; i < timeOptions.length; i++) {
+          const time = timeOptions[i];
+          const [hour, minute] = time.split(':').map(Number);
+          const totalMinutes = hour * 60 + minute;
+          if (totalMinutes >= currentTime) {
+            startIndex = i;
+            break;
+          }
+        }
+  
+        this.setData({
+          startTimeIndex: startIndex, // 更新开始时间的索引
+          endTimeIndex: startIndex
+        });
+      } else {
+        // 如果不是今天，则开始时间可以从 00:00 开始
+        this.setData({
+          startTimeIndex: 0, // 重置开始时间的索引
+        });
+      }
+    }
+  },
+
+  handleTimeChange(e: WechatMiniprogram.BaseEvent) {
+    const { field } = e.currentTarget.dataset;
+    const value = e.detail.value; // 选中的索引
+    const timeOptions = this.data.timeOptions;
+  
+    // 获取选中的时间
+    const selectedTime = timeOptions[value];
+  
+    // 更新开始时间或结束时间
+    if (field === 'eventTime') {
+      this.setData({
+        'event.eventTime': selectedTime,
+        startTimeIndex: value, // 更新开始时间的索引
+      });
+    } else if (field === 'eventTimee') {
+      this.setData({
+        'event.eventTimee': selectedTime,
+        endTimeIndex: value, // 更新结束时间的索引
       });
     }
   },

@@ -1,103 +1,74 @@
-<view class="edit-profile-container">
-  <!-- 页面标题 -->
-  <view class="header">
-    <text class="title">编辑个人信息</text>
-  </view>
+<view class="page">
 
-  <!-- 用户头像 -->
+  <!-- 内容区域 -->
+  <view class="content">
+    <!-- 头像卡片 -->
+    <view class="card avatar-card">
+      <text class="card-label">头像</text>
+      <image class="avatar" src="{{userData.avatar}}" bindtap="didPressChooesImage" />
+    </view>
+
+    <!-- 球号展示 -->
+    <view class="card info-card" bindtap="copyBallNumber">
+      <text class="card-label">球号</text>
+      <text class="info-text">{{userData.ballNumber}}</text>
+    </view>
+
+    <!-- 表单卡片 -->
+    <view class="card form-card">
   <view class="form-item required">
-    <text class="label">头像</text>
-    <image class="avatar" src="{{userData.avatar}}" bindtap="didPressChooesImage"></image>
+    <text class="form-label">昵称</text>
+    <input class="form-input" placeholder="请输入昵称" value="{{userData.name}}" bindinput="onInputChange" data-field="name" />
   </view>
-
-  <!-- 球号 -->
-  <view class="form-item" bindtap="copyBallNumber">
-    <text class="label">球号</text>
-    <text class="ballNumber-value">{{userData.ballNumber}}</text>
-  </view>
-
-  <!-- 昵称 -->
-  <view class="form-item required">
-    <text class="label">昵称</text>
-    <input class="input" placeholder="请输入昵称" value="{{userData.name}}" bindinput="onInputChange" data-field="name" />
-  </view>
-
-  <!-- 性别 -->
   <view class="form-item">
-    <text class="label">性别</text>
+    <text class="form-label">性别</text>
     <picker mode="selector" range="{{genderOptions}}" value="{{userData.gender}}" bindchange="onGenderChange">
-      <view class="picker">{{genderOptions[userData.gender] || '请选择性别'}}</view>
+      <view class="picker-display">{{genderOptions[userData.gender] || '请选择性别'}}</view>
     </picker>
   </view>
-
-  <!-- 生日 -->
   <view class="form-item">
-    <text class="label">生日</text>
+    <text class="form-label">生日</text>
     <picker mode="date" value="{{userData.birthday}}" bindchange="onDateChange">
-      <view class="picker">{{userData.birthday || '请选择生日'}}</view>
+      <view class="picker-display">{{userData.birthday || '请选择生日'}}</view>
     </picker>
   </view>
-
-  <!-- 填写手机号 -->
   <view class="form-item">
-    <text class="label">手机号</text>
+    <text class="form-label">手机号</text>
     <input class="form-input" type="number" maxlength="11" placeholder="请输入11位手机号" value="{{userData.phone}}" bindinput="handlePhoneInput" />
   </view>
-
-
-  <!-- 个性签名 -->
   <view class="form-item">
-    <text class="label">个性签名</text>
-    <textarea class="textarea" placeholder="请输入个性签名，最多15字！" value="{{userData.description}}" bindinput="onInputChange" data-field="description"></textarea>
+    <text class="form-label">标签</text>
+    <input class="form-input" placeholder="请输入标签" value="{{userData.label}}" bindinput="onInputChange" data-field="label" />
   </view>
-
-  <!-- 标签 -->
   <view class="form-item">
-    <text class="label">标签</text>
-    <input class="input" placeholder="请输入标签" value="{{userData.label}}" bindinput="onInputChange" data-field="label" />
+    <text class="form-label">个性签名</text>
+    <input class="form-input" placeholder="请输入个性签名，最多15字！" value="{{userData.description}}" bindinput="onInputChange" data-field="description"></input>
   </view>
+</view>
 
-  <!-- 信誉分 -->
-  <view class="form-item score-item">
-    <text class="label">信誉分</text>
-    <view class="credit-bar">
-      <view class="credit-gradient" style="width: {{userData.credit}}"></view>
-      <text class="credit-text">{{userData.credit}}</text>
-    </view>
-  </view>
 
-  <!-- 赛点 -->
-  <view class="form-item score-item">
-    <text class="label">赛点</text>
-    <view class="score-card">
-      <text class="score-desc">✨</text>
-      <text class="score-value">{{userData.score}}</text>
-      <text class="score-desc">✨</text>
-    </view>
-  </view>
-
-  <!-- 经验 - 长条进度条 -->
-  <view class="form-item score-item">
-    <text class="label">经验</text>
-    <view class="exp-bar-container">
-      <text class="exp-text">{{userData.exp}} / {{userData.grade * 10}}</text>
-      <view class="exp-bar">
-        <view class="exp-progress" style="width: {{expWidth}};"></view>
+    <!-- 评分卡片 -->
+    <view class="card score-card">
+      <view class="score-row">
+        <text class="score-title">信誉分</text>
+        <text class="score-value">{{userData.credit}}</text>
+      </view>
+      <view class="score-row">
+        <text class="score-title">赛点</text>
+        <text class="score-value">{{userData.score}}</text>
+      </view>
+      <view class="score-row">
+        <text class="score-title">经验</text>
+        <text class="score-value">{{userData.exp}} / {{userData.grade * 10}}</text>
+      </view>
+      <view class="score-row">
+        <text class="score-title">等级</text>
+        <text class="score-value">LV.{{userData.grade}}</text>
       </view>
     </view>
+
   </view>
 
-
-  <!-- 等级 - 小牌子 -->
-  <view class="form-item score-item">
-    <text class="label">等级</text>
-    <view class="level-badge">
-      <text class="level-text">LV.{{userData.grade}}</text>
-    </view>
-  </view>
-
-
-
-  <!-- 保存按钮 -->
+  <!-- 底部保存按钮 -->
   <button class="save-btn" bindtap="onSave">保存</button>
 </view>

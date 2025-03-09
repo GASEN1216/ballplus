@@ -13,7 +13,8 @@ Page({
     limitsText: '',
     levelText: '',
     isPastEvent: false, // 是否是过去的活动
-    isStateTwo: false,  // 活动是否 state === 2
+    isStateZero: true,  // 活动是否 state === 0
+    ifNotification: true
   },
   // 请求订阅消息授权
   requestSubscribeMessage() {
@@ -37,7 +38,7 @@ Page({
             },
             success: (res) => {
               if (res.statusCode === 200 && res.data.code === 0) {
-                console.error('参加活动通知发送成功！');
+                console.log('参加活动通知发送成功！');
               } else {
                 console.error('参加活动通知发送失败！');
               }
@@ -57,6 +58,11 @@ Page({
   onLoad(options) {
     const { id } = options; // 获取活动ID
     this.fetchActivityDetail(Number(id));
+    if(app.globalData.isLoggedin){
+      this.setData({
+        ifNotification: false
+      });
+    }
   },
 
   // 获取活动详情
@@ -101,8 +107,14 @@ Page({
           // 检查活动日期是否早于今天
           const isPastEvent = activity.eventDate < today;
 
-          // 检查活动状态是否是 2
-          const isStateTwo = activity.state === 2;
+          // 去掉 eventTime 的秒数
+          activity.eventTime = activity.eventTime.split(':').slice(0, 2).join(':');
+
+          // 去掉 eventTimee 的秒数
+          activity.eventTimee = activity.eventTimee.split(':').slice(0, 2).join(':');
+
+          // 检查活动状态是否是 0
+          const isStateZero = activity.state === 0;
 
           this.setData({
             activity,
@@ -113,8 +125,8 @@ Page({
             limitsText,
             levelText,
             isPastEvent, // 存储过去的活动状态
-            isStateTwo,
-          });
+            isStateZero,
+          });      
         } else {
           wx.showToast({
             title: '获取活动详情失败',
@@ -263,6 +275,14 @@ Page({
     if (this.data.isJoined) return;
 
     const activity = this.data.activity;
+
+    if (activity.totalParticipants <= activity.participants) {
+      wx.showToast({
+        title: '人数已满！',
+        icon: 'none',
+      });
+      return;
+    }
 
     // 校验性别
     if (activity.limits !== 0) { // 0 表示无限制

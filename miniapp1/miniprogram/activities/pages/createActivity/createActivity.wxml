@@ -16,11 +16,11 @@
   <!-- 开始时间 -->
   <view class="form-item">
     <text class="form-label">开始时间</text>
-    <picker class="form-input" mode="time" data-field="eventTime" start="{{currentTime}}" end="23:59"  bindchange="handleInputChange">
+    <picker class="form-input" mode="selector" data-field="eventTime" range="{{timeOptions}}" value="{{startTimeIndex}}" bindchange="handleTimeChange">
       <view>{{event.eventTime || '请选择开始时间'}}</view>
     </picker>
     <text class="time-divider">至</text>
-    <picker class="form-input" mode="time" data-field="eventTimee" start="{{currentTime}}" end="23:59"  bindchange="handleInputChange">
+    <picker class="form-input" mode="selector" data-field="eventTimee" range="{{timeOptions}}" value="{{endTimeIndex}}" bindchange="handleTimeChange">
       <view>{{event.eventTimee || '请选择结束时间'}}</view>
     </picker>
   </view>

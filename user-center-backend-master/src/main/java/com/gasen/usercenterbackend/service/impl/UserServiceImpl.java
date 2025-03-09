@@ -238,7 +238,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public List<userIdAndAvatar> getAvatarByUserIds(List<Integer> userIds) {
-        return userMapper.selectList(new LambdaQueryWrapper<User>().in(User::getId, userIds)).stream().map(user -> new userIdAndAvatar(user.getId(), user.getAvatarUrl())).toList();
+        // 查询数据库，获取用户信息
+        List<User> users = userMapper.selectList(
+                new LambdaQueryWrapper<User>()
+                        .in(User::getId, userIds)
+        );
+
+        // 将查询结果转换为 Map，方便根据 userId 快速查找
+        Map<Integer, String> userAvatarMap = users.stream()
+                .collect(Collectors.toMap(
+                        User::getId, // Key: userId
+                        User::getAvatarUrl // Value: avatarUrl
+                ));
+
+        // 按照 userIds 的顺序构建结果列表
+        return userIds.stream()
+                .map(userId -> new userIdAndAvatar(
+                        userId,
+                        userAvatarMap.getOrDefault(userId, null) // 如果 userId 不存在，返回 null
+                ))
+                .toList();
     }
 
     @Override

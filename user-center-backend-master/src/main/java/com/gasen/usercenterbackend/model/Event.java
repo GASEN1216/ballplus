@@ -167,6 +167,7 @@ public class Event implements Serializable {
                 .setLimits(limits)
                 .setLevel(level)
                 .setFeeMode(feeMode)
+                .setState(state)
                 .setFee(fee)
                 .setRemarks(remarks);
     }

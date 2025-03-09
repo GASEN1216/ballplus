@@ -19,7 +19,7 @@ function initQiniu() {
      *  注意：此处的 region、domain 与生成 uploadToken 时提交的 bucket 对应，否则上传图片时可能出现 401 expired token
      */
     uptoken: '',
-    uptokenURL: 'http://10.45.4.53:8080/user/wx/uptoken',
+    uptokenURL: 'http://192.168.1.10:8080/user/wx/uptoken',
     uptokenFunc: function () { return '' },
 
     // 后端生成 uploadToken 时使用的 bucket 所分配的域名。 https://portal.qiniu.com/kodo/bucket/overview?bucketName=cregskin-static-pictures
@@ -106,7 +106,7 @@ Page({
           options:
           {
             region: 'SCN', // 华北区
-            uptokenURL: 'http://10.45.4.53:8080/user/wx/uptoken',
+            uptokenURL: 'http://192.168.1.10:8080/user/wx/uptoken',
             domain: 'https://portal.qiniu.com/kodo/bucket/resource-v2?bucketName=ballplus',
             shouldUseQiniuFileName: false,
             key: fileName,
@@ -135,8 +135,8 @@ Page({
     const field = e.currentTarget.dataset.field as keyof wxUser; // 获取字段名
     const value = e.detail.value.trim(); // 去除首尾空格
 
-    // 正则校验：只允许中文、英文、数字，至少2个字符
-    const isValid = /^[a-zA-Z0-9\u4e00-\u9fa5]{2,15}$/.test(value);
+    // 正则校验：允许中文、英文、数字和标点符号，至少2个字符，最多15个字符
+    const isValid = /^[a-zA-Z0-9\u4e00-\u9fa5\p{P}]{2,15}$/u.test(value);
 
     if (!isValid) {
       wx.showToast({

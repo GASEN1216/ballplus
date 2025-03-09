@@ -68,6 +68,7 @@ Page({
         this.loadHistoryMessage(false);
     },
     onLoad(options) {
+        console.log('options.to:', options.to);
         // 初始化群数据
         let group = JSON.parse(options.to);
         let currentUser = app.globalData.currentUser;

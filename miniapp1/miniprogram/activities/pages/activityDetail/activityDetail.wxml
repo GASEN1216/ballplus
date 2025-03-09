@@ -35,7 +35,7 @@
   </view>
 
   <!-- 底部按钮 -->
-  <view class="action-buttons" wx:if="{{!isPastEvent && !isStateTwo}}">
+  <view class="action-buttons" wx:if="{{!isPastEvent && isStateZero && !ifNotification}}">
     <button wx:if="{{isCreator}}" bindtap="cancelActivity">我要取消</button>
     <button wx:if="{{!isCreator && isJoined}}" bindtap="exitActivity">我要退出</button>
     <button wx:if="{{!isCreator && !isJoined}}" bindtap="joinActivity">我要参加</button>

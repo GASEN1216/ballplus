@@ -33,6 +33,7 @@ public class detailEvent implements Serializable {
     private Byte limits;
     private Byte level;
     private Byte feeMode;
+    private Byte state;
     private Float fee;
     private String remarks;
     private List<userIdAndAvatar> persons;

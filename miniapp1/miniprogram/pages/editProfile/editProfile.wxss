@@ -1,246 +1,160 @@
-/* 页面容器 */
-.edit-profile-container {
-  padding: 20rpx;
-  background-color: #f5f5f5;
-}
-
-/* 页面标题 */
-.header {
-  text-align: center;
-  margin-bottom: 30rpx;
-}
-
-.title {
-  font-size: 36rpx;
-  font-weight: bold;
-}
-
-/* 表单项 */
-.form-item {
+/* 整体页面 */
+.page {
   display: flex;
-  align-items: center;
-  margin-bottom: 20rpx;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  padding: 20rpx;
 }
 
-.form-item .label {
-  width: 150rpx;
-  font-size: 28rpx;
-  color: #333;
-}
-
-.required .label::after {
-  content: "*";
-  color: red;
-  margin-left: 5rpx;
-}
-
-/* 输入框 */
-.input {
+/* 内容区域 */
+.content {
   flex: 1;
-  border: 1rpx solid #ccc;
-  border-radius: 8rpx;
-  padding: 10rpx;
-  font-size: 28rpx;
 }
 
-/* 头像 */
+/* 通用卡片样式 */
+.card {
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+}
+
+/* 头像卡片 */
+.avatar-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .avatar {
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
-  background-color: #eee;
-  margin-left: 20rpx;
-}
-.ballNumber-value {
-  flex: 1; /* 占据剩余空间 */
-  font-size: 16px; /* 字体大小 */
-  color: #666; /* 灰色文字 */
-  text-align: left; /* 左对齐 */
-}
-/* 选择器 */
-.picker {
-  flex: 1;
-  border: 1rpx solid #ccc;
-  border-radius: 8rpx;
-  padding: 10rpx;
-  font-size: 28rpx;
+  border: 2rpx solid #e0e0e0;
 }
 
-/* 文本区域 */
-.textarea {
-  flex: 1;
-  border: 1rpx solid #ccc;
-  border-radius: 8rpx;
-  padding: 10rpx;
-  font-size: 28rpx;
+/* 球号展示卡片 */
+.info-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* 只读信息 */
-.readonly {
-  flex: 1;
+.info-text {
   font-size: 28rpx;
   color: #666;
-  margin-left: 20rpx;
 }
+
+/* 表单卡片 */
+/* 表单卡片整体 */
+.form-card {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 0 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 表单项布局，每项下方有分割线 */
+.form-card .form-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 标签和填写区域两端对齐 */
+  padding: 15rpx 0;
+  border-bottom: 1rpx solid #eaeaea;
+}
+
+/* 最后一项无分割线 */
+.form-card .form-item:last-child {
+  border-bottom: none;
+}
+
+/* 标签样式：固定宽度 */
+.form-label {
+  width: 150rpx;
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 必填项标记 */
+.required .form-label::after {
+  content: '*';
+  color: #e74c3c;
+  margin-left: 5rpx;
+}
+
+/* 填写区域样式：输入框、选择器显示及文本域，无边框，右对齐 */
+.form-input,
+.picker-display {
+  flex: 1;
+  border: none;
+  background-color: transparent;
+  font-size: 28rpx;
+  color: #333;
+  text-align: right;
+}
+
+/* 去除输入时默认的轮廓 */
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+}
+
+/* 文本域高度及禁止调整大小 */
+.form-textarea {
+  height: 80rpx;
+  resize: none;
+}
+
+
+/* 评分卡片 */
+/* 简洁优雅的分数展示卡片 */
+.score-card {
+  background-color: #fff;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin: 20rpx 0;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.score-row:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.score-title {
+  font-size: 28rpx;
+  color: #555;
+}
+
+.score-value {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+
 
 /* 保存按钮 */
 .save-btn {
   width: 100%;
-  margin-top: 40rpx;
   background-color: #1cbbb4;
   color: #fff;
-  font-size: 28rpx;
-  border-radius: 8rpx;
-  padding: 12rpx;
+  font-size: 32rpx;
+  border: none;
+  border-radius: 12rpx;
+  padding: 20rpx;
   text-align: center;
-}
-
-/* 评分项 */
-.score-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 30rpx;
-}
-
-/* 标题标签 */
-.label {
-  width: 150rpx;
-  font-size: 28rpx;
-  font-weight: bold;
-  color: #333;
-}
-
-/* 信誉分进度条 */
-.credit-bar {
-  position: relative;
-  flex: 1;
-  height: 30rpx;
-  background: #333;
-  border-radius: 15rpx;
-  overflow: hidden;
-  margin-left: 20rpx;
-}
-
-.credit-gradient {
-  height: 100%;
-  background: linear-gradient(to right, #f85032, #e73827);
-  transition: width 0.3s ease-in-out;
-}
-
-.credit-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 24rpx;
-  font-weight: bold;
-  color: #fff;
-  z-index: 2; /* 确保文本在进度条上方 */
-}
-
-/* 积分卡片 */
-.score-card {
-  flex: 1;
-  background: linear-gradient(135deg, #ff5f6d, #ffc371);
-  border-radius: 20rpx;
-  padding: 10rpx;
-  text-align: center;
-  box-shadow: 0 4rpx 8rpx rgba(255, 95, 109, 0.4);
-  animation: pulse 2s infinite;
-  margin-left: 20rpx;
-}
-
-.score-value {
-  font-size: 48rpx;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 0 3rpx 6rpx rgba(0, 0, 0, 0.5);
-}
-
-.score-desc {
-  font-size: 24rpx;
-  color: #fff;
-  margin-top: 10rpx;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 4rpx 8rpx rgba(255, 95, 109, 0.4);
-  }
-  50% {
-    box-shadow: 0 8rpx 16rpx rgba(255, 95, 109, 0.6);
-  }
-}
-
-/* 经验条容器 */
-.exp-bar-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 20rpx;
-}
-
-/* 经验值文本 */
-.exp-text {
-  font-size: 24rpx;
-  font-weight: bold;
-  color: #555;
-  margin-bottom: 5rpx;
-  text-align: center;
-}
-
-/* 经验进度条 */
-.exp-bar {
-  width: 100%;
-  height: 20rpx;
-  background: #000; /* 黑色背景，表示未获得经验 */
-  border-radius: 10rpx;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.1);
-}
-
-/* 已获得经验部分 */
-.exp-progress {
-  height: 100%;
-  background: linear-gradient(to right, #0072ff, #00c6ff); /* 蓝色渐变 */
-  width: 0%; /* 初始状态 */
-  transition: width 0.5s ease-in-out;
-  border-radius: 10rpx; /* 与父容器一致 */
-  z-index: 200;
-}
-
-
-
-/* 等级徽章 */
-.level-badge {
-  flex: 0;
-  background: #fff; /* 设置背景为白色 */
-  border: 2rpx solid #ffffff; /* 添加蓝色边框以增加层次感 */
-  border-radius: 10rpx; /* 保持圆角 */
-  padding: 8rpx 20rpx;
-  text-align: center;
-  margin-left: 20rpx;
-  box-shadow: 0 4rpx 8rpx rgba(0, 114, 255, 0.1); /* 添加轻微阴影 */
-  animation: float 2s infinite alternate; /* 保留浮动动画 */
-}
-
-/* 等级文本 */
-.level-text {
-  font-size: 24rpx;
-  font-weight: bold;
-  color: #0072ff; /* 字体颜色设置为蓝色 */
-  text-shadow: 0 2rpx 4rpx rgba(0, 114, 255, 0.2); /* 蓝色文字阴影，增加立体感 */
-}
-
-
-/* 小牌子浮动动画 */
-@keyframes float {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-5rpx);
-  }
+  margin-top: 20rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
 }

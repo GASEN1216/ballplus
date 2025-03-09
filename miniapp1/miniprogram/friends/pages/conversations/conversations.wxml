@@ -106,11 +106,11 @@
         <view class="contacts-title" v-if="friends && friends.length !=0">联系人</view>
         <view class="user-list">
             <view class="user-list-item" wx:for="{{friends || []}}" wx:for-item="friend"
-                  data-type="private" data-to="{{friend}}" wx:key="key">
-                <view class="user-item-avatar" bindtap="goToInfo" data-userid="{{friend.id}}">
+                  data-type="private" data-to="{{friend}}" wx:key="key" bindtap="chat">
+                <view class="user-item-avatar" catchtap="goToInfo" data-userid="{{friend.id}}">
                     <image src="{{friend.avatar}}"></image>
                 </view>
-                <view class="user-item-info" bindtap="chat">
+                <view class="user-item-info">
                     <text class="user-item-info__name">{{friend.name}}</text>
                 </view>
             </view>
