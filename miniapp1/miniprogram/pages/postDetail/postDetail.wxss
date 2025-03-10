@@ -1,241 +1,284 @@
-.post-detail-container {
-  padding: 16px;
+/* 整体容器 */
+.container {
+  padding: 32rpx 24rpx;
   background-color: #f9f9f9;
   font-family: Arial, sans-serif;
 }
 
+/* 帖子头部 */
 .post-header {
-  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 24rpx;
 }
-
-.post-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 8px;
+.post-author-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 16rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.1);
 }
-
 .post-meta {
-  font-size: 12px;
+  flex: 1;
+}
+.post-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+.post-author-info {
+  font-size: 24rpx;
   color: #666;
   display: flex;
-  justify-content: space-between;
+  gap: 16rpx;
 }
 
+/* 帖子内容 */
 .post-content {
-  margin-bottom: 16px;
   background-color: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 24rpx;
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.05);
+  margin-bottom: 24rpx;
 }
-
 .content-text {
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 8px;
+  font-size: 28rpx;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 16rpx;
 }
-
 .post-image {
   width: 100%;
-  max-height: 200px;
+  max-height: 400rpx;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 8rpx;
 }
 
+/* 分割线 */
 .divider {
-  height: 1px;
+  width: 100%;
+  height: 1rpx;
   background-color: #ddd;
-  margin: 16px 0;
+  margin: 24rpx 0;
 }
 
+/* 整个评论区域，使用内边距保证左右间距 */
 .comments-container {
-  margin-bottom: 80px; /* 避免被底部操作栏遮挡 */
+  width: 100%;
+  padding: 0 24rpx;
+  box-sizing: border-box;
 }
 
+/* 每个评论块：占满全屏宽度，带有背景、圆角、阴影和底部间隔 */
+.comment-block {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
+  margin-bottom: 16rpx;
+  overflow: hidden;
+}
+
+/* 主评论区域，采用水平布局 */
 .comment-item {
   display: flex;
-  margin-bottom: 12px;
-  padding: 8px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 16rpx;
 }
 
+/* 用户头像 */
 .comment-avatar {
-  width: 40px;
-  height: 40px;
+  width: 60rpx;
+  height: 60rpx;
   border-radius: 50%;
-  margin-right: 8px;
+  margin-right: 16rpx;
 }
 
-.comment-info {
+/* 评论主体 */
+.comment-main {
   flex: 1;
+}
+
+/* 评论信息 */
+.comment-info {
+  margin-bottom: 8rpx;
 }
 
 .comment-name {
-  font-size: 14px;
+  font-size: 26rpx;
   font-weight: bold;
-  margin-bottom: 4px;
+  color: #333;
+  margin-bottom: 4rpx;
 }
 
 .comment-content {
-  font-size: 12px;
-  color: #555;
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1.4;
 }
 
+/* 评论操作按钮 */
 .comment-actions {
   display: flex;
-  gap: 8px;
+  gap: 12rpx;
   align-items: center;
+  margin-top: 8rpx;
 }
 
-.like-button,
-.reply-button {
-  width: 50rpx;
-  height: 50rpx;
-  font-size: 12px;
+.icon-button {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.likes-count {
+  font-size: 24rpx;
   color: #007aff;
-  border: none;
-  background: none;
-}
-.share-icon,
-.comment-icon,
-.like-icon {
-  width: 20px;
-  height: 20px;
 }
 
-.show-more {
-  text-align: center;
-  color: #007aff;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.bottom-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 94%;
-  background-color: #fff;
-  padding: 8px 16px;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 10; /* 确保在其他元素上方 */
-}
-
-.comment-input {
-  flex: 1;
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  margin-right: 8px;
-}
-
-.bottom-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.action-number {
-  font-size: 12px;
-  color: #666;
-  margin-top: 4px; /* 添加这一行 */
-}
-
-.action-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #888;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.reply-popup {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #fff;
-  padding: 16px;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 16px 16px 0 0;
-  z-index: 20; /* 确保在 bottom-bar 之上 */
-}
-
-.popup-content {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.reply-title {
-  font-size: 14px;
-  color: #333;
-}
-
-.reply-input {
-  flex: 1;
-  padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.send-button {
-  font-size: 14px;
-  color: #fff;
-  background-color: #007aff;
-  padding: 8px 16px;
-  border-radius: 4px;
-  border: none;
-}
-.post-author-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 12px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+/* 子评论区域：使用浅背景色、内边距和分隔线效果 */
 .sub-comments {
-  background-color: #f0f0f0;
-  padding: 12px;
-  margin: 12px 0;
-  border-radius: 5px;
+  background-color: #ebebeb;
+  padding: 12rpx;
+  border-top: 1rpx solid #eee;
 }
 
 .sub-comment-item {
-  margin-bottom: 10px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #ddd;
-  font-size: 12px;
-  color: #333;
-}
-
-.sub-comment-item:last-child {
-  border-bottom: none; /* 最后一项不显示底边框 */
+  display: flex;
+  font-size: 24rpx;
+  color: #555;
+  margin-bottom: 8rpx;
 }
 
 .sub-comment-name {
   font-weight: bold;
+  margin-right: 4rpx;
 }
 
 .show-more-sub-comments {
-  font-size: 12px;
+  font-size: 24rpx;
   color: #007aff;
   text-align: right;
   cursor: pointer;
 }
-.overlay {
+
+/* 底部操作栏 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 16rpx 24rpx;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 -2rpx 6rpx rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+.comment-input {
+  flex: 1;
+  padding: 12rpx;
+  font-size: 28rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 30rpx;
+  margin-right: 16rpx;
+}
+.bottom-actions {
+  display: flex;
+  gap: 16rpx;
+}
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.action-number {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 4rpx;
+}
+
+/* 整个回复弹窗容器，全屏覆盖 */
+.reply-popup {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 91%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 15; /* 确保在 popup 下方 */
+  height: 100%;
+  z-index: 20;
+}
+
+/* 遮罩层 */
+.popup-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+/* 回复弹窗内容区域 */
+.popup-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+  box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.1);
+  z-index: 15;
+  /* 使用 flex 布局，使按钮固定在底部 */
+  display: flex;
+  flex-direction: column;
+  transition: height 0.3s;
+}
+
+/* 拖拽把手 */
+.handle {
+  width: 40rpx;
+  height: 4rpx;
+  background-color: #ccc;
+  border-radius: 2rpx;
+  margin: 16rpx auto;
+}
+
+/* 回复内容区域：随容器高度扩展 */
+.reply-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 24rpx;
+  overflow: hidden;
+}
+
+/* 回复标题 */
+.reply-title {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+/* 回复输入框 */
+.reply-input {
+  flex: 1;
+  width: 100%;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 12rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  resize: none; /* 禁止手动调整大小 */
+}
+
+/* 发送按钮始终在底部 */
+.send-button {
+  margin: 16rpx 24rpx;
+  padding: 16rpx;
+  background-color: #007aff;
+  color: #fff;
+  border: none;
+  border-radius: 8rpx;
+  font-size: 28rpx;
 }

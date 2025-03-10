@@ -1,52 +1,62 @@
-<view class="forum-container">
-  <!-- 搜索栏和加号按钮 -->
-  <view class="search-bar" wx:if="{{showSearchBar}}">
-    <input
-    class="search-input"
-    placeholder="搜索帖子..."
-    value="{{searchKeyword}}"
-    bindinput="onSearchInput"
-    confirm-type="search"
-    bindconfirm="onSearchConfirm"
-  />
-    <image src="/icon/add.png" class="add-button" bindtap="onAddClick" style="transform: rotate({{addButtonRotate}}deg);" />
+<view class="container">
+  <!-- 固定顶部搜索栏及加号按钮 -->
+  <view class="header">
+    <input 
+      class="search-input" 
+      placeholder="搜索帖子..." 
+      value="{{searchKeyword}}" 
+      bindinput="onSearchInput" 
+      confirm-type="search" 
+      bindconfirm="onSearchConfirm"
+    />
+    <image 
+      class="add-button" 
+      src="/icon/add.png" 
+      bindtap="onAddClick" 
+      style="transform: rotate({{addButtonRotate}}deg);"
+    />
   </view>
 
-  <!-- 向上箭头按钮 -->
+  <!-- 帖子列表区域 -->
+  <view class="post-list">
+    <block wx:for="{{filteredPosts}}" wx:key="id">
+      <view class="post-item" bindtap="goToPostDetail" data-id="{{item.id}}">
+        <!-- 帖子头部：头像、标题、时间 -->
+        <view class="post-header">
+          <image class="avatar" src="{{item.avatar}}" />
+          <view class="header-info">
+            <text class="post-title">{{item.title}}</text>
+            <text class="level-text">LV.{{item.grade}}</text>
+          </view>
+        </view>
+        <!-- 帖子主体：作者、内容 -->
+        <view class="post-body">
+          <text class="post-name">{{item.name}}</text>
+          <text class="post-content">{{item.content}}</text>
+        </view>
+        <!-- 帖子图片（如果存在） -->
+        <image wx:if="{{item.image}}" class="post-image" src="{{item.image}}" />
+        <!-- 帖子操作：点赞、评论 -->
+        <view class="post-actions">
+          <view class="action-item">👍 {{item.likes}}</view>
+          <view class="action-item">💬 {{item.comments}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 向上返回按钮 -->
   <view class="up-arrow" wx:if="{{showUpArrow}}" bindtap="onScrollToTop">
     <text>⬆️</text>
   </view>
 
-  <view class="post-list">
-  <block wx:for="{{filteredPosts}}" wx:key="id">
-    <view class="post-item" bindtap="goToPostDetail" data-id="{{item.id}}">
-      <image src="{{item.avatar}}" class="post-avatar" />
-      <view class="post-info">
-        <text class="post-name">{{item.name}}</text>
-        <text class="post-time">{{item.time}}</text>
-        <text class="post-title">{{item.title}}</text>
-        <text class="post-content">{{item.content}}</text>
-      </view>
-      <image wx:if="{{item.image}}" src="{{item.image}}" class="post-image" />
-      <view class="post-actions" catchtap="preventClose"> <!-- 避免交互 -->
-        <view class="action-item disabled">👍 {{item.likes}}</view>
-        <view class="action-item disabled">🔄</view>
-        <view class="action-item disabled">💬 {{item.comments}}</view>
-      </view>
+  <!-- 发帖弹窗 -->
+  <view class="modal-overlay" wx:if="{{showPostModal}}" catchtap="onCancelPost">
+    <view class="modal-content" catchtap="preventClose">
+      <input placeholder="标题" bindinput="onTitleInput" />
+      <textarea placeholder="内容" bindinput="onContentInput"></textarea>
+      <button class="upload-btn" bindtap="onUploadImage">上传图片</button>
+      <button class="submit-btn" bindtap="onSubmitPost">提交</button>
     </view>
-  </block>
-</view>
-
-</view>
-
-
-<!-- 发帖弹窗 -->
-<view class="post-modal" wx:if="{{showPostModal}}" catchtap="onCancelPost">
-  <view class="modal-content" catchtap="preventClose">
-    <input placeholder="标题" bindinput="onTitleInput" />
-    <textarea placeholder="内容" bindinput="onContentInput"></textarea>
-    <button bindtap="onUploadImage">上传图片</button>
-    <button class="submit-button" bindtap="onSubmitPost">提交</button>
   </view>
 </view>
-

@@ -6,7 +6,7 @@
 
   <!-- 主评论 -->
   <view class="main-comment">
-    <image class="main-avatar" src="{{mainComment.avatar}}" />
+    <image class="main-avatar" src="{{mainComment.avatar}}" mode="aspectFill" />
     <view class="main-info">
       <text class="main-name">{{mainComment.name}}</text>
       <text class="main-content">{{mainComment.content}}</text>
@@ -21,7 +21,7 @@
     <text class="sub-comments-title">回复</text>
     <block wx:for="{{mainComment.subComments}}" wx:key="id">
       <view class="sub-comment-card">
-        <image class="sub-avatar" src="{{item.avatar}}" />
+        <image class="sub-avatar" src="{{item.avatar}}" mode="aspectFill" />
         <view class="sub-info">
           <text class="sub-name">{{item.name}}</text>
           <text class="sub-content">{{item.content}}</text>
