@@ -1,20 +1,8 @@
 <view class="container">
   <!-- 固定顶部搜索栏及加号按钮 -->
   <view class="header">
-    <input 
-      class="search-input" 
-      placeholder="搜索帖子..." 
-      value="{{searchKeyword}}" 
-      bindinput="onSearchInput" 
-      confirm-type="search" 
-      bindconfirm="onSearchConfirm"
-    />
-    <image 
-      class="add-button" 
-      src="/icon/add.png" 
-      bindtap="onAddClick" 
-      style="transform: rotate({{addButtonRotate}}deg);"
-    />
+    <input class="search-input" placeholder="搜索帖子..." value="{{searchKeyword}}" bindinput="onSearchInput" confirm-type="search" bindconfirm="onSearchConfirm" />
+    <image class="add-button" src="/icon/add.png" bindtap="onAddClick" style="transform: rotate({{addButtonRotate}}deg);" />
   </view>
 
   <!-- 帖子列表区域 -->
@@ -25,13 +13,14 @@
         <view class="post-header">
           <cover-image class="avatar" src="{{item.avatar}}"></cover-image>
           <view class="header-info">
-            <text class="post-title">{{item.title}}</text>
+            <text class="post-name">{{item.name}}</text>
             <text class="level-text">LV.{{item.grade}}</text>
           </view>
         </view>
         <!-- 帖子主体：作者、内容 -->
         <view class="post-body">
-          <text class="post-name">{{item.name}}</text>
+          <text class="post-title">{{item.title}}
+          </text>
           <text class="post-content">{{item.content}}</text>
         </view>
         <!-- 帖子图片（如果存在） -->

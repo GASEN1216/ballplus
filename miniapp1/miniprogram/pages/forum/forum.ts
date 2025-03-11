@@ -32,11 +32,16 @@ Page({
   },
 
   onLoad() {
+    // 强制刷新数据
+    this.setData({
+      posts: [],    // 清空原有数据，避免数据不一致
+      filteredPosts: []
+    });
     this.fetchPosts();
   },
 
-   // 页面每次显示时触发
-   onShow() {
+  // 页面每次显示时触发
+  onShow() {
     // 强制刷新数据
     this.setData({
       posts: [],    // 清空原有数据，避免数据不一致
@@ -44,7 +49,7 @@ Page({
     });
 
     this.fetchPosts();
-  
+
   },
 
   // 从后端获取帖子数据，并转换成前端需要的格式
@@ -53,8 +58,6 @@ Page({
       url: `${app.globalData.url}/user/wx/getPostList`, // 替换成你的后端地址
       method: 'GET',
       success: (res) => {
-        console.log(res);
-        
         if (res.data.code === 0 && res.data.data) {
           const posts: Post[] = res.data.data.map((item: any) => ({
             id: item.postId,

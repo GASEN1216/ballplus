@@ -34,6 +34,7 @@
 
 /* 帖子列表区 */
 .post-list {
+  width: 97%;
   margin-top: -90rpx; /* 顶部预留空间 */
   padding: 0 20rpx;
 }
@@ -54,8 +55,8 @@
   margin-bottom: 15rpx;
 }
 .avatar {
-  width: 60rpx;
-  height: 60rpx;
+  width: 45rpx;
+  height: 45rpx;
   border-radius: 50%;
 }
 .header-info {
@@ -70,15 +71,14 @@
 /* 等级文本 - 小牌子效果 */
 .level-text {
   display: inline-block;
-  font-size: 18rpx;
+  font-size: 16rpx;
   font-weight: bold;
-  padding: 5rpx 10rpx;             /* 内边距，营造牌子效果 */
+  padding: 3rpx 6rpx;             /* 内边距，营造牌子效果 */
   margin-left: 5rpx;
-  color: #0072ff;                 /* 字体颜色为蓝色 */
-  background-color: #e7f0ff;      /* 淡蓝色背景 */
-  border: 1rpx solid #0072ff;      /* 蓝色边框 */
+  color: #000000;                 /* 字体颜色为蓝色 */
+  background-color: #ffffff;      /* 淡蓝色背景 */
+  border: 1rpx solid #000000;      /* 蓝色边框 */
   border-radius: 15rpx;           /* 圆角，形成牌子形状 */
-  text-shadow: 0 2rpx 4rpx rgba(0, 114, 255, 0.2); /* 文字阴影 */
   transform: translateX(10rpx);
 }
 
@@ -87,13 +87,23 @@
   margin-bottom: 15rpx;
 }
 .post-name {
-  font-size: 28rpx;
+  font-size: 22rpx;
   color: #666;
   margin-bottom: 5rpx;
 }
 .post-content {
   font-size: 28rpx;
   color: #555;
+  display: -webkit-box; /* 关键属性 */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 限制两行 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* 以下保证换行能力 */
+  word-wrap: break-word;
+  white-space: pre-wrap; /* 保留\n换行 */
+  line-height: 1.4em; /* 行高需明确 */
+  max-height: 2.8em; /* 行高 × 行数 */
 }
 
 /* 帖子图片 */
