@@ -19,7 +19,8 @@ public enum ErrorCode {
     PHONE_NUMBER_ERROR(1010, "获取手机号失败", ""),
     NO_EVENTS(1011, "还没有活动哦，快去创建吧！", ""),
     MATCH_NO_EVENTS(1012, "没有匹配的活动", ""),
-    SEND_NOTIFICATION_FAILED(1013, "发送活动通知失败", "");
+    SEND_NOTIFICATION_FAILED(1013, "发送活动通知失败", ""),
+    POST_NOT_FOUND(1014, "找不到帖子", "");
 
 
     private final int code;

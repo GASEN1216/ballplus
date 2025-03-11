@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gasen.usercenterbackend.mapper.UserEventMapper;
-import com.gasen.usercenterbackend.model.UserEvent;
+import com.gasen.usercenterbackend.model.dao.UserEvent;
 import com.gasen.usercenterbackend.service.IUserEventService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

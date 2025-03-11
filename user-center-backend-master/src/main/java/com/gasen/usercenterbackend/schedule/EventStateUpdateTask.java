@@ -1,16 +1,14 @@
 package com.gasen.usercenterbackend.schedule;
 
-import com.gasen.usercenterbackend.model.Event;
+import com.gasen.usercenterbackend.model.dao.Event;
 import com.gasen.usercenterbackend.service.IEventService;
 import com.gasen.usercenterbackend.utils.WechatUtil;
-import io.lettuce.core.output.ListOfGenericMapsOutput;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.List;

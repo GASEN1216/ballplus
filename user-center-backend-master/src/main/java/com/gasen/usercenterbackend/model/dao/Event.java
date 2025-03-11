@@ -1,9 +1,6 @@
-package com.gasen.usercenterbackend.model;
+package com.gasen.usercenterbackend.model.dao;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.gasen.usercenterbackend.model.respond.detailEvent;
 import com.gasen.usercenterbackend.model.respond.eventTemplates;
 import com.gasen.usercenterbackend.model.respond.indexEvent;
@@ -78,6 +75,7 @@ public class Event implements Serializable {
     /**
      * 逻辑删除
      */
+    @TableLogic(value = "0", delval = "1")
     private Integer isDelete;
 
     /**

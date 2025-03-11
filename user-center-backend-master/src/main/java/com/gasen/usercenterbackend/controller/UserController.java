@@ -1,7 +1,6 @@
 package com.gasen.usercenterbackend.controller;
 
 
-import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -16,7 +15,7 @@ import com.gasen.usercenterbackend.model.Request.UserBannedDaysRequest;
 import com.gasen.usercenterbackend.model.Request.UserRegisterLoginRequest;
 import com.gasen.usercenterbackend.model.Request.weChatAddItemRequest;
 import com.gasen.usercenterbackend.model.Request.weChatUseItemRequest;
-import com.gasen.usercenterbackend.model.User;
+import com.gasen.usercenterbackend.model.dao.User;
 import com.gasen.usercenterbackend.model.respond.goEasyUser;
 import com.gasen.usercenterbackend.model.respond.wxUser;
 import com.gasen.usercenterbackend.service.IFriendsService;
@@ -25,7 +24,6 @@ import com.gasen.usercenterbackend.service.IUserService;
 import com.gasen.usercenterbackend.utils.WechatUtil;
 import com.qiniu.util.Auth;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.models.security.SecurityScheme;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +35,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import  java.util.concurrent.TimeUnit;
 
 import static com.gasen.usercenterbackend.common.ErrorCode.INVALID_TOKEN;

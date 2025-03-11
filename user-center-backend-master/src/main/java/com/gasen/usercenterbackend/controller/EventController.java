@@ -1,15 +1,12 @@
 package com.gasen.usercenterbackend.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gasen.usercenterbackend.common.BaseResponse;
 import com.gasen.usercenterbackend.common.ErrorCode;
 import com.gasen.usercenterbackend.common.ResultUtils;
 import com.gasen.usercenterbackend.mapper.EventMapper;
-import com.gasen.usercenterbackend.model.Event;
-import com.gasen.usercenterbackend.model.User;
-import com.gasen.usercenterbackend.model.UserEvent;
+import com.gasen.usercenterbackend.model.dao.Event;
+import com.gasen.usercenterbackend.model.dao.User;
 import com.gasen.usercenterbackend.model.respond.detailEvent;
 import com.gasen.usercenterbackend.model.respond.eventTemplates;
 import com.gasen.usercenterbackend.model.respond.indexEvent;

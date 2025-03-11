@@ -3,7 +3,7 @@ package com.gasen.usercenterbackend.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.gasen.usercenterbackend.model.UserEvent;
+import com.gasen.usercenterbackend.model.dao.UserEvent;
 
 import java.util.List;
 

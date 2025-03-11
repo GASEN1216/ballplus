@@ -1,6 +1,6 @@
 package com.gasen.usercenterbackend.service;
 
-import com.gasen.usercenterbackend.model.FriendsRequest;
+import com.gasen.usercenterbackend.model.dao.FriendsRequest;
 
 import java.util.List;
 

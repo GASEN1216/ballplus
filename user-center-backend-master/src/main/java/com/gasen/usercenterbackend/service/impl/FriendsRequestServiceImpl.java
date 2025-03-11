@@ -2,7 +2,7 @@ package com.gasen.usercenterbackend.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.gasen.usercenterbackend.mapper.FriendsRequestMapper;
-import com.gasen.usercenterbackend.model.FriendsRequest;
+import com.gasen.usercenterbackend.model.dao.FriendsRequest;
 import com.gasen.usercenterbackend.service.IFriendsRequestService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

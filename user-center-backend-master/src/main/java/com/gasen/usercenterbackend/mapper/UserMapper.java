@@ -1,6 +1,6 @@
 package com.gasen.usercenterbackend.mapper;
 
-import com.gasen.usercenterbackend.model.User;
+import com.gasen.usercenterbackend.model.dao.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

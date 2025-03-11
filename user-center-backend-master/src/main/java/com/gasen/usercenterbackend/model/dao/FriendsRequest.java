@@ -1,4 +1,4 @@
-package com.gasen.usercenterbackend.model;
+package com.gasen.usercenterbackend.model.dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

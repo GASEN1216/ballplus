@@ -1,25 +1,17 @@
 package com.gasen.usercenterbackend.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
-import com.gasen.usercenterbackend.common.BaseResponse;
 import com.gasen.usercenterbackend.common.ErrorCode;
 import com.gasen.usercenterbackend.common.ItemsEunm;
-import com.gasen.usercenterbackend.common.ResultUtils;
 import com.gasen.usercenterbackend.controller.UserController;
 import com.gasen.usercenterbackend.exception.BusinessExcetion;
-import com.gasen.usercenterbackend.model.Event;
-import com.gasen.usercenterbackend.model.Friends;
+import com.gasen.usercenterbackend.model.respond.PostInfo;
 import com.gasen.usercenterbackend.model.Request.UserBannedDaysRequest;
 import com.gasen.usercenterbackend.model.Request.weChatAddItemRequest;
 import com.gasen.usercenterbackend.model.Request.weChatUseItemRequest;
-import com.gasen.usercenterbackend.model.User;
+import com.gasen.usercenterbackend.model.dao.User;
 import com.gasen.usercenterbackend.mapper.UserMapper;
 import com.gasen.usercenterbackend.model.respond.goEasyUser;
-import com.gasen.usercenterbackend.model.respond.indexEvent;
 import com.gasen.usercenterbackend.model.userIdAndAvatar;
 import com.gasen.usercenterbackend.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

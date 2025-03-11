@@ -23,7 +23,7 @@
       <view class="post-item" bindtap="goToPostDetail" data-id="{{item.id}}">
         <!-- 帖子头部：头像、标题、时间 -->
         <view class="post-header">
-          <image class="avatar" src="{{item.avatar}}" />
+          <cover-image class="avatar" src="{{item.avatar}}"></cover-image>
           <view class="header-info">
             <text class="post-title">{{item.title}}</text>
             <text class="level-text">LV.{{item.grade}}</text>

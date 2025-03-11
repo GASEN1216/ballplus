@@ -1,6 +1,6 @@
 package com.gasen.usercenterbackend;
 
-import com.gasen.usercenterbackend.model.User;
+import com.gasen.usercenterbackend.model.dao.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

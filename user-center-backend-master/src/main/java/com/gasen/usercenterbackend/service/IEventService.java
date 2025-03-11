@@ -1,7 +1,7 @@
 package com.gasen.usercenterbackend.service;
 
-import com.gasen.usercenterbackend.model.Event;
-import com.gasen.usercenterbackend.model.User;
+import com.gasen.usercenterbackend.model.dao.Event;
+import com.gasen.usercenterbackend.model.dao.User;
 
 import java.util.List;
 
