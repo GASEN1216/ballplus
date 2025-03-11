@@ -19,7 +19,7 @@ function initQiniu() {
      *  注意：此处的 region、domain 与生成 uploadToken 时提交的 bucket 对应，否则上传图片时可能出现 401 expired token
      */
     uptoken: '',
-    uptokenURL: 'http://192.168.1.10:8080/user/wx/uptoken',
+    uptokenURL: app.globalData.url+'/user/wx/uptoken',
     uptokenFunc: function () { return '' },
 
     // 后端生成 uploadToken 时使用的 bucket 所分配的域名。 https://portal.qiniu.com/kodo/bucket/overview?bucketName=cregskin-static-pictures
@@ -106,7 +106,7 @@ Page({
           options:
           {
             region: 'SCN', // 华北区
-            uptokenURL: 'http://192.168.1.10:8080/user/wx/uptoken',
+            uptokenURL: app.globalData.url+'/user/wx/uptoken',
             domain: 'https://portal.qiniu.com/kodo/bucket/resource-v2?bucketName=ballplus',
             shouldUseQiniuFileName: false,
             key: fileName,
