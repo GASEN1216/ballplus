@@ -1,4 +1,5 @@
 export const app = getApp<IAppOption>();
+import { chooseAndUploadImage } from '../editProfile/editProfile';
 
 interface Post {
   id: number;
@@ -28,7 +29,7 @@ Page({
       image: ''
     },
     timer: null as number | null,
-    lastScrollTop: 0
+    lastScrollTop: 0,
   },
 
   onLoad() {
@@ -41,16 +42,16 @@ Page({
   },
 
   // 页面每次显示时触发
-  onShow() {
-    // 强制刷新数据
-    this.setData({
-      posts: [],    // 清空原有数据，避免数据不一致
-      filteredPosts: []
-    });
+  // onShow() {
+  //   // 强制刷新数据
+  //   this.setData({
+  //     posts: [],    // 清空原有数据，避免数据不一致
+  //     filteredPosts: []
+  //   });
 
-    this.fetchPosts();
+  //   this.fetchPosts();
 
-  },
+  // },
 
   // 从后端获取帖子数据，并转换成前端需要的格式
   fetchPosts() {
@@ -182,10 +183,32 @@ Page({
     });
   },
 
-  // 输入事件：更新新帖子的标题
+  // 点击图片预览
+  previewImage(e: any) {
+    const imageUrl = e.currentTarget.dataset.url;
+    wx.previewImage({
+      current: imageUrl, // 当前显示图片的链接
+      urls: [imageUrl]   // 需要预览的图片链接列表
+    });
+  },
+
+  // 预览上传的图片
+  previewUploadImage(e: any) {
+    const imageUrl = this.data.newPost.image;
+    wx.previewImage({
+      current: imageUrl, // 当前显示图片链接
+      urls: [imageUrl]   // 预览的图片列表
+    });
+  },
+
+  // 标题输入：额外进行截断处理，确保最多20个字符
   onTitleInput(e: any) {
+    let value = e.detail.value;
+    if (value.length > 20) {
+      value = value.substring(0, 20);
+    }
     this.setData({
-      'newPost.title': e.detail.value
+      'newPost.title': value
     });
   },
 
@@ -198,18 +221,35 @@ Page({
 
   // 上传图片事件：选择图片后填充到 newPost.image
   onUploadImage() {
-    wx.chooseMedia({
-      count: 1,
-      success: (res) => {
+    chooseAndUploadImage('post/')
+      .then(res => {
+        // 处理上传成功后的结果，例如保存图片 URL 并更新页面显示
         this.setData({
-          'newPost.image': res.tempFiles[0].tempFilePath
+          'newPost.image': res.url
         });
-      }
-    });
+        wx.showToast({
+          title: '上传成功',
+          icon: 'success'
+        });
+      })
+      .catch(err => {
+        wx.showToast({
+          title: '上传失败',
+          icon: 'none'
+        });
+        console.error('上传错误:', err);
+      });
   },
 
   // 提交帖子事件：这里仅作页面更新提示，实际提交逻辑建议调用后端接口
   onSubmitPost() {
+    if (!app.globalData.isLoggedin) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'error'
+      });
+      return;
+    }
     const { title, content, image } = this.data.newPost;
     if (!title || !content) {
       wx.showToast({
@@ -218,28 +258,55 @@ Page({
       });
       return;
     }
-    // 提交成功后，将新帖子添加到列表中（实际业务中建议调用后端接口提交并返回结果）
-    const newPost: Post = {
-      id: Date.now(), // 临时生成ID，实际应由后端返回
-      avatar: app.globalData.currentUser.avatar,
-      name: app.globalData.currentUser.name,
-      grade: app.globalData.currentUser.grade || 0,
-      content,
-      image,
-      likes: 0,
-      comments: 0,
-      title
+    // 构造请求数据，与后端 AddPost 对象字段保持一致
+    const payload = {
+      addId: app.globalData.currentUser.id,         // 用户ID
+      appName: app.globalData.currentUser.name,       // 用户名称
+      avatar: app.globalData.currentUser.avatar,      // 用户头像
+      grade: app.globalData.currentUser.grade,        // 用户等级
+      title: title,
+      content: content,
+      picture: image
     };
-    this.setData({
-      addButtonRotate: (this.data.addButtonRotate + 45) % 360,
-      posts: [newPost, ...this.data.posts],
-      filteredPosts: [newPost, ...this.data.filteredPosts],
-      showPostModal: false,
-      newPost: { title: '', content: '', image: '' }
+    wx.request({
+      url: `${app.globalData.url}/user/wx/addPost`, // 替换成你的后端地址
+      method: 'POST',
+      data: payload,
+      header: {
+        'Content-Type': 'application/json',
+        'X-Token': app.globalData.currentUser.token
+      },
+      success: (res: any) => {
+        if (res.data.code === 0) {
+          wx.showToast({
+            title: '发帖成功！',
+            icon: 'success'
+          });
+          // 提交成功后，清空输入，并刷新帖子列表
+          this.setData({
+            newPost: { title: '', content: '', image: '' },
+            showPostModal: false
+          });
+          this.fetchPosts();
+        } else {
+          wx.showToast({
+            title: res.data.message || '发帖失败！',
+            icon: 'error'
+          });
+        }
+      },
+      fail: (err: any) => {
+        wx.showToast({
+          title: '发帖失败！',
+          icon: 'error'
+        });
+      }
     });
-    wx.showToast({
-      title: '提交成功，待审核',
-      icon: 'success'
+  },
+  goToInfo(e: any) {
+    const userId = e.currentTarget.dataset.userid; // 获取传递的id
+    wx.navigateTo({
+      url: `../profile/profile?userId=${userId}`,
     });
-  }
+  },
 });

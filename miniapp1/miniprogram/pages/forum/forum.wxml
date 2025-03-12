@@ -11,7 +11,7 @@
       <view class="post-item" bindtap="goToPostDetail" data-id="{{item.id}}">
         <!-- 帖子头部：头像、标题、时间 -->
         <view class="post-header">
-          <cover-image class="avatar" src="{{item.avatar}}"></cover-image>
+          <image class="avatar"  catchtap="goToInfo"  src="{{item.avatar}}"  data-userid="{{item.userId}}"></image>
           <view class="header-info">
             <text class="post-name">{{item.name}}</text>
             <text class="level-text">LV.{{item.grade}}</text>
@@ -23,8 +23,11 @@
           </text>
           <text class="post-content">{{item.content}}</text>
         </view>
-        <!-- 帖子图片（如果存在） -->
-        <image wx:if="{{item.image}}" class="post-image" src="{{item.image}}" />
+        <!-- 帖子图片的容器，用于截取图片的一部分 -->
+        <view wx:if="{{item.image}}" class="post-image-container">
+          <!-- 帖子图片（如果存在） -->
+          <image wx:if="{{item.image}}" class="post-image" src="{{item.image}}" catchtap="previewImage" data-url="{{item.image}}" />
+        </view>
         <!-- 帖子操作：点赞、评论 -->
         <view class="post-actions">
           <view class="action-item">👍 {{item.likes}}</view>
@@ -42,8 +45,10 @@
   <!-- 发帖弹窗 -->
   <view class="modal-overlay" wx:if="{{showPostModal}}" catchtap="onCancelPost">
     <view class="modal-content" catchtap="preventClose">
-      <input placeholder="标题" bindinput="onTitleInput" />
-      <textarea placeholder="内容" bindinput="onContentInput"></textarea>
+      <input placeholder="标题（20字以内）" value="{{newPost.title}}" bindinput="onTitleInput" maxLength="20" />
+      <textarea placeholder="内容" value="{{newPost.content}}" bindinput="onContentInput" maxlength="10000"></textarea>
+      <!-- 上传图片后展示预览，点击可预览大图 -->
+      <image wx:if="{{newPost.image}}" class="upload-preview" src="{{newPost.image}}" bindtap="previewUploadImage" />
       <button class="upload-btn" bindtap="onUploadImage">上传图片</button>
       <button class="submit-btn" bindtap="onSubmitPost">提交</button>
     </view>

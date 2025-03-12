@@ -106,13 +106,21 @@
   max-height: 2.8em; /* 行高 × 行数 */
 }
 
-/* 帖子图片 */
+/* 图片容器：固定尺寸，溢出部分隐藏 */
+.post-image-container {
+  width: 33%;
+  height: 250rpx;
+  overflow: hidden;
+  border-radius: 10rpx;
+  margin-bottom: 15rpx;
+}
+
+/* 图片：填满容器，等比例缩放且裁剪多余部分，显示中心区域 */
 .post-image {
   width: 100%;
-  border-radius: 10rpx;
-  object-fit: cover;
-  max-height: 300rpx;
-  margin-bottom: 15rpx;
+  height: 100%;
+  object-fit: cover;      /* 等比例缩放，保证覆盖容器 */
+  object-position: center;/* 始终显示图片的中心部分 */
 }
 
 /* 帖子操作区 */
@@ -158,14 +166,24 @@
   border-radius: 10rpx;
   padding: 30rpx;
 }
-.modal-content input,
-.modal-content textarea {
-  width: 100%;
+.modal-content input{
+  width: 98%;
   border: 1rpx solid #ddd;
   border-radius: 8rpx;
   padding: 10rpx;
   font-size: 28rpx;
   margin-bottom: 20rpx;
+}
+.modal-content textarea {
+  width: 98%;
+  height: 300rpx; /* 固定高度 */
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 10rpx;
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+  overflow-y: auto; /* 超出内容垂直滚动 */
+  white-space: pre-wrap; /* 保留换行 */
 }
 .upload-btn, .submit-btn {
   width: 100%;
@@ -182,4 +200,14 @@
 .submit-btn {
   background-color: #007aff;
   color: #fff;
+}
+
+/* 新增上传图片预览样式 */
+.upload-preview {
+  width: 100%;
+  height: 500rpx;
+  object-fit: contain;
+  margin-top: 10rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
 }

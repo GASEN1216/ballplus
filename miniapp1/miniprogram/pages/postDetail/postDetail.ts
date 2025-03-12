@@ -23,15 +23,13 @@ Page({
     showReplyPopup: false,
     replyTo: '',
     replyContent: '',
-    minPopupHeight: 300,    // 最小高度 300rpx
-    popupHeight: 300,       // 当前弹窗高度，初始为最小高度
-    startY: 0,              // 拖拽开始时的触摸 Y 坐标
-    initialPopupHeight: 300,// 拖拽开始时的弹窗高度
-    dragging: false,
-    pageSize: 10,           // 每次加载的评论数量
-    currentPage: 1,         // 当前加载的页数
-    isLoading: false,       // 防止重复加载
-    selectedCommentId: -1   // 记录选中的评论ID，-1 表示未选中
+    // 用于输入状态下控制焦点
+    autoFocus: false,
+    // 分页相关
+    pageSize: 10,
+    currentPage: 1,
+    isLoading: false,
+    selectedCommentId: -1, // -1 表示新增主评论，否则为回复某条评论
   },
 
   onLoad(query: any) {
@@ -50,7 +48,7 @@ Page({
 
     const comments = this.generateComments(30);
 
-    // 预处理子评论：设置 visibleSubComments 字段（只显示前 2 条子评论）
+    // 预处理子评论，只显示前两条
     comments.forEach(comment => {
       comment.visibleSubComments = comment.subComments.length > 2
         ? comment.subComments.slice(0, 2)
@@ -64,7 +62,7 @@ Page({
     });
   },
 
-  // 生成指定数量的主评论数据
+  // 生成主评论数据
   generateComments(count: number): Comment[] {
     return Array.from({ length: count }, (_, i) => ({
       id: i + 1,
@@ -77,9 +75,9 @@ Page({
     }));
   },
 
-  // 生成指定主评论下的子评论数据（随机生成 0 ~ 3 条）
+  // 生成子评论数据（随机0~3条）
   generateSubComments(parentId: number): SubComment[] {
-    const randomLength = Math.floor(Math.random() * 4); // 可能值 0, 1, 2, 或 3
+    const randomLength = Math.floor(Math.random() * 4);
     return Array.from({ length: randomLength }, (_, j) => ({
       id: j + 1,
       parentId,
@@ -88,7 +86,7 @@ Page({
     }));
   },
 
-  // 滑动到底部自动加载更多评论
+  // 自动加载更多评论
   onReachBottom() {
     if (this.data.isLoading) return;
     this.setData({ isLoading: true });
@@ -108,7 +106,6 @@ Page({
       console.log('没有更多评论了');
     }
 
-    // 模拟网络请求延迟
     setTimeout(() => {
       this.setData({ isLoading: false });
     }, 1000);
@@ -121,66 +118,88 @@ Page({
     });
   },
 
-  // 打开回复弹窗时重置高度
+  // 点击“点我发评论”进入回复状态
+  handleTapCommentInput() {
+    this.setData({
+      showReplyPopup: true,
+      autoFocus: true,
+      replyTo: '帖子',  // 如果是回复主帖，可固定提示“帖子”，如回复评论则在 openReplyPopup 中传入对应名字
+      replyContent: '',
+      selectedCommentId: -1  // 新增主评论
+    });
+
+    // 延时确保输入框自动聚焦
+    setTimeout(() => {
+      wx.createSelectorQuery()
+        .select('#replyInput')
+        .fields({ properties: ['focus'] }, res => {
+          if (!res.focus) {
+            this.setData({ autoFocus: true });
+          }
+        })
+        .exec();
+    }, 200);
+  },
+
+  // 普通状态下点击某评论的回复按钮
   openReplyPopup(e: any) {
     const replyTo = e.currentTarget.dataset.name || '帖子';
+    const commentId = e.currentTarget.dataset.id;
     this.setData({
       showReplyPopup: true,
       replyTo,
-      popupHeight: this.data.minPopupHeight
+      autoFocus: true,
+      replyContent: '',
+      selectedCommentId: commentId
     });
+
+    setTimeout(() => {
+      wx.createSelectorQuery()
+        .select('#replyInput')
+        .fields({ properties: ['focus'] }, res => {
+          if (!res.focus) {
+            this.setData({ autoFocus: true });
+          }
+        })
+        .exec();
+    }, 200);
   },
 
-  // 关闭回复弹窗
+  // 关闭回复状态
   closeReplyPopup() {
     this.setData({
       showReplyPopup: false,
       replyTo: '',
-      popupHeight: this.data.minPopupHeight
+      replyContent: '',
+      autoFocus: false,
+      selectedCommentId: -1
     });
   },
 
   preventClose() {
-    // 阻止点击事件冒泡，不做任何操作
+    // 阻止点击事件冒泡
   },
 
-    // 开始拖拽：记录初始触摸位置和弹窗高度
-    onTouchStart(e: any) {
-      const touch = e.touches[0];
-      this.setData({
-        startY: touch.clientY,
-        initialPopupHeight: this.data.popupHeight,
-        dragging: true
-      });
-    },
-
-  // 拖拽过程中，只允许向上拖动，扩展回复弹窗高度
-  onTouchMove(e: any) {
-    if (!this.data.dragging) return;
-    const touch = e.touches[0];
-    // 如果用户向上拖动（startY > currentY），delta 为正
-    const delta = this.data.startY - touch.clientY;
-    if (delta > 0) {
-      this.setData({
-        popupHeight: this.data.initialPopupHeight + delta
-      });
-    }
-  },
-
-  // 拖拽结束，停止拖拽状态
-  onTouchEnd() {
-    this.setData({ dragging: false });
-    const closeThreshold = 500; // 50rpx 拖拽距离就足够关闭弹窗
-    if (this.data.popupHeight - this.data.minPopupHeight >= closeThreshold) {
-      this.closeReplyPopup();
-    }
-  },
-
+  // 输入评论
   onReplyInput(e: any) {
     this.setData({ replyContent: e.detail.value });
   },
 
-  // 发送回复：如果 selectedCommentId > 0，则为子评论回复，否则为主评论
+  onReplyBlur() {
+    // 可选择失焦时做处理，此处直接不操作
+    this.setData({ showReplyPopup: false });
+  },
+
+  onReplyFocus() {
+    // 保证输入框自动聚焦
+    this.setData({ autoFocus: true });
+  },
+
+  cancelClosePopup(){
+
+  },
+
+  // 发送评论或回复
   sendReply() {
     const replyContent = this.data.replyContent.trim();
     if (!replyContent) {
@@ -191,10 +210,8 @@ Page({
     let updatedComments = [...this.data.comments];
 
     if (this.data.selectedCommentId > 0) {
-      // 添加子评论到指定的主评论中
-      const parentIndex = updatedComments.findIndex(
-        comment => comment.id === this.data.selectedCommentId
-      );
+      // 添加子评论到对应主评论
+      const parentIndex = updatedComments.findIndex(comment => comment.id === this.data.selectedCommentId);
       if (parentIndex !== -1) {
         const newSubComment: SubComment = {
           id: Date.now(),
@@ -202,9 +219,7 @@ Page({
           name: '当前用户',
           content: replyContent
         };
-        // 插入到子评论数组最前面
         updatedComments[parentIndex].subComments.unshift(newSubComment);
-        // 更新 visibleSubComments（只显示前两条）
         updatedComments[parentIndex].visibleSubComments =
           updatedComments[parentIndex].subComments.length > 2
             ? updatedComments[parentIndex].subComments.slice(0, 2)
@@ -222,18 +237,17 @@ Page({
         likes: 0
       };
       updatedComments.unshift(newComment);
-
-      this.closeReplyPopup();
     }
 
-    // 根据当前加载页数更新 visibleComments 数组
+    // 根据当前分页重新计算显示的评论
     const totalVisible = this.data.pageSize * this.data.currentPage;
     this.setData({
       comments: updatedComments,
       visibleComments: updatedComments.slice(0, totalVisible),
       showReplyPopup: false,
       replyContent: '',
-      selectedCommentId: -1
+      selectedCommentId: -1,
+      autoFocus: false
     });
   },
 
@@ -246,7 +260,6 @@ Page({
       }
       return comment;
     });
-
     this.setData({
       comments: updatedComments,
       visibleComments: updatedComments.slice(0, this.data.pageSize * this.data.currentPage)
@@ -254,7 +267,6 @@ Page({
   },
 
   sharePost() {
-    // 添加分享逻辑
     console.log('分享帖子');
-  }
+  },
 });

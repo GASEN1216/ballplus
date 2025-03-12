@@ -63,14 +63,12 @@
   margin: 24rpx 0;
 }
 
-/* 整个评论区域，使用内边距保证左右间距 */
+/* 评论区域 */
 .comments-container {
   width: 100%;
   padding: 0 24rpx;
   box-sizing: border-box;
 }
-
-/* 每个评论块：占满全屏宽度，带有背景、圆角、阴影和底部间隔 */
 .comment-block {
   width: 100%;
   background-color: #fff;
@@ -79,81 +77,63 @@
   margin-bottom: 16rpx;
   overflow: hidden;
 }
-
-/* 主评论区域，采用水平布局 */
 .comment-item {
   display: flex;
   padding: 16rpx;
 }
-
-/* 用户头像 */
 .comment-avatar {
   width: 60rpx;
   height: 60rpx;
   border-radius: 50%;
   margin-right: 16rpx;
 }
-
-/* 评论主体 */
 .comment-main {
   flex: 1;
 }
-
-/* 评论信息 */
 .comment-info {
   margin-bottom: 8rpx;
 }
-
 .comment-name {
   font-size: 26rpx;
   font-weight: bold;
   color: #333;
   margin-bottom: 4rpx;
 }
-
 .comment-content {
   font-size: 24rpx;
   color: #666;
   line-height: 1.4;
 }
-
-/* 评论操作按钮 */
 .comment-actions {
   display: flex;
   gap: 12rpx;
   align-items: center;
   margin-top: 8rpx;
 }
-
 .icon-button {
   width: 36rpx;
   height: 36rpx;
 }
-
 .likes-count {
   font-size: 24rpx;
   color: #007aff;
 }
-
-/* 子评论区域：使用浅背景色、内边距和分隔线效果 */
+/* 子评论 */
 .sub-comments {
   background-color: #ebebeb;
   padding: 12rpx;
   border-top: 1rpx solid #eee;
 }
-
 .sub-comment-item {
   display: flex;
   font-size: 24rpx;
   color: #555;
   margin-bottom: 8rpx;
 }
-
 .sub-comment-name {
   font-weight: bold;
   margin-right: 4rpx;
 }
-
 .show-more-sub-comments {
   font-size: 24rpx;
   color: #007aff;
@@ -169,10 +149,16 @@
   right: 0;
   background-color: #fff;
   padding: 16rpx 24rpx;
-  display: flex;
-  align-items: center;
   box-shadow: 0 -2rpx 6rpx rgba(0, 0, 0, 0.1);
   z-index: 10;
+}
+
+/* 普通状态下 */
+.bottom-normal {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
 }
 .comment-input {
   flex: 1;
@@ -197,88 +183,46 @@
   margin-top: 4rpx;
 }
 
-/* 整个回复弹窗容器，全屏覆盖 */
-.reply-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 20;
-}
-
-/* 遮罩层 */
-.popup-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 10;
-}
-
-/* 回复弹窗内容区域 */
-.popup-content {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #fff;
-  border-top-left-radius: 20rpx;
-  border-top-right-radius: 20rpx;
-  box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.1);
-  z-index: 15;
-  /* 使用 flex 布局，使按钮固定在底部 */
+/* 回复状态下 */
+.bottom-reply {
   display: flex;
-  flex-direction: column;
-  transition: height 0.3s;
+  width: 100%;
+  align-items: flex-start;
+  gap: 16rpx;
 }
-
-/* 拖拽把手 */
-.handle {
-  width: 40rpx;
-  height: 4rpx;
-  background-color: #ccc;
-  border-radius: 2rpx;
-  margin: 16rpx auto;
-}
-
-/* 回复内容区域：随容器高度扩展 */
-.reply-body {
+.reply-container {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 0 24rpx;
-  overflow: hidden;
 }
-
-/* 回复标题 */
-.reply-title {
+.reply-label {
   font-size: 28rpx;
   color: #333;
-  margin-bottom: 16rpx;
+  margin-bottom: 8rpx;
 }
-
-/* 回复输入框 */
 .reply-input {
-  flex: 1;
   width: 100%;
-  border: 1rpx solid #ddd;
-  border-radius: 8rpx;
+  min-height: 50rpx;
+  max-height: 150rpx;  /* 当内容较多时出现滚动条 */
   padding: 12rpx;
   font-size: 28rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 30rpx;
+  overflow-y: auto;
+  resize: none;  /* 禁止用户手动调整 */
   box-sizing: border-box;
-  resize: none; /* 禁止手动调整大小 */
 }
 
-/* 发送按钮始终在底部 */
-.send-button {
-  margin: 16rpx 24rpx;
-  padding: 16rpx;
+/* 自定义提交控件，仅占两个汉字宽度 */
+.submit-custom {
   background-color: #007aff;
   color: #fff;
-  border: none;
-  border-radius: 8rpx;
   font-size: 28rpx;
+  padding: 10rpx;
+  width: 70rpx;  /* 根据实际情况调整 */
+  height: 72rpx;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

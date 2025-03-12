@@ -34,7 +34,66 @@ function initQiniu() {
   // 将七牛云相关配置初始化进本sdk
   qiniuUploader.init(options);
 }
-
+/**
+ * 调用微信 API 选择图片，并上传到七牛云
+ * @param prefix 文件夹前缀，例如 "user_avatars/"
+ * @returns 返回 Promise，当上传成功时 resolve 上传结果和图片 URL
+ */
+export function chooseAndUploadImage(prefix: string): Promise<{ 
+  uploadRes: any, 
+  fileName: string, 
+  url: string 
+}> {
+  return new Promise((resolve, reject) => {
+    // 初始化七牛云配置
+    initQiniu();
+    // 调用微信选择图片接口（只支持单图上传）
+    wx.chooseMedia({
+      count: 1,
+      mediaType: ['image'],
+      success: (res) => {
+        if (!res.tempFiles || res.tempFiles.length === 0) {
+          reject(new Error('未选择图片'));
+          return;
+        }
+        const filePath = res.tempFiles[0].tempFilePath;
+        const fileName = prefix + filePath.split('/').pop();
+        // 构造上传参数
+        const uploadOptions: qiniuUploader.QiniuUploadOptions = {
+          filePath: filePath,
+          success: (uploadRes) => {
+            // 上传成功后返回上传结果和生成的图片 URL
+            resolve({
+              uploadRes,
+              fileName,
+              url: app.globalData.qnurl + fileName
+            });
+          },
+          fail: (error) => {
+            reject(error);
+          },
+          options: {
+            region: 'SCN',
+            uptokenURL: app.globalData.url + '/user/wx/uptoken',
+            domain: 'https://portal.qiniu.com/kodo/bucket/resource-v2?bucketName=ballplus',
+            shouldUseQiniuFileName: false,
+            key: fileName,
+          },
+          progress: (progress) => {
+            // 可在此处理上传进度，如通知 UI 更新进度条
+            // console.log('上传进度', progress.progress);
+          },
+          cancelTask: () => { }
+        };
+        // 开始上传
+        qiniuUploader.upload(uploadOptions);
+      },
+      fail: (err) => {
+        reject(err);
+      }
+    });
+  });
+}
 
 Page({
   data: {
@@ -69,10 +128,10 @@ Page({
   },
   // 图片上传（从相册）方法
   didPressChooesImage: function () {
-    this._didPressChooesImage();
+    this._didPressChooesImage('user_avatars/');
   },
   // 图片上传（从相册）方法
-  _didPressChooesImage() {
+  _didPressChooesImage(prefix: string) {
     // 初始化七牛云配置
     initQiniu();
     // 置空messageFileObject，否则在第二次上传过程中，wxml界面会存留上次上传的信息
@@ -89,7 +148,7 @@ Page({
       success: function (res) {
         // 拿取图片名，并加入七牛云文件夹前缀
         let filePath = res.tempFiles[0].tempFilePath;
-        let fileName = 'user_avatars/' + filePath.split('/').pop();
+        let fileName = prefix + filePath.split('/').pop();
 
         // 向七牛云上传
         const uploadOptions: qiniuUploader.QiniuUploadOptions = {

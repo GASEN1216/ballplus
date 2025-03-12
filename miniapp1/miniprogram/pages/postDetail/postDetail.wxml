@@ -1,4 +1,4 @@
-<view class="container">
+<view class="container" bindtap="closeReplyPopup">
   <!-- 帖子头部 -->
   <view class="post-header">
     <image class="post-author-avatar" src="{{post.avatar}}" />
@@ -19,72 +19,76 @@
 
   <view class="divider"></view>
 
-<!-- 评论列表 -->
-<view class="comments-container">
-  <block wx:for="{{visibleComments}}" wx:key="id">
-    <!-- 每个用户评论及其回复为一个整体块 -->
-    <view class="comment-block">
-      <!-- 主评论 -->
-      <view class="comment-item">
-        <image class="comment-avatar" src="{{item.avatar}}" />
-        <view class="comment-main">
-          <view class="comment-info">
-            <text class="comment-name">{{item.name}}</text>
-            <text class="comment-content">{{item.content}}</text>
+  <!-- 评论列表 -->
+  <view class="comments-container">
+    <block wx:for="{{visibleComments}}" wx:key="id">
+      <view class="comment-block">
+        <!-- 主评论 -->
+        <view class="comment-item">
+          <image class="comment-avatar" src="{{item.avatar}}" />
+          <view class="comment-main">
+            <view class="comment-info">
+              <text class="comment-name">{{item.name}}</text>
+              <text class="comment-content">{{item.content}}</text>
+            </view>
+            <view class="comment-actions">
+              <image class="icon-button" src="/icon/like.png" bindtap="likeComment" data-id="{{item.id}}" />
+              <text class="likes-count">{{item.likes}}</text>
+              <image class="icon-button" src="/icon/reply.png" catchtap="openReplyPopup" data-id="{{item.id}}" data-name="{{item.name}}" />
+            </view>
           </view>
-          <view class="comment-actions">
-            <image class="icon-button" src="/icon/like.png" bindtap="likeComment" data-id="{{item.id}}" />
-            <text class="likes-count">{{item.likes}}</text>
-            <image class="icon-button" src="/icon/reply.png" bindtap="openReplyPopup" data-id="{{item.id}}" data-name="{{item.name}}" />
+        </view>
+        <!-- 子评论 -->
+        <view class="sub-comments" wx:if="{{item.subComments && item.subComments.length > 0}}">
+          <block wx:for="{{item.visibleSubComments}}" wx:key="id">
+            <view class="sub-comment-item">
+              <text class="sub-comment-name">{{item.name}}:</text>
+              <text class="sub-comment-content">{{item.content}}</text>
+            </view>
+          </block>
+          <view wx:if="{{item.subComments.length > 2}}" class="show-more-sub-comments" bindtap="goToCommentDetail" data-id="{{item.id}}">
+            显示更多回复
           </view>
         </view>
       </view>
-      <!-- 子评论 -->
-      <view class="sub-comments" wx:if="{{item.subComments && item.subComments.length > 0}}">
-        <block wx:for="{{item.visibleSubComments}}" wx:key="id">
-          <view class="sub-comment-item">
-            <text class="sub-comment-name">{{item.name}}:</text>
-            <text class="sub-comment-content">{{item.content}}</text>
-          </view>
-        </block>
-        <view wx:if="{{item.subComments.length > 2}}" class="show-more-sub-comments" bindtap="goToCommentDetail" data-id="{{item.id}}">
-          显示更多回复
-        </view>
-      </view>
-    </view>
-  </block>
-</view>
-
+    </block>
+  </view>
 
   <!-- 底部操作栏 -->
-  <view class="bottom-bar">
-    <input class="comment-input" placeholder="点我发评论" bindfocus="openReplyPopup" />
-    <view class="bottom-actions">
-      <view class="action-item" bindtap="sharePost">
-        <image class="icon-button" src="/icon/share.png" />
-      </view>
-      <view class="action-item">
-        <image class="icon-button" src="/icon/reply.png" />
-        <text class="action-number">{{post.comments || 0}}</text>
-      </view>
-      <view class="action-item">
-        <image class="icon-button" src="/icon/like.png" />
-        <text class="action-number">{{post.likes || 0}}</text>
+  <view class="bottom-bar" catchtap="cancelClosePopup">
+    <!-- 普通状态下：显示点赞、分享、评论按钮 -->
+    <view wx:if="{{!showReplyPopup}}" class="bottom-normal">
+      <input class="comment-input"
+             placeholder="点我发评论"
+             bindtap="handleTapCommentInput" />
+      <view class="bottom-actions">
+        <view class="action-item" bindtap="sharePost">
+          <image class="icon-button" src="/icon/share.png" />
+        </view>
+        <view class="action-item">
+          <image class="icon-button" src="/icon/reply.png" />
+          <text class="action-number">{{post.comments || 0}}</text>
+        </view>
+        <view class="action-item">
+          <image class="icon-button" src="/icon/like.png" />
+          <text class="action-number">{{post.likes || 0}}</text>
+        </view>
       </view>
     </view>
-  </view>
 
-  <!-- 回复弹窗 -->
-  <view class="reply-popup" wx:if="{{showReplyPopup}}" catchtouchmove="preventClose">
-    <view class="popup-overlay" bindtap="closeReplyPopup"></view>
-    <view class="popup-content" catchtap="preventClose" style="height: {{popupHeight}}rpx;" bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd">
-      <view class="handle"></view>
-      <view class="reply-body">
-        <text class="reply-title">回复 {{replyTo}}</text>
-        <textarea class="reply-input" value="{{replyContent}}" placeholder="请输入回复内容" bindinput="onReplyInput"></textarea>
+    <!-- 回复状态下：隐藏点赞、分享、评论，仅显示回复输入区 -->
+    <view wx:if="{{showReplyPopup}}" class="bottom-reply">
+      <view class="reply-container">
+        <text class="reply-label">回复 {{replyTo}}：</text>
+        <textarea class="reply-input"
+                  id="replyInput"
+                  value="{{replyContent}}"
+                  placeholder="请输入评论..."
+                  bindinput="onReplyInput"
+                  bindblur="onReplyBlur"
+                  bindfocus="onReplyFocus"></textarea>
       </view>
-      <button class="send-button" bindtap="sendReply">发送</button>
+      <view class="submit-custom" bindtap="sendReply">提交</view>
     </view>
   </view>
-
 </view>

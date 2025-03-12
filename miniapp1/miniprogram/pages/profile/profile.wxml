@@ -8,6 +8,11 @@
   <!-- 详细信息 -->
   <view class="info-section">
     <view class="info-item">
+      <text class="label">🎭 昵称</text>
+      <text class="value">{{userData.userAccount}}</text>
+    </view>
+
+    <view class="info-item">
       <text class="label">🎖 等级</text>
       <text class="value">LV.{{userData.grade}}</text>
     </view>
