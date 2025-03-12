@@ -1,5 +1,6 @@
 package com.gasen.usercenterbackend.model.Request;
 
+import com.gasen.usercenterbackend.model.respond.SubCommentDetail;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -33,4 +35,6 @@ public class CommentDetail implements Serializable {
     private int likes;
     // 创建时间
     private LocalDateTime createTime;
+    // 子评论列表
+    private List<SubCommentDetail> subComments;
 }

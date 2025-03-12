@@ -13,6 +13,8 @@ public class AddComment implements Serializable {
     private Integer userId;
     // 使用者姓名
     private String appName;
+    // 使用者头像
+    private String avatar;
     // 使用者等级
     private Integer grade;
     // 所属帖子ID
@@ -23,6 +25,7 @@ public class AddComment implements Serializable {
     public Comment toComment() {
         Comment comment = new Comment();
         comment.setAppId(userId);
+        comment.setAvatar(avatar);
         comment.setPostId(postId);
         comment.setAppName(appName);
         comment.setGrade(grade);

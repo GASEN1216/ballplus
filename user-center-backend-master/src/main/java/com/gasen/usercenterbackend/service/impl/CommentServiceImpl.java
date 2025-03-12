@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.gasen.usercenterbackend.mapper.CommentMapper;
 import com.gasen.usercenterbackend.mapper.PostMapper;
 import com.gasen.usercenterbackend.model.Request.AddComment;
+import com.gasen.usercenterbackend.model.Request.CommentDetail;
 import com.gasen.usercenterbackend.model.Request.UpdateComment;
 import com.gasen.usercenterbackend.model.dao.Comment;
 import com.gasen.usercenterbackend.service.ICommentService;
@@ -12,6 +13,7 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -78,5 +80,15 @@ public class CommentServiceImpl implements ICommentService {
     @Override
     public Comment getComment(Long commentId) {
         return commentMapper.selectById(commentId);
+    }
+
+    @Override
+    public List<CommentDetail> getCommentsByPostId(Long postId) {
+        // 查询所有post_id == postId的评论
+        List<Comment> comments = commentMapper.selectList(new LambdaQueryWrapper<Comment>().eq(Comment::getPostId, postId));
+        if (comments == null) {
+            return new ArrayList<>();
+        }
+        return comments.stream().map(Comment::toCommentDetail).toList();
     }
 }

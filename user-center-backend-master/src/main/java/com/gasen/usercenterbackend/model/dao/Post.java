@@ -39,6 +39,7 @@ public class Post {
 
     public PostDetail toPostDetail() {
         return new PostDetail()
+                .setId(this.id)
                 .setAppId(this.appId)
                 .setAvatar(this.avatar)
                 .setAppName(this.appName)
@@ -54,6 +55,7 @@ public class Post {
 
     public PostInfo toPostInfo() {
         return new PostInfo()
+                .setPostId(this.id)
                 .setAppId(this.appId)
                 .setAppName(this.appName)
                 .setAvatar(this.avatar)

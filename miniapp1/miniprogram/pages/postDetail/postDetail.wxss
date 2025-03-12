@@ -161,13 +161,14 @@
   justify-content: space-between;
 }
 .comment-input {
-  flex: 1;
-  padding: 12rpx;
-  font-size: 28rpx;
-  border: 1rpx solid #ddd;
-  border-radius: 30rpx;
-  margin-right: 16rpx;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 20px; /* 更圆润的圆角 */
+  padding: 10px 15px;
+  color: #999;
+  background-color: #fff; /* 可选：设置背景色 */
 }
+
 .bottom-actions {
   display: flex;
   gap: 16rpx;

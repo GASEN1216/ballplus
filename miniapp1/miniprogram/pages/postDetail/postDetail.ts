@@ -1,115 +1,69 @@
-interface SubComment {
-  id: number;
-  parentId: number;
-  name: string;
-  content: string;
-}
-
-interface Comment {
-  id: number;
-  avatar: string;
-  name: string;
-  content: string;
-  subComments: SubComment[];
-  visibleSubComments: SubComment[];
-  likes: number;
-}
+export const app = getApp<IAppOption>();
 
 Page({
   data: {
+    apiUrl: `${app.globalData.url}/user/wx/getPostDetail`,
+    addCommentUrl: `${app.globalData.url}/user/wx/addComment`,
     post: {} as any,
-    comments: [] as Comment[],
-    visibleComments: [] as Comment[],
+    comments: [],
+    visibleComments: [],
     showReplyPopup: false,
     replyTo: '',
     replyContent: '',
     // 用于输入状态下控制焦点
     autoFocus: false,
     // 分页相关
-    pageSize: 10,
+    pageSize: 100,
     currentPage: 1,
     isLoading: false,
     selectedCommentId: -1, // -1 表示新增主评论，否则为回复某条评论
   },
 
-  onLoad(query: any) {
-    const postId = query.id;
-    const post = {
-      id: postId,
-      avatar: 'https://picsum.photos/150',
-      name: 'Jack',
-      time: '2023-12-07 08:50',
-      content: '这个社区真棒，我希望能认识更多志同道合的朋友！',
-      image: '',
-      likes: 999,
-      comments: 999,
-      title: '帖子标题 10',
-    };
-
-    const comments = this.generateComments(30);
-
-    // 预处理子评论，只显示前两条
-    comments.forEach(comment => {
-      comment.visibleSubComments = comment.subComments.length > 2
-        ? comment.subComments.slice(0, 2)
-        : comment.subComments;
+  onLoad(options) {
+    const { id } = options; 
+    wx.request({
+      url: `${this.data.apiUrl}`,
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-Token': app.globalData.currentUser.token,
+      },
+      data: { postId: id },
+      success: res => {
+        if (res.statusCode === 200 && res.data.code === 0) {
+          const postDetail = res.data.data;
+          // 假设后端返回的 postDetail 中包含 commentsList 字段，里面包含评论和对应的子评论数据
+          this.setData({
+            post: {
+              id: postDetail.id,  // 或使用其它唯一标识
+              appId: postDetail.appId,
+              avatar: postDetail.avatar,
+              name: postDetail.appName,
+              time: this.formatTime(postDetail.createTime),
+              content: postDetail.content,
+              image: postDetail.picture,
+              likes: postDetail.likes,
+              comments: postDetail.comments,
+              title: postDetail.title,
+            },
+            comments: postDetail.commentsList,
+            visibleComments: postDetail.commentsList.slice(0, this.data.pageSize)
+          });
+        } else {
+          wx.showToast({ title: res.data.message, icon: 'none' });
+        }
+      },
+      fail: () => {
+        wx.showToast({ title: '请求失败', icon: 'none' });
+      }
     });
-
-    this.setData({
-      post,
-      comments,
-      visibleComments: comments.slice(0, this.data.pageSize)
-    });
   },
 
-  // 生成主评论数据
-  generateComments(count: number): Comment[] {
-    return Array.from({ length: count }, (_, i) => ({
-      id: i + 1,
-      avatar: `https://picsum.photos/50/50?random=${i + 1}`,
-      name: `用户 ${i + 1}`,
-      content: `主评论内容 ${i + 1}`,
-      subComments: this.generateSubComments(i + 1),
-      visibleSubComments: [] as SubComment[],
-      likes: 0
-    }));
-  },
-
-  // 生成子评论数据（随机0~3条）
-  generateSubComments(parentId: number): SubComment[] {
-    const randomLength = Math.floor(Math.random() * 4);
-    return Array.from({ length: randomLength }, (_, j) => ({
-      id: j + 1,
-      parentId,
-      name: `子评论者 ${j + 1}`,
-      content: `子评论内容 ${j + 1}`
-    }));
-  },
-
-  // 自动加载更多评论
-  onReachBottom() {
-    if (this.data.isLoading) return;
-    this.setData({ isLoading: true });
-
-    const { currentPage, pageSize, comments } = this.data;
-    const nextPage = currentPage + 1;
-    const start = (nextPage - 1) * pageSize;
-    const end = start + pageSize;
-    const moreComments = comments.slice(start, end);
-
-    if (moreComments.length > 0) {
-      this.setData({
-        visibleComments: this.data.visibleComments.concat(moreComments),
-        currentPage: nextPage
-      });
-    } else {
-      console.log('没有更多评论了');
-    }
-
-    setTimeout(() => {
-      this.setData({ isLoading: false });
-    }, 1000);
-  },
+    // 用于格式化时间，具体实现可根据实际需求调整
+    formatTime(timeStr) {
+      const date = new Date(timeStr);
+      return date.toLocaleString();
+    },
 
   goToCommentDetail(e: any) {
     const commentId = e.currentTarget.dataset.id;
@@ -211,10 +165,10 @@ Page({
 
     if (this.data.selectedCommentId > 0) {
       // 添加子评论到对应主评论
-      const parentIndex = updatedComments.findIndex(comment => comment.id === this.data.selectedCommentId);
+      const parentIndex = updatedComments.findIndex(comment => comment.commentId === this.data.selectedCommentId);
       if (parentIndex !== -1) {
-        const newSubComment: SubComment = {
-          id: Date.now(),
+        const newSubComment = {
+          userId: app.globalData.currentUser.id,
           parentId: this.data.selectedCommentId,
           name: '当前用户',
           content: replyContent
@@ -226,17 +180,47 @@ Page({
             : updatedComments[parentIndex].subComments;
       }
     } else {
+      let user = app.globalData.currentUser;
       // 添加新的主评论
-      const newComment: Comment = {
-        id: Date.now(),
-        avatar: 'https://picsum.photos/50/50?random=3',
-        name: '当前用户',
+      const newComment = {
+        userId: user.id,
+        avatar: user.avatar,
+        appName: user.name,
+        grade: user.grade,
+        postId: this.data.post.id,
         content: replyContent,
-        subComments: [],
-        visibleSubComments: [],
-        likes: 0
       };
       updatedComments.unshift(newComment);
+
+      wx.request({
+        url: `${this.data.addCommentUrl}`, // 替换成你的后端接口
+        method: 'POST',
+        header: {
+          'Content-Type': 'application/json',
+          'X-Token': app.globalData.currentUser.token,
+        },
+        data: newComment,
+        success: (res) => {
+          if (res.statusCode === 200 && res.data.code === 0) {
+            wx.showToast({
+              title: "发送成功",
+              icon: "none",
+            });
+          } else {
+            wx.showToast({
+              title: "发送失败",
+              icon: "none",
+            });
+          }
+        },
+        fail: (err) => {
+          wx.showToast({
+            title: "网络错误，请稍后重试",
+            icon: "none",
+          });
+          console.error("请求失败:", err);
+        },
+      });
     }
 
     // 根据当前分页重新计算显示的评论
@@ -253,7 +237,7 @@ Page({
 
   // 点赞评论
   likeComment(e: any) {
-    const commentId = e.currentTarget.dataset.id;
+    const commentId = e.currentTarget.dataset.commentid;
     const updatedComments = this.data.comments.map(comment => {
       if (comment.id === commentId) {
         return { ...comment, likes: comment.likes + 1 };

@@ -1,6 +1,7 @@
 package com.gasen.usercenterbackend.service;
 
 import com.gasen.usercenterbackend.model.Request.AddComment;
+import com.gasen.usercenterbackend.model.Request.CommentDetail;
 import com.gasen.usercenterbackend.model.Request.UpdateComment;
 import com.gasen.usercenterbackend.model.dao.Comment;
 
@@ -16,4 +17,6 @@ public interface ICommentService {
     List<Comment> getCommentListByPost(Long postId);
 
     Comment getComment(Long commentId);
+
+    List<CommentDetail> getCommentsByPostId(Long postId);
 }

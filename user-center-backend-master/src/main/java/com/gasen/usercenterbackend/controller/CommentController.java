@@ -30,6 +30,7 @@ public class CommentController {
     // 1. 新增评论
     @PostMapping("/addComment")
     public BaseResponse addComment(@RequestBody AddComment addComment) {
+        System.out.println(addComment);
         try {
             if (addComment == null || addComment.getUserId() == null || addComment.getPostId() == null || addComment.getContent() == null){
                 return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "参数为空！");
@@ -38,6 +39,7 @@ public class CommentController {
             if (result) {
                 return ResultUtils.success("添加评论成功！");
             } else {
+                log.error("添加评论异常");
                 return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "添加评论失败！");
             }
         } catch (Exception e) {

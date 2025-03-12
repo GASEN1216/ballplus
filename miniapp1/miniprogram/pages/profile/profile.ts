@@ -31,8 +31,6 @@ Page({
         userId: userId,
       },
       success: (res) => {
-        console.log(res);
-        
         if (res.statusCode === 200 && res.data.code === 0) {
           const user = res.data.data;
 

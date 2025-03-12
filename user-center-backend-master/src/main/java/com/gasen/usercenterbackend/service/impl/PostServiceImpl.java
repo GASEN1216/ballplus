@@ -1,9 +1,14 @@
 package com.gasen.usercenterbackend.service.impl;
 
+import com.gasen.usercenterbackend.mapper.CommentMapper;
 import com.gasen.usercenterbackend.mapper.PostMapper;
+import com.gasen.usercenterbackend.model.Request.CommentDetail;
 import com.gasen.usercenterbackend.model.respond.PostDetail;
 import com.gasen.usercenterbackend.model.dao.Post;
+import com.gasen.usercenterbackend.model.respond.SubCommentDetail;
+import com.gasen.usercenterbackend.service.ICommentService;
 import com.gasen.usercenterbackend.service.IPostService;
+import com.gasen.usercenterbackend.service.ISubCommentService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,21 +21,39 @@ public class PostServiceImpl implements IPostService {
     @Resource
     private PostMapper postMapper;
 
+    @Resource
+    private ICommentService commentService;
+
+    @Resource
+    private ISubCommentService subCommentService;
+
     @Override
     public boolean addPost(Post post) {
         return postMapper.insert(post) > 0;
     }
 
+    // TODO：暂时全部拿取，后续优化
     @Override
     public PostDetail getPostDetail(Long postId) {
-        try {
-            Post post = postMapper.selectById(postId);
-            return post.toPostDetail();
-        } catch (Exception e) {
-            log.error("查询帖子详情异常", e);
+        Post post = postMapper.selectById(postId);
+        if (post == null) {
+            log.error("查询帖子详情异常，帖子不存在");
             return null;
         }
+        PostDetail postDetail = post.toPostDetail();
+        // 查询主评论
+        List<CommentDetail> commentList = commentService.getCommentsByPostId(postId);
+
+        for (CommentDetail comment : commentList) {
+            // 查询该评论的子评论
+            List<SubCommentDetail> subComments = subCommentService.getSubCommentsByCommentId(comment.getCommentId());
+            comment.setSubComments(subComments);
+        }
+        postDetail.setCommentsList(commentList);
+
+        return postDetail;
     }
+
 
     @Override
     public boolean deletePost(Long postId, Integer userId) {
