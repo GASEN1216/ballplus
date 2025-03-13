@@ -1,5 +1,5 @@
 export const app = getApp<IAppOption>();
-import { chooseAndUploadImage } from '../editProfile/editProfile';
+//import { chooseAndUploadImage } from '../editProfile/editProfile';
 
 interface Post {
   id: number;
@@ -76,6 +76,8 @@ Page({
             posts,
             filteredPosts: posts
           });
+          console.log(posts);
+          
         } else {
           wx.showToast({
             title: res.data.message || '加载帖子失败',
@@ -219,27 +221,27 @@ Page({
     });
   },
 
-  // 上传图片事件：选择图片后填充到 newPost.image
-  onUploadImage() {
-    chooseAndUploadImage('post/')
-      .then(res => {
-        // 处理上传成功后的结果，例如保存图片 URL 并更新页面显示
-        this.setData({
-          'newPost.image': res.url
-        });
-        wx.showToast({
-          title: '上传成功',
-          icon: 'success'
-        });
-      })
-      .catch(err => {
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none'
-        });
-        console.error('上传错误:', err);
-      });
-  },
+  // // 上传图片事件：选择图片后填充到 newPost.image
+  // onUploadImage() {
+  //   chooseAndUploadImage('post/')
+  //     .then(res => {
+  //       // 处理上传成功后的结果，例如保存图片 URL 并更新页面显示
+  //       this.setData({
+  //         'newPost.image': res.url
+  //       });
+  //       wx.showToast({
+  //         title: '上传成功',
+  //         icon: 'success'
+  //       });
+  //     })
+  //     .catch(err => {
+  //       wx.showToast({
+  //         title: '上传失败',
+  //         icon: 'none'
+  //       });
+  //       console.error('上传错误:', err);
+  //     });
+  // },
 
   // 提交帖子事件：这里仅作页面更新提示，实际提交逻辑建议调用后端接口
   onSubmitPost() {

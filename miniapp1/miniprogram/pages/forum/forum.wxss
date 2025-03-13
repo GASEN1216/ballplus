@@ -62,6 +62,8 @@
 .header-info {
   margin-left: 15rpx;
   flex: 1;
+  display: flex;
+  align-items: center; /* 子元素垂直居中 */
 }
 .post-title {
   font-size: 32rpx;
@@ -71,14 +73,14 @@
 /* 等级文本 - 小牌子效果 */
 .level-text {
   display: inline-block;
-  font-size: 16rpx;
+  font-size: 14rpx;
+  line-height: 14rpx;  /* 行高设置为字体大小 */
   font-weight: bold;
-  padding: 3rpx 6rpx;             /* 内边距，营造牌子效果 */
+  padding: 0rpx 6rpx;            
   margin-left: 5rpx;
-  color: #000000;                 /* 字体颜色为蓝色 */
-  background-color: #ffffff;      /* 淡蓝色背景 */
-  border: 1rpx solid #000000;      /* 蓝色边框 */
-  border-radius: 15rpx;           /* 圆角，形成牌子形状 */
+  color: #000000;                
+  background-color: #ffffff;     
+  border: 1rpx solid #000000;      
   transform: translateX(10rpx);
 }
 
@@ -89,7 +91,6 @@
 .post-name {
   font-size: 22rpx;
   color: #666;
-  margin-bottom: 5rpx;
 }
 .post-content {
   font-size: 28rpx;
@@ -115,12 +116,10 @@
   margin-bottom: 15rpx;
 }
 
-/* 图片：填满容器，等比例缩放且裁剪多余部分，显示中心区域 */
 .post-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;      /* 等比例缩放，保证覆盖容器 */
-  object-position: center;/* 始终显示图片的中心部分 */
+  object-position: center;
 }
 
 /* 帖子操作区 */

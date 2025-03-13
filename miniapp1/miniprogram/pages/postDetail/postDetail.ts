@@ -39,12 +39,14 @@ Page({
               appId: postDetail.appId,
               avatar: postDetail.avatar,
               name: postDetail.appName,
-              time: this.formatTime(postDetail.createTime),
+              grade: postDetail.grade,
               content: postDetail.content,
               image: postDetail.picture,
               likes: postDetail.likes,
               comments: postDetail.comments,
               title: postDetail.title,
+              time: this.formatTime(postDetail.createTime),
+              updateTime: this.formatTime(postDetail.updateTime),
             },
             comments: postDetail.commentsList,
             visibleComments: postDetail.commentsList.slice(0, this.data.pageSize)
@@ -59,10 +61,35 @@ Page({
     });
   },
 
-    // 用于格式化时间，具体实现可根据实际需求调整
-    formatTime(timeStr) {
-      const date = new Date(timeStr);
-      return date.toLocaleString();
+  formatTime(timeStr) {
+    const inputDate = new Date(timeStr);
+    const now = new Date();
+    const diffMs = now - inputDate; // 毫秒差值
+    const oneDayMs = 24 * 60 * 60 * 1000;
+    
+    if (diffMs < oneDayMs) {
+      // 如果是一日内，显示"xx小时前"
+      const hours = Math.floor(diffMs / (60 * 60 * 1000));
+      return hours + "小时前";
+    } else if (inputDate.getFullYear() === now.getFullYear()) {
+      // 如果不是一天内，但是今年，显示"03-12"格式（月份和日期）
+      const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
+      const day = inputDate.getDate().toString().padStart(2, '0');
+      return `${month}-${day}`;
+    } else {
+      // 如果不是今年，显示"2024-03-12"格式（年月日）
+      const year = inputDate.getFullYear();
+      const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
+      const day = inputDate.getDate().toString().padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+  },
+
+    goToInfo(e: any) {
+      const userId = e.currentTarget.dataset.userid; // 获取传递的id
+      wx.navigateTo({
+        url: `../profile/profile?userId=${userId}`,
+      });
     },
 
   goToCommentDetail(e: any) {
@@ -253,4 +280,13 @@ Page({
   sharePost() {
     console.log('分享帖子');
   },
+
+    // 点击图片预览
+    previewImage(e: any) {
+      const imageUrl = e.currentTarget.dataset.url;
+      wx.previewImage({
+        current: imageUrl, // 当前显示图片的链接
+        urls: [imageUrl]   // 需要预览的图片链接列表
+      });
+    },
 });

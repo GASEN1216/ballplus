@@ -26,7 +26,7 @@
         <!-- 帖子图片的容器，用于截取图片的一部分 -->
         <view wx:if="{{item.image}}" class="post-image-container">
           <!-- 帖子图片（如果存在） -->
-          <image wx:if="{{item.image}}" class="post-image" src="{{item.image}}" catchtap="previewImage" data-url="{{item.image}}" />
+          <image wx:if="{{item.image}}" class="post-image" src="{{item.image}}" catchtap="previewImage" data-url="{{item.image}}" mode="aspectFill" />
         </view>
         <!-- 帖子操作：点赞、评论 -->
         <view class="post-actions">

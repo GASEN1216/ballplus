@@ -1,12 +1,19 @@
 <view class="container" bindtap="closeReplyPopup">
+  <image wx:if="{{post.image}}" class="post-image" src="{{post.image}}" catchtap="previewImage" data-url="{{post.image}}" mode="aspectFit" />
+  <text class="post-title">{{post.title}}</text>
   <!-- 帖子头部 -->
   <view class="post-header">
-    <image class="post-author-avatar" src="{{post.avatar}}" />
+    <image class="post-author-avatar" catchtap="goToInfo" src="{{post.avatar}}" data-userid="{{post.appId}}" />
     <view class="post-meta">
-      <text class="post-title">{{post.title}}</text>
       <view class="post-author-info">
-        <text class="post-author">作者: {{post.name}}</text>
+        <text class="post-author">{{post.name}}</text>
+        <text class="level-text">LV.{{post.grade}}</text>
+      </view>
+      <view wx:if="{{post.time === post.updateTime}}">
         <text class="post-time">{{post.time}}</text>
+      </view>
+      <view wx:else>
+        <text class="post-time">上一次修改: {{post.updateTime}}</text>
       </view>
     </view>
   </view>
@@ -14,7 +21,6 @@
   <!-- 帖子内容 -->
   <view class="post-content">
     <text class="content-text">{{post.content}}</text>
-    <image wx:if="{{post.image}}" class="post-image" src="{{post.image}}" />
   </view>
 
   <view class="divider"></view>
