@@ -1,6 +1,5 @@
-package com.gasen.usercenterbackend.model.respond;
+package com.gasen.usercenterbackend.model.vo;
 
-import com.gasen.usercenterbackend.model.Request.CommentDetail;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -8,25 +7,32 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class PostDetail implements Serializable {
-    // 帖子详情：appId、头像、标题、内容、点赞数、评论数、图片、创建时间、更新时间
-    private Long id;
+public class CommentInfo implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
+    // 评论ID
+    private Long commentId;
+    // 所属帖子ID
+    private Long postId;
+    // 发布评论的用户ID
     private Integer appId;
+    // 发布评论的用户名
     private String appName;
+    // 用户头像
     private String avatar;
+    // 用户等级
     private Integer grade;
-    private String title;
+    // 评论内容
     private String content;
+    // 点赞数
     private int likes;
+    // 评论数
     private int comments;
-    private String picture;
+    // 创建时间
     private LocalDateTime createTime;
-    private LocalDateTime updateTime;
-    private List<CommentDetail> commentsList;
 }

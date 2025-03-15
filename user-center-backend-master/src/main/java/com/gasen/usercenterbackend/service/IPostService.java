@@ -1,11 +1,11 @@
 package com.gasen.usercenterbackend.service;
 
-import com.gasen.usercenterbackend.model.respond.PostDetail;
+import com.gasen.usercenterbackend.model.vo.PostDetail;
 import com.gasen.usercenterbackend.model.dao.Post;
 
 import java.util.List;
 
-public interface IPostService {
+public interface IPostService extends ILikesService{
     boolean addPost(Post post);
 
     PostDetail getPostDetail(Long postId);
@@ -17,4 +17,6 @@ public interface IPostService {
     List<Post> getPostList();
 
     boolean reduceComments(Long postId);
+
+    boolean addComments(Long postId);
 }

@@ -1,13 +1,13 @@
 package com.gasen.usercenterbackend.service;
 
-import com.gasen.usercenterbackend.model.Request.AddComment;
-import com.gasen.usercenterbackend.model.Request.CommentDetail;
-import com.gasen.usercenterbackend.model.Request.UpdateComment;
+import com.gasen.usercenterbackend.model.dto.AddComment;
+import com.gasen.usercenterbackend.model.dto.CommentDetail;
+import com.gasen.usercenterbackend.model.dto.UpdateComment;
 import com.gasen.usercenterbackend.model.dao.Comment;
 
 import java.util.List;
 
-public interface ICommentService {
+public interface ICommentService extends ILikesService{
     boolean addComment(AddComment addComment);
 
     boolean deleteComment(Long commentId, Integer userId);

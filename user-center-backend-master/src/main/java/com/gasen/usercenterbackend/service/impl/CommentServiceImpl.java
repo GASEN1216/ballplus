@@ -1,14 +1,15 @@
 package com.gasen.usercenterbackend.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.gasen.usercenterbackend.common.ErrorCode;
+import com.gasen.usercenterbackend.exception.BusinessExcetion;
 import com.gasen.usercenterbackend.mapper.CommentMapper;
-import com.gasen.usercenterbackend.mapper.PostMapper;
-import com.gasen.usercenterbackend.model.Request.AddComment;
-import com.gasen.usercenterbackend.model.Request.CommentDetail;
-import com.gasen.usercenterbackend.model.Request.UpdateComment;
+import com.gasen.usercenterbackend.model.dao.Post;
+import com.gasen.usercenterbackend.model.dto.AddComment;
+import com.gasen.usercenterbackend.model.dto.CommentDetail;
+import com.gasen.usercenterbackend.model.dto.UpdateComment;
 import com.gasen.usercenterbackend.model.dao.Comment;
 import com.gasen.usercenterbackend.service.ICommentService;
-import com.gasen.usercenterbackend.service.IPostService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -90,5 +91,25 @@ public class CommentServiceImpl implements ICommentService {
             return new ArrayList<>();
         }
         return comments.stream().map(Comment::toCommentDetail).toList();
+    }
+
+    @Override
+    public Integer getLikesById(Long id) {
+        Comment comment = commentMapper.selectById(id);
+        if (comment == null)
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "评论不存在");
+        return comment.getLikes();
+    }
+
+    @Override
+    public boolean updateLikes(Long id, Integer likes) {
+        Comment comment = commentMapper.selectById(id);
+        if (comment == null) {
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "帖子不存在");
+        }
+        if (likes == null || likes < 0)
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "点赞数错误");
+        comment.setLikes(likes);
+        return commentMapper.updateById(comment) > 0;
     }
 }

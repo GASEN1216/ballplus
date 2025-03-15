@@ -11,13 +11,13 @@ import com.gasen.usercenterbackend.common.ResultUtils;
 import com.gasen.usercenterbackend.config.QiniuConfig;
 import com.gasen.usercenterbackend.config.WXConfig;
 import com.gasen.usercenterbackend.mapper.UserMapper;
-import com.gasen.usercenterbackend.model.Request.UserBannedDaysRequest;
-import com.gasen.usercenterbackend.model.Request.UserRegisterLoginRequest;
-import com.gasen.usercenterbackend.model.Request.weChatAddItemRequest;
-import com.gasen.usercenterbackend.model.Request.weChatUseItemRequest;
+import com.gasen.usercenterbackend.model.dto.UserBannedDaysRequest;
+import com.gasen.usercenterbackend.model.dto.UserRegisterLoginRequest;
+import com.gasen.usercenterbackend.model.dto.weChatAddItemRequest;
+import com.gasen.usercenterbackend.model.dto.weChatUseItemRequest;
 import com.gasen.usercenterbackend.model.dao.User;
-import com.gasen.usercenterbackend.model.respond.goEasyUser;
-import com.gasen.usercenterbackend.model.respond.wxUser;
+import com.gasen.usercenterbackend.model.vo.goEasyUser;
+import com.gasen.usercenterbackend.model.vo.wxUser;
 import com.gasen.usercenterbackend.service.IFriendsService;
 import com.gasen.usercenterbackend.service.IItemsService;
 import com.gasen.usercenterbackend.service.IUserService;
@@ -39,8 +39,7 @@ import  java.util.concurrent.TimeUnit;
 
 import static com.gasen.usercenterbackend.common.ErrorCode.INVALID_TOKEN;
 import static com.gasen.usercenterbackend.common.ErrorCode.SUCCESS;
-import static com.gasen.usercenterbackend.constant.UserConstant.ADMIN;
-import static com.gasen.usercenterbackend.constant.UserConstant.USER_LOGIN_IN;
+import static com.gasen.usercenterbackend.constant.UserConstant.*;
 
 /**
  * <p>
@@ -191,14 +190,14 @@ public class UserController {
         // 3.接收微信接口服务 获取返回的参数
         String openid = SessionKeyOpenId.getString("openid");
         String sessionKey = SessionKeyOpenId.getString("session_key");
-        String os = openid + "+" + sessionKey;
+        String os = REDIS_USER_TOKEN + openid + "+" + sessionKey;
 
         // 3.5 判断是否缓存里已有记录,已有直接取出token并更新过期时间
         ValueOperations<String, Object> ops = redisTemplate.opsForValue();
         String token = (String) ops.get(os);
         if(token==null){
             // 4. 将openid和sessionKey和随机数使用加密算法得到有效期为一天的token，存到redis中，key为token，value为openid+sessionKey
-            token = WechatUtil.generateToken(openid, sessionKey, wxConfig.getSalt());
+            token = REDIS_USER_TOKEN + WechatUtil.generateToken(openid, sessionKey, wxConfig.getSalt());
             ops.set(token, os, 1, TimeUnit.DAYS);
             ops.set(os, token, 1, TimeUnit.DAYS);
         }else {
@@ -225,6 +224,8 @@ public class UserController {
         userService.addExp(user);
         // 返回安全用户信息
         wxUser saftyUser = getSaftywxUser(user);
+        // 去掉token前面的REDIS_USER_TOKEN字符串，再赋值
+        token = token.substring(REDIS_USER_TOKEN.length());
         saftyUser.setToken(token);
         return ResultUtils.success(saftyUser);
     }

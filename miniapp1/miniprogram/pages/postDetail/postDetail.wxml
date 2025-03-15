@@ -20,7 +20,7 @@
 
   <!-- 帖子内容 -->
   <view class="post-content">
-    <text class="content-text">{{post.content}}</text>
+    <text class="content-text" user-select="true">{{post.content}}</text>
   </view>
 
   <view class="divider"></view>
@@ -31,18 +31,19 @@
       <view class="comment-block">
         <!-- 主评论 -->
         <view class="comment-item">
-          <image class="comment-avatar" src="{{item.avatar}}" />
+          <image class="comment-avatar" catchtap="goToInfo" src="{{item.avatar}}" data-userid="{{item.appId}}" />
           <view class="comment-main">
             <view class="comment-info">
-              <text class="comment-name">{{item.appName}}
-              </text>
-              <text class="comment-content">{{item.content}}</text>
+              <text class="comment-name">{{item.appName}}</text>
+              <text class="level-text">LV.{{item.grade}}</text>
+              <view class="comment-actions">
+                <image class="icon-button" src="/icon/like.png" bindtap="likeComment" data-id="{{item.commentId}}" />
+                <text class="likes-count">{{item.likes}}</text>
+                <image class="icon-button" src="/icon/reply.png" catchtap="openReplyPopup" data-id="{{item.commentId}}" data-name="{{item.appName}}" />
+              </view>
             </view>
-            <view class="comment-actions">
-              <image class="icon-button" src="/icon/like.png" bindtap="likeComment" data-id="{{item.commentId}}" />
-              <text class="likes-count">{{item.likes}}</text>
-              <image class="icon-button" src="/icon/reply.png" catchtap="openReplyPopup" data-id="{{item.commentId}}" data-name="{{item.appName}}" />
-            </view>
+            <text class="post-time">{{item.createTime}}</text>
+            <text class="content-text">{{item.content}}</text>
           </view>
         </view>
         <!-- 子评论 -->
@@ -73,11 +74,11 @@
           <image class="icon-button" src="/icon/share.png" />
         </view>
         <view class="action-item">
-          <image class="icon-button" src="/icon/reply.png" />
+          <image class="icon-button" src="/icon/reply.png" bindtap="handleTapCommentInput" />
           <text class="action-number">{{post.comments || 0}}</text>
         </view>
         <view class="action-item">
-          <image class="icon-button" src="/icon/like.png" />
+          <image class="icon-button" src="{{ islike ? '/icon/islike.png' : '/icon/like.png' }}" bindtap="handleLikePost" />
           <text class="action-number">{{post.likes || 0}}</text>
         </view>
       </view>

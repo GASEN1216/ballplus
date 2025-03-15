@@ -7,7 +7,7 @@ import com.gasen.usercenterbackend.common.ResultUtils;
 import com.gasen.usercenterbackend.constant.FriendsReqConstant;
 import com.gasen.usercenterbackend.model.dao.FriendsRequest;
 import com.gasen.usercenterbackend.model.dao.User;
-import com.gasen.usercenterbackend.model.respond.receivedApplicationRes;
+import com.gasen.usercenterbackend.model.vo.receivedApplicationRes;
 import com.gasen.usercenterbackend.service.IFriendsRequestService;
 import com.gasen.usercenterbackend.service.IFriendsService;
 import com.gasen.usercenterbackend.service.IUserService;

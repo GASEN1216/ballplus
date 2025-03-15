@@ -1,11 +1,12 @@
 package com.gasen.usercenterbackend.service.impl;
 
-import com.gasen.usercenterbackend.mapper.CommentMapper;
+import com.gasen.usercenterbackend.common.ErrorCode;
+import com.gasen.usercenterbackend.exception.BusinessExcetion;
 import com.gasen.usercenterbackend.mapper.PostMapper;
-import com.gasen.usercenterbackend.model.Request.CommentDetail;
-import com.gasen.usercenterbackend.model.respond.PostDetail;
+import com.gasen.usercenterbackend.model.dto.CommentDetail;
+import com.gasen.usercenterbackend.model.vo.PostDetail;
 import com.gasen.usercenterbackend.model.dao.Post;
-import com.gasen.usercenterbackend.model.respond.SubCommentDetail;
+import com.gasen.usercenterbackend.model.vo.SubCommentDetail;
 import com.gasen.usercenterbackend.service.ICommentService;
 import com.gasen.usercenterbackend.service.IPostService;
 import com.gasen.usercenterbackend.service.ISubCommentService;
@@ -57,67 +58,82 @@ public class PostServiceImpl implements IPostService {
 
     @Override
     public boolean deletePost(Long postId, Integer userId) {
-        try {
-            Post post = postMapper.selectById(postId);
-            if (post == null) {
-                return false;
-            }
-            if (post.getAppId().equals(userId)) {
-                // 逻辑删除
-                post.setIsDelete((byte) 1);
-                return true;
-            } else {
-                log.error("删除帖子异常，用户id不匹配");
-                return false;
-            }
-        } catch (Exception e) {
-            log.error("删除帖子异常", e);
+
+        Post post = postMapper.selectById(postId);
+        if (post == null) {
             return false;
         }
+        if (post.getAppId().equals(userId)) {
+            // 逻辑删除
+            post.setIsDelete((byte) 1);
+            return true;
+        } else {
+            log.error("删除帖子异常，用户id不匹配");
+            return false;
+        }
+
     }
 
     @Override
     public boolean updatePost(Post post) {
-        try {
-            Post oldPost = postMapper.selectById(post.getId());
-            if (oldPost == null) {
-                log.error("更新帖子异常，帖子不存在");
-                return false;
-            }
-            if (!oldPost.getAppId().equals(post.getAppId())) {
-                log.error("更新帖子异常，用户id不匹配");
-                return false;
-            }
-        } catch (Exception e) {
-            log.error("更新帖子异常", e);
+
+        Post oldPost = postMapper.selectById(post.getId());
+        if (oldPost == null) {
+            log.error("更新帖子异常，帖子不存在");
             return false;
         }
+        if (!oldPost.getAppId().equals(post.getAppId())) {
+            log.error("更新帖子异常，用户id不匹配");
+            return false;
+        }
+
         return postMapper.updateById(post) > 0;
     }
 
     @Override
     public List<Post> getPostList() {
-        try {
-            return postMapper.selectList(null);
-        } catch (Exception e) {
-            log.error("查询帖子列表异常", e);
-            return null;
-        }
+        return postMapper.selectList(null);
     }
 
     @Override
     public boolean reduceComments(Long postId) {
-        try {
-            Post post = postMapper.selectById(postId);
-            if (post == null) {
-                log.error("减少帖子评论异常，帖子不存在");
-                return false;
-            }
-            post.setComments(post.getComments() - 1);
-            return postMapper.updateById(post) > 0;
-        } catch (Exception e) {
-            log.error("减少帖子评论异常", e);
+        Post post = postMapper.selectById(postId);
+        if (post == null) {
+            log.error("减少帖子评论异常，帖子不存在");
             return false;
         }
+        post.setComments(post.getComments() - 1);
+        return postMapper.updateById(post) > 0;
+    }
+
+    @Override
+    public boolean addComments(Long postId) {
+        Post post = postMapper.selectById(postId);
+        if (post == null) {
+            log.error("增加帖子评论异常，帖子不存在");
+            return false;
+        }
+        post.setComments(post.getComments() + 1);
+        return postMapper.updateById(post) > 0;
+    }
+
+    @Override
+    public Integer getLikesById(Long postId) {
+        Post post = postMapper.selectById(postId);
+        if (post == null)
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "帖子不存在");
+        return post.getLikes();
+    }
+
+    @Override
+    public boolean updateLikes(Long postId, Integer likes) {
+        Post post = postMapper.selectById(postId);
+        if (post == null) {
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "帖子不存在");
+        }
+        if (likes == null || likes < 0)
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "点赞数错误");
+        post.setLikes(likes);
+        return postMapper.updateById(post) > 0;
     }
 }

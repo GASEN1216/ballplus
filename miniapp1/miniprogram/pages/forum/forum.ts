@@ -41,18 +41,6 @@ Page({
     this.fetchPosts();
   },
 
-  // 页面每次显示时触发
-  // onShow() {
-  //   // 强制刷新数据
-  //   this.setData({
-  //     posts: [],    // 清空原有数据，避免数据不一致
-  //     filteredPosts: []
-  //   });
-
-  //   this.fetchPosts();
-
-  // },
-
   // 从后端获取帖子数据，并转换成前端需要的格式
   fetchPosts() {
     wx.request({
@@ -76,8 +64,6 @@ Page({
             posts,
             filteredPosts: posts
           });
-          console.log(posts);
-          
         } else {
           wx.showToast({
             title: res.data.message || '加载帖子失败',

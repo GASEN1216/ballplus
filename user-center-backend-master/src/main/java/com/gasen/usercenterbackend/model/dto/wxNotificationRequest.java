@@ -1,4 +1,4 @@
-package com.gasen.usercenterbackend.model.Request;
+package com.gasen.usercenterbackend.model.dto;
 
 import com.gasen.usercenterbackend.model.TemplateData;
 import lombok.Data;

@@ -1,0 +1,46 @@
+package com.gasen.usercenterbackend.config.rabbitmq;
+
+import com.gasen.usercenterbackend.common.ErrorCode;
+import com.gasen.usercenterbackend.exception.BusinessExcetion;
+import com.gasen.usercenterbackend.model.dto.LikeEvent;
+import com.gasen.usercenterbackend.service.ICommentService;
+import com.gasen.usercenterbackend.service.ILikesService;
+import com.gasen.usercenterbackend.service.IPostService;
+import com.gasen.usercenterbackend.service.ISubCommentService;
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.stereotype.Component;
+
+@Component
+@Slf4j
+public class LikeEventConsumer {
+
+    @Resource
+    private IPostService postService;
+
+    @Resource
+    private ICommentService commentService;
+
+    @Resource
+    private ISubCommentService subCommentService;
+
+    @RabbitListener(queues = "likeQueue")
+    public void handleLikeEvent(LikeEvent event) {
+        if (event==null)
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "点赞事件为空");
+
+        ILikesService likesService = switch (event.getType()) {
+            case 1 -> postService;
+            case 2 -> commentService;
+            case 3 -> subCommentService;
+            default -> throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "点赞事件类型错误");
+        };
+
+        if(!likesService.updateLikes(event.getId(), event.getLikes())){
+            throw new BusinessExcetion(ErrorCode.UPDATE_POST_LIKES_FAILED, "点赞失败");
+        }
+        log.info("成功处理点赞事件，type: {}, id: {}, likes: {}", event.getType(), event.getId(), event.getLikes());
+    }
+}

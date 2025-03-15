@@ -13,4 +13,6 @@ public interface UserConstant {
     int MAX_RETRY_COUNT = 3; // 发送通知最大重试次数
 
     String UNKNOWN_LOCATION = "未知";
+
+    String REDIS_USER_TOKEN = "ballplus:user:token:";
 }

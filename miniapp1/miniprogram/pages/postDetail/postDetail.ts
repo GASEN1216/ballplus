@@ -1,9 +1,12 @@
+import { PostProcess } from "XrFrame/xrFrameSystem";
+
 export const app = getApp<IAppOption>();
 
 Page({
   data: {
     apiUrl: `${app.globalData.url}/user/wx/getPostDetail`,
     addCommentUrl: `${app.globalData.url}/user/wx/addComment`,
+    likePostUrl: `${app.globalData.url}/user/wx/likePost`,
     post: {} as any,
     comments: [],
     visibleComments: [],
@@ -16,6 +19,7 @@ Page({
     pageSize: 100,
     currentPage: 1,
     isLoading: false,
+    islike: false,
     selectedCommentId: -1, // -1 表示新增主评论，否则为回复某条评论
   },
 
@@ -32,6 +36,13 @@ Page({
       success: res => {
         if (res.statusCode === 200 && res.data.code === 0) {
           const postDetail = res.data.data;
+          const processedComments = postDetail.commentsList.map(comment => {
+            // 对 createTime 进行格式化处理
+            return {
+              ...comment,
+              createTime: this.formatTime(comment.createTime)
+            };
+          });
           // 假设后端返回的 postDetail 中包含 commentsList 字段，里面包含评论和对应的子评论数据
           this.setData({
             post: {
@@ -48,8 +59,8 @@ Page({
               time: this.formatTime(postDetail.createTime),
               updateTime: this.formatTime(postDetail.updateTime),
             },
-            comments: postDetail.commentsList,
-            visibleComments: postDetail.commentsList.slice(0, this.data.pageSize)
+            comments: processedComments,
+            visibleComments: processedComments.slice(0, this.data.pageSize)
           });
         } else {
           wx.showToast({ title: res.data.message, icon: 'none' });
@@ -65,9 +76,20 @@ Page({
     const inputDate = new Date(timeStr);
     const now = new Date();
     const diffMs = now - inputDate; // 毫秒差值
-    const oneDayMs = 24 * 60 * 60 * 1000;
+    const oneSecond = 1000;
+    const oneMinute = 60 * oneSecond;
+    const oneHour = 60 * oneMinute;
+    const oneDay = 24 * oneHour;
     
-    if (diffMs < oneDayMs) {
+    if (diffMs < oneMinute) {
+      // 如果一分钟内，显示"xx秒前"
+      const seconds = Math.floor(diffMs / oneSecond);
+      return seconds + "秒前";
+    } else if (diffMs < oneHour) {
+      // 如果一小时内，显示"xx分钟前"
+      const minutes = Math.floor(diffMs / oneMinute);
+      return minutes + "分钟前";
+    } else if (diffMs < oneDay) {
       // 如果是一日内，显示"xx小时前"
       const hours = Math.floor(diffMs / (60 * 60 * 1000));
       return hours + "小时前";
@@ -216,6 +238,7 @@ Page({
         grade: user.grade,
         postId: this.data.post.id,
         content: replyContent,
+        createTime: "刚刚",
       };
       updatedComments.unshift(newComment);
 
@@ -253,6 +276,7 @@ Page({
     // 根据当前分页重新计算显示的评论
     const totalVisible = this.data.pageSize * this.data.currentPage;
     this.setData({
+      'post.comments': this.data.post.comments + 1,
       comments: updatedComments,
       visibleComments: updatedComments.slice(0, totalVisible),
       showReplyPopup: false,
@@ -274,6 +298,40 @@ Page({
     this.setData({
       comments: updatedComments,
       visibleComments: updatedComments.slice(0, this.data.pageSize * this.data.currentPage)
+    });
+  },
+  // 当点击图片时，先判断 islike 的值
+  handleLikePost() {
+    if (!this.data.islike) {
+      this.likePost();
+    }
+  },
+  likePost(){
+    wx.request({
+      url: `${this.data.likePostUrl}`, // 替换成你的后端接口
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-Token': app.globalData.currentUser.token,
+      },
+      data: {
+        postId: this.data.post.id
+      },
+      success: (res) => {
+        if (res.statusCode === 200 && res.data.code === 0) {
+          this.setData({
+            islike: true,
+            'post.likes': this.data.post.likes + 1
+          })
+        }
+      },
+      fail: (err) => {
+        wx.showToast({
+          title: "网络错误，请稍后重试",
+          icon: "none",
+        });
+        console.error("请求失败:", err);
+      },
     });
   },
 

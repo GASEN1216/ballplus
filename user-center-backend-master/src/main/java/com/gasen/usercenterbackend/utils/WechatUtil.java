@@ -4,7 +4,7 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.gasen.usercenterbackend.config.WXConfig;
 import com.gasen.usercenterbackend.model.dao.Event;
-import com.gasen.usercenterbackend.model.Request.wxNotificationRequest;
+import com.gasen.usercenterbackend.model.dto.wxNotificationRequest;
 import com.gasen.usercenterbackend.model.TemplateData;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

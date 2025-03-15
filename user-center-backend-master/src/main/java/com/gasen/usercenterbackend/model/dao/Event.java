@@ -1,10 +1,10 @@
 package com.gasen.usercenterbackend.model.dao;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.gasen.usercenterbackend.model.respond.detailEvent;
-import com.gasen.usercenterbackend.model.respond.eventTemplates;
-import com.gasen.usercenterbackend.model.respond.indexEvent;
-import com.gasen.usercenterbackend.model.respond.indexEventWithState;
+import com.gasen.usercenterbackend.model.vo.detailEvent;
+import com.gasen.usercenterbackend.model.vo.eventTemplates;
+import com.gasen.usercenterbackend.model.vo.indexEvent;
+import com.gasen.usercenterbackend.model.vo.indexEventWithState;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

@@ -3,19 +3,24 @@ package com.gasen.usercenterbackend.controller;
 import com.gasen.usercenterbackend.common.BaseResponse;
 import com.gasen.usercenterbackend.common.ErrorCode;
 import com.gasen.usercenterbackend.common.ResultUtils;
-import com.gasen.usercenterbackend.model.Request.AddPost;
-import com.gasen.usercenterbackend.model.respond.PostDetail;
-import com.gasen.usercenterbackend.model.respond.PostInfo;
-import com.gasen.usercenterbackend.model.Request.UpdatePost;
+import com.gasen.usercenterbackend.model.dto.AddPost;
+import com.gasen.usercenterbackend.model.vo.PostDetail;
+import com.gasen.usercenterbackend.model.vo.PostInfo;
+import com.gasen.usercenterbackend.model.dto.UpdatePost;
 import com.gasen.usercenterbackend.model.dao.Post;
 import com.gasen.usercenterbackend.service.IPostService;
-import com.gasen.usercenterbackend.service.IUserService;
+import com.gasen.usercenterbackend.utils.LikesUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;
 import java.util.List;
+
+import static com.gasen.usercenterbackend.constant.LikeConstant.POST_TYPE;
+import static com.gasen.usercenterbackend.constant.LikeConstant.REDIS_POST_LIKES;
 
 @Slf4j
 @RestController
@@ -26,7 +31,7 @@ public class PostController {
     private IPostService postService;
 
     @Resource
-    private IUserService userService;
+    private LikesUtil likesUtil;
 
     // 1. 新增帖子，接收 AddPost 对象
     @PostMapping("/addPost")
@@ -113,6 +118,24 @@ public class PostController {
         } catch (Exception e) {
             log.error("查询帖子详情异常", e);
             return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "查询帖子详情失败！");
+        }
+    }
+
+    // 6. 帖子点赞，放redis里，弄异步任务，一分钟后删除，同时更新点赞数
+    @PostMapping("/likePost")
+    public BaseResponse likePost(@RequestParam Long postId) {
+        try {
+            if (postId == null) {
+                return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "参数为空！");
+            }
+            boolean result = likesUtil.like(POST_TYPE, postId);
+            if (!result)
+                return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "点赞失败！");
+
+            return ResultUtils.success("点赞成功！");
+        } catch (Exception e) {
+            log.error("点赞帖子异常", e);
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "点赞失败！");
         }
     }
 }

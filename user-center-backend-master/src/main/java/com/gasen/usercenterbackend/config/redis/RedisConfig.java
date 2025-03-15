@@ -1,4 +1,4 @@
-package com.gasen.usercenterbackend.config;
+package com.gasen.usercenterbackend.config.redis;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,4 +19,14 @@ public class RedisConfig {
     template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
     return template;
   }
+
+  @Bean
+  public RedisTemplate<String, Long> longRedisTemplate(RedisConnectionFactory factory) {
+    RedisTemplate<String, Long> template = new RedisTemplate<>();
+    template.setConnectionFactory(factory);
+    template.setKeySerializer(new StringRedisSerializer());
+    template.setValueSerializer(new GenericToStringSerializer<>(Long.class)); // 直接存储 Long 值
+    return template;
+  }
+
 }

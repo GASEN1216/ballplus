@@ -1,11 +1,12 @@
 package com.gasen.usercenterbackend.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.gasen.usercenterbackend.mapper.PostMapper;
+import com.gasen.usercenterbackend.common.ErrorCode;
+import com.gasen.usercenterbackend.exception.BusinessExcetion;
 import com.gasen.usercenterbackend.mapper.SubCommentMapper;
+import com.gasen.usercenterbackend.model.dao.Comment;
 import com.gasen.usercenterbackend.model.dao.SubComment;
-import com.gasen.usercenterbackend.model.respond.SubCommentDetail;
-import com.gasen.usercenterbackend.service.IPostService;
+import com.gasen.usercenterbackend.model.vo.SubCommentDetail;
 import com.gasen.usercenterbackend.service.ISubCommentService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -36,5 +37,25 @@ public class SubCommentServiceImpl implements ISubCommentService {
             return null;
         }
         return subComments.stream().map(SubComment::toSubCommentDetail).toList();
+    }
+
+    @Override
+    public Integer getLikesById(Long id) {
+        SubComment subComment = subCommentMapper.selectById(id);
+        if (subComment == null)
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "子评论不存在");
+        return subComment.getLikes();
+    }
+
+    @Override
+    public boolean updateLikes(Long id, Integer likes) {
+        SubComment subComment = subCommentMapper.selectById(id);
+        if (subComment == null) {
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "帖子不存在");
+        }
+        if (likes == null || likes < 0)
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "点赞数错误");
+        subComment.setLikes(likes);
+        return subCommentMapper.updateById(subComment) > 0;
     }
 }

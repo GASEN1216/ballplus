@@ -1,4 +1,4 @@
-package com.gasen.usercenterbackend.model.respond;
+package com.gasen.usercenterbackend.model.vo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

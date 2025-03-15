@@ -7,8 +7,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
-import com.gasen.usercenterbackend.model.respond.goEasyUser;
-import com.gasen.usercenterbackend.model.respond.wxUser;
+import com.gasen.usercenterbackend.model.vo.goEasyUser;
+import com.gasen.usercenterbackend.model.vo.wxUser;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

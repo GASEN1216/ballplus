@@ -1,7 +1,5 @@
-package com.gasen.usercenterbackend.model.respond;
+package com.gasen.usercenterbackend.model.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;

@@ -1,8 +1,8 @@
 package com.gasen.usercenterbackend.model.dao;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.gasen.usercenterbackend.model.Request.CommentDetail;
-import com.gasen.usercenterbackend.model.respond.CommentInfo;
+import com.gasen.usercenterbackend.model.dto.CommentDetail;
+import com.gasen.usercenterbackend.model.vo.CommentInfo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
