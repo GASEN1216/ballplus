@@ -102,7 +102,25 @@ Page({
         });
     },
 
+    // 添加登录检查函数
+    checkLogin() {
+        if (!app.globalData.isLoggedin) {
+            wx.showToast({
+                title: '请先登录',
+                icon: 'none'
+            });
+            wx.switchTab({
+                url: '/pages/mine/mine'
+            });
+            return false;
+        }
+        return true;
+    },
+
+    // 修改跳转到帖子详情的方法
     goToPostDetail(e: any) {
+        if (!this.checkLogin()) return;
+
         const postId = e.currentTarget.dataset.id;
         wx.navigateTo({
             url: `/pages/postDetail/postDetail?id=${postId}`
@@ -141,8 +159,10 @@ Page({
         });
     },
 
-    // 加号按钮点击事件：打开发帖弹窗
+    // 修改加号按钮点击事件
     onAddClick() {
+        if (!this.checkLogin()) return;
+
         this.setData({
             addButtonRotate: (this.data.addButtonRotate + 45) % 360,
             showPostModal: true
@@ -193,12 +213,14 @@ Page({
         });
     },
 
-    // 点击图片预览
+    // 修改预览图片的方法
     previewImage(e: any) {
+        if (!this.checkLogin()) return;
+
         const imageUrl = e.currentTarget.dataset.url;
         wx.previewImage({
-            current: imageUrl, // 当前显示图片的链接
-            urls: [imageUrl]   // 需要预览的图片链接列表
+            current: imageUrl,
+            urls: [imageUrl]
         });
     },
 
@@ -251,15 +273,10 @@ Page({
     //     });
     // },
 
-    // 提交帖子事件：这里仅作页面更新提示，实际提交逻辑建议调用后端接口
+    // 修改提交帖子的方法
     onSubmitPost() {
-        if (!app.globalData.isLoggedin) {
-            wx.showToast({
-                title: '请先登录',
-                icon: 'error'
-            });
-            return;
-        }
+        if (!this.checkLogin()) return;
+
         const { title, content, image } = this.data.newPost;
         if (!title || !content) {
             wx.showToast({
@@ -313,8 +330,12 @@ Page({
             }
         });
     },
+
+    // 修改跳转到用户信息的方法
     goToInfo(e: any) {
-        const userId = e.currentTarget.dataset.userid; // 获取传递的id
+        if (!this.checkLogin()) return;
+
+        const userId = e.currentTarget.dataset.userid;
         wx.navigateTo({
             url: `../profile/profile?userId=${userId}`,
         });

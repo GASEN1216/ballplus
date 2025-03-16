@@ -1,151 +1,304 @@
-/* 容器 */
-.form-container {
+/* 页面容器 */
+.page-header {
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #4a90e2, #357abd);
+  color: white;
+  text-align: center;
 }
 
-/* 表单项 */
+.header-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.form-container {
+  position: relative;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
+/* 内容区域 */
+.content-area {
+  padding: 15px 15px 84px 15px; /* 底部padding要大于底部按钮区域的高度 */
+}
+
+/* 卡片样式 */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/* 表单项样式 */
 .form-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  padding: 10px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  width: 100%; /* 确保容器不超出父级 */
-  box-sizing: border-box;
+  margin-bottom: 15px;
 }
 
-/* 表单项 */
-.form-item2 {
-  display: flex;
-  flex-direction: column;  /* 改为上下排列 */
-  align-items: center;
-  margin-bottom: 20px;
-  padding: 10px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  width: 100%; /* 确保容器不超出父级 */
-  box-sizing: border-box;
-}
-
-/* 标签 */
 .form-label {
-  flex-shrink: 0; /* 保证标签宽度固定 */
-  flex: 0 0 120px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #333333;
-  margin-right: 10px;
-}
-
-/* 输入框、选择器、文本域 */
-.form-input,
-.form-textarea,
-.picker {
-  flex: 1;
-  padding: 10px;
+  display: block;
   font-size: 14px;
-  color: #666666;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  transition: border-color 0.3s;
+  color: #666;
+  margin-bottom: 8px;
 }
 
-.form-input:focus,
-.form-textarea:focus,
-.picker:focus {
-  border-color: #007aff;
+.form-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  background: #f8f9fa;
+  border: 1px solid #e0e3e7;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* 时间选择器组 */
+.time-picker-group {
+  margin-bottom: 15px;
+}
+
+.time-pickers {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.time-picker {
+  flex: 1;
+  background: #f8f9fa;
+  border: 1px solid #e0e3e7;
+  border-radius: 8px;
+  height: 44px;
+  padding: 0 12px;
+}
+
+.time-divider {
+  color: #999;
+  font-size: 14px;
+}
+
+/* 地点选择器 */
+.location-item {
+  margin-bottom: 15px;
+}
+
+.location-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background: #f8f9fa;
+  border: 1px solid #e0e3e7;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.location-content.disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.location-text {
+  font-size: 14px;
+  color: #333;
+}
+
+.location-icon {
+  font-size: 18px;
+}
+
+/* 联系方式 */
+.contact-item {
+  margin-bottom: 15px;
+}
+
+.phone-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.phone-number {
+  flex: 1;
+  font-size: 14px;
+  color: #333;
+  padding: 12px;
+  background: #f8f9fa;
+  border: 1px solid #e0e3e7;
+  border-radius: 8px;
+  line-height: 20px;
+}
+
+.get-phone-button {
+  min-width: 120px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #f8f9fa;
+  border: 1px solid #e0e3e7;
+  border-radius: 8px;
+  color: #666;
+  font-size: 14px;
+  padding: 0 16px;
+  transition: all 0.3s ease;
+}
+
+.get-phone-button:active {
+  background: #edf5ff;
+  border-color: #4a90e2;
+  color: #4a90e2;
+}
+
+.phone-icon {
+  font-size: 16px;
+}
+
+/* 更多设置区域 */
+.more-settings {
+  margin-bottom: 20px;
+}
+
+.more-settings-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.toggle-text {
+  font-size: 14px;
+  color: #4a90e2;
+}
+
+.toggle-icon {
+  font-size: 12px;
+  color: #4a90e2;
+}
+
+.more-settings-content {
+  display: none;
+  transition: all 0.3s ease;
+}
+
+.more-settings-content.show {
+  display: block;
+}
+
+/* 开关组 */
+.switch-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.switch-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.switch-label {
+  font-size: 14px;
+  color: #666;
 }
 
 /* 文本域 */
+.textarea-item {
+  margin-bottom: 20px;
+}
+
 .form-textarea {
-  height: 100px;
-  resize: none;
-}
-
-/* 链接 */
-.form-link {
-  color: #007aff;
-  font-size: 14px;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-/* 提交按钮 */
-.submit-button {
   width: 100%;
+  height: 100px;
   padding: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #ffffff;
-  background-color: #007aff;
-  text-align: center;
+  background: #f8f9fa;
+  border: 1px solid #e0e3e7;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 122, 255, 0.4);
-  transition: background-color 0.3s;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* 底部按钮区 */
+.bottom-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.template-button {
+  flex: 1;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border: 1px solid #4a90e2;
+  border-radius: 8px;
+  color: #4a90e2;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.template-button:active {
+  background: #edf5ff;
+}
+
+.submit-button {
+  flex: 1;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #4a90e2, #357abd);
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  box-shadow: 0 2px 4px rgba(74, 144, 226, 0.2);
+  transition: all 0.3s ease;
 }
 
 .submit-button:active {
-  background-color: #005bb5;
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(74, 144, 226, 0.2);
 }
 
-/* 切换更多设置 */
-.more-settings-toggle {
-  text-align: center;
-  padding: 10px 0;
-  font-size: 14px;
-  color: #666666;
-  cursor: pointer;
-}
-
-.more-settings-toggle:hover {
-  color: #007aff;
-}
-
-/* 提示文字 */
-.helper-text {
-  font-size: 12px;
-  color: #999999;
-  margin-top: 5px;
-}
-
-.form-input-container {
-  flex: 1; /* 填满剩余空间 */
-  display: flex;
-  align-items: center;
-  overflow: hidden; /* 强制隐藏超出部分 */
-  width: 100%;
-}
-
-.form-display {
-  flex: 1; /* 占满剩余空间 */
-  font-size: 14px;
+/* Picker文本样式 */
+.picker-text {
+  line-height: 44px;
   color: #333;
-  overflow: hidden; /* 超出隐藏 */
-  text-overflow: ellipsis; /* 显示省略号 */
-  white-space: nowrap; /* 禁止换行 */
-  max-width: 100%; /* 强制不超过容器宽度 */
-  line-height: 24px; /* 与文字高度一致 */
-  cursor: pointer; /* 鼠标显示为可点击 */
-}
-.form-disabled {
-  flex: 1; /* 占满剩余空间 */
-  font-size: 14px;
-  color: #333;
-  overflow: hidden; /* 超出隐藏 */
-  text-overflow: ellipsis; /* 显示省略号 */
-  white-space: nowrap; /* 禁止换行 */
-  max-width: 100%; /* 强制不超过容器宽度 */
-  line-height: 24px; /* 与文字高度一致 */
-  pointer-events: none; /* 禁用点击 */
-  cursor: not-allowed; /* 鼠标显示不可点击 */
-}
-.info-link {
-  font-size: 14px;
-  color: #37d0ff; /* 淡蓝色 */
-  transform: translateY(-5px);
 }
