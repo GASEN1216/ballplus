@@ -159,6 +159,7 @@ public class UserController {
      * @return 是否有效的布尔值
      */
     public boolean validateToken(String token) {
+        token = REDIS_USER_TOKEN + token;
         // 从Redis中获取token对应的值
         String storedValue = (String) redisTemplate.opsForValue().get(token);
 

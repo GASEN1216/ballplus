@@ -1,5 +1,5 @@
 export const app = getApp<IAppOption>();
-//import { chooseAndUploadImage } from '../editProfile/editProfile';
+import { chooseAndUploadImage } from '../editProfile/editProfile';
 
 interface Post {
     id: number;
@@ -252,26 +252,26 @@ Page({
     },
 
     // // 上传图片事件：选择图片后填充到 newPost.image
-    // onUploadImage() {
-    //   chooseAndUploadImage('post/')
-    //     .then(res => {
-    //       // 处理上传成功后的结果，例如保存图片 URL 并更新页面显示
-    //       this.setData({
-    //         'newPost.image': res.url
-    //       });
-    //       wx.showToast({
-    //         title: '上传成功',
-    //         icon: 'success'
-    //       });
-    //     })
-    //     .catch(err => {
-    //       wx.showToast({
-    //         title: '上传失败',
-    //         icon: 'none'
-    //       });
-    //       console.error('上传错误:', err);
-    //     });
-    // },
+    onUploadImage() {
+      chooseAndUploadImage('post/')
+        .then(res => {
+          // 处理上传成功后的结果，例如保存图片 URL 并更新页面显示
+          this.setData({
+            'newPost.image': res.url
+          });
+          wx.showToast({
+            title: '上传成功',
+            icon: 'success'
+          });
+        })
+        .catch(err => {
+          wx.showToast({
+            title: '上传失败',
+            icon: 'none'
+          });
+          console.error('上传错误:', err);
+        });
+    },
 
     // 修改提交帖子的方法
     onSubmitPost() {
