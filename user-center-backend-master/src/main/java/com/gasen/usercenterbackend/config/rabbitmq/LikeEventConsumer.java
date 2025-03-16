@@ -13,6 +13,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.stereotype.Component;
 
+import static com.gasen.usercenterbackend.constant.LikeConstant.*;
+
 @Component
 @Slf4j
 public class LikeEventConsumer {
@@ -32,9 +34,9 @@ public class LikeEventConsumer {
             throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "点赞事件为空");
 
         ILikesService likesService = switch (event.getType()) {
-            case 1 -> postService;
-            case 2 -> commentService;
-            case 3 -> subCommentService;
+            case POST_TYPE -> postService;
+            case COMMENT_TYPE -> commentService;
+            case SUB_COMMENT_TYPE -> subCommentService;
             default -> throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "点赞事件类型错误");
         };
 

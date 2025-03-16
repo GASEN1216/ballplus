@@ -64,6 +64,7 @@ public class Post {
                 .setContent(this.content)
                 .setLikes(this.likes)
                 .setComments(this.comments)
-                .setPicture(this.picture);
+                .setPicture(this.picture)
+                .setUpdateTime(this.updateTime);
     }
 }

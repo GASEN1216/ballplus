@@ -1,6 +1,5 @@
 package com.gasen.usercenterbackend.model.vo;
 
-import com.gasen.usercenterbackend.model.dto.CommentDetail;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

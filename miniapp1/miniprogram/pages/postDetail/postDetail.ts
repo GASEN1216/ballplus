@@ -3,348 +3,566 @@ import { PostProcess } from "XrFrame/xrFrameSystem";
 export const app = getApp<IAppOption>();
 
 Page({
-  data: {
-    apiUrl: `${app.globalData.url}/user/wx/getPostDetail`,
-    addCommentUrl: `${app.globalData.url}/user/wx/addComment`,
-    likePostUrl: `${app.globalData.url}/user/wx/likePost`,
-    post: {} as any,
-    comments: [],
-    visibleComments: [],
-    showReplyPopup: false,
-    replyTo: '',
-    replyContent: '',
-    // 用于输入状态下控制焦点
-    autoFocus: false,
-    // 分页相关
-    pageSize: 100,
-    currentPage: 1,
-    isLoading: false,
-    islike: false,
-    selectedCommentId: -1, // -1 表示新增主评论，否则为回复某条评论
-  },
-
-  onLoad(options) {
-    const { id } = options; 
-    wx.request({
-      url: `${this.data.apiUrl}`,
-      method: 'POST',
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'X-Token': app.globalData.currentUser.token,
-      },
-      data: { postId: id },
-      success: res => {
-        if (res.statusCode === 200 && res.data.code === 0) {
-          const postDetail = res.data.data;
-          const processedComments = postDetail.commentsList.map(comment => {
-            // 对 createTime 进行格式化处理
-            return {
-              ...comment,
-              createTime: this.formatTime(comment.createTime)
-            };
-          });
-          // 假设后端返回的 postDetail 中包含 commentsList 字段，里面包含评论和对应的子评论数据
-          this.setData({
-            post: {
-              id: postDetail.id,  // 或使用其它唯一标识
-              appId: postDetail.appId,
-              avatar: postDetail.avatar,
-              name: postDetail.appName,
-              grade: postDetail.grade,
-              content: postDetail.content,
-              image: postDetail.picture,
-              likes: postDetail.likes,
-              comments: postDetail.comments,
-              title: postDetail.title,
-              time: this.formatTime(postDetail.createTime),
-              updateTime: this.formatTime(postDetail.updateTime),
-            },
-            comments: processedComments,
-            visibleComments: processedComments.slice(0, this.data.pageSize)
-          });
-        } else {
-          wx.showToast({ title: res.data.message, icon: 'none' });
-        }
-      },
-      fail: () => {
-        wx.showToast({ title: '请求失败', icon: 'none' });
-      }
-    });
-  },
-
-  formatTime(timeStr) {
-    const inputDate = new Date(timeStr);
-    const now = new Date();
-    const diffMs = now - inputDate; // 毫秒差值
-    const oneSecond = 1000;
-    const oneMinute = 60 * oneSecond;
-    const oneHour = 60 * oneMinute;
-    const oneDay = 24 * oneHour;
-    
-    if (diffMs < oneMinute) {
-      // 如果一分钟内，显示"xx秒前"
-      const seconds = Math.floor(diffMs / oneSecond);
-      return seconds + "秒前";
-    } else if (diffMs < oneHour) {
-      // 如果一小时内，显示"xx分钟前"
-      const minutes = Math.floor(diffMs / oneMinute);
-      return minutes + "分钟前";
-    } else if (diffMs < oneDay) {
-      // 如果是一日内，显示"xx小时前"
-      const hours = Math.floor(diffMs / (60 * 60 * 1000));
-      return hours + "小时前";
-    } else if (inputDate.getFullYear() === now.getFullYear()) {
-      // 如果不是一天内，但是今年，显示"03-12"格式（月份和日期）
-      const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
-      const day = inputDate.getDate().toString().padStart(2, '0');
-      return `${month}-${day}`;
-    } else {
-      // 如果不是今年，显示"2024-03-12"格式（年月日）
-      const year = inputDate.getFullYear();
-      const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
-      const day = inputDate.getDate().toString().padStart(2, '0');
-      return `${year}-${month}-${day}`;
-    }
-  },
-
-    goToInfo(e: any) {
-      const userId = e.currentTarget.dataset.userid; // 获取传递的id
-      wx.navigateTo({
-        url: `../profile/profile?userId=${userId}`,
-      });
+    data: {
+        apiUrl: `${app.globalData.url}/user/wx/getPostDetail`,
+        addCommentUrl: `${app.globalData.url}/user/wx/addComment`,
+        likePostUrl: `${app.globalData.url}/user/wx/likePost`,
+        likeCommentUrl: `${app.globalData.url}/user/wx/likeComment`,
+        addSubCommentUrl: `${app.globalData.url}/user/wx/addSubComment`,
+        likeSubCommentUrl: `${app.globalData.url}/user/wx/likeSubComment`,
+        post: {} as any,
+        comments: [],
+        visibleComments: [],
+        showReplyPopup: false,
+        replyTo: '',
+        replyContent: '',
+        // 用于输入状态下控制焦点
+        autoFocus: false,
+        // 分页相关
+        pageSize: 100,
+        currentPage: 1,
+        isLoading: false,
+        islike: false,
+        selectedCommentId: -1, // -1 表示新增主评论，否则为回复某条评论
+        likedComments: [] as number[],  // 改用数组存储已点赞的评论ID
+        sortType: 'hot', // 新增：排序类型，'hot' 或 'new'
+        postId: '', // 添加帖子ID字段
     },
 
-  goToCommentDetail(e: any) {
-    const commentId = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: `/pages/commentDetail/commentDetail?id=${commentId}`
-    });
-  },
+    onLoad(options) {
+        const { id } = options;
+        this.setData({ postId: id });
+        this.fetchPostDetail();
+    },
 
-  // 点击“点我发评论”进入回复状态
-  handleTapCommentInput() {
-    this.setData({
-      showReplyPopup: true,
-      autoFocus: true,
-      replyTo: '帖子',  // 如果是回复主帖，可固定提示“帖子”，如回复评论则在 openReplyPopup 中传入对应名字
-      replyContent: '',
-      selectedCommentId: -1  // 新增主评论
-    });
-
-    // 延时确保输入框自动聚焦
-    setTimeout(() => {
-      wx.createSelectorQuery()
-        .select('#replyInput')
-        .fields({ properties: ['focus'] }, res => {
-          if (!res.focus) {
-            this.setData({ autoFocus: true });
-          }
-        })
-        .exec();
-    }, 200);
-  },
-
-  // 普通状态下点击某评论的回复按钮
-  openReplyPopup(e: any) {
-    const replyTo = e.currentTarget.dataset.name || '帖子';
-    const commentId = e.currentTarget.dataset.id;
-    this.setData({
-      showReplyPopup: true,
-      replyTo,
-      autoFocus: true,
-      replyContent: '',
-      selectedCommentId: commentId
-    });
-
-    setTimeout(() => {
-      wx.createSelectorQuery()
-        .select('#replyInput')
-        .fields({ properties: ['focus'] }, res => {
-          if (!res.focus) {
-            this.setData({ autoFocus: true });
-          }
-        })
-        .exec();
-    }, 200);
-  },
-
-  // 关闭回复状态
-  closeReplyPopup() {
-    this.setData({
-      showReplyPopup: false,
-      replyTo: '',
-      replyContent: '',
-      autoFocus: false,
-      selectedCommentId: -1
-    });
-  },
-
-  preventClose() {
-    // 阻止点击事件冒泡
-  },
-
-  // 输入评论
-  onReplyInput(e: any) {
-    this.setData({ replyContent: e.detail.value });
-  },
-
-  onReplyBlur() {
-    // 可选择失焦时做处理，此处直接不操作
-    this.setData({ showReplyPopup: false });
-  },
-
-  onReplyFocus() {
-    // 保证输入框自动聚焦
-    this.setData({ autoFocus: true });
-  },
-
-  cancelClosePopup(){
-
-  },
-
-  // 发送评论或回复
-  sendReply() {
-    const replyContent = this.data.replyContent.trim();
-    if (!replyContent) {
-      wx.showToast({ title: '请输入回复内容', icon: 'none' });
-      return;
-    }
-
-    let updatedComments = [...this.data.comments];
-
-    if (this.data.selectedCommentId > 0) {
-      // 添加子评论到对应主评论
-      const parentIndex = updatedComments.findIndex(comment => comment.commentId === this.data.selectedCommentId);
-      if (parentIndex !== -1) {
-        const newSubComment = {
-          userId: app.globalData.currentUser.id,
-          parentId: this.data.selectedCommentId,
-          name: '当前用户',
-          content: replyContent
-        };
-        updatedComments[parentIndex].subComments.unshift(newSubComment);
-        updatedComments[parentIndex].visibleSubComments =
-          updatedComments[parentIndex].subComments.length > 2
-            ? updatedComments[parentIndex].subComments.slice(0, 2)
-            : updatedComments[parentIndex].subComments;
-      }
-    } else {
-      let user = app.globalData.currentUser;
-      // 添加新的主评论
-      const newComment = {
-        userId: user.id,
-        avatar: user.avatar,
-        appName: user.name,
-        grade: user.grade,
-        postId: this.data.post.id,
-        content: replyContent,
-        createTime: "刚刚",
-      };
-      updatedComments.unshift(newComment);
-
-      wx.request({
-        url: `${this.data.addCommentUrl}`, // 替换成你的后端接口
-        method: 'POST',
-        header: {
-          'Content-Type': 'application/json',
-          'X-Token': app.globalData.currentUser.token,
-        },
-        data: newComment,
-        success: (res) => {
-          if (res.statusCode === 200 && res.data.code === 0) {
+    // 添加下拉刷新处理函数
+    async onPullDownRefresh() {
+        try {
+            await this.fetchPostDetail();
+            wx.stopPullDownRefresh();
+        } catch (error) {
+            wx.stopPullDownRefresh();
             wx.showToast({
-              title: "发送成功",
-              icon: "none",
+                title: '刷新失败，请重试',
+                icon: 'none'
             });
-          } else {
-            wx.showToast({
-              title: "发送失败",
-              icon: "none",
-            });
-          }
-        },
-        fail: (err) => {
-          wx.showToast({
-            title: "网络错误，请稍后重试",
-            icon: "none",
-          });
-          console.error("请求失败:", err);
-        },
-      });
-    }
-
-    // 根据当前分页重新计算显示的评论
-    const totalVisible = this.data.pageSize * this.data.currentPage;
-    this.setData({
-      'post.comments': this.data.post.comments + 1,
-      comments: updatedComments,
-      visibleComments: updatedComments.slice(0, totalVisible),
-      showReplyPopup: false,
-      replyContent: '',
-      selectedCommentId: -1,
-      autoFocus: false
-    });
-  },
-
-  // 点赞评论
-  likeComment(e: any) {
-    const commentId = e.currentTarget.dataset.commentid;
-    const updatedComments = this.data.comments.map(comment => {
-      if (comment.id === commentId) {
-        return { ...comment, likes: comment.likes + 1 };
-      }
-      return comment;
-    });
-    this.setData({
-      comments: updatedComments,
-      visibleComments: updatedComments.slice(0, this.data.pageSize * this.data.currentPage)
-    });
-  },
-  // 当点击图片时，先判断 islike 的值
-  handleLikePost() {
-    if (!this.data.islike) {
-      this.likePost();
-    }
-  },
-  likePost(){
-    wx.request({
-      url: `${this.data.likePostUrl}`, // 替换成你的后端接口
-      method: 'POST',
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'X-Token': app.globalData.currentUser.token,
-      },
-      data: {
-        postId: this.data.post.id
-      },
-      success: (res) => {
-        if (res.statusCode === 200 && res.data.code === 0) {
-          this.setData({
-            islike: true,
-            'post.likes': this.data.post.likes + 1
-          })
         }
-      },
-      fail: (err) => {
-        wx.showToast({
-          title: "网络错误，请稍后重试",
-          icon: "none",
-        });
-        console.error("请求失败:", err);
-      },
-    });
-  },
+    },
 
-  sharePost() {
-    console.log('分享帖子');
-  },
+    // 抽取获取帖子详情的方法
+    fetchPostDetail() {
+        return new Promise((resolve, reject) => {
+            wx.request({
+                url: `${this.data.apiUrl}`,
+                method: 'POST',
+                header: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-Token': app.globalData.currentUser.token,
+                },
+                data: { postId: this.data.postId },
+                success: res => {
+                    if (res.statusCode === 200 && res.data.code === 0) {
+                        const postDetail = res.data.data;
+                        const processedComments = postDetail.commentsList.map(comment => {
+                            return {
+                                ...comment,
+                                createTimeStamp: new Date(comment.createTime).getTime(),
+                                createTime: this.formatTime(comment.createTime),
+                                subComments: comment.subComments ? comment.subComments.map(subComment => ({
+                                    ...subComment,
+                                    createTime: this.formatTime(subComment.createTime)
+                                })).sort((a, b) => (b.likes || 0) - (a.likes || 0)) : [],
+                                visibleSubComments: comment.subComments ?
+                                    comment.subComments
+                                        .sort((a, b) => (b.likes || 0) - (a.likes || 0))
+                                        .slice(0, 2)
+                                        .map(subComment => ({
+                                            ...subComment,
+                                            createTime: this.formatTime(subComment.createTime)
+                                        })) : []
+                            };
+                        });
+
+                        // 根据当前排序方式排序
+                        const sortedComments = this.sortComments(processedComments);
+
+                        this.setData({
+                            post: {
+                                id: postDetail.id,
+                                appId: postDetail.appId,
+                                avatar: postDetail.avatar,
+                                name: postDetail.appName,
+                                grade: postDetail.grade,
+                                content: postDetail.content,
+                                image: postDetail.picture,
+                                likes: postDetail.likes,
+                                comments: postDetail.comments,
+                                title: postDetail.title,
+                                time: this.formatTime(postDetail.createTime),
+                                updateTime: this.formatTime(postDetail.updateTime),
+                            },
+                            comments: sortedComments,
+                            visibleComments: sortedComments.slice(0, this.data.pageSize)
+                        });
+                        resolve(true);
+                    } else {
+                        wx.showToast({ title: res.data.message, icon: 'none' });
+                        reject(new Error(res.data.message));
+                    }
+                },
+                fail: (error) => {
+                    wx.showToast({ title: '请求失败', icon: 'none' });
+                    reject(error);
+                }
+            });
+        });
+    },
+
+    // 添加评论排序方法
+    sortComments(comments) {
+        return [...comments].sort((a, b) => {
+            if (this.data.sortType === 'hot') {
+                const likeDiff = (b.likes || 0) - (a.likes || 0);
+                return likeDiff !== 0 ? likeDiff : b.createTimeStamp - a.createTimeStamp;
+            } else {
+                return b.createTimeStamp - a.createTimeStamp;
+            }
+        });
+    },
+
+    formatTime(timeStr) {
+        const inputDate = new Date(timeStr);
+        const now = new Date();
+        const diffMs = now - inputDate; // 毫秒差值
+        const oneSecond = 1000;
+        const oneMinute = 60 * oneSecond;
+        const oneHour = 60 * oneMinute;
+        const oneDay = 24 * oneHour;
+
+        if (diffMs < oneMinute) {
+            // 如果一分钟内，显示"xx秒前"
+            const seconds = Math.floor(diffMs / oneSecond);
+            return seconds + "秒前";
+        } else if (diffMs < oneHour) {
+            // 如果一小时内，显示"xx分钟前"
+            const minutes = Math.floor(diffMs / oneMinute);
+            return minutes + "分钟前";
+        } else if (diffMs < oneDay) {
+            // 如果是一日内，显示"xx小时前"
+            const hours = Math.floor(diffMs / (60 * 60 * 1000));
+            return hours + "小时前";
+        } else if (inputDate.getFullYear() === now.getFullYear()) {
+            // 如果不是一天内，但是今年，显示"03-12"格式（月份和日期）
+            const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
+            const day = inputDate.getDate().toString().padStart(2, '0');
+            return `${month}-${day}`;
+        } else {
+            // 如果不是今年，显示"2024-03-12"格式（年月日）
+            const year = inputDate.getFullYear();
+            const month = (inputDate.getMonth() + 1).toString().padStart(2, '0');
+            const day = inputDate.getDate().toString().padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+    },
+
+    goToInfo(e: any) {
+        const userId = e.currentTarget.dataset.userid; // 获取传递的id
+        wx.navigateTo({
+            url: `../profile/profile?userId=${userId}`,
+        });
+    },
+
+    goToCommentDetail(e: any) {
+        const commentId = e.currentTarget.dataset.id;
+        const comment = e.currentTarget.dataset.comment;
+        wx.navigateTo({
+            url: `/pages/commentDetail/commentDetail?id=${commentId}`,
+            success: function (res) {
+                // 将评论数据传递给评论详情页
+                res.eventChannel.emit('acceptDataFromOpenerPage', { comment: comment })
+            }
+        });
+    },
+
+    // 点击"点我发评论"进入回复状态
+    handleTapCommentInput() {
+        this.setData({
+            showReplyPopup: true,
+            autoFocus: true,
+            replyTo: '帖子',  // 如果是回复主帖，可固定提示"帖子"，如回复评论则在 openReplyPopup 中传入对应名字
+            replyContent: '',
+            selectedCommentId: -1  // 新增主评论
+        });
+
+        // 延时确保输入框自动聚焦
+        setTimeout(() => {
+            wx.createSelectorQuery()
+                .select('#replyInput')
+                .fields({ properties: ['focus'] }, res => {
+                    if (!res.focus) {
+                        this.setData({ autoFocus: true });
+                    }
+                })
+                .exec();
+        }, 200);
+    },
+
+    // 普通状态下点击某评论的回复按钮
+    openReplyPopup(e: any) {
+        const replyTo = e.currentTarget.dataset.name || '帖子';
+        const commentId = e.currentTarget.dataset.id;
+        this.setData({
+            showReplyPopup: true,
+            replyTo,
+            autoFocus: true,
+            replyContent: '',
+            selectedCommentId: commentId
+        });
+
+        setTimeout(() => {
+            wx.createSelectorQuery()
+                .select('#replyInput')
+                .fields({ properties: ['focus'] }, res => {
+                    if (!res.focus) {
+                        this.setData({ autoFocus: true });
+                    }
+                })
+                .exec();
+        }, 200);
+    },
+
+    // 关闭回复状态
+    closeReplyPopup() {
+        this.setData({
+            showReplyPopup: false,
+            replyTo: '',
+            replyContent: '',
+            autoFocus: false,
+            selectedCommentId: -1
+        });
+    },
+
+    preventClose() {
+        // 阻止点击事件冒泡
+    },
+
+    // 输入评论
+    onReplyInput(e: any) {
+        this.setData({ replyContent: e.detail.value });
+    },
+
+    onReplyBlur() {
+        // 可选择失焦时做处理，此处直接不操作
+        this.setData({ showReplyPopup: false });
+    },
+
+    onReplyFocus() {
+        // 保证输入框自动聚焦
+        this.setData({ autoFocus: true });
+    },
+
+    cancelClosePopup() {
+
+    },
+
+    // 发送评论或回复
+    sendReply() {
+        const replyContent = this.data.replyContent.trim();
+        if (!replyContent) {
+            wx.showToast({ title: '请输入回复内容', icon: 'none' });
+            return;
+        }
+
+        let user = app.globalData.currentUser;
+
+        if (this.data.selectedCommentId > 0) {
+            // 添加子评论
+            const subCommentData = {
+                userId: user.id,
+                commentId: this.data.selectedCommentId,
+                content: replyContent,
+                appName: user.name,
+                avatar: user.avatar,
+                grade: user.grade
+            };
+
+            wx.request({
+                url: `${this.data.addSubCommentUrl}`,
+                method: 'POST',
+                header: {
+                    'Content-Type': 'application/json',
+                    'X-Token': app.globalData.currentUser.token,
+                },
+                data: subCommentData,
+                success: (res: any) => {
+                    if (res.statusCode === 200 && res.data.code === 0) {
+                        // 更新评论列表中的子评论
+                        const updatedComments = this.data.comments.map(comment => {
+                            if (comment.commentId === this.data.selectedCommentId) {
+                                const newSubComment = {
+                                    ...subCommentData,
+                                    createTime: '刚刚'
+                                };
+
+                                // 确保 subComments 数组存在
+                                const subComments = comment.subComments || [];
+                                const newSubComments = [newSubComment, ...subComments];
+
+                                return {
+                                    ...comment,
+                                    subComments: newSubComments,
+                                    visibleSubComments: newSubComments.slice(0, 2)
+                                };
+                            }
+                            return comment;
+                        });
+
+                        this.setData({
+                            comments: updatedComments,
+                            visibleComments: updatedComments.slice(0, this.data.pageSize * this.data.currentPage),
+                            showReplyPopup: false,
+                            replyContent: '',
+                            selectedCommentId: -1,
+                            autoFocus: false
+                        });
+
+                        wx.showToast({
+                            title: '回复成功',
+                            icon: 'success'
+                        });
+                    } else {
+                        wx.showToast({
+                            title: res.data.message || '回复失败',
+                            icon: 'none'
+                        });
+                    }
+                },
+                fail: () => {
+                    wx.showToast({
+                        title: '网络错误，请稍后重试',
+                        icon: 'none'
+                    });
+                }
+            });
+        } else {
+            // 添加主评论的逻辑保持不变
+            const newComment = {
+                userId: user.id,
+                avatar: user.avatar,
+                appName: user.name,
+                grade: user.grade,
+                postId: this.data.post.id,
+                content: replyContent,
+                createTime: "刚刚",
+                createTimeStamp: new Date().getTime(), // 添加时间戳
+                subComments: [],
+                visibleSubComments: []
+            };
+
+            wx.request({
+                url: `${this.data.addCommentUrl}`,
+                method: 'POST',
+                header: {
+                    'Content-Type': 'application/json',
+                    'X-Token': app.globalData.currentUser.token,
+                },
+                data: newComment,
+                success: (res) => {
+                    if (res.statusCode === 200 && res.data.code === 0) {
+                        const updatedComments = [newComment, ...this.data.comments];
+                        this.setData({
+                            'post.comments': this.data.post.comments + 1,
+                            comments: updatedComments,
+                            visibleComments: updatedComments.slice(0, this.data.pageSize * this.data.currentPage),
+                            showReplyPopup: false,
+                            replyContent: '',
+                            selectedCommentId: -1,
+                            autoFocus: false
+                        });
+
+                        wx.showToast({
+                            title: "发送成功",
+                            icon: "success"
+                        });
+                    } else {
+                        wx.showToast({
+                            title: res.data.message || "发送失败",
+                            icon: "none"
+                        });
+                    }
+                },
+                fail: () => {
+                    wx.showToast({
+                        title: "网络错误，请稍后重试",
+                        icon: "none"
+                    });
+                }
+            });
+        }
+    },
+
+    preventBubble() {
+        // 阻止事件冒泡
+    },
+
+    // 点赞评论
+    likeComment(e: any) {
+        const commentId = e.currentTarget.dataset.id;
+        const isSubComment = e.currentTarget.dataset.issub;
+
+        // 如果是子评论
+        if (isSubComment) {
+            wx.request({
+                url: `${this.data.likeSubCommentUrl}`,
+                method: 'POST',
+                header: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-Token': app.globalData.currentUser.token
+                },
+                data: {
+                    subCommentId: commentId
+                },
+                success: (res: any) => {
+                    if (res.statusCode === 200 && res.data.code === 0) {
+                        // 更新子评论的点赞状态
+                        const updatedComments = this.data.comments.map(comment => {
+                            if (comment.subComments) {
+                                const updatedSubComments = comment.subComments.map(subComment => {
+                                    if (subComment.id === commentId) {
+                                        return {
+                                            ...subComment,
+                                            likes: (subComment.likes || 0) + 1,
+                                            isLiked: true
+                                        };
+                                    }
+                                    return subComment;
+                                }).sort((a, b) => (b.likes || 0) - (a.likes || 0)); // 按点赞数排序
+                                return {
+                                    ...comment,
+                                    subComments: updatedSubComments,
+                                    visibleSubComments: updatedSubComments.slice(0, 2)
+                                };
+                            }
+                            return comment;
+                        });
+
+                        this.setData({
+                            comments: updatedComments,
+                            visibleComments: updatedComments.slice(0, this.data.pageSize * this.data.currentPage)
+                        });
+                    }
+                }
+            });
+            return;
+        }
+
+        // 如果已经点赞过，就不再重复点赞
+        if (this.data.likedComments.includes(commentId)) {
+            return;
+        }
+
+        wx.request({
+            url: `${this.data.likeCommentUrl}`,
+            method: 'POST',
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-Token': app.globalData.currentUser.token
+            },
+            data: {
+                commentId: commentId
+            },
+            success: (res: any) => {
+                if (res.statusCode === 200 && res.data.code === 0) {
+                    // 更新评论列表中的点赞数和状态
+                    const updatedComments = this.data.comments.map(comment => {
+                        if (comment.commentId === commentId) {
+                            return {
+                                ...comment,
+                                likes: (comment.likes || 0) + 1,
+                                isLiked: true
+                            };
+                        }
+                        return comment;
+                    });
+
+                    // 更新状态
+                    const newLikedComments = [...this.data.likedComments, commentId];
+
+                    this.setData({
+                        comments: updatedComments,
+                        visibleComments: updatedComments.slice(0, this.data.pageSize * this.data.currentPage),
+                        likedComments: newLikedComments
+                    });
+                }
+            }
+        });
+    },
+    // 当点击图片时，先判断 islike 的值
+    handleLikePost() {
+        if (!this.data.islike) {
+            this.likePost();
+        }
+    },
+    likePost() {
+        wx.request({
+            url: `${this.data.likePostUrl}`, // 替换成你的后端接口
+            method: 'POST',
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-Token': app.globalData.currentUser.token,
+            },
+            data: {
+                postId: this.data.post.id
+            },
+            success: (res) => {
+                if (res.statusCode === 200 && res.data.code === 0) {
+                    this.setData({
+                        islike: true,
+                        'post.likes': this.data.post.likes + 1
+                    })
+                }
+            },
+            fail: (err) => {
+                wx.showToast({
+                    title: "网络错误，请稍后重试",
+                    icon: "none",
+                });
+                console.error("请求失败:", err);
+            },
+        });
+    },
+
+    sharePost() {
+        console.log('分享帖子');
+    },
 
     // 点击图片预览
     previewImage(e: any) {
-      const imageUrl = e.currentTarget.dataset.url;
-      wx.previewImage({
-        current: imageUrl, // 当前显示图片的链接
-        urls: [imageUrl]   // 需要预览的图片链接列表
-      });
+        const imageUrl = e.currentTarget.dataset.url;
+        wx.previewImage({
+            current: imageUrl, // 当前显示图片的链接
+            urls: [imageUrl]   // 需要预览的图片链接列表
+        });
+    },
+
+    // 切换排序方式
+    toggleSortType() {
+        const newSortType = this.data.sortType === 'hot' ? 'new' : 'hot';
+        const sortedComments = [...this.data.comments].sort((a, b) => {
+            if (newSortType === 'hot') {
+                // 按点赞数排序，点赞数相同时按时间倒序
+                const likeDiff = (b.likes || 0) - (a.likes || 0);
+                return likeDiff !== 0 ? likeDiff : b.createTimeStamp - a.createTimeStamp;
+            } else {
+                // 按时间倒序排序
+                return b.createTimeStamp - a.createTimeStamp;
+            }
+        });
+
+        this.setData({
+            sortType: newSortType,
+            comments: sortedComments,
+            visibleComments: sortedComments.slice(0, this.data.pageSize * this.data.currentPage)
+        });
     },
 });

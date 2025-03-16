@@ -98,7 +98,8 @@ page {
 /* 评论区域 */
 .comments-container {
   width: 100%;
-  padding: 0 24rpx;
+  padding: 20rpx;
+  background-color: #fff;
   box-sizing: border-box;
   padding-bottom: 150rpx;
 }
@@ -152,25 +153,55 @@ page {
 }
 /* 子评论 */
 .sub-comments {
-  background-color: #ebebeb;
-  padding: 12rpx;
-  border-top: 1rpx solid #eee;
+  margin-left: 60rpx;
+  margin-top: 20rpx;
+  background-color: #f7f7f7;
+  border-radius: 8rpx;
+  padding: 12rpx 0;
+}
+.show-more-sub-comments {
+  font-size: 26rpx;
+  color: #576b95;
+  padding: 12rpx 20rpx;
+  text-align: left;
 }
 .sub-comment-item {
   display: flex;
-  font-size: 24rpx;
-  color: #555;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12rpx 20rpx;
   margin-bottom: 8rpx;
 }
-.sub-comment-name {
-  font-weight: bold;
-  margin-right: 4rpx;
+.sub-comment-content {
+  flex: 1;
+  margin-right: 16rpx;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
-.show-more-sub-comments {
+.sub-comment-name {
+  font-size: 28rpx;
+  color: #576b95;
+  font-weight: 500;
+}
+.sub-comment-text {
+  font-size: 28rpx;
+  color: #333;
+}
+.sub-comment-actions {
+  display: flex;
+  align-items: center;
+  min-width: 80rpx;
+}
+.icon-button-small {
+  width: 32rpx;
+  height: 32rpx;
+  padding: 4rpx;
+}
+.likes-count-small {
   font-size: 24rpx;
-  color: #007aff;
-  text-align: right;
-  cursor: pointer;
+  color: #999;
+  margin-left: 4rpx;
 }
 
 /* 底部操作栏 */
@@ -180,82 +211,103 @@ page {
   left: 0;
   right: 0;
   background-color: #fff;
-  padding: 16rpx 24rpx;
-  box-shadow: 0 -2rpx 6rpx rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  padding: 16rpx 32rpx;
+  box-shadow: 0 -2rpx 8rpx rgba(0, 0, 0, 0.1);
+  z-index: 100;
 }
 
-/* 普通状态下 */
 .bottom-normal {
   display: flex;
-  width: 100%;
   align-items: center;
-  justify-content: space-between;
+  gap: 16rpx;
 }
+
 .comment-input {
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 20px; /* 更圆润的圆角 */
-  padding: 10px 15px;
+  flex: 1;
+  height: 72rpx;
+  background-color: #f5f5f5;
+  border-radius: 36rpx;
+  padding: 0 32rpx;
+  line-height: 72rpx;
   color: #999;
-  background-color: #fff; /* 可选：设置背景色 */
+  font-size: 28rpx;
 }
 
 .bottom-actions {
   display: flex;
-  gap: 16rpx;
+  align-items: center;
+  gap: 24rpx;
 }
+
 .action-item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-}
-.action-number {
-  font-size: 24rpx;
-  color: #666;
-  margin-top: 4rpx;
+  gap: 8rpx;
+  padding: 8rpx;
 }
 
-/* 回复状态下 */
+.icon-button {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.action-count {
+  font-size: 26rpx;
+  color: #999;
+  min-width: 20rpx;
+  text-align: center;
+}
+
 .bottom-reply {
   display: flex;
-  width: 100%;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 16rpx;
 }
+
 .reply-container {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.reply-label {
-  font-size: 28rpx;
-  color: #333;
-  margin-bottom: 8rpx;
-}
-.reply-input {
-  width: 100%;
-  min-height: 50rpx;
-  max-height: 150rpx;  /* 当内容较多时出现滚动条 */
-  padding: 12rpx;
-  font-size: 28rpx;
-  border: 1rpx solid #ddd;
-  border-radius: 30rpx;
-  overflow-y: auto;
-  resize: none;  /* 禁止用户手动调整 */
-  box-sizing: border-box;
+  background-color: #f5f5f5;
+  border-radius: 8rpx;
+  padding: 16rpx;
 }
 
-/* 自定义提交控件，仅占两个汉字宽度 */
-.submit-custom {
-  background-color: #007aff;
-  color: #fff;
+.reply-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.reply-input {
+  width: 100%;
+  min-height: 36rpx;
+  max-height: 300rpx;
   font-size: 28rpx;
-  padding: 10rpx;
-  width: 70rpx;  /* 根据实际情况调整 */
-  height: 72rpx;
-  border-radius: 8rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  line-height: 1.5;
+  padding: 0;
+}
+
+.submit-custom {
+  width: 120rpx;
+  height: 64rpx;
+  background-color: #07c160;
+  color: #fff;
+  text-align: center;
+  line-height: 64rpx;
+  border-radius: 32rpx;
+  font-size: 28rpx;
+}
+
+.sort-switch {
+  text-align: right;
+  padding: 10rpx 0;
+  margin-bottom: 10rpx;
+}
+
+.sort-text {
+  font-size: 24rpx;
+  color: #666;
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+  background-color: #f5f5f5;
 }

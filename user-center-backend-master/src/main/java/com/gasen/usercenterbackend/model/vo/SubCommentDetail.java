@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class SubCommentDetail {
+    private Long subCommentId;
     private String appName;
     private String avatar;
     private Integer grade;

@@ -1,4 +1,6 @@
 {
-  "navigationBarTitleText": "球坛",
-  "usingComponents": {}
+    "navigationBarTitleText": "球坛",
+    "usingComponents": {},
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark"
 }

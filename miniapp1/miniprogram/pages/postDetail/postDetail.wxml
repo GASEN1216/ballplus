@@ -27,6 +27,10 @@
 
   <!-- 评论列表 -->
   <view class="comments-container">
+    <!-- 添加排序切换按钮 -->
+    <view class="sort-switch" catchtap="toggleSortType">
+      <text class="sort-text">{{sortType === 'hot' ? '最热' : '最新'}}</text>
+    </view>
     <block wx:for="{{visibleComments}}" wx:key="commentId">
       <view class="comment-block">
         <!-- 主评论 -->
@@ -37,8 +41,8 @@
               <text class="comment-name">{{item.appName}}</text>
               <text class="level-text">LV.{{item.grade}}</text>
               <view class="comment-actions">
-                <image class="icon-button" src="/icon/like.png" bindtap="likeComment" data-id="{{item.commentId}}" />
-                <text class="likes-count">{{item.likes}}</text>
+                <image class="icon-button" src="{{item.isLiked ? '/icon/islike.png' : '/icon/like.png'}}" bindtap="likeComment" data-id="{{item.commentId}}" />
+                <text class="likes-count">{{item.likes || 0}}</text>
                 <image class="icon-button" src="/icon/reply.png" catchtap="openReplyPopup" data-id="{{item.commentId}}" data-name="{{item.appName}}" />
               </view>
             </view>
@@ -48,14 +52,16 @@
         </view>
         <!-- 子评论 -->
         <view class="sub-comments" wx:if="{{item.subComments && item.subComments.length > 0}}">
-          <block wx:for="{{item.visibleSubComments}}" wx:key="index">
+          <block wx:for="{{item.visibleSubComments}}" wx:key="id" wx:for-item="subItem">
             <view class="sub-comment-item">
-              <text class="sub-comment-name">{{item.appName}}:</text>
-              <text class="sub-comment-content">{{item.content}}</text>
+              <view class="sub-comment-content">
+                <text class="sub-comment-name">{{subItem.appName}}：</text>
+                <text class="sub-comment-text">{{subItem.content}}</text>
+              </view>
             </view>
           </block>
-          <view wx:if="{{item.subComments.length > 2}}" class="show-more-sub-comments" bindtap="goToCommentDetail" data-id="{{item.commentId}}">
-            显示更多回复
+        <view wx:if="{{item.subComments.length > 2}}" class="show-more-sub-comments" bindtap="goToCommentDetail" data-id="{{item.commentId}}" data-comment="{{item}}">
+            共 {{item.subComments.length}} 条回复 >
           </view>
         </view>
       </view>
@@ -63,32 +69,32 @@
   </view>
 
   <!-- 底部操作栏 -->
-  <view class="bottom-bar" catchtap="cancelClosePopup">
-    <!-- 普通状态下：显示点赞、分享、评论按钮 -->
+  <view class="bottom-bar" catchtap="preventBubble">
+    <!-- 普通状态下：显示评论输入框和操作按钮 -->
     <view wx:if="{{!showReplyPopup}}" class="bottom-normal">
       <view class="comment-input" bindtap="handleTapCommentInput">
         点我发评论
       </view>
       <view class="bottom-actions">
-        <view class="action-item" bindtap="sharePost">
-          <image class="icon-button" src="/icon/share.png" />
-        </view>
-        <view class="action-item">
-          <image class="icon-button" src="/icon/reply.png" bindtap="handleTapCommentInput" />
-          <text class="action-number">{{post.comments || 0}}</text>
-        </view>
         <view class="action-item">
           <image class="icon-button" src="{{ islike ? '/icon/islike.png' : '/icon/like.png' }}" bindtap="handleLikePost" />
-          <text class="action-number">{{post.likes || 0}}</text>
+          <text class="action-count">{{post.likes || 0}}</text>
+        </view>
+        <view class="action-item">
+          <image class="icon-button" src="/icon/reply.png" bindtap="handleTapCommentInput"/>
+          <text class="action-count">{{post.comments || 0}}</text>
+        </view>
+        <view class="action-item">
+          <image class="icon-button" src="/icon/share.png" bindtap="sharePost" />
         </view>
       </view>
     </view>
 
-    <!-- 回复状态下：隐藏点赞、分享、评论，仅显示回复输入区 -->
+    <!-- 回复状态下：显示回复输入区 -->
     <view wx:if="{{showReplyPopup}}" class="bottom-reply">
       <view class="reply-container">
-        <text class="reply-label">回复 {{replyTo}}：</text>
-        <textarea class="reply-input" id="replyInput" value="{{replyContent}}" placeholder="请输入评论..." bindinput="onReplyInput" bindblur="onReplyBlur" bindfocus="onReplyFocus"></textarea>
+        <text class="reply-label">{{replyTo ? '回复 ' + replyTo + '：' : '评论'}}</text>
+        <textarea class="reply-input" id="replyInput" value="{{replyContent}}" placeholder="请输入评论..." bindinput="onReplyInput" bindblur="onReplyBlur" bindfocus="onReplyFocus" auto-height></textarea>
       </view>
       <view class="submit-custom" bindtap="sendReply">提交</view>
     </view>

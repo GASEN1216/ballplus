@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -23,4 +24,5 @@ public class PostInfo  implements Serializable {
     private String picture;
     private int likes;
     private int comments;
+    private LocalDateTime updateTime;
 }

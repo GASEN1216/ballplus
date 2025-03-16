@@ -1,4 +1,4 @@
-package com.gasen.usercenterbackend.model.dto;
+package com.gasen.usercenterbackend.model.vo;
 
 import com.gasen.usercenterbackend.model.vo.SubCommentDetail;
 import lombok.Data;

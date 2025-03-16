@@ -4,33 +4,30 @@ import com.gasen.usercenterbackend.model.dao.Comment;
 import com.gasen.usercenterbackend.model.dao.SubComment;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
 @Data
-public class AddSubComment implements Serializable {
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+public class UpdateSubComment implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    // 发表评论时，使用者的ID
+    // 要修改的评论ID
+    private Long subCommentId;
+    // 当前操作用户ID，用于权限校验
     private Integer userId;
-    // 使用者姓名
-    private String appName;
-    // 使用者头像
-    private String avatar;
-    // 使用者等级
-    private Integer grade;
-    // 所属评论ID
-    private Long commentId;
-    // 评论内容
+    // 修改后的评论内容
     private String content;
 
     public SubComment toSubComment() {
         SubComment subComment = new SubComment();
+        subComment.setId(subCommentId);
         subComment.setAppId(userId);
-        subComment.setAvatar(avatar);
-        subComment.setCommentId(commentId);
-        subComment.setAppName(appName);
-        subComment.setGrade(grade);
         subComment.setContent(content);
         return subComment;
     }

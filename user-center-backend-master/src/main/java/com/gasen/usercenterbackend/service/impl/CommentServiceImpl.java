@@ -6,9 +6,10 @@ import com.gasen.usercenterbackend.exception.BusinessExcetion;
 import com.gasen.usercenterbackend.mapper.CommentMapper;
 import com.gasen.usercenterbackend.model.dao.Post;
 import com.gasen.usercenterbackend.model.dto.AddComment;
-import com.gasen.usercenterbackend.model.dto.CommentDetail;
+
 import com.gasen.usercenterbackend.model.dto.UpdateComment;
 import com.gasen.usercenterbackend.model.dao.Comment;
+import com.gasen.usercenterbackend.model.vo.CommentDetail;
 import com.gasen.usercenterbackend.service.ICommentService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -86,7 +87,8 @@ public class CommentServiceImpl implements ICommentService {
     @Override
     public List<CommentDetail> getCommentsByPostId(Long postId) {
         // 查询所有post_id == postId的评论
-        List<Comment> comments = commentMapper.selectList(new LambdaQueryWrapper<Comment>().eq(Comment::getPostId, postId));
+        List<Comment> comments = commentMapper
+                .selectList(new LambdaQueryWrapper<Comment>().eq(Comment::getPostId, postId));
         if (comments == null) {
             return new ArrayList<>();
         }
@@ -110,6 +112,26 @@ public class CommentServiceImpl implements ICommentService {
         if (likes == null || likes < 0)
             throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "点赞数错误");
         comment.setLikes(likes);
+        return commentMapper.updateById(comment) > 0;
+    }
+
+    @Override
+    public boolean addComments(Long commentId) {
+        Comment comment = commentMapper.selectById(commentId);
+        if (comment == null) {
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "评论不存在");
+        }
+        comment.setComments(comment.getComments() + 1);
+        return commentMapper.updateById(comment) > 0;
+    }
+
+    @Override
+    public boolean reduceComments(Long commentId) {
+        Comment comment = commentMapper.selectById(commentId);
+        if (comment == null) {
+            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "评论不存在");
+        }
+        comment.setComments(comment.getComments() - 1);
         return commentMapper.updateById(comment) > 0;
     }
 }

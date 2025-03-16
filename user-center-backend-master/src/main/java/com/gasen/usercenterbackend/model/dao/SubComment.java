@@ -36,6 +36,7 @@ public class SubComment {
 
     public SubCommentDetail toSubCommentDetail() {
         return new SubCommentDetail()
+                .setSubCommentId(id)
                 .setAppName(appName)
                 .setAvatar(avatar)
                 .setGrade(grade)
