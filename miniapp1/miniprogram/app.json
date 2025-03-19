@@ -9,7 +9,9 @@
     "pages/profile/profile",
     "pages/editProfile/editProfile",
     "pages/friendRequests/friendRequests",
-    "pages/createPost/createPost"
+    "pages/createPost/createPost",
+    "pages/myPosts/myPosts",
+    "pages/myComments/myComments"
   ],
   "subPackages": [
     {

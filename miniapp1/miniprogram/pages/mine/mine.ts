@@ -238,9 +238,10 @@ Page({
   // 查看我的帖子
   goToMyPosts() {
     if (!this.checkLogin()) return;
+    console.log("!!!!!!!!!");
     
     wx.navigateTo({
-      url: '/pages/forum/myPosts/myPosts'
+      url: '/pages/myPosts/myPosts'
     });
   },
   
@@ -249,7 +250,7 @@ Page({
     if (!this.checkLogin()) return;
     
     wx.navigateTo({
-      url: '/pages/forum/myComments/myComments'
+      url: '/pages/myComments/myComments'
     });
   },
   
