@@ -1,8 +1,10 @@
 package com.gasen.usercenterbackend.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gasen.usercenterbackend.common.ErrorCode;
 import com.gasen.usercenterbackend.exception.BusinessExcetion;
+import com.gasen.usercenterbackend.mapper.CommentMapper;
 import com.gasen.usercenterbackend.mapper.SubCommentMapper;
 import com.gasen.usercenterbackend.model.dao.Comment;
 import com.gasen.usercenterbackend.model.dao.SubComment;
@@ -15,12 +17,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class SubCommentServiceImpl implements ISubCommentService {
     @Resource
     private SubCommentMapper subCommentMapper;
+
+    @Resource
+    private CommentMapper commentMapper;
 
     @Override
     public List<SubComment> getSubCommentList(Long commentId) {
@@ -92,5 +98,53 @@ public class SubCommentServiceImpl implements ISubCommentService {
         }
         subComment.setContent(updateSubComment.getContent());
         return subCommentMapper.updateById(subComment) > 0;
+    }
+
+    @Override
+    public List<SubCommentDetail> getRepliesByCommentUserId(Integer userId, Integer pageNum, Integer pageSize) {
+        try {
+            if (userId == null || userId <= 0) {
+                log.error("获取用户评论回复列表参数异常，用户ID不合法");
+                return null;
+            }
+
+            // 首先找出该用户发布的所有评论ID
+            LambdaQueryWrapper<Comment> commentQueryWrapper = new LambdaQueryWrapper<>();
+            commentQueryWrapper.eq(Comment::getAppId, userId);
+            commentQueryWrapper.eq(Comment::getIsDelete, 0); // 只查询未删除的评论
+            List<Comment> userComments = commentMapper.selectList(commentQueryWrapper);
+
+            if (userComments == null || userComments.isEmpty()) {
+                return List.of(); // 用户没有发表评论，返回空列表
+            }
+
+            // 获取用户所有评论的ID
+            List<Long> commentIds = userComments.stream()
+                    .map(Comment::getId)
+                    .collect(Collectors.toList());
+
+            // 查询这些评论下的回复
+            LambdaQueryWrapper<SubComment> subCommentQueryWrapper = new LambdaQueryWrapper<>();
+            subCommentQueryWrapper.in(SubComment::getCommentId, commentIds);
+            subCommentQueryWrapper.eq(SubComment::getIsDelete, 0); // 只查询未删除的回复
+            subCommentQueryWrapper.orderByDesc(SubComment::getCreateTime); // 按创建时间降序排序
+
+            // 分页查询
+            Page<SubComment> page = new Page<>(pageNum, pageSize);
+            Page<SubComment> subCommentPage = subCommentMapper.selectPage(page, subCommentQueryWrapper);
+
+            // 将查询结果转换为SubCommentDetail列表
+            if (subCommentPage.getRecords().isEmpty()) {
+                return List.of(); // 返回空列表
+            }
+
+            return subCommentPage.getRecords().stream()
+                    .map(SubComment::toSubCommentDetail)
+                    .collect(Collectors.toList());
+
+        } catch (Exception e) {
+            log.error("获取用户评论回复列表异常", e);
+            return null;
+        }
     }
 }

@@ -65,6 +65,7 @@ public class Post {
                 .setLikes(this.likes)
                 .setComments(this.comments)
                 .setPicture(this.picture)
+                .setCreateTime(this.createTime)
                 .setUpdateTime(this.updateTime);
     }
 }

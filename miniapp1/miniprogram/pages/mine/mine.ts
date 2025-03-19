@@ -238,8 +238,7 @@ Page({
   // 查看我的帖子
   goToMyPosts() {
     if (!this.checkLogin()) return;
-    console.log("!!!!!!!!!");
-    
+
     wx.navigateTo({
       url: '/pages/myPosts/myPosts'
     });

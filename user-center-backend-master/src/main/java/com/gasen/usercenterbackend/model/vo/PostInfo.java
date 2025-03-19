@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class PostInfo  implements Serializable {
+public class PostInfo implements Serializable {
     // 帖子列表粗略信息：帖子ID、appId、头像、截取后的内容、图片、点赞数、评论数
     private Long postId;
     private Integer appId;
@@ -24,5 +24,6 @@ public class PostInfo  implements Serializable {
     private String picture;
     private int likes;
     private int comments;
+    private LocalDateTime createTime;
     private LocalDateTime updateTime;
 }

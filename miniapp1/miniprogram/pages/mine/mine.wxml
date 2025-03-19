@@ -13,7 +13,7 @@
           <text class="exp-text">{{userData.exp}} / {{userData.grade * 10}}</text>
         </view>
         <!-- 经验 - 长条进度条 -->
-        <view class="form-item score-item" style="width: 122rpx; display: block; box-sizing: border-box">
+        <view class="form-item score-item">
           <view class="exp-bar-container">
             <view class="exp-bar">
               <view class="exp-progress" style="width: {{expWidth}};"></view>

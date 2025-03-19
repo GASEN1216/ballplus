@@ -39,7 +39,8 @@ public class PostController {
     @PostMapping("/addPost")
     public BaseResponse addPost(@RequestBody AddPost addPost) {
         try {
-            if(addPost == null || addPost.getAddId() == null || addPost.getTitle() == null || addPost.getContent() == null)
+            if (addPost == null || addPost.getAddId() == null || addPost.getTitle() == null
+                    || addPost.getContent() == null)
                 return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "参数为空！");
             boolean result = postService.addPost(addPost.toPost());
             if (result) {
@@ -74,7 +75,8 @@ public class PostController {
     @PostMapping("/updatePost")
     public BaseResponse updatePost(@RequestBody UpdatePost updatePost) {
         try {
-            if (updatePost == null || updatePost.getPostId() == null || updatePost.getUserId() == null || updatePost.getContent() == null)
+            if (updatePost == null || updatePost.getPostId() == null || updatePost.getUserId() == null
+                    || updatePost.getContent() == null)
                 return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "参数为空！");
             boolean result = postService.updatePost(updatePost.toPost());
             if (result) {
@@ -122,7 +124,7 @@ public class PostController {
             return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "查询帖子详情失败！");
         }
     }
-    
+
     // 获取点赞数最高的帖子
     @GetMapping("/posts/top")
     public BaseResponse getTopPost() {
@@ -156,6 +158,34 @@ public class PostController {
         } catch (Exception e) {
             log.error("点赞帖子异常", e);
             return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "点赞失败！");
+        }
+    }
+
+    // 7. 获取用户个人发布的帖子列表，支持分页
+    @PostMapping("/getMyPosts")
+    public BaseResponse getMyPosts(@RequestParam Integer userId,
+            @RequestParam(defaultValue = "1") Integer pageNum,
+            @RequestParam(defaultValue = "10") Integer pageSize) {
+        try {
+            if (userId == null) {
+                return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "用户ID不能为空！");
+            }
+
+            // 调用service层方法获取用户帖子
+            List<PostInfo> myPosts = postService.getPostsByUserId(userId, pageNum, pageSize);
+
+            if (myPosts == null) {
+                return ResultUtils.error(ErrorCode.POST_NOT_FOUND, "未找到帖子！");
+            }
+
+            // 构建返回结果，包含帖子列表和分页信息
+            Map<String, Object> result = new HashMap<>();
+            result.put("posts", myPosts);
+
+            return ResultUtils.success(result);
+        } catch (Exception e) {
+            log.error("获取用户帖子列表异常", e);
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "获取用户帖子列表失败！");
         }
     }
 }

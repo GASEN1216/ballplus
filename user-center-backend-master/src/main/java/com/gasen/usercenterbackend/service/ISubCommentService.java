@@ -17,4 +17,14 @@ public interface ISubCommentService extends ILikesService {
     boolean deleteSubComment(Long subCommentId, Integer userId);
 
     boolean updateSubComment(UpdateSubComment updateSubComment);
+
+    /**
+     * 获取用户评论收到的回复列表
+     * 
+     * @param userId   评论作者的用户ID
+     * @param pageNum  页码
+     * @param pageSize 每页数量
+     * @return 回复详情列表
+     */
+    List<SubCommentDetail> getRepliesByCommentUserId(Integer userId, Integer pageNum, Integer pageSize);
 }

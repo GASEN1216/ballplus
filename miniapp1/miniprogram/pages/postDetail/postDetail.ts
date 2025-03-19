@@ -1,5 +1,3 @@
-import { PostProcess } from "XrFrame/xrFrameSystem";
-
 export const app = getApp<IAppOption>();
 
 Page({

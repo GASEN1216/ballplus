@@ -1,15 +1,18 @@
 package com.gasen.usercenterbackend.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gasen.usercenterbackend.common.ErrorCode;
 import com.gasen.usercenterbackend.exception.BusinessExcetion;
 import com.gasen.usercenterbackend.mapper.CommentMapper;
+import com.gasen.usercenterbackend.mapper.PostMapper;
 import com.gasen.usercenterbackend.model.dao.Post;
 import com.gasen.usercenterbackend.model.dto.AddComment;
 
 import com.gasen.usercenterbackend.model.dto.UpdateComment;
 import com.gasen.usercenterbackend.model.dao.Comment;
 import com.gasen.usercenterbackend.model.vo.CommentDetail;
+import com.gasen.usercenterbackend.model.vo.CommentInfo;
 import com.gasen.usercenterbackend.service.ICommentService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -17,12 +20,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class CommentServiceImpl implements ICommentService {
     @Resource
     private CommentMapper commentMapper;
+
+    @Resource
+    private PostMapper postMapper;
 
     @Override
     public Long addComment(AddComment addComment) {
@@ -131,9 +138,58 @@ public class CommentServiceImpl implements ICommentService {
     public boolean reduceComments(Long commentId) {
         Comment comment = commentMapper.selectById(commentId);
         if (comment == null) {
-            throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "评论不存在");
+            log.error("减少子评论数量异常，评论不存在");
+            return false;
         }
         comment.setComments(comment.getComments() - 1);
         return commentMapper.updateById(comment) > 0;
+    }
+
+    @Override
+    public List<CommentInfo> getCommentsByPostUserId(Integer userId, Integer pageNum, Integer pageSize) {
+        try {
+            if (userId == null || userId <= 0) {
+                log.error("获取用户帖子评论列表参数异常，用户ID不合法");
+                return null;
+            }
+
+            // 首先找出该用户发布的所有帖子ID
+            LambdaQueryWrapper<Post> postQueryWrapper = new LambdaQueryWrapper<>();
+            postQueryWrapper.eq(Post::getAppId, userId);
+            postQueryWrapper.eq(Post::getIsDelete, 0); // 只查询未删除的帖子
+            List<Post> userPosts = postMapper.selectList(postQueryWrapper);
+
+            if (userPosts == null || userPosts.isEmpty()) {
+                return List.of(); // 用户没有发帖，返回空列表
+            }
+
+            // 获取用户所有帖子的ID
+            List<Long> postIds = userPosts.stream()
+                    .map(Post::getId)
+                    .collect(Collectors.toList());
+
+            // 查询这些帖子下的评论
+            LambdaQueryWrapper<Comment> commentQueryWrapper = new LambdaQueryWrapper<>();
+            commentQueryWrapper.in(Comment::getPostId, postIds);
+            commentQueryWrapper.eq(Comment::getIsDelete, 0); // 只查询未删除的评论
+            commentQueryWrapper.orderByDesc(Comment::getCreateTime); // 按创建时间降序排序
+
+            // 分页查询
+            Page<Comment> page = new Page<>(pageNum, pageSize);
+            Page<Comment> commentPage = commentMapper.selectPage(page, commentQueryWrapper);
+
+            // 将查询结果转换为CommentInfo列表
+            if (commentPage.getRecords().isEmpty()) {
+                return List.of(); // 返回空列表
+            }
+
+            return commentPage.getRecords().stream()
+                    .map(Comment::toCommentInfo)
+                    .collect(Collectors.toList());
+
+        } catch (Exception e) {
+            log.error("获取用户帖子评论列表异常", e);
+            return null;
+        }
     }
 }

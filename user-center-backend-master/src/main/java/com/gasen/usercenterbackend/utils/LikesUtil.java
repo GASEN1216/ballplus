@@ -51,10 +51,10 @@ public class LikesUtil {
         // 先检查redis里有没有这个键
         String likeCountKey = prefix + id;
         String copyLikeCountKey = COPY + likeCountKey;
-        if (!longRedisTemplate.hasKey(likeCountKey)) {
+        if (Boolean.FALSE.equals(longRedisTemplate.hasKey(likeCountKey))) {
             Long likes = likesService.getLikesById(id).longValue();
             longRedisTemplate.opsForValue().set(likeCountKey, likes);
-            longRedisTemplate.opsForValue().set(copyLikeCountKey, Long.valueOf(0), Duration.ofSeconds(10));
+            longRedisTemplate.opsForValue().set(copyLikeCountKey, Long.valueOf(0), Duration.ofSeconds(EXPIRE_TIME));
         }
 
         // Redis 自增点赞数

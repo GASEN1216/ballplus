@@ -6,6 +6,7 @@ import com.gasen.usercenterbackend.mapper.PostMapper;
 import com.gasen.usercenterbackend.model.dao.Post;
 import com.gasen.usercenterbackend.model.vo.CommentDetail;
 import com.gasen.usercenterbackend.model.vo.PostDetail;
+import com.gasen.usercenterbackend.model.vo.PostInfo;
 import com.gasen.usercenterbackend.model.vo.SubCommentDetail;
 import com.gasen.usercenterbackend.service.ICommentService;
 import com.gasen.usercenterbackend.service.IPostService;
@@ -15,7 +16,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 @Service
 @Slf4j
@@ -55,7 +59,6 @@ public class PostServiceImpl implements IPostService {
 
         return postDetail;
     }
-
 
     @Override
     public boolean deletePost(Long postId, Integer userId) {
@@ -137,7 +140,7 @@ public class PostServiceImpl implements IPostService {
         post.setLikes(likes);
         return postMapper.updateById(post) > 0;
     }
-    
+
     @Override
     public Post getTopPost() {
         try {
@@ -147,6 +150,40 @@ public class PostServiceImpl implements IPostService {
             return postMapper.selectOne(wrapper);
         } catch (Exception e) {
             log.error("获取点赞最高帖子异常", e);
+            return null;
+        }
+    }
+
+    @Override
+    public List<PostInfo> getPostsByUserId(Integer userId, Integer pageNum, Integer pageSize) {
+        try {
+            // 参数检查
+            if (userId == null || userId <= 0) {
+                log.error("获取用户帖子列表参数异常，用户ID不合法");
+                return null;
+            }
+
+            // 构建查询条件
+            LambdaQueryWrapper<Post> queryWrapper = new LambdaQueryWrapper<>();
+            queryWrapper.eq(Post::getAppId, userId); // 根据用户ID筛选
+            queryWrapper.eq(Post::getIsDelete, 0); // 只查询未删除的帖子
+            queryWrapper.orderByDesc(Post::getCreateTime); // 按创建时间降序排序
+
+            // 分页查询
+            Page<Post> page = new Page<>(pageNum, pageSize);
+            Page<Post> postPage = postMapper.selectPage(page, queryWrapper);
+
+            // 将查询结果转换为PostInfo列表
+            if (postPage.getRecords().isEmpty()) {
+                return List.of(); // 返回空列表而不是null
+            }
+
+            return postPage.getRecords().stream()
+                    .map(Post::toPostInfo)
+                    .collect(Collectors.toList());
+
+        } catch (Exception e) {
+            log.error("获取用户帖子列表异常", e);
             return null;
         }
     }
