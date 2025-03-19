@@ -3,6 +3,13 @@ import { IAppOption } from '../../../typings'
 // pages/mine/mine.ts
 const app = getApp<IAppOption>();
 
+interface CarouselItem {
+    url: string;
+    link: string;
+    title?: string;
+    isWelcome?: boolean;
+}
+
 Page({
     data: {
         // 后端接口相关
@@ -16,11 +23,8 @@ Page({
         filteredActivities: [] as any[], // 筛选后的活动数据
 
         // 轮播图数据
-        carouselImages: [
-            { url: 'https://picsum.photos/1200/400?random=1', link: '../../study/pages/resources/resources' },
-            { url: 'https://picsum.photos/1200/400?random=2', link: '../../study/pages/resources/resources' },
-            { url: 'https://picsum.photos/1200/400?random=3', link: '../../study/pages/resources/resources' }
-        ],
+        carouselImages: [] as CarouselItem[],
+        showWelcomeAnimation: false,
 
         // 路径配置
         activityPath: '../../activities',
@@ -42,6 +46,7 @@ Page({
     onLoad() {
         this.initDateRange();
         this.fetchActivities();
+        this.initCarousel();
         app.loginReadyCallback = () => {
             this.fetchActivities();
         },
@@ -62,17 +67,107 @@ Page({
         }
     },
 
+    // 初始化轮播图数据
+    initCarousel() {
+        // 第一张固定为欢迎图
+        const welcomeSlide = {
+            url: 'http://sunsetchat.top/index/logo.png',
+            link: '',
+            title: '欢迎来到球Plus！',
+            isWelcome: true
+        };
+
+        // 获取最受欢迎的帖子和资源
+        this.fetchTopPost((topPost) => {
+            this.fetchTopResource((topResource) => {
+                const carouselImages = [
+                    welcomeSlide,
+                    {
+                        url: 'http://sunsetchat.top/index/post.png',
+                        link: `../../pages/postDetail/postDetail?id=${topPost.id}`,
+                        title: topPost.title
+                    },
+                    {
+                        url: 'http://sunsetchat.top/index/resource.png',
+                        link: `../../study/pages/resourcesDetail/resourcesDetail?id=${topResource.id}`,
+                        title: topResource.title
+                    }
+                ];
+                this.setData({ carouselImages });
+            });
+        });
+    },
+
+    // 获取最受欢迎的帖子
+    fetchTopPost(callback: (post: any) => void) {
+        wx.request({
+            url: `${app.globalData.url}/user/wx/posts/top`,
+            method: 'GET',
+            success: (res: any) => {
+                if (res.statusCode === 200 && res.data.code === 0) {
+                    callback(res.data.data);
+                } else {
+                    callback({
+                        id: 1,
+                        title: '热门讨论'
+                    });
+                }
+            },
+            fail: () => {
+                callback({
+                    id: 1,
+                    title: '热门讨论'
+                });
+            }
+        });
+    },
+
+    // 获取最受欢迎的资源
+    fetchTopResource(callback: (resource: any) => void) {
+        wx.request({
+            url: `${app.globalData.url}/user/wx/resources/top`,
+            method: 'GET',
+            success: (res: any) => {
+                if (res.statusCode === 200 && res.data.code === 0) {
+                    callback(res.data.data);
+                } else {
+                    callback({
+                        id: 1,
+                        title: '精选资源'
+                    });
+                }
+            },
+            fail: () => {
+                callback({
+                    id: 1,
+                    title: '精选资源'
+                });
+            }
+        });
+    },
+
     // 轮播图点击事件
     onCarouselItemClick(e: any) {
-        const link = e.currentTarget.dataset.link; // 获取 data-link 的值
-        if (!link) {
+        const index = e.currentTarget.dataset.index;
+        const item = this.data.carouselImages[index];
+        
+        if (item.isWelcome) {
+            // 显示欢迎动画
+            this.setData({ showWelcomeAnimation: true });
+            setTimeout(() => {
+                this.setData({ showWelcomeAnimation: false });
+            }, 1000); // 3秒后关闭动画
+            return;
+        }
+        
+        if (!item.link) {
             wx.showToast({
                 title: '链接无效',
                 icon: 'none'
             });
             return;
         }
-        wx.navigateTo({ url: link });
+        wx.navigateTo({ url: item.link });
     },
 
     // 添加登录检查函数
@@ -330,6 +425,15 @@ Page({
         const newOrder = this.data.order === 'asc' ? 'desc' : 'asc';
         this.setData({ order: newOrder });
         this.filterActivities(); // 按新顺序重新过滤
+    },
+
+    // 跳转到学习资源页面
+    navigateToResources() {
+        if (!this.checkLogin()) return;
+        
+        wx.navigateTo({
+            url: `${this.data.studyPath}/pages/resources/resources`
+        });
     },
 
 });

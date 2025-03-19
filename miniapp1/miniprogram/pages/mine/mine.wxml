@@ -3,7 +3,7 @@
   <!-- 顶部固定栏 -->
   <view class="header">
     <view wx:if="{{isLoggedin}}" class="user-info">
-      <cover-image src="{{profilePic}}" class="avatar" bindtap="goToInfo"></cover-image>
+      <image src="{{profilePic}}" class="avatar" bindtap="goToInfo"></image>
       <!-- 用户文本信息 -->
       <view class="user-text">
         <text class="nickname" bindtap="goToInfo">{{nickname}}</text>
@@ -13,7 +13,7 @@
           <text class="exp-text">{{userData.exp}} / {{userData.grade * 10}}</text>
         </view>
         <!-- 经验 - 长条进度条 -->
-        <view class="form-item score-item">
+        <view class="form-item score-item" style="width: 122rpx; display: block; box-sizing: border-box">
           <view class="exp-bar-container">
             <view class="exp-bar">
               <view class="exp-progress" style="width: {{expWidth}};"></view>
@@ -22,94 +22,166 @@
         </view>
       </view>
     </view>
-    <view class="settings-btn" bindtap="navigateToSettings">
-      <image src="../../icon/settings.png" class="settings-icon" mode="aspectFit"></image>
+    <view class="header-btns">
+      <button open-type="contact" class="customer-service-btn" style="width: 64rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">
+        <image src="../../icon/customer-service2.png" class="header-icon" mode="aspectFit"></image>
+      </button>
+      <view class="settings-btn" bindtap="navigateToSettings">
+        <image src="../../icon/settings.png" class="header-icon" mode="aspectFit"></image>
+      </view>
     </view>
   </view>
 
-    <!-- 显示剩余时间 -->
-  <view wx:if="{{activities[0].remainingTime}}" class="activity-banner">
-    <text class="activity-remaining-time">{{activities[0].remainingTime}}</text>
-  </view>
-
-  <!-- 没有活动时显示其他文案 -->
-<view wx:else class="activity-banner">
-  <text class="activity-remaining-time2">「此刻 青天无片云」</text>
-</view>
-
-  <!-- 活动展示区域 -->
-  <view class="activity-list">
-    <!-- 判断是否有活动信息 -->
-    <block wx:if="{{activities.length > 0}}">
-      <block wx:for="{{activities}}" wx:key="index">
-        <view class="activity-card" bindtap="viewActivityDetail" data-id="{{item.id}}">
-          <!-- 头像 -->
-          <cover-image src="{{item.avatar}}" class="activity-avatar"></cover-image>
-          <!-- 活动信息 -->
-          <view class="activity-details">
-            <text class="activity-name">{{item.name}}</text>
-            <text class="activity-meta">📅 {{item.eventDate}} {{item.weekDay}} {{item.eventTime}}-{{item.eventTimee}}</text>
-            <text class="activity-meta">📍 {{item.location}}</text>
-            <text class="activity-meta">👥 {{item.participants}}/{{item.totalParticipants}}</text>
-            <text class="activity-remarks">备注: {{item.remarks}}</text>
-          </view>
-          <!-- 距离 -->
-          <view class="activity-distance">
-            <text>{{item.distance}}</text> <!-- 显示与用户的距离 -->
-          </view>
+  <!-- 主要内容区 -->
+  <view class="main-content">
+    <!-- 活动倒计时卡片 - 可折叠 -->
+    <view class="card activity-time-card">
+      <view class="card-header">
+        <view class="card-title">
+          <image src="../../icon/clock.png" class="card-icon" mode="aspectFit"></image>
+          <text>活动倒计时</text>
         </view>
-      </block>
-    </block>
-
-    <block wx:else>
-    <!-- 空状态卡片 -->
-    <view class="activity-card empty-card">
-      <text class="poetic-state">「若无闲事挂心头，便是人间好时节」</text>
-    </view>
-  </block>
-  </view>
-
-  <!-- 地图和好友部分 -->
-  <view class="navigation-section">
-    <view class="nav-item" bindtap="toGdmap">
-      <image src="../../icon/location.png" class="nav-icon" mode="aspectFit" />
-      <text>地图</text>
-    </view>
-    <view class="nav-item" bindtap="toFriends">
-      <image src="../../icon/mine-icon.png" class="nav-icon" mode="aspectFit" />
-      <text>好友</text>
-    </view>
-    <view class="nav-item" bindtap="toPointsMall">
-      <image src="../../icon/location.png" class="nav-icon" mode="aspectFit" />
-      <text>赛点商城</text>
-    </view>
-  </view>
-
-  <!-- 活动部分 -->
-  <view class="activity-section">
-    <text class="activity-title">活动</text>
-    <view class="activity-items">
-      <view class="activity-item" bindtap="goToActivities" data-tab="all">
-        <image src="../../icon/activities.png" class="activity-icon"></image>
-        <text>我的活动</text>
       </view>
-      <view class="activity-item" bindtap="goToActivities" data-tab="0">
-        <image src="../../icon/departure.png" class="activity-icon"></image>
-        <text>待出发</text>
+      
+      <view wx:if="{{activities[0].remainingTime}}" class="card-content">
+        <text class="activity-remaining-time">{{activities[0].remainingTime}}</text>
+        <view class="activity-summary" bindtap="toggleActivityList" data-id="{{activities[0].id}}">
+          <view class="activity-summary-text">{{activities[0].name}}</view>
+          <image src="../../icon/arrow-right.png" class="arrow-icon {{showActivityList ? 'arrow-down' : ''}}" mode="aspectFit"></image>
+        </view>
       </view>
-      <view class="activity-item" bindtap="goToActivities" data-tab="1">
-        <image src="../../icon/review.png" class="activity-icon"></image>
-        <text>已完成</text>
+      <view wx:else class="card-content">
+        <image src="../../icon/quote.png" class="quote-icon" mode="aspectFit"></image>
+        <text class="quote-text">「此刻 青天无片云」</text>
       </view>
-      <view class="activity-item" bindtap="goToActivities" data-tab="2">
-        <image src="../../icon/cancel.png" class="activity-icon"></image>
-        <text>已取消</text>
+      
+      <!-- 近期活动列表 - 折叠内容 -->
+      <view class="recent-activities-list {{showActivityList ? 'show' : 'hide'}}">
+        <block wx:if="{{activities.length > 0}}">
+          <block wx:for="{{activities}}" wx:key="index">
+            <view class="recent-activity-item" bindtap="viewActivityDetail" data-id="{{item.id}}">
+              <image src="{{item.avatar}}" class="activity-avatar"></image>
+              <view class="activity-details">
+                <text class="activity-name">{{item.name}}</text>
+                <text class="activity-meta">📅 {{item.eventDate}} {{item.weekDay}} {{item.eventTime}}-{{item.eventTimee}}</text>
+                <text class="activity-meta">📍 {{item.location}}</text>
+                <text class="activity-meta">👥 {{item.participants}}/{{item.totalParticipants}}</text>
+              </view>
+              <view class="activity-distance">
+                <text>{{item.distance}}</text>
+              </view>
+            </view>
+          </block>
+        </block>
+        <view wx:else class="empty-activities">
+          <text class="empty-text">暂无近期活动</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 功能菜单区域 -->
+    <view class="menu-section">
+      <view class="menu-row">
+        <view class="menu-item" bindtap="toGdmap">
+          <image src="../../icon/location.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">地图</text>
+        </view>
+        <view class="menu-item" bindtap="toFriends">
+          <image src="../../icon/friends.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">好友</text>
+        </view>
+        <view class="menu-item" bindtap="toPointsMall">
+          <image src="../../icon/points.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">赛点商城</text>
+        </view>
+        <view class="menu-item" bindtap="goToEditInfo">
+          <image src="../../icon/profile.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">资料编辑</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 活动管理卡片 -->
+    <view class="card activity-card">
+      <view class="card-title">
+        <image src="../../icon/activity.png" class="card-icon" mode="aspectFit"></image>
+        <text>活动管理</text>
+      </view>
+      <view class="menu-row">
+        <view class="menu-item" bindtap="goToActivities" data-tab="all">
+          <image src="../../icon/activities.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">全部活动</text>
+        </view>
+        <view class="menu-item" bindtap="goToActivities" data-tab="0">
+          <image src="../../icon/departure.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">待出发</text>
+        </view>
+        <view class="menu-item" bindtap="goToActivities" data-tab="1">
+          <image src="../../icon/review.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">已完成</text>
+        </view>
+        <view class="menu-item" bindtap="goToActivities" data-tab="2">
+          <image src="../../icon/cancel.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">已取消</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 好友管理卡片 -->
+    <view class="card friends-card">
+      <view class="card-title">
+        <image src="../../icon/friends.png" class="card-icon" mode="aspectFit"></image>
+        <text>好友管理</text>
+      </view>
+      <view class="menu-row">
+        <view class="menu-item" bindtap="toFriends">
+          <image src="../../icon/friends.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">好友</text>
+        </view>
+        <view class="menu-item" bindtap="goToAddFriend">
+          <image src="../../icon/add-friend.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">添加好友</text>
+        </view>
+        <view class="menu-item" bindtap="viewSentRequests">
+          <image src="../../icon/my-request.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">我的申请</text>
+        </view>
+        <view class="menu-item" bindtap="viewFriendRequests">
+          <image src="../../icon/friend-request.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">好友申请</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 球坛管理卡片 -->
+    <view class="card forum-card">
+      <view class="card-title">
+        <image src="../../icon/basketball.png" class="card-icon" mode="aspectFit"></image>
+        <text>球坛管理</text>
+      </view>
+      <view class="menu-row">
+        <view class="menu-item" bindtap="goToForum">
+          <image src="../../icon/home-icon.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">球坛</text>
+        </view>
+        <view class="menu-item" bindtap="createPost">
+          <image src="../../icon/add.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">发帖</text>
+        </view>
+        <view class="menu-item" bindtap="goToMyPosts">
+          <image src="../../icon/profile-icon.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">我的帖子</text>
+        </view>
+        <view class="menu-item" bindtap="goToMyComments">
+          <image src="../../icon/reply.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">我的评论</text>
+        </view>
       </view>
     </view>
   </view>
 
   <!-- 登录按钮 -->
-  <button wx:if="{{!isLoggedin}}" bindtap="onLoginButtonClick">登录</button>
+  <button wx:if="{{!isLoggedin}}" class="login-btn" bindtap="onLoginButtonClick">登录</button>
 
   <!-- Token 验证 -->
   <!-- <view wx:if="{{isLoggedin}}">

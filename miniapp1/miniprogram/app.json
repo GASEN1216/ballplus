@@ -8,7 +8,8 @@
     "pages/settings/settings",
     "pages/profile/profile",
     "pages/editProfile/editProfile",
-    "pages/friendRequests/friendRequests"
+    "pages/friendRequests/friendRequests",
+    "pages/createPost/createPost"
   ],
   "subPackages": [
     {

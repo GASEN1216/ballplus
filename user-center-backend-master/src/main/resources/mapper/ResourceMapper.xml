@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gasen.usercenterbackend.mapper.ResourceMapper">
+    <resultMap id="ResourceVOMap" type="com.gasen.usercenterbackend.model.dto.ResourceVO">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="description" property="description"/>
+        <result column="cover_image" property="coverImage"/>
+        <result column="type" property="type"/>
+        <result column="link" property="link"/>
+        <result column="views" property="views"/>
+        <result column="likes" property="likes"/>
+        <result column="category" property="category"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_favorite" property="isFavorite"/>
+    </resultMap>
+
+    <select id="selectResourcePage" resultMap="ResourceVOMap">
+        SELECT r.*, false as is_favorite
+        FROM resource r
+        <where>
+            <if test="category != null and category != ''">
+                AND r.category = #{category}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND (r.title LIKE CONCAT('%', #{keyword}, '%') OR r.description LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+        </where>
+        ORDER BY r.create_time DESC
+    </select>
+
+    <select id="selectResourceDetail" resultMap="ResourceVOMap">
+        SELECT r.*, false as is_favorite
+        FROM resource r
+        WHERE r.id = #{id}
+    </select>
+
+    <update id="updateViews">
+        UPDATE resource SET views = views + 1 WHERE id = #{id}
+    </update>
+</mapper> 

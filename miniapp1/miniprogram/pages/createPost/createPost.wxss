@@ -1,0 +1,213 @@
+/* 整体容器 */
+.create-post-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  position: relative;
+  padding-bottom: 100rpx; /* 为底部提示腾出空间 */
+}
+
+/* 顶部导航栏 */
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #eee;
+  background-color: #ffffff;
+}
+
+.nav-back {
+  font-size: 32rpx;
+  color: #333;
+}
+
+.nav-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.nav-publish {
+  font-size: 32rpx;
+  color: #cccccc;
+  padding: 10rpx 20rpx;
+  border-radius: 30rpx;
+}
+
+.nav-publish.active {
+  color: #4ecdc4;
+  font-weight: bold;
+}
+
+/* 内容区域 */
+.content-area {
+  flex: 1;
+  padding: 30rpx;
+  padding-top: 20rpx;
+  overflow-y: auto;
+}
+
+/* 标题输入区域 */
+.title-area {
+  position: relative;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.title-input {
+  width: 100%;
+  font-size: 36rpx;
+  font-weight: 500;
+  color: #333;
+  padding-right: 70rpx; /* 为计数器腾出空间 */
+}
+
+.title-counter {
+  position: absolute;
+  right: 0;
+  bottom: 20rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 内容输入区域 */
+.content-input-area {
+  margin-bottom: 30rpx;
+}
+
+.content-input {
+  width: 100%;
+  min-height: 180rpx;
+  font-size: 32rpx;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* 图片上传区域 */
+.image-upload-area {
+  margin: 30rpx 0;
+}
+
+.image-upload-button {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  background-color: #f7f7f7;
+  border-radius: 12rpx;
+}
+
+.upload-icon {
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 20rpx;
+}
+
+.upload-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 图片预览区域 */
+.image-preview-area {
+  position: relative;
+  margin: 30rpx 0;
+  border-radius: 12rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.image-preview {
+  width: 100%;
+  height: 350rpx;
+  background-color: #f5f5f5;
+}
+
+.delete-image {
+  position: absolute;
+  top: 16rpx;
+  right: 16rpx;
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+}
+
+/* 底部提示 */
+.bottom-tips {
+  width: 100%;
+  padding: 20rpx 0;
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+  background-color: #f7f7f7;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+/* 发布按钮 */
+.publish-button {
+  position: fixed;
+  right: 40rpx;
+  bottom: 120rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+  transition: all 0.3s;
+}
+
+.publish-button.active {
+  background-color: #4ecdc4;
+}
+
+.publish-icon {
+  color: #999;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.publish-button.active .publish-icon {
+  color: #ffffff;
+}
+
+.back-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+/* 底部工具栏 */
+.toolbar {
+  display: flex;
+  padding: 20rpx 30rpx;
+  border-top: 1rpx solid #eee;
+  background-color: #f7f7f7;
+}
+
+.tool-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 60rpx;
+}
+
+.tool-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin-bottom: 6rpx;
+}
+
+.tool-text {
+  font-size: 24rpx;
+  color: #666;
+} 

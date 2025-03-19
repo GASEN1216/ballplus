@@ -1,20 +1,49 @@
-<view class="resources-container">
-  <!-- 分类标签 -->
-  <scroll-view class="category-tabs" scroll-x>
-    <button bindtap="filterResources" data-type="all">全部</button>
-    <button bindtap="filterResources" data-type="video">📹 视频</button>
-    <button bindtap="filterResources" data-type="text">📝 图文</button>
-    <button bindtap="filterResources" data-type="pdf">📄 文档</button>
-  </scroll-view>
+<view class="container">
+    <!-- 顶部搜索栏 -->
+    <view class="search-bar">
+        <input type="text" placeholder="搜索资源和教程" bindinput="onSearchInput" />
+        <icon type="search" size="20"></icon>
+    </view>
 
-  <!-- 资源列表 -->
-  <scroll-view class="resources-list" scroll-y>
-    <block wx:for="{{filteredResources}}" wx:key="id">
-      <view class="resource-card" bindtap="goToDetail" data-id="{{item.id}}">
-        <image class="resource-cover" src="{{item.cover}}"></image>
-        <text class="resource-title">{{item.title}}</text>
-        <text class="resource-desc">{{item.description}}</text>
-      </view>
-    </block>
-  </scroll-view>
+    <!-- 分类导航 -->
+    <scroll-view class="category-nav" scroll-x="true">
+        <view class="category-item {{currentCategory === index ? 'active' : ''}}" 
+              wx:for="{{categories}}" 
+              wx:key="index"
+              bindtap="switchCategory"
+              data-index="{{index}}">
+            {{item.name}}
+        </view>
+    </scroll-view>
+
+    <!-- 资源列表 -->
+    <view class="resource-list">
+        <view class="resource-item" wx:for="{{filteredResources}}" wx:key="id" bindtap="navigateToDetail" data-id="{{item.id}}">
+            <view class="resource-card">
+                <view class="cover-wrapper">
+                    <image class="cover-image" src="{{item.coverImage}}" mode="aspectFill" />
+                    <view class="type-tag">
+                        <text>{{item.type === 'video' ? '视频' : '文章'}}</text>
+                    </view>
+                </view>
+                <view class="resource-content">
+                    <view class="resource-title">{{item.title}}</view>
+                    <view class="resource-description">{{item.description}}</view>
+                    <view class="resource-meta">
+                        <view class="meta-item">
+                            <image class="meta-icon" src="/icon/views.png" />
+                            <text>{{item.views}}</text>
+                        </view>
+                        <view class="meta-item">
+                            <image class="meta-icon" src="/icon/like.png" />
+                            <text>{{item.likes}}</text>
+                        </view>
+                        <view class="favorite-btn" catchtap="toggleFavorite" data-id="{{item.id}}">
+                            <image class="favorite-icon" src="{{item.isFavorite ? '/icon/islikeRes.png' : '/icon/likeRes.png'}}" />
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
 </view>

@@ -17,7 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.gasen.usercenterbackend.constant.LikeConstant.POST_TYPE;
 import static com.gasen.usercenterbackend.constant.LikeConstant.REDIS_POST_LIKES;
@@ -118,6 +120,24 @@ public class PostController {
         } catch (Exception e) {
             log.error("查询帖子详情异常", e);
             return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "查询帖子详情失败！");
+        }
+    }
+    
+    // 获取点赞数最高的帖子
+    @GetMapping("/posts/top")
+    public BaseResponse getTopPost() {
+        try {
+            Post topPost = postService.getTopPost();
+            if (topPost == null) {
+                return ResultUtils.error(ErrorCode.POST_NOT_FOUND, "没有帖子数据");
+            }
+            Map<String, Object> result = new HashMap<>();
+            result.put("id", topPost.getId());
+            result.put("title", topPost.getTitle());
+            return ResultUtils.success(result);
+        } catch (Exception e) {
+            log.error("查询点赞最高帖子异常", e);
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "查询点赞最高帖子失败");
         }
     }
 

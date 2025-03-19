@@ -1,14 +1,94 @@
 <view class="settings-container">
-  <view class="settings-option" bindtap="goToEditInfo">
-    <text class="option-text">个人信息</text>
+  <!-- 个人中心 -->
+  <view class="settings-section">
+    <view class="section-title">个人中心</view>
+    <view class="settings-option" bindtap="goToEditInfo">
+      <view class="option-left">
+        <image class="option-icon" src="/icon/user.png" mode="aspectFit"></image>
+        <text class="option-text">个人信息</text>
+      </view>
+      <image class="arrow-icon" src="/icon/arrow-right.png" mode="aspectFit"></image>
+    </view>
   </view>
-  <view class="settings-option">
-    <button class="customer-service-btn" open-type="contact">客服</button>
+
+  <!-- 社交中心 -->
+  <view class="settings-section">
+    <view class="section-title">社交中心</view>
+    <view class="settings-option" bindtap="goToAddFriend">
+      <view class="option-left">
+        <image class="option-icon" src="/icon/add-friend.png" mode="aspectFit"></image>
+        <text class="option-text">添加好友</text>
+      </view>
+      <image class="arrow-icon" src="/icon/arrow-right.png" mode="aspectFit"></image>
+    </view>
+    <view class="settings-option" bindtap="viewFriendRequests">
+      <view class="option-left">
+        <image class="option-icon" src="/icon/friend-request.png" mode="aspectFit"></image>
+        <text class="option-text">好友申请</text>
+      </view>
+      <image class="arrow-icon" src="/icon/arrow-right.png" mode="aspectFit"></image>
+    </view>
   </view>
-  <view class="settings-option" bindtap="goToAddFriend">
-    <text class="option-text">添加好友</text>
+
+  <!-- 通用设置 -->
+  <view class="settings-section">
+    <view class="section-title">通用设置</view>
+    <view class="settings-option">
+      <view class="option-left">
+        <image class="option-icon" src="/icon/theme.png" mode="aspectFit"></image>
+        <text class="option-text">外观模式</text>
+      </view>
+      <view class="toggle-container">
+        <picker bindchange="onThemeChange" value="{{themeIndex}}" range="{{themeOptions}}">
+          <text class="picker-text">{{themeOptions[themeIndex]}}</text>
+        </picker>
+      </view>
+    </view>
+    <view class="settings-option">
+      <view class="option-left">
+        <image class="option-icon" src="/icon/font.png" mode="aspectFit"></image>
+        <text class="option-text">字体大小</text>
+      </view>
+      <view class="toggle-container">
+        <picker bindchange="onFontSizeChange" value="{{fontSizeIndex}}" range="{{fontSizeOptions}}">
+          <text class="picker-text">{{fontSizeOptions[fontSizeIndex]}}</text>
+        </picker>
+      </view>
+    </view>
+    <view class="settings-option">
+      <view class="option-left">
+        <image class="option-icon" src="/icon/notification.png" mode="aspectFit"></image>
+        <text class="option-text">消息通知</text>
+      </view>
+      <switch checked="{{notificationsEnabled}}" bindchange="toggleNotifications" color="#1cbbb4"></switch>
+    </view>
   </view>
-  <view class="settings-option" bindtap="viewFriendRequests">
-    <text class="option-text">好友申请</text>
+
+  <!-- 关于我们 -->
+  <view class="settings-section">
+    <view class="section-title">关于我们</view>
+    <view class="settings-option" bindtap="showAboutUs">
+      <view class="option-left">
+        <image class="option-icon" src="/icon/about.png" mode="aspectFit"></image>
+        <text class="option-text">关于球Plus</text>
+      </view>
+      <image class="arrow-icon" src="/icon/arrow-right.png" mode="aspectFit"></image>
+    </view>
+    <button class="settings-option contact-btn" open-type="contact" style="width: 100%; display: flex; box-sizing: border-box; left: 0rpx; top: 0rpx">
+      <view class="option-left">
+        <image class="option-icon" src="/icon/customer-service.png" mode="aspectFit"></image>
+        <text class="option-text">联系客服</text>
+      </view>
+      <image class="arrow-icon" src="/icon/arrow-right.png" mode="aspectFit"></image>
+    </button>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-section" wx:if="{{isLoggedin}}">
+    <button class="logout-btn" bindtap="handleLogout">退出登录</button>
+  </view>
+
+  <view class="app-version">
+    <text>版本号 v1.0.0</text>
   </view>
 </view>

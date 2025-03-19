@@ -7,8 +7,17 @@ Page({
     sentRequests: [] as Array<{ id: number; avatar: string; name: string; state: number }>, // 已发送的好友申请
   },
 
-  onLoad() {
-    this.loadRequests(0); // 默认加载收到的好友申请
+  onLoad(options) {
+    // 获取URL参数type（0:收到的申请，1:发送的申请）
+    const type = options && options.type ? parseInt(options.type) : 0;
+    
+    // 设置激活的标签
+    this.setData({
+      activeTab: type === 0 ? 'received' : 'sent'
+    });
+    
+    // 加载对应类型的好友申请
+    this.loadRequests(type);
   },
 
   // 切换标签

@@ -1,18 +1,39 @@
 <view class="carousel-container">
   <!-- 轮播图区域 -->
-  <swiper class="carousel" autoplay interval="3000" duration="500" circular>
-    <block wx:for="{{carouselImages}}" wx:key="index">
-      <swiper-item>
-        <image src="{{item.url}}" class="carousel-image" bindtap="onCarouselItemClick" data-link="{{item.link}}" />
-      </swiper-item>
-    </block>
+  <swiper class="carousel" indicator-dots="true" autoplay="true" interval="3000" duration="500">
+    <swiper-item wx:for="{{carouselImages}}" wx:key="url" bindtap="onCarouselItemClick" data-index="{{index}}">
+      <image src="{{item.url}}" mode="aspectFill" class="carousel-image" />
+      <view class="carousel-title" wx:if="{{item.title}}">{{item.title}}</view>
+    </swiper-item>
   </swiper>
 </view>
 
-<!-- 发起活动按钮 -->
-<view class="create-activity-section">
-  <button class="create-activity-button" bindtap="createActivity">➕ 发起活动</button>
-  <button class="match-activity-button" bindtap="matchActivity">🏀 匹配活动</button>
+<!-- 功能按钮区域 -->
+<view class="function-section">
+  <view class="function-grid">
+    <view class="function-item" bindtap="createActivity">
+      <image src="/icon/create.png" class="function-icon" mode="aspectFit" />
+      <text class="function-text">发起活动</text>
+    </view>
+    <view class="function-item" bindtap="matchActivity">
+      <image src="/icon/match.png" class="function-icon" mode="aspectFit" />
+      <text class="function-text">匹配活动</text>
+    </view>
+    <view class="function-item" bindtap="navigateToResources">
+      <image src="/icon/resource.png" class="function-icon" mode="aspectFit" />
+      <text class="function-text">学习资源</text>
+    </view>
+  </view>
+</view>
+
+<!-- 欢迎动画 -->
+<view class="welcome-animation {{showWelcomeAnimation ? 'show' : ''}}" wx:if="{{showWelcomeAnimation}}">
+  <view class="welcome-content">
+    <text class="welcome-text">欢迎来到球Plus！</text>
+    <view class="confetti-container">
+      <view class="confetti" wx:for="{{20}}" wx:key="*this"></view>
+    </view>
+  </view>
 </view>
 
 <!-- 过场动画 -->

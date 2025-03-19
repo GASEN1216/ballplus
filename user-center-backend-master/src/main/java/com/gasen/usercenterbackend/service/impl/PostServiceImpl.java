@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 
 @Service
 @Slf4j
@@ -135,5 +136,18 @@ public class PostServiceImpl implements IPostService {
             throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "点赞数错误");
         post.setLikes(likes);
         return postMapper.updateById(post) > 0;
+    }
+    
+    @Override
+    public Post getTopPost() {
+        try {
+            LambdaQueryWrapper<Post> wrapper = new LambdaQueryWrapper<>();
+            wrapper.orderByDesc(Post::getLikes);
+            wrapper.last("LIMIT 1");
+            return postMapper.selectOne(wrapper);
+        } catch (Exception e) {
+            log.error("获取点赞最高帖子异常", e);
+            return null;
+        }
     }
 }

@@ -41,16 +41,4 @@
   <view class="up-arrow" wx:if="{{showUpArrow}}" bindtap="onScrollToTop">
     <text>⬆️</text>
   </view>
-
-  <!-- 发帖弹窗 -->
-  <view class="modal-overlay" wx:if="{{showPostModal}}" catchtap="onCancelPost">
-    <view class="modal-content" catchtap="preventClose">
-      <input placeholder="标题（20字以内）" value="{{newPost.title}}" bindinput="onTitleInput" maxLength="20" />
-      <textarea placeholder="内容" value="{{newPost.content}}" bindinput="onContentInput" maxlength="10000"></textarea>
-      <!-- 上传图片后展示预览，点击可预览大图 -->
-      <image wx:if="{{newPost.image}}" class="upload-preview" src="{{newPost.image}}" bindtap="previewUploadImage" />
-      <button class="upload-btn" bindtap="onUploadImage">上传图片</button>
-      <button class="submit-btn" bindtap="onSubmitPost">提交</button>
-    </view>
-  </view>
 </view>

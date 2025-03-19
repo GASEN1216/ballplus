@@ -7,7 +7,13 @@ import com.gasen.usercenterbackend.model.vo.CommentDetail;
 import java.util.List;
 
 public interface ICommentService extends ILikesService {
-    boolean addComment(AddComment addComment);
+    /**
+     * 添加评论
+     * 
+     * @param addComment 评论信息
+     * @return 新增评论的ID，失败返回-1
+     */
+    Long addComment(AddComment addComment);
 
     boolean deleteComment(Long commentId, Integer userId);
 

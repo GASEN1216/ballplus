@@ -18,7 +18,18 @@ Page({
     apiUrl: `${app.globalData.url}/user/wx/getNearestEvent`,
     // 活动数据
     activities: [] as any[], // 所有活动数据
+    
+    // 显示控制
+    showActivityList: false // 控制活动列表的折叠/展开
   },
+  
+  // 折叠/展开活动列表
+  toggleActivityList() {
+    this.setData({
+      showActivityList: !this.data.showActivityList
+    });
+  },
+  
   onLoad() {
     const currentUser = app.globalData.currentUser;
     const width = (currentUser.exp / (currentUser.grade * 10)) * 100;
@@ -44,9 +55,9 @@ Page({
       };
     }
   },
+  
   // 获取活动数据
   fetchActivities() {
-
     const { apiUrl } = this.data;
 
     wx.request({
@@ -149,25 +160,28 @@ Page({
     });
   },
 
-  // 点击“个人信息”跳转到填写信息页面
+  // 点击"个人信息"跳转到填写信息页面
   goToEditInfo() {
     wx.navigateTo({
       url: '/pages/editProfile/editProfile', // 跳转到编辑信息页面
     });
   },
 
+  // 查看个人资料
   goToInfo() {
     wx.navigateTo({
       url: `/pages/profile/profile?userId=${this.data.userData.id}`,
     });
   },
 
+  // 跳转到设置页面
   navigateToSettings() {
     wx.navigateTo({
       url: '/pages/settings/settings'
     });
   },
 
+  // 跳转到活动页面（带标签）
   goToActivities(e: any) {
     const tab = e.currentTarget.dataset.tab; // 获取按钮对应的标签
     wx.navigateTo({
@@ -175,12 +189,14 @@ Page({
     });
   },
 
+  // 跳转到地图
   toGdmap() {
     wx.navigateTo({
       url: `${this.data.gdmapPath}/pages/amap/amap`
     });
   },
 
+  // 跳转到好友列表
   toFriends() {
     wx.navigateTo({
       url: `${this.data.friPath}/pages/conversations/conversations`
@@ -194,6 +210,136 @@ Page({
     });
   },
 
+  // 创建活动
+  createActivity() {
+    if (!this.checkLogin()) return;
+    
+    wx.navigateTo({
+      url: `${this.data.actPath}/pages/createActivity/createActivity`
+    });
+  },
+  
+  // 跳转到球坛
+  goToForum() {
+    wx.switchTab({
+      url: '/pages/forum/forum'
+    });
+  },
+  
+  // 创建帖子
+  createPost() {
+    if (!this.checkLogin()) return;
+    
+    wx.navigateTo({
+      url: '/pages/createPost/createPost'
+    });
+  },
+  
+  // 查看我的帖子
+  goToMyPosts() {
+    if (!this.checkLogin()) return;
+    
+    wx.navigateTo({
+      url: '/pages/forum/myPosts/myPosts'
+    });
+  },
+  
+  // 查看我的评论
+  goToMyComments() {
+    if (!this.checkLogin()) return;
+    
+    wx.navigateTo({
+      url: '/pages/forum/myComments/myComments'
+    });
+  },
+  
+  // 添加好友
+  goToAddFriend() {
+    if (!this.checkLogin()) return;
+    
+    wx.showModal({
+      title: '添加好友',
+      editable: true,
+      placeholderText: '请输入好友球号',
+      success: (res) => {
+        if (res.confirm && res.content) {
+          const ballNumber = res.content;
+
+          // 校验输入数据是否为数字
+          if (!/^\d+$/.test(ballNumber)) {
+            wx.showToast({
+              title: '球号只能包含数字',
+              icon: 'none',
+            });
+            return;
+          }
+
+          // 调用后端接口发送好友申请
+          wx.request({
+            url: `${app.globalData.url}/user/wx/addFriendsRequest`,
+            method: 'POST',
+            header: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'X-Token': app.globalData.currentUser.token,
+            },
+            data: {
+              userId: app.globalData.currentUser.id, // 当前用户ID
+              ballNumber, // 要添加的好友球号
+            },
+            success: (response) => {
+              if (response.statusCode === 200 && response.data.success) {
+                wx.showToast({
+                  title: '好友申请已发送',
+                  icon: 'success',
+                });
+              } else {
+                wx.showToast({
+                  title: response.data.data || '好友申请发送失败',
+                  icon: 'none',
+                });
+              }
+            },
+            fail: () => {
+              wx.showToast({
+                title: '请求失败，请检查网络',
+                icon: 'none',
+              });
+            },
+          });
+        }
+      },
+    });
+  },
+  
+  // 查看好友申请
+  viewFriendRequests() {
+    if (!this.checkLogin()) return;
+    
+    wx.navigateTo({
+      url: '/pages/friendRequests/friendRequests?type=0',
+    });
+  },
+  
+  // 查看我发送的好友申请
+  viewSentRequests() {
+    if (!this.checkLogin()) return;
+    
+    wx.navigateTo({
+      url: '/pages/friendRequests/friendRequests?type=1',
+    });
+  },
+
+  // 添加登录检查函数
+  checkLogin() {
+    if (!app.globalData.isLoggedin) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      });
+      return false;
+    }
+    return true;
+  },
 
   onShow() {
     // 强制刷新数据
@@ -212,37 +358,5 @@ Page({
       });
       this.fetchActivities();
     }
-  },
-  // 验证token方法
-  onTokenButtonClick() {
-    const token = app.globalData.currentUser.token; // 获取全局token
-    wx.request({
-      url: app.getUrl('/user/wx/token'), // 确保URL正确
-      method: 'POST',
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      data: {
-        token: token
-      },
-      success: (response) => {
-        if (response.data && typeof response.data === 'object' && 'code' in response.data) {
-          if (response.data.code === 0) {
-            this.setData({
-              tokenStatus: 'Token有效',
-            });
-          } else {
-            this.setData({
-              tokenStatus: 'Token无效或已过期',
-            });
-          }
-        }
-      },
-      fail: () => {
-        this.setData({
-          tokenStatus: '验证失败',
-        });
-      }
-    });
   },
 });

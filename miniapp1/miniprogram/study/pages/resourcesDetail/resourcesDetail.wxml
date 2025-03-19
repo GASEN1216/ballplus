@@ -1,32 +1,59 @@
 <view class="resource-detail">
-  <!-- 封面图 -->
-  <image class="resource-cover" src="{{resource.cover}}" mode="aspectFill"></image>
-  
-  <!-- 标题 -->
-  <text class="resource-title">{{resource.title}}</text>
-  
-  <!-- 描述 -->
-  <text class="resource-desc">{{resource.description}}</text>
-  
-  <!-- 视频播放 -->
-  <view wx:if="{{resource.type === 'video'}}">
-    <video class="resource-video" src="{{resource.url}}" controls></video>
+  <!-- 顶部封面图 -->
+  <view class="cover-section">
+    <image class="cover-image" src="{{resource.coverImage}}" mode="aspectFill" />
+    <view class="type-tag">{{resource.type === 'video' ? '视频' : '文章'}}</view>
   </view>
-  
-  <!-- 文章链接 -->
-<view wx:if="{{resource.type === 'text'}}">
-  <button class="resource-button" bindtap="openWebPage">阅读文章</button>
-</view>
 
-  
-  <!-- PDF 下载 -->
-  <view wx:if="{{resource.type === 'pdf'}}">
-    <button class="resource-button" bindtap="handleDownloadTip">下载 PDF</button>
+  <!-- 主要内容区 -->
+  <view class="content-section">
+    <!-- 标题和互动区 -->
+    <view class="header">
+      <view class="title">{{resource.title}}</view>
+      <view class="interaction">
+        <view class="stats">
+          <view class="stat-item">
+            <image class="icon" src="/icon/views.png" />
+            <text>{{resource.views}}</text>
+          </view>
+          <view class="stat-item" bindtap="likeResource">
+            <image class="icon" src="/icon/like.png" />
+            <text>{{resource.likes}}</text>
+          </view>
+        </view>
+        <view class="favorite-btn {{resource.isFavorite ? 'active' : ''}}" bindtap="toggleFavorite">
+          <image class="icon" src="{{resource.isFavorite ? '/icon/islikeRes.png' : '/icon/likeRes.png'}}" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 描述信息 -->
+    <view class="description">{{resource.description}}</view>
+
+    <!-- 内容区域 -->
+    <view class="main-content">
+      <rich-text nodes="{{resource.content}}"></rich-text>
+    </view>
   </view>
-  
-  <!-- 点赞和收藏 -->
-  <view class="resource-actions">
-    <button bindtap="likeResource">👍 点赞 {{resource.likes}}</button>
-    <button bindtap="favoriteResource">⭐ 收藏 {{resource.favorites}}</button>
+
+  <!-- 底部推荐区 -->
+  <view class="recommendations" wx:if="{{recommendations && recommendations.length > 0}}">
+    <view class="section-title">相关推荐</view>
+    <view class="recommendation-list">
+      <view class="recommendation-item" 
+            wx:for="{{recommendations}}" 
+            wx:key="id"
+            bindtap="navigateToDetail"
+            data-id="{{item.id}}">
+        <image class="thumb" src="{{item.coverImage}}" mode="aspectFill" />
+        <view class="info">
+          <view class="rec-title">{{item.title}}</view>
+          <view class="rec-stats">
+            <text>{{item.views}} 浏览</text>
+            <text>{{item.likes}} 点赞</text>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </view>

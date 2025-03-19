@@ -347,6 +347,7 @@ Page({
         } else {
             // 添加主评论的逻辑保持不变
             const newComment = {
+                commentId: -1,
                 userId: user.id,
                 avatar: user.avatar,
                 appName: user.name,
@@ -369,6 +370,7 @@ Page({
                 data: newComment,
                 success: (res) => {
                     if (res.statusCode === 200 && res.data.code === 0) {
+                        newComment.commentId = res.data.data.commentId;
                         const updatedComments = [newComment, ...this.data.comments];
                         this.setData({
                             'post.comments': this.data.post.comments + 1,
@@ -381,7 +383,7 @@ Page({
                         });
 
                         wx.showToast({
-                            title: "发送成功",
+                            title: res.data.message || "发送成功",
                             icon: "success"
                         });
                     } else {

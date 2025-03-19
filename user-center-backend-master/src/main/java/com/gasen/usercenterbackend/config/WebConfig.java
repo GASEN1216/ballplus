@@ -45,7 +45,9 @@ public class WebConfig implements WebMvcConfigurer {
                         "/user/wx/update", //update的在方法里进行检测
                         "/user/wx/getEvent",//getEvent避免首页空白
                         "/user/wx/getPostList",// getPostList避免球探首页空白
-                        "/user/wx/getEventDetailById");//getEventDetailById避免点开通知空白
+                        "/user/wx/getEventDetailById",//getEventDetailById避免点开通知空白
+                        "/user/wx/posts/top",//post/top避免帖子详情空白
+                        "/user/wx/resources/top");//resource/top避免资源详情空白
     }
 
 }

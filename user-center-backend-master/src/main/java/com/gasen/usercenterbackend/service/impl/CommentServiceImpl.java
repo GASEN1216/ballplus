@@ -25,14 +25,17 @@ public class CommentServiceImpl implements ICommentService {
     private CommentMapper commentMapper;
 
     @Override
-    public boolean addComment(AddComment addComment) {
+    public Long addComment(AddComment addComment) {
         try {
             Comment comment = addComment.toComment();
             int insert = commentMapper.insert(comment);
-            return insert > 0;
+            if (insert > 0) {
+                return comment.getId();
+            }
+            return -1L;
         } catch (Exception e) {
             log.error("添加评论异常", e);
-            return false;
+            return -1L;
         }
     }
 
@@ -47,7 +50,6 @@ public class CommentServiceImpl implements ICommentService {
         } else {
             return false;
         }
-
     }
 
     @Override

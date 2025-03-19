@@ -1,5 +1,5 @@
 page {
-  background-color: #f5f5f5;
+  background-color: #f6f7f9;
 }
 /* 全局容器 */
 .container {
@@ -7,17 +7,19 @@ page {
   flex-direction: column;
   align-items: center;
   padding-top: env(safe-area-inset-top);
+  padding-bottom: 120rpx;
 }
 
 /* 顶部固定栏 */
 .header {
-  width: 100%;
-  height: 100rpx;
+  width: 92%;
+  height: 120rpx;
   background-color: #ffffff;
-  border-bottom: 1px solid #ddd;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  border-radius: 0 0 20rpx 20rpx;
   display: flex;
   align-items: center;
-  padding: 10rpx 40rpx;
+  padding: 20rpx 40rpx;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -26,8 +28,9 @@ page {
 /* 用户信息 */
 .user-info {
   display: flex;
-  gap: 20rpx; /* 设置子元素之间的间距为 20rpx */
+  gap: 20rpx;
   align-items: center;
+  flex: 1;
 }
 
 /* 用户头像 */
@@ -35,7 +38,8 @@ page {
   width: 90rpx;
   height: 90rpx;
   border-radius: 50%;
-  margin-left: 30rpx; /* 头像向右移动 */
+  border: 2rpx solid #f0f0f0;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
 }
 
 /* 用户文本信息（昵称和个人信息） */
@@ -47,301 +51,316 @@ page {
 
 .nickname {
   font-size: 28rpx;
+  font-weight: 500;
   color: #333;
+}
+
+/* 顶部按钮区域 */
+.header-btns {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.customer-service-btn {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  line-height: normal;
+  border: none;
+  border-radius:0
+}
+
+.customer-service-btn::after {
+  border: none;
+}
+
+.header-icon {
+  width: 64rpx;
+  height: 64rpx;
 }
 
 .settings-btn {
-  margin-left: auto;
-  padding-right: 20rpx; /* 右侧留白 */
-}
-
-.settings-icon {
-  width: 80rpx;
-  height: 80rpx;
-}
-
-/* 活动剩余时间的小牌子 */
-.activity-banner {
-  width: 100%; /* 让它占满整个屏幕 */
-  background-color: #fff; /* 白色背景 */
-  border-radius: 10rpx; /* 适当缩小圆角 */
-  padding: 4rpx 0; /* 仅在上下增加小内边距 */
-  text-align: center; /* 文字居中 */
-  font-size: 16rpx; /* 字体大小 */
-  font-weight: bold;
-  box-shadow: 0 2rpx 5rpx rgba(0, 0, 0, 0.1); /* 轻微阴影，让它像浮起来 */
-  margin: 0 auto; /* 水平居中 */
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 0rpx; /* 确保高度足够但不太高 */
-  line-height: 0rpx; /* 让文本垂直居中 */
-  position: relative;
-  margin-top: 5px;
+  justify-content: center;
 }
 
-/* 活动列表样式 */
-.activity-list {
+/* 主要内容区域 */
+.main-content {
   width: 100%;
-  margin-top: 5px;
+  padding: 20rpx;
+  box-sizing: border-box;
 }
 
-.activity-card {
+/* 卡片通用样式 */
+.card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.03);
+}
+
+/* 卡片标题 */
+.card-title {
   display: flex;
-  position: relative;
-  gap: 10px;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #fff;
-}
-.activity-distance {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 14px;
-  color: #666;
-}
-/* 头像样式 */
-.activity-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 1px solid #ccc;
-  object-fit: cover;
-}
-
-/* 活动信息 */
-.activity-details {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.activity-name {
-  font-size: 16px;
-  font-weight: bold;
+  align-items: center;
+  margin-bottom: 20rpx;
+  font-size: 30rpx;
+  font-weight: 500;
   color: #333;
 }
 
-.activity-meta {
-  font-size: 14px;
-  color: #666;
+.card-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 12rpx;
 }
 
-.activity-remarks {
-  display: -webkit-box;        /* 创建一个伸缩容器 */
-  -webkit-box-orient: vertical; /* 设置伸缩方向为纵向 */
-  overflow: hidden;            /* 隐藏溢出部分 */
-  text-overflow: ellipsis;     /* 超出部分显示省略号 */
-  -webkit-line-clamp: 2;           /* 限制最多显示两行 */
-  white-space: normal;         /* 允许文本换行 */
-  line-height: 1.5;            /* 设置行高（可根据需要调整） */
-  max-height: 3.3em;           /* 设置最大高度（可根据需要调整） */
-  font-size: 14px;
-  color: #888;
-  margin-top: 5px;
-}
-
-.no-activity {
-  text-align: center;
-  color: #999;
-  margin-top: 20rpx;
-  margin-bottom: 25rpx;
-  font-size: 16px;
-}
-
-/* 包裹所有内容的白板样式 */
-.whiteboard {
-  background-color: #f5f5f5; /* 白色背景 */
-  border-radius: 10px;     /* 圆角 */
-  padding: 20px; /* 内边距 */
-  position: relative;  /* 使用相对定位 */
-  top: -35px; /* 向上移动 10px */
-  margin: 10px; /* 外边距 */
-  width: 100%;
+/* 卡片头部（带箭头） */
+.card-header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
 
+/* 箭头图标 */
+.arrow-icon {
+  width: 32rpx;
+  height: 32rpx;
+  opacity: 0.6;
+  transition: transform 0.3s ease;
+}
+
+.arrow-down {
+  transform: rotate(90deg);
+}
+
+/* 卡片内容 */
+.card-content {
+  margin-top: 20rpx;
+}
+
+/* 活动倒计时卡片 */
+.activity-time-card {
+  border-left: 8rpx solid #1cbbb4;
+}
+
 .activity-remaining-time {
-  font-size: 16px;           /* 增大字体，突出显示 */
-  color: #FF4C4C;            /* 红色，代表紧迫感 */
-  font-weight: bold;         /* 加粗字体 */
-  margin: 10px 0;            /* 上下外边距，给内容更多空间 */
-  padding: 8px 12px;         /* 增加内边距，避免内容粘边 */
-  background-color: #fff; /* 背景色，浅红色让文字突出 */
-  text-align: center;        /* 居中文本 */
-}
-
-.activity-remaining-time2 {
-  font-size: 16px;           /* 比活动时间大2px，保持视觉层级 */
-  color: #5A7D9C;            /* 改为青天色值，取自"青天无片云"意象 */
-  font-weight: 600;          /* 中等加粗，避免过度强硬 */
-  margin: 12px 0;            /* 扩大留白，模拟中国画题诗空间感 */
-  padding: 10px 16px;        
-  background: linear-gradient(
-    to right, 
-    #F0F6FF 20%,            /* 左浅蓝模拟天际渐变 */
-    #FFFFFF 80%              /* 右留白呼应"无片云" */
-  );
-  text-align: center;
-  border-radius: 4px;        /* 圆角暗合古籍装帧特征 */
-  box-shadow: 0 2px 8px rgba(88,129,164,0.1); /* 青天投影效果 */
-  font-family: '霞鹜文楷', sans-serif; /* 推荐开源书法字体 */
-}
-
-/* 在原有样式基础上新增 */
-.activity-card.empty-card {
-  background: #f8f9fa; /* 素绢色背景 */
-  min-height: 180px; /* 保持与正常卡片等高 */
-  width: 100%;
-}
-
-.poetic-state {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 16px;
-  color: #5a7d9c;
-  text-align: center;
-  white-space: nowrap; /* 禁止换行 */
-  font-family: 'LXGW WenKai', sans-serif;
-  z-index: 2;
-}
-
-/* 导航部分 */
-.navigation-section {
-  display: flex;
-  justify-content: space-around;
-  margin: 0rpx 0;
-  width: 100%;
-  background-color: #fff;
-  padding: 20rpx;
-  border-radius: 10rpx;
-  margin-top: -5px;
-}
-
-.nav-item {
-  text-align: center;
-}
-
-.nav-icon {
-  width: 60rpx;
-  height: 60rpx;
-}
-
-/* 活动部分 */
-.activity-section {
-  width: 95%;
-  background-color: #fff;
-  padding: 20rpx;
-  border-radius: 10rpx;
-  margin-top: 20rpx;
-}
-
-.activity-title {
-  font-size: 30rpx;
+  font-size: 32rpx;
   font-weight: bold;
+  color: #FF4C4C;
+  margin: 16rpx 0;
+  display: block;
 }
 
-.activity-items {
+.activity-summary {
   display: flex;
-  justify-content: space-around;
-  margin-top: 20rpx;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16rpx;
 }
 
-.activity-item {
-  text-align: center;
-}
-
-.activity-icon {
-  width: 50rpx;
-  height: 50rpx;
-}
-
-/* 按钮和状态 */
-.token-button {
-  margin-top: 20rpx;
-  padding: 10rpx 20rpx;
-  background-color: #1cbbb4;
-  color: #fff;
-  border-radius: 5rpx;
-}
-
-.token-status {
-  margin-top: 10rpx;
+.activity-summary-text {
   font-size: 28rpx;
   color: #333;
 }
 
-
-/* 等级文本 */
-.level-text {
-  font-size: 24rpx;
-  font-weight: bold;
-  margin-left: 5rpx;
-  color: #0072ff; /* 字体颜色设置为蓝色 */
-  text-shadow: 0 2rpx 4rpx rgba(0, 114, 255, 0.2); /* 蓝色文字阴影，增加立体感 */
-  animation: float 2s infinite alternate; /* 保留浮动动画 */
+/* 引言卡片 */
+.quote-icon {
+  width: 60rpx;
+  height: 60rpx;
+  margin: 20rpx auto;
+  opacity: 0.6;
+  display: block;
 }
 
-/* 小牌子浮动动画 */
-@keyframes float {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-5rpx);
-  }
+.quote-text {
+  font-size: 30rpx;
+  color: #5A7D9C;
+  font-weight: 500;
+  text-align: center;
+  display: block;
 }
-/* 经验条容器 */
-.exp-bar-container {
-  flex: 1;
+
+/* 功能菜单区域 */
+.menu-section {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.03);
+}
+
+.menu-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.menu-item {
+  width: 25%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 20rpx;
+  padding: 20rpx 0;
 }
 
-/* 经验值文本 */
-.exp-text {
-  font-size: 16rpx;
-  font-weight: bold;
-  color: #555;
-  margin-bottom: 5rpx;
-  text-align: right; /* 改为右对齐 */
-  align-self: flex-end; /* 对齐到容器右侧 */
+.menu-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-bottom: 10rpx;
 }
 
-/* 经验进度条 */
-.exp-bar {
-  width: 125%;
-  height: 6rpx;
-  background: #000; /* 黑色背景，表示未获得经验 */
-  border-radius: 10rpx;
+.menu-text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 活动管理卡片 */
+.activity-card {
+  border-left: 8rpx solid #ff9645;
+}
+
+/* 好友管理卡片 */
+.friends-card {
+  border-left: 8rpx solid #4ecdc4;
+}
+
+/* 球坛管理卡片 */
+.forum-card {
+  border-left: 8rpx solid #8c7ae6;
+}
+
+/* 近期活动列表 */
+.recent-activities-list {
+  margin-top: 20rpx;
+  max-height: 0;
   overflow: hidden;
-  position: relative;
-  box-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.1);
+  transition: max-height 0.3s ease;
+  border-top: 1rpx solid transparent;
 }
 
-/* 已获得经验部分 */
-.exp-progress {
-  height: 100%;
-  background: linear-gradient(to right, #4f9eff, #00c6ff); /* 蓝色渐变 */
-  width: 0%; /* 初始状态 */
-  transition: width 0.5s ease-in-out;
-  border-radius: 10rpx; /* 与父容器一致 */
-  z-index: 200;
+.recent-activities-list.show {
+  max-height: 1000rpx;
+  border-top: 1rpx solid #f0f0f0;
+  padding-top: 20rpx;
 }
-/* 容器 - 等级和经验值 */
+
+.recent-activities-list.hide {
+  max-height: 0;
+}
+
+.recent-activity-item {
+  display: flex;
+  position: relative;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.recent-activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.activity-details {
+  flex: 1;
+  margin-right: 60rpx; /* 为右侧距离预留空间 */
+}
+
+.activity-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.activity-meta {
+  font-size: 24rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.activity-distance {
+  font-size: 24rpx;
+  color: #888;
+  position: absolute;
+  top: 20rpx;
+  right: 10rpx;
+}
+
+.empty-activities {
+  padding: 30rpx 0;
+  text-align: center;
+}
+
+.empty-text {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 登录按钮 */
+.login-btn {
+  width: 80%;
+  height: 88rpx;
+  line-height: 88rpx;
+  background: linear-gradient(to right, #1cbbb4, #0081ff);
+  color: #fff;
+  font-size: 32rpx;
+  border-radius: 44rpx;
+  margin-top: 60rpx;
+  box-shadow: 0 8rpx 16rpx rgba(0, 129, 255, 0.2);
+}
+
+/* 等级和经验条 */
 .level-exp-container {
   display: flex;
-  justify-content: space-between; /* 水平两端对齐 */
-  align-items: center; /* 垂直居中 */
-  
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4rpx;
+}
+
+.level-text {
+  font-size: 22rpx;
+  font-weight: bold;
+  color: #0072ff;
+  text-shadow: 0 2rpx 4rpx rgba(0, 114, 255, 0.2);
+  animation: float 2s infinite alternate;
+}
+
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-3rpx); }
+}
+
+.exp-text {
+  font-size: 20rpx;
+  color: #666;
+  margin-left: auto;
+}
+
+.exp-bar-container {
+  width: 100%;
+  margin-top: 8rpx;
+}
+
+.exp-bar {
+  width: 100%;
+  height: 6rpx;
+  background: #eee;
+  border-radius: 3rpx;
+  overflow: hidden;
+}
+
+.exp-progress {
+  height: 100%;
+  background: linear-gradient(to right, #4f9eff, #00c6ff);
+  border-radius: 3rpx;
 }

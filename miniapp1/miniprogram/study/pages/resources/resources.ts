@@ -1,89 +1,352 @@
 interface Resource {
   id: number;
   title: string;
-  type: 'video' | 'text' | 'pdf';
-  cover: string;
-  url: string;
   description: string;
+  coverImage: string;
+  type: string;
+  views: number;
   likes: number;
-  favorites: number;
+  link: string;
+  category: string;
+  isFavorite?: boolean;
 }
+
+interface PageData {
+  records: Resource[];
+  total: number;
+  size: number;
+  current: number;
+  pages: number;
+}
+
+interface wxUser {
+  id: string;
+  token: string;
+}
+
+interface IAppOption {
+  globalData: {
+    qnurl: string;
+    url: string;
+    isLoggedin: boolean;
+    currentUser: wxUser;
+  }
+}
+
+export const app = getApp<IAppOption>();
 
 Page({
   data: {
+    categories: [
+      { name: '全部', type: 'all' },
+      { name: '我的收藏', type: 'favorites' },
+      { name: '基础教程', type: 'basic' },
+      { name: '进阶技巧', type: 'advanced' },
+      { name: '比赛策略', type: 'strategy' },
+      { name: '装备指南', type: 'equipment' },
+      { name: '健身训练', type: 'fitness' }
+    ],
+    currentCategory: 0,
+    searchQuery: '',
     resources: [] as Resource[],
-    filteredResources: [] as Resource[]
+    filteredResources: [] as Resource[],
+    page: 1,
+    size: 10,
+    hasMore: true,
+    total: 0,
+    pages: 0
   },
 
   onLoad() {
-    this.loadFakeResources();
+    this.loadResources();
   },
 
-  // 加载假数据
-  loadFakeResources(): void {
-    const fakeResources: Resource[] = [
-      {
-        id: 1,
-        title: '🏀 篮球投篮技巧',
-        type: 'video',
-        cover: 'https://picsum.photos/1200/400?random=1',
-        url: 'http://sunsetchat.top/study/basketball.mp4',
-        description: '提高你的投篮命中率，观看完整教程。',
-        likes: 120,
-        favorites: 45
-      },
-      {
-        id: 2,
-        title: '🧘‍♀️ 瑜伽核心训练',
-        type: 'video',
-        cover: 'https://picsum.photos/1200/400?random=2',
-        url: 'http://sunsetchat.top/study/yoga.mp4',
-        description: '改善你的核心力量，适合初学者。',
-        likes: 98,
-        favorites: 60
-      },
-      {
-        id: 3,
-        title: '⚽ 足球基础训练',
-        type: 'text',
-        cover: 'https://picsum.photos/1200/400?random=3',
-        url: 'https://dongqiudi.com/articles/4821323',
-        description: '掌握足球基本技能，成为场上明星。',
-        likes: 75,
-        favorites: 30
-      },
-      {
-        id: 4,
-        title: '📄 健身计划表',
-        type: 'pdf',
-        cover: 'https://picsum.photos/1200/400?random=4',
-        url: 'http://sunsetchat.top/study/fitness.pdf',
-        description: '科学的健身计划，助你事半功倍。',
-        likes: 85,
-        favorites: 40
+  // 加载资源列表
+  loadResources() {
+    const { currentCategory, searchQuery, categories, page, size } = this.data;
+    
+    // 如果是"我的收藏"分类
+    if (categories[currentCategory].type === 'favorites') {
+      if (!app.globalData.isLoggedin) {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        });
+        this.setData({
+          resources: [],
+          filteredResources: [],
+          hasMore: false,
+          total: 0,
+          pages: 0
+        });
+        return;
       }
-    ];
 
-    this.setData({ resources: fakeResources, filteredResources: fakeResources });
+      // 直接请求收藏列表
+      wx.request({
+        url: `${app.globalData.url}/user/wx/resources/favorites`,
+        method: 'GET',
+        data: {
+          userId: app.globalData.currentUser.id,
+          page,
+          size
+        },
+        header: {
+          'X-Token': app.globalData.currentUser?.token
+        },
+        success: (res: any) => {
+          if (res.statusCode === 200 && res.data.code === 0) {
+            const pageData = res.data.data as PageData;
+            const resourcesWithFavorite = pageData.records.map(resource => ({
+              ...resource,
+              isFavorite: true
+            }));
+
+            this.setData({
+              resources: page === 1 ? resourcesWithFavorite : [...this.data.resources, ...resourcesWithFavorite],
+              filteredResources: page === 1 ? resourcesWithFavorite : [...this.data.resources, ...resourcesWithFavorite],
+              hasMore: pageData.current < pageData.pages,
+              total: pageData.total,
+              pages: pageData.pages
+            });
+          } else {
+            wx.showToast({
+              title: res.data.message || '加载失败',
+              icon: 'none'
+            });
+          }
+        },
+        fail: () => {
+          wx.showToast({
+            title: '加载失败',
+            icon: 'none'
+          });
+        }
+      });
+      return;
+    }
+
+    // 其他分类的原有逻辑
+    const category = currentCategory === 0 ? '' : categories[currentCategory].type;
+    wx.request({
+      url: `${app.globalData.url}/user/wx/resources/`,
+      method: 'GET',
+      data: {
+        category,
+        keyword: searchQuery,
+        page,
+        size
+      },
+      header: {
+        'X-Token': app.globalData.currentUser?.token
+      },
+      success: (res: any) => {
+        if (res.statusCode === 200 && res.data.code === 0) {
+          const pageData = res.data.data as PageData;
+          const hasMore = pageData.current < pageData.pages;
+          
+          if (app.globalData.isLoggedin && app.globalData.currentUser?.id) {
+            this.getFavorites((favorites: number[]) => {
+              const resourcesWithFavorite = pageData.records.map((resource: Resource) => ({
+                ...resource,
+                isFavorite: favorites.includes(resource.id)
+              }));
+
+              const sortedResources = resourcesWithFavorite.sort((a, b) => {
+                if (a.isFavorite === b.isFavorite) {
+                  return 0;
+                }
+                return a.isFavorite ? -1 : 1;
+              });
+
+              this.setData({
+                resources: page === 1 ? sortedResources : [...this.data.resources, ...sortedResources],
+                filteredResources: page === 1 ? sortedResources : [...this.data.resources, ...sortedResources],
+                hasMore,
+                total: pageData.total,
+                pages: pageData.pages
+              });
+            });
+          } else {
+            this.setData({
+              resources: page === 1 ? pageData.records : [...this.data.resources, ...pageData.records],
+              filteredResources: page === 1 ? pageData.records : [...this.data.resources, ...pageData.records],
+              hasMore,
+              total: pageData.total,
+              pages: pageData.pages
+            });
+          }
+        } else {
+          wx.showToast({
+            title: res.data.message || '加载失败',
+            icon: 'none'
+          });
+        }
+      },
+      fail: () => {
+        wx.showToast({
+          title: '加载失败',
+          icon: 'none'
+        });
+      }
+    });
   },
 
-  // 筛选资源
-  filterResources(event: WechatMiniprogram.BaseEvent): void {
-    const type = event.currentTarget.dataset.type as string;
+  // 获取收藏列表
+  getFavorites(callback: (favorites: number[]) => void) {
+    if (!app.globalData.isLoggedin || !app.globalData.currentUser?.id) {
+      callback([]);
+      return;
+    }
 
-    if (type === 'all') {
-      this.setData({ filteredResources: this.data.resources });
-    } else {
-      const filtered = this.data.resources.filter((item) => item.type === type);
-      this.setData({ filteredResources: filtered });
+    wx.request({
+      url: `${app.globalData.url}/user/wx/resources/favorites`,
+      method: 'GET',
+      data: {
+        userId: app.globalData.currentUser.id,
+        page: 1,
+        size: 100
+      },
+      header: {
+        'X-Token': app.globalData.currentUser?.token
+      },
+      success: (res: any) => {
+        if (res.statusCode === 200 && res.data.code === 0) {
+          callback(res.data.data.records.map((item: Resource) => item.id));
+        } else {
+          callback([]);
+        }
+      },
+      fail: () => {
+        callback([]);
+      }
+    });
+  },
+
+  // 切换收藏状态
+  toggleFavorite(e: any) {
+    if (!app.globalData.isLoggedin || !app.globalData.currentUser?.id) {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      });
+      return;
+    }
+
+    const id = e.currentTarget.dataset.id;
+    const resource = this.data.resources.find(r => r.id === id);
+    
+    if (!resource) return;
+
+    wx.request({
+      url: `${app.globalData.url}/user/wx/resources/${id}/favorite`,
+      method: resource.isFavorite ? 'DELETE' : 'POST',
+      data: {
+        userId: app.globalData.currentUser.id
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-Token': app.globalData.currentUser?.token
+      },
+      success: (res: any) => {
+        if (res.statusCode === 200 && res.data.code === 0) {
+          const resources = this.data.resources.map(r => {
+            if (r.id === id) {
+              return { ...r, isFavorite: !r.isFavorite };
+            }
+            return r;
+          });
+
+          // 重新排序，确保收藏的资源始终在前面
+          const sortedResources = resources.sort((a, b) => {
+            if (a.isFavorite === b.isFavorite) {
+              return 0;
+            }
+            return a.isFavorite ? -1 : 1;
+          });
+
+          this.setData({ 
+            resources: sortedResources,
+            filteredResources: sortedResources
+          });
+        } else {
+          wx.showToast({
+            title: res.data.message || '操作失败',
+            icon: 'none'
+          });
+        }
+      },
+      fail: () => {
+        wx.showToast({
+          title: '操作失败',
+          icon: 'none'
+        });
+      }
+    });
+  },
+
+  // 搜索输入处理
+  onSearchInput(e: any) {
+    this.setData({
+      searchQuery: e.detail.value,
+      page: 1
+    }, () => {
+      this.loadResources();
+    });
+  },
+
+  // 切换分类
+  switchCategory(e: any) {
+    const index = e.currentTarget.dataset.index;
+    this.setData({
+      currentCategory: index,
+      page: 1
+    }, () => {
+      this.loadResources();
+    });
+  },
+
+  // 触底加载更多
+  onReachBottom() {
+    if (this.data.hasMore) {
+      this.setData({
+        page: this.data.page + 1
+      }, () => {
+        this.loadResources();
+      });
     }
   },
 
   // 跳转到详情页
-  goToDetail(event: WechatMiniprogram.BaseEvent): void {
-    const id = event.currentTarget.dataset.id;
+  navigateToDetail(e: any) {
+    const id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: `../resourcesDetail/resourcesDetail?id=${id}`
     });
+  },
+
+  // 播放视频
+  playVideo(e: any) {
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `../resourcesDetail/resourcesDetail?id=${id}`
+    });
+  },
+
+  // 查看资源详情
+  viewResource(e: any) {
+    const id = e.currentTarget.dataset.id;
+    const resource = this.data.resources.find(item => item.id === id);
+    
+    if (resource) {
+      if (resource.type === 'video') {
+        this.playVideo({ currentTarget: { dataset: { id: resource.id } } });
+      } else {
+        // 如果是外部链接，使用webview页面打开
+        wx.navigateTo({
+          url: `../webview/webview?url=${encodeURIComponent(resource.link)}&title=${encodeURIComponent(resource.title)}`
+        });
+      }
+    }
   }
 });

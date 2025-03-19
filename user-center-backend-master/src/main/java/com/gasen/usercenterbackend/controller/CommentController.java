@@ -15,7 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.gasen.usercenterbackend.constant.LikeConstant.COMMENT_TYPE;
 import static com.gasen.usercenterbackend.constant.LikeConstant.POST_TYPE;
@@ -42,9 +44,15 @@ public class CommentController {
             if (addComment == null || addComment.getUserId() == null || addComment.getPostId() == null || addComment.getContent() == null){
                 return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "参数为空！");
             }
-            boolean result = commentService.addComment(addComment) && postService.addComments(addComment.getPostId());
+            
+            Long commentId = commentService.addComment(addComment);
+            boolean result = commentId > 0 && postService.addComments(addComment.getPostId());
+            
             if (result) {
-                return ResultUtils.success("添加评论成功！");
+                Map<String, Object> resultMap = new HashMap<>();
+                resultMap.put("commentId", commentId);
+                resultMap.put("message", "评论成功！");
+                return ResultUtils.success(resultMap);
             } else {
                 log.error("添加评论异常");
                 return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "添加评论失败！");

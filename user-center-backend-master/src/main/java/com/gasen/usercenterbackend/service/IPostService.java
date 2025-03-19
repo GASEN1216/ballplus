@@ -19,4 +19,11 @@ public interface IPostService extends ILikesService{
     boolean reduceComments(Long postId);
 
     boolean addComments(Long postId);
+    
+    /**
+     * 获取点赞数最高的帖子
+     *
+     * @return 点赞数最高的帖子
+     */
+    Post getTopPost();
 }
