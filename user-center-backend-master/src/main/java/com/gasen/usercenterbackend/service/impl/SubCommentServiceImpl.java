@@ -11,6 +11,7 @@ import com.gasen.usercenterbackend.model.dao.SubComment;
 import com.gasen.usercenterbackend.model.dto.AddSubComment;
 import com.gasen.usercenterbackend.model.dto.UpdateSubComment;
 import com.gasen.usercenterbackend.model.vo.SubCommentDetail;
+import com.gasen.usercenterbackend.model.vo.SubCommentInfo;
 import com.gasen.usercenterbackend.service.ISubCommentService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -101,7 +102,7 @@ public class SubCommentServiceImpl implements ISubCommentService {
     }
 
     @Override
-    public List<SubCommentDetail> getRepliesByCommentUserId(Integer userId, Integer pageNum, Integer pageSize) {
+    public List<SubCommentInfo> getRepliesByCommentUserId(Integer userId, Integer pageNum, Integer pageSize) {
         try {
             if (userId == null || userId <= 0) {
                 log.error("获取用户评论回复列表参数异常，用户ID不合法");
@@ -133,13 +134,33 @@ public class SubCommentServiceImpl implements ISubCommentService {
             Page<SubComment> page = new Page<>(pageNum, pageSize);
             Page<SubComment> subCommentPage = subCommentMapper.selectPage(page, subCommentQueryWrapper);
 
-            // 将查询结果转换为SubCommentDetail列表
+            // 将查询结果转换为SubCommentInfo列表
             if (subCommentPage.getRecords().isEmpty()) {
                 return List.of(); // 返回空列表
             }
 
             return subCommentPage.getRecords().stream()
-                    .map(SubComment::toSubCommentDetail)
+                    .map(subComment -> {
+                        SubCommentInfo info = new SubCommentInfo();
+                        info.setSubCommentId(subComment.getId())
+                            .setCommentId(subComment.getCommentId())
+                            .setAppName(subComment.getAppName())
+                            .setAppId(subComment.getAppId())
+                            .setAvatar(subComment.getAvatar())
+                            .setGrade(subComment.getGrade())
+                            .setContent(subComment.getContent())
+                            .setLikes(subComment.getLikes())
+                            .setCreateTime(subComment.getCreateTime());
+                        
+                        // 获取父评论内容和发布者ID
+                        Comment parentComment = commentMapper.selectById(subComment.getCommentId());
+                        if (parentComment != null) {
+                            info.setOriginalCommentContent(parentComment.getContent());
+                            info.setParentCommentAppId(parentComment.getAppId());
+                        }
+                        
+                        return info;
+                    })
                     .collect(Collectors.toList());
 
         } catch (Exception e) {

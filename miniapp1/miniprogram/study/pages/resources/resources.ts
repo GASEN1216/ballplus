@@ -324,29 +324,4 @@ Page({
       url: `../resourcesDetail/resourcesDetail?id=${id}`
     });
   },
-
-  // 播放视频
-  playVideo(e: any) {
-    const id = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: `../resourcesDetail/resourcesDetail?id=${id}`
-    });
-  },
-
-  // 查看资源详情
-  viewResource(e: any) {
-    const id = e.currentTarget.dataset.id;
-    const resource = this.data.resources.find(item => item.id === id);
-    
-    if (resource) {
-      if (resource.type === 'video') {
-        this.playVideo({ currentTarget: { dataset: { id: resource.id } } });
-      } else {
-        // 如果是外部链接，使用webview页面打开
-        wx.navigateTo({
-          url: `../webview/webview?url=${encodeURIComponent(resource.link)}&title=${encodeURIComponent(resource.title)}`
-        });
-      }
-    }
-  }
 });

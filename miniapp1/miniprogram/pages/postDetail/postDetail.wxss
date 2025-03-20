@@ -104,11 +104,22 @@ page {
   padding-bottom: 150rpx;
 }
 .comment-block {
-  width: 100%;
-  border-radius: 20rpx;
-  box-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.05);
-  margin-bottom: 16rpx;
-  overflow: hidden;
+  background: #fff;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  border-radius: 12rpx;
+  transition: background-color 0.3s ease;
+}
+.comment-block.highlighted {
+  animation: highlightFade 1s ease;
+}
+@keyframes highlightFade {
+  0% {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    background-color: #fff;
+  }
 }
 .comment-item {
   display: flex;
@@ -298,10 +309,23 @@ page {
   font-size: 28rpx;
 }
 
+.sort-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10rpx 0;
+  margin-bottom: 10rpx;
+}
+
+.comment-count {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
 .sort-switch {
   text-align: right;
   padding: 10rpx 0;
-  margin-bottom: 10rpx;
 }
 
 .sort-text {

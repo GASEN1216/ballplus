@@ -20,7 +20,7 @@
   <view class="sub-comments" catchtap="preventBubble">
     <text class="sub-comments-title">全部回复 ({{subComments.length}})</text>
     <block wx:for="{{subComments}}" wx:key="subCommentId">
-      <view class="sub-comment-card">
+      <view class="sub-comment-card {{item.isHighlighted ? 'highlighted' : ''}}" id="sub-comment-{{item.subCommentId}}">
         <image class="sub-avatar" src="{{item.avatar}}" mode="aspectFill" />
         <view class="sub-info">
           <view class="sub-header">

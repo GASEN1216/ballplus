@@ -357,6 +357,18 @@ Page({
         profilePic: app.globalData.currentUser.avatar,
       });
       this.fetchActivities();
+      // 刷新用户数据
+      this.fetchUserData();
     }
+  },
+
+  // 获取用户数据
+  fetchUserData() {
+    const currentUser = app.globalData.currentUser;
+    const width = (currentUser.exp / (currentUser.grade * 10)) * 100;
+    this.setData({
+      userData: { ...currentUser },
+      expWidth: `${width}%`
+    });
   },
 });

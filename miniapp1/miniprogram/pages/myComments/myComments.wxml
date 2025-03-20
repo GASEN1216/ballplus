@@ -18,72 +18,84 @@
     
     <!-- 帖子评论 -->
     <block wx:if="{{activeTab === 'post' && postComments.length > 0}}">
-      <view class="comment-item" wx:for="{{postComments}}" wx:key="commentId" bindtap="goToPostComment" data-post-id="{{item.postId}}" data-comment-id="{{item.commentId}}">
-        <view class="user-avatar">
-          <image src="{{item.avatar || '/icon/default-avatar.png'}}" mode="aspectFill"></image>
-        </view>
-        
-        <view class="comment-content">
-          <view class="user-info">
-            <view class="username">{{item.appName || '匿名用户'}}</view>
-            <view class="user-badge" wx:if="{{item.grade}}">UP</view>
+      <view class="comment-item" wx:for="{{postComments}}" wx:key="commentId">
+        <view class="comment-main" bindtap="goToPostComment" data-post-id="{{item.postId}}" data-comment-id="{{item.commentId}}">
+          <view class="user-avatar">
+            <image src="{{item.avatar || '/icon/default-avatar.png'}}" mode="aspectFill"></image>
           </view>
           
-          <view class="comment-text">
-            <text>回复了我的帖子: {{item.postTitle || ''}}</text>
-          </view>
-          
-          <view class="reply-content">{{item.content || '无内容'}}</view>
-          
-          <view class="comment-footer">
-            <view class="post-time">{{item.createTime}}</view>
-            <view class="action-btns">
-              <view class="btn">
-                <image src="/icon/comment.png" class="action-icon"></image>
-                <text>回复</text>
-              </view>
-              <view class="btn">
-                <image src="/icon/like.png" class="action-icon"></image>
-                <text>点赞</text>
+          <view class="comment-content">
+            <view class="user-info">
+              <view class="username">{{item.appId === userId ? '我' : (item.appName || '匿名用户')}}</view>
+              <!-- 显示等级 -->
+              <view class="user-badge" wx:if="{{item.grade}}">Lv{{item.grade}}</view>
+              <!-- 显示UP标识 -->
+              <view class="user-badge up-badge" wx:if="{{item.appId === userId}}">UP</view>
+            </view>
+            
+            <view class="comment-text">
+              <text>回复了我的帖子</text>
+            </view>
+            
+            <view class="reply-content">{{item.content || '无内容'}}</view>
+            
+            <view class="comment-footer">
+              <view class="post-time">{{item.createTime}}</view>
+              <view class="action-btns">
+                <view class="btn {{item.isLiked ? 'liked' : ''}}" catchtap="likeComment" data-id="{{item.commentId}}">
+                  <image src="{{item.isLiked ? '/icon/islike.png' : '/icon/like.png'}}" class="action-icon"></image>
+                  <text>{{item.likes || 0}}</text>
+                </view>
               </view>
             </view>
           </view>
+        </view>
+        
+        <!-- 右侧预览块 -->
+        <view class="preview-block" bindtap="goToPostDetail" data-id="{{item.postId}}">
+          <view class="preview-content">{{item.postTitle || '无标题'}}</view>
         </view>
       </view>
     </block>
     
     <!-- 评论的回复 -->
     <block wx:if="{{activeTab === 'comment' && commentReplies.length > 0}}">
-      <view class="comment-item" wx:for="{{commentReplies}}" wx:key="subCommentId" bindtap="goToCommentDetail" data-comment-id="{{item.commentId}}">
-        <view class="user-avatar">
-          <image src="{{item.avatar || '/icon/default-avatar.png'}}" mode="aspectFill"></image>
-        </view>
-        
-        <view class="comment-content">
-          <view class="user-info">
-            <view class="username">{{item.appName || '匿名用户'}}</view>
-            <view class="user-badge" wx:if="{{item.grade}}">UP</view>
+      <view class="comment-item" wx:for="{{commentReplies}}" wx:key="subCommentId">
+        <view class="comment-main" bindtap="goToCommentDetail" data-comment-id="{{item.commentId}}" data-sub-comment-id="{{item.subCommentId}}">
+          <view class="user-avatar">
+            <image src="{{item.avatar || '/icon/default-avatar.png'}}" mode="aspectFill"></image>
           </view>
           
-          <view class="comment-text">
-            <text>回复了我的评论</text>
-          </view>
-          
-          <view class="reply-content">{{item.content || '无内容'}}</view>
-          
-          <view class="comment-footer">
-            <view class="post-time">{{item.createTime}}</view>
-            <view class="action-btns">
-              <view class="btn">
-                <image src="/icon/comment.png" class="action-icon"></image>
-                <text>回复</text>
-              </view>
-              <view class="btn">
-                <image src="/icon/like.png" class="action-icon"></image>
-                <text>点赞</text>
+          <view class="comment-content">
+            <view class="user-info">
+              <view class="username">{{item.appId === userId ? '我' : (item.appName || '匿名用户')}}</view>
+              <!-- 显示等级 -->
+              <view class="user-badge" wx:if="{{item.grade}}">Lv{{item.grade}}</view>
+              <!-- 如果是父评论的发布者，则显示"楼主" -->
+              <view class="user-badge author-badge" wx:if="{{item.appId === item.parentCommentAppId}}">楼主</view>
+            </view>
+            
+            <view class="comment-text">
+              <text>回复了我的评论</text>
+            </view>
+            
+            <view class="reply-content">{{item.content || '无内容'}}</view>
+            
+            <view class="comment-footer">
+              <view class="post-time">{{item.createTime}}</view>
+              <view class="action-btns">
+                <view class="btn {{item.isLiked ? 'liked' : ''}}" catchtap="likeSubComment" data-id="{{item.subCommentId}}">
+                  <image src="{{item.isLiked ? '/icon/islike.png' : '/icon/like.png'}}"  class="action-icon"></image>
+                  <text>{{item.likes || 0}}</text>
+                </view>
               </view>
             </view>
           </view>
+        </view>
+        
+        <!-- 右侧预览块 -->
+        <view class="preview-block" bindtap="viewOriginalComment" data-comment-id="{{item.commentId}}">
+          <view class="preview-content">{{item.originalCommentContent || '无内容'}}</view>
         </view>
       </view>
     </block>

@@ -98,6 +98,28 @@
   display: flex;
   padding: 24rpx 0;
   border-bottom: 1rpx solid #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+.sub-comment-card.highlighted {
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: scale(1.01);
+  animation: highlightFade 2s ease;
+}
+
+@keyframes highlightFade {
+  0% {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.02);
+  }
+  50% {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: scale(1.01);
+  }
+  100% {
+    background-color: transparent;
+    transform: scale(1);
+  }
 }
 
 .sub-avatar {

@@ -183,8 +183,20 @@ public class CommentServiceImpl implements ICommentService {
                 return List.of(); // 返回空列表
             }
 
+            // 创建帖子ID到帖子的映射，用于快速查找帖子信息
+            final var postMap = userPosts.stream()
+                    .collect(Collectors.toMap(Post::getId, post -> post));
+
             return commentPage.getRecords().stream()
-                    .map(Comment::toCommentInfo)
+                    .map(comment -> {
+                        CommentInfo commentInfo = comment.toCommentInfo();
+                        // 设置帖子标题
+                        Post post = postMap.get(comment.getPostId());
+                        if (post != null) {
+                            commentInfo.setPostTitle(post.getTitle());
+                        }
+                        return commentInfo;
+                    })
                     .collect(Collectors.toList());
 
         } catch (Exception e) {

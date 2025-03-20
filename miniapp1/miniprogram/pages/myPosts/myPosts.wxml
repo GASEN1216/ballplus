@@ -4,7 +4,10 @@
     class="post-list" 
     scroll-y 
     bindscrolltolower="loadMorePosts" 
-    enable-back-to-top>
+    enable-back-to-top
+    refresher-enabled="{{true}}"
+    refresher-triggered="{{loading}}"
+    bindrefresherrefresh="onPullDownRefresh">
     
     <block wx:if="{{posts.length > 0}}">
       <view class="post-item" wx:for="{{posts}}" wx:key="id" bindtap="goToPostDetail" data-id="{{item.id}}">

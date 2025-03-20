@@ -20,14 +20,28 @@ Page({
 
     // 刷新页面
     onPullDownRefresh() {
+        // 保存当前数据
+        const currentPosts = this.data.posts;
+        
+        // 先设置 loading 状态，但不清空数据
         this.setData({
-            posts: [],
             currentPage: 1,
-            loadAll: false
+            loadAll: false,
+            loading: true
         });
-        this.fetchMyPosts(() => {
-            wx.stopPullDownRefresh();
-        });
+
+        // 添加延时，让刷新动画持续时间更合理
+        setTimeout(() => {
+            this.fetchMyPosts((newPosts: any[]) => {
+                // 如果获取新数据失败，恢复原来的数据
+                if (!newPosts || newPosts.length === 0) {
+                    this.setData({
+                        posts: currentPosts
+                    });
+                }
+                wx.stopPullDownRefresh();
+            });
+        }, 500);
     },
 
     // 加载更多帖子
@@ -52,8 +66,6 @@ Page({
             return;
         }
 
-        this.setData({ loading: true });
-
         wx.request({
             url: `${myPostsApp.globalData.url}/user/wx/getMyPosts`,
             method: 'POST',
@@ -73,9 +85,7 @@ Page({
                     // 处理时间格式和其他数据
                     const processedPosts = newPosts.map((post: any) => ({
                         ...post,
-                        // 将 postId 转换为前端使用的 id
                         id: post.postId,
-                        //  
                         createTime: this.formatTime(post.createTime)
                     }));
 
@@ -90,11 +100,16 @@ Page({
                             loadAll: processedPosts.length < pageSize
                         });
                     }
+
+                    // 如果有回调函数，传入新数据
+                    if (callback) callback(processedPosts);
                 } else {
                     wx.showToast({
                         title: res.data.message || '获取失败',
                         icon: 'none'
                     });
+                    // 如果有回调函数，传入空数组表示获取失败
+                    if (callback) callback([]);
                 }
             },
             fail: (err) => {
@@ -103,10 +118,11 @@ Page({
                     title: '网络错误，请重试',
                     icon: 'none'
                 });
+                // 如果有回调函数，传入空数组表示获取失败
+                if (callback) callback([]);
             },
             complete: () => {
                 this.setData({ loading: false });
-                if (callback) callback();
             }
         });
     },

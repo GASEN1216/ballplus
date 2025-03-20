@@ -28,11 +28,14 @@
   <!-- 评论列表 -->
   <view class="comments-container">
     <!-- 添加排序切换按钮 -->
-    <view class="sort-switch" catchtap="toggleSortType">
-      <text class="sort-text">{{sortType === 'hot' ? '最热' : '最新'}}</text>
+    <view class="sort-header">
+      <text class="comment-count">全部回复 ({{comments.length}})</text>
+      <view class="sort-switch" catchtap="toggleSortType">
+        <text class="sort-text">{{sortType === 'hot' ? '最热' : '最新'}}</text>
+      </view>
     </view>
     <block wx:for="{{visibleComments}}" wx:key="commentId">
-      <view class="comment-block">
+      <view class="comment-block {{item.isHighlighted ? 'highlighted' : ''}}" id="comment-{{item.commentId}}">
         <!-- 主评论 -->
         <view class="comment-item">
           <image class="comment-avatar" catchtap="goToInfo" src="{{item.avatar}}" data-userid="{{item.appId}}" />

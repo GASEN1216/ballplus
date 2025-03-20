@@ -44,6 +44,7 @@ page {
 
 /* 用户文本信息（昵称和个人信息） */
 .user-text {
+  width: 30%;
   display: flex;
   flex-direction: column;
   justify-content: center;

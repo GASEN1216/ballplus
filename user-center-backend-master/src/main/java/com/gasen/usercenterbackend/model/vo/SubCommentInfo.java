@@ -5,36 +5,33 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class CommentInfo implements Serializable {
-    private static final long serialVersionUID = 1L;
-    
-    // 评论ID
+public class SubCommentInfo {
+    // 子评论ID
+    private Long subCommentId;
+    // 父评论ID
     private Long commentId;
-    // 所属帖子ID
-    private Long postId;
-    // 帖子标题
-    private String postTitle;
-    // 发布评论的用户ID
-    private Integer appId;
-    // 发布评论的用户名
+    // 父评论发布者ID
+    private Integer parentCommentAppId;
+    // 用户名
     private String appName;
+    // 用户ID
+    private Integer appId;
     // 用户头像
     private String avatar;
     // 用户等级
     private Integer grade;
-    // 评论内容
+    // 子评论内容
     private String content;
+    // 父评论内容
+    private String originalCommentContent;
     // 点赞数
-    private int likes;
-    // 评论数
-    private int comments;
+    private Integer likes;
     // 创建时间
     private LocalDateTime createTime;
-}
+} 

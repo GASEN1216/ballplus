@@ -4,6 +4,7 @@ import com.gasen.usercenterbackend.model.dao.SubComment;
 import com.gasen.usercenterbackend.model.dto.AddSubComment;
 import com.gasen.usercenterbackend.model.dto.UpdateSubComment;
 import com.gasen.usercenterbackend.model.vo.SubCommentDetail;
+import com.gasen.usercenterbackend.model.vo.SubCommentInfo;
 
 import java.util.List;
 
@@ -26,5 +27,5 @@ public interface ISubCommentService extends ILikesService {
      * @param pageSize 每页数量
      * @return 回复详情列表
      */
-    List<SubCommentDetail> getRepliesByCommentUserId(Integer userId, Integer pageNum, Integer pageSize);
+    List<SubCommentInfo> getRepliesByCommentUserId(Integer userId, Integer pageNum, Integer pageSize);
 }

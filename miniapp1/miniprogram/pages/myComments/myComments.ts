@@ -10,14 +10,68 @@ Page({
         pageSize: 10,
         loading: false,
         loadAll: false,
-        userId: ''
+        userId: -1,
+        likedComments: [] as string[], // 记录已点赞的评论
+        likedSubComments: [] as string[] // 记录已点赞的子评论
     },
 
     onLoad() {
         this.setData({
-            userId: myCommentsApp.globalData.currentUser.id
+            userId: Number(myCommentsApp.globalData.currentUser.id)
         });
+        // 从本地存储加载点赞记录
+        this.loadLikedRecords();
         this.fetchMyComments();
+    },
+
+    onShow() {
+        // 每次页面显示时重新加载点赞记录
+        this.loadLikedRecords();
+        this.updateLikeStatus();
+    },
+
+    // 加载点赞记录
+    loadLikedRecords() {
+        const likedComments = wx.getStorageSync('likedComments') || [];
+        const likedSubComments = wx.getStorageSync('likedSubComments') || [];
+        this.setData({
+            likedComments: likedComments,
+            likedSubComments: likedSubComments
+        });
+    },
+
+    // 保存点赞记录 - 全局共享存储
+    saveLikedRecords() {
+        wx.setStorageSync('likedComments', this.data.likedComments);
+        wx.setStorageSync('likedSubComments', this.data.likedSubComments);
+    },
+
+    // 更新数据中的点赞状态
+    updateLikeStatus() {
+        if (!this.data.postComments.length && !this.data.commentReplies.length) {
+            return;
+        }
+
+        // 更新帖子评论的点赞状态
+        const updatedPostComments = this.data.postComments.map(comment => {
+            return {
+                ...comment,
+                isLiked: this.data.likedComments.includes(comment.commentId)
+            };
+        });
+
+        // 更新评论回复的点赞状态
+        const updatedCommentReplies = this.data.commentReplies.map(reply => {
+            return {
+                ...reply,
+                isLiked: this.data.likedSubComments.includes(reply.subCommentId)
+            };
+        });
+
+        this.setData({
+            postComments: updatedPostComments,
+            commentReplies: updatedCommentReplies
+        });
     },
 
     // 切换选项卡
@@ -108,7 +162,11 @@ Page({
                     const processedComments = newComments.map((comment: any) => {
                         const processed = {
                             ...comment,
-                            createTime: this.formatTime(comment.createTime)
+                            createTime: this.formatTime(comment.createTime),
+                            // 添加点赞状态
+                            isLiked: activeTab === 'post' 
+                                ? this.data.likedComments.includes(comment.commentId)
+                                : this.data.likedSubComments.includes(comment.subCommentId)
                         };
 
                         // 如果是评论回复，添加 commentId 字段用于导航
@@ -176,9 +234,18 @@ Page({
         });
     },
 
+    // 跳转到帖子详情
+    goToPostDetail(e: any) {
+        const postId = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: `/pages/postDetail/postDetail?id=${postId}`
+        });
+    },
+
     // 跳转到评论详情
     goToCommentDetail(e: any) {
         const commentId = e.currentTarget.dataset.commentId;
+        const subCommentId = e.currentTarget.dataset.subCommentId;
 
         // 根据 commentId 获取评论详情，然后跳转
         wx.request({
@@ -192,13 +259,23 @@ Page({
             success: (res: any) => {
                 if (res.statusCode === 200 && res.data.code === 0) {
                     const comment = res.data.data;
+                    
+                    // 格式化评论数据中的时间
+                    const formattedComment = {
+                        ...comment,
+                        createTime: this.formatTime(comment.createTime),
+                        subComments: comment.subComments ? comment.subComments.map(subComment => ({
+                            ...subComment,
+                            createTime: this.formatTime(subComment.createTime)
+                        })) : []
+                    };
 
                     // 跳转到评论详情页
                     wx.navigateTo({
-                        url: `/pages/commentDetail/commentDetail?id=${commentId}`,
+                        url: `/pages/commentDetail/commentDetail?subCommentId=${subCommentId}`,
                         success: function (res) {
-                            // 将评论数据传递给评论详情页
-                            res.eventChannel.emit('acceptDataFromOpenerPage', { comment: comment });
+                            // 将格式化后的评论数据传递给评论详情页
+                            res.eventChannel.emit('acceptDataFromOpenerPage', { comment: formattedComment });
                         }
                     });
                 } else {
@@ -214,6 +291,128 @@ Page({
                     title: '网络错误，请重试',
                     icon: 'none'
                 });
+            }
+        });
+    },
+
+    // 查看原评论
+    viewOriginalComment(e: any) {
+        const commentId = e.currentTarget.dataset.commentId;
+        
+        // 直接查看评论详情
+        this.goToCommentDetail(e);
+    },
+
+    // 点赞评论
+    likeComment(e: any) {
+        const commentId = e.currentTarget.dataset.id;
+        
+        // 检查是否已经点赞
+        if (this.data.likedComments.includes(commentId)) {
+            wx.showToast({
+                title: '已经点赞过了',
+                icon: 'none'
+            });
+            return;
+        }
+
+        wx.request({
+            url: `${myCommentsApp.globalData.url}/user/wx/likeComment`,
+            method: 'POST',
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-Token': myCommentsApp.globalData.currentUser.token
+            },
+            data: {
+                commentId: commentId
+            },
+            success: (res: any) => {
+                if (res.statusCode === 200 && res.data.code === 0) {
+                    // 更新评论点赞数
+                    const updatedComments = this.data.postComments.map(comment => {
+                        if (comment.commentId === commentId) {
+                            return {
+                                ...comment,
+                                likes: (comment.likes || 0) + 1,
+                                isLiked: true
+                            };
+                        }
+                        return comment;
+                    });
+                    
+                    // 更新点赞记录
+                    const newLikedComments = [...this.data.likedComments, commentId];
+                    
+                    this.setData({
+                        postComments: updatedComments,
+                        likedComments: newLikedComments
+                    });
+                    
+                    // 保存到本地存储
+                    this.saveLikedRecords();
+                    
+                    wx.showToast({
+                        title: '点赞成功',
+                        icon: 'success'
+                    });
+                }
+            }
+        });
+    },
+
+    // 点赞子评论
+    likeSubComment(e: any) {
+        const subCommentId = e.currentTarget.dataset.id;
+        
+        // 检查是否已经点赞
+        if (this.data.likedSubComments.includes(subCommentId)) {
+            wx.showToast({
+                title: '已经点赞过了',
+                icon: 'none'
+            });
+            return;
+        }
+
+        wx.request({
+            url: `${myCommentsApp.globalData.url}/user/wx/likeSubComment`,
+            method: 'POST',
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-Token': myCommentsApp.globalData.currentUser.token
+            },
+            data: {
+                subCommentId: subCommentId
+            },
+            success: (res: any) => {
+                if (res.statusCode === 200 && res.data.code === 0) {
+                    // 更新子评论点赞数
+                    const updatedReplies = this.data.commentReplies.map(reply => {
+                        if (reply.subCommentId === subCommentId) {
+                            return {
+                                ...reply,
+                                likes: (reply.likes || 0) + 1,
+                                isLiked: true
+                            };
+                        }
+                        return reply;
+                    });
+                    
+                    // 更新点赞记录
+                    const newLikedSubComments = [...this.data.likedSubComments, subCommentId];
+                    
+                    this.setData({
+                        commentReplies: updatedReplies,
+                        likedSubComments: newLikedSubComments
+                    });
+                    
+                    // 保存到本地存储
+                    this.saveLikedRecords();
+                    
+                    wx.showToast({
+                        title: '点赞成功',
+                        icon: 'success'
+                    });
+                }
             }
         });
     },

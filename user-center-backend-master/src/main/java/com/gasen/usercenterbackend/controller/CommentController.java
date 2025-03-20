@@ -8,6 +8,7 @@ import com.gasen.usercenterbackend.model.vo.CommentInfo;
 import com.gasen.usercenterbackend.model.dto.UpdateComment;
 import com.gasen.usercenterbackend.model.dao.Comment;
 import com.gasen.usercenterbackend.model.vo.SubCommentDetail;
+import com.gasen.usercenterbackend.model.vo.SubCommentInfo;
 import com.gasen.usercenterbackend.service.ICommentService;
 import com.gasen.usercenterbackend.service.IPostService;
 import com.gasen.usercenterbackend.service.ISubCommentService;
@@ -216,7 +217,7 @@ public class CommentController {
             }
 
             // 获取用户评论收到的回复
-            List<SubCommentDetail> replies = subCommentService.getRepliesByCommentUserId(userId, pageNum, pageSize);
+            List<SubCommentInfo> replies = subCommentService.getRepliesByCommentUserId(userId, pageNum, pageSize);
 
             if (replies == null) {
                 return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "获取回复失败！");
