@@ -207,6 +207,7 @@ Page({
         //从未存在会话进入
         if (!this.data.isConversation) {
             let to = e.currentTarget.dataset.to;
+            console.log(to);
             let type = e.currentTarget.dataset.type;
             let path = type === wx.GoEasy.IM_SCENE.PRIVATE ?
                 '../chat/privateChat/privateChat?to=' + JSON.stringify(to) :

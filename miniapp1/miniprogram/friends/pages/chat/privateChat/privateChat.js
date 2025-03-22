@@ -1,7 +1,7 @@
 /* privateChat.js */
 import EmojiDecoder from '../../../static/lib/EmojiDecoder';
 import restApi from '../../../static/lib/restapi';
-import {formatDate} from '../../../static/lib/utils';
+import { formatDate } from '../../../static/lib/utils';
 
 let emojiUrl = 'https://imgcache.qq.com/open/qcloud/tim/assets/emoji/';
 let emojiMap = {
@@ -63,6 +63,10 @@ Page({
         this.loadHistoryMessage(false);
     },
     onLoad: function (options) {
+        if (wx.goEasy.getConnectionStatus() === 'disconnected') {
+            this.connectGoEasy(); //连接goeasy
+            this.subscribeGroup(); //建立连接后，就应该订阅群聊消息，避免漏掉
+        }
         // 获取初始数据并加载
         let friend = JSON.parse(options.to);
         let currentUser = app.globalData.currentUser;
@@ -89,6 +93,25 @@ Page({
         wx.goEasy.im.off(wx.GoEasy.IM_EVENT.PRIVATE_MESSAGE_RECEIVED, this.onMessageReceived);
         wx.goEasy.im.off(wx.GoEasy.IM_EVENT.MESSAGE_DELETED, this.onMessageDeleted);
         wx.goEasy.im.off(wx.GoEasy.IM_EVENT.MESSAGE_RECALLED, this.onMessageRecalled);
+    },
+    connectGoEasy() {
+        let currentUser = app.globalData.currentUser;
+        wx.goEasy.connect({
+            id: currentUser.id,
+            data: {
+                name: currentUser.name,
+                avatar: currentUser.avatar
+            },
+            onSuccess: () => {
+                console.log('GoEasy connect successfully.')
+            },
+            onFailed: (error) => {
+                console.log('Failed to connect GoEasy, code:' + error.code + ',error:' + error.content);
+            },
+            onProgress: (attempts) => {
+                console.log('GoEasy is connecting', attempts);
+            }
+        });
     },
     initialGoEasyListeners() {
         // 监听私聊消息
@@ -141,7 +164,7 @@ Page({
     onMessageRecalled(recalledMessages) {
         this.renderMessages(this.data.history.messages);
     },
-    initialAudioPlayer () {
+    initialAudioPlayer() {
         this.setData({
             ['audioPlayer.innerAudioContext']: wx.createInnerAudioContext(),
         });
@@ -310,7 +333,7 @@ Page({
                 }
             });
         }
-        this.setData({text: ''});
+        this.setData({ text: '' });
     },
     sendImageMessage() {
         // 发送图片
@@ -517,7 +540,7 @@ Page({
                 message.size = (message.payload.size / 1024).toFixed(2);
             }
             if (message.type === 'audio') {
-                message.width = Math.ceil(message.payload.duration)*7+80+'rpx';
+                message.width = Math.ceil(message.payload.duration) * 7 + 80 + 'rpx';
                 message.finalDuration = Math.ceil(message.payload.duration)
             }
         });
@@ -539,7 +562,7 @@ Page({
     setContent(e) {
         // 监听输入的消息
         let text = e.detail.value;
-        this.setData({text: text});
+        this.setData({ text: text });
     },
     switchAudioKeyboard() {
         // 语音录制按钮和键盘输入的切换
@@ -694,9 +717,9 @@ Page({
     },
 
     goToInfo(e) {
-      const userId = e.currentTarget.dataset.userid; // 获取传递的 userId
-      wx.navigateTo({
-        url: `../../../../pages/profile/profile?userId=${userId}`, 
-      });
+        const userId = e.currentTarget.dataset.userid; // 获取传递的 userId
+        wx.navigateTo({
+            url: `../../../../pages/profile/profile?userId=${userId}`,
+        });
     },
 })

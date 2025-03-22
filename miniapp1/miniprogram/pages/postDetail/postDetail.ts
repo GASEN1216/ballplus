@@ -27,7 +27,7 @@ Page({
 
     onLoad(options) {
         const { id, commentId } = options;
-        this.setData({ 
+        this.setData({
             postId: id,
             targetCommentId: commentId
         });
@@ -156,10 +156,10 @@ Page({
                         this.setData({
                             islike: wx.getStorageSync(`likedPost_${postDetail.id}`) || false
                         });
-                        
+
                         // 立即更新评论点赞状态
                         this.updateLikeStatus();
-                        
+
                         resolve(true);
                     } else {
                         wx.showToast({ title: res.data.message, icon: 'none' });
@@ -468,7 +468,7 @@ Page({
     // 点赞评论
     likeComment(e: any) {
         const commentId = e.currentTarget.dataset.id;
-        
+
         // 检查是否已经点赞
         if (this.data.likedComments.includes(commentId.toString())) {
             wx.showToast({
@@ -575,11 +575,31 @@ Page({
         });
     },
 
-    sharePost() {
-        console.log('分享帖子');
+    // 分享给朋友
+    onShareAppMessage() {
+        const post = this.data.post;
+
+        return {
+            title: post.title || '来看看这个有趣的帖子',
+            path: `/pages/postDetail/postDetail?id=${this.data.postId}`,
+            imageUrl: post.image || '', // 如果帖子有图片则使用，否则使用默认图片
+            success: function () {
+                wx.showToast({
+                    title: '分享成功',
+                    icon: 'success',
+                    duration: 2000
+                });
+            },
+            fail: function () {
+                wx.showToast({
+                    title: '分享失败',
+                    icon: 'none',
+                    duration: 2000
+                });
+            }
+        };
     },
 
-    // 点击图片预览
     previewImage(e: any) {
         const imageUrl = e.currentTarget.dataset.url;
         wx.previewImage({
@@ -624,14 +644,14 @@ Page({
                         scrollTop: res[1].scrollTop + res[0].top - 100, // 偏移量，让评论显示在稍微靠上的位置
                         duration: 300
                     });
-                    
+
                     // 添加高亮动画
                     this.highlightComment(commentId);
                 }
             });
         }, 100);
     },
-    
+
     // 高亮显示评论
     highlightComment(commentId) {
         // 设置高亮状态
@@ -644,12 +664,12 @@ Page({
             }
             return comment;
         });
-        
+
         this.setData({
             comments: comments,
             visibleComments: comments.slice(0, this.data.pageSize * this.data.currentPage)
         });
-        
+
         // 2秒后取消高亮
         setTimeout(() => {
             const resetComments = this.data.comments.map(comment => {
@@ -661,7 +681,7 @@ Page({
                 }
                 return comment;
             });
-            
+
             this.setData({
                 comments: resetComments,
                 visibleComments: resetComments.slice(0, this.data.pageSize * this.data.currentPage)

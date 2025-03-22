@@ -107,4 +107,19 @@ public class FriendsController {
             return ResultUtils.success("添加好友成功");
         return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"添加好友失败");
     }
+    
+    @Operation(summary = "检查用户之间的好友关系")
+    @PostMapping("/checkFriendship")
+    public BaseResponse checkFriendship(@RequestParam(value = "userId") int userId, @RequestParam(value = "friendId") int friendId) {
+        try {
+            // 调用friendsService中的ifFriends方法检查好友关系
+            boolean isFriend = friendsService.ifFriends(userId, friendId);
+            
+            // 返回好友关系状态（true/false）
+            return ResultUtils.success(isFriend);
+        } catch (Exception e) {
+            log.error("检查好友关系出错", e);
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "检查好友关系失败");
+        }
+    }
 }

@@ -240,9 +240,9 @@ public class UserController {
     public BaseResponse updatewxUser(@RequestBody wxUser user, HttpServletRequest request) {
         //判断是否是用户自己，是的话也可以进入修改
         //通过token从redis缓存中拿取openid+sessionid，然后分割字符串取得openid
-        String os = (String) redisTemplate.opsForValue().get(user.getToken());
+        String os = (String) redisTemplate.opsForValue().get(REDIS_USER_TOKEN+user.getToken());
         if(os==null) return ResultUtils.error(INVALID_TOKEN);
-        String openid = os.split("\\+")[0];
+        String openid = os.split("\\+")[0].split(":")[3];
         //通过openid查询数据库得到用户的id，再和传过来的id进行比较，如果相同则可以修改，如果不同则不可以修改
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
         Integer id = userMapper.selectOne(userLambdaQueryWrapper.eq(User::getOpenId, openid)).getId();

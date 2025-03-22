@@ -37,6 +37,7 @@ page {
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .info-item {
@@ -57,4 +58,43 @@ page {
 
 .value {
   color: #666;
+}
+
+/* 新的按钮区域样式 */
+.action-area {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.action-btn {
+  height: 44px;
+  line-height: 44px;
+  font-size: 16px;
+  border-radius: 22px;
+  padding: 0;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-btn, .message-btn {
+  flex: 1;
+  margin-right: 10px;
+  background: #4080ff;
+  color: white;
+}
+
+.message-btn {
+  background: #3086e4;
+}
+
+.share-btn {
+  flex: 1;
+  background: #3cb371;
+  color: white;
+}
+
+.full-width {
+  width: 100%;
 }

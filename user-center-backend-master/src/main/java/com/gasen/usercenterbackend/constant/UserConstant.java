@@ -2,6 +2,8 @@ package com.gasen.usercenterbackend.constant;
 
 public interface UserConstant {
 
+    String PROJECT_NAME = "ballplus";
+
     String USER_LOGIN_IN = "userLoginIn";
 
     int ADMIN = 1;

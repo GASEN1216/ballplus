@@ -44,6 +44,7 @@ page {
 /* 活动列表样式 */
 .activity-list {
   margin-top: 10px;
+  width: 100%;
 }
 
 .activity-card {

@@ -37,4 +37,25 @@
       <text class="value">{{userData.description || "这个人很神秘，什么都没留下~"}}</text>
     </view>
   </view>
+  
+  <!-- 操作按钮 -->
+  <view class="action-area">
+    <!-- 非自己的资料页 -->
+    <block wx:if="{{!isSelf}}">
+      <!-- 已是好友显示发送消息 -->
+      <block wx:if="{{isFriend}}">
+        <button class="action-btn message-btn" bindtap="sendMessage">发送消息</button>
+      </block>
+      <!-- 非好友显示添加好友 -->
+      <block wx:else>
+        <button class="action-btn add-btn" bindtap="addFriend">添加好友</button>
+      </block>
+      <button class="action-btn share-btn" open-type="share">分享名片</button>
+    </block>
+    
+    <!-- 自己的资料页只显示分享名片 -->
+    <block wx:else>
+      <button class="action-btn share-btn full-width" open-type="share">分享名片</button>
+    </block>
+  </view>
 </view>

@@ -39,10 +39,6 @@ Page({
         });
       })
       .catch(err => {
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none'
-        });
         console.error('上传错误:', err);
       });
   },
@@ -147,6 +143,8 @@ Page({
         'Content-Type': 'application/json', // 设置请求头，通常为 JSON 格式
       },
       success: (res) => {
+        console.log(res);
+        
         if (res.statusCode === 200) {
           wx.showToast({
             title: '保存成功',

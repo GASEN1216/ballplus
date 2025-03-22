@@ -32,7 +32,7 @@ public class WechatUtil {
 
     private static final String WX_SEND_TEMPLATE_URL = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=";
 
-    private static final String WX_ACCESS_TOKEN_KEY = "wechat:access_token"; // Redis 缓存 key
+    private static final String WX_ACCESS_TOKEN_KEY = "ballplus:wechat:access_token"; // Redis 缓存 key
 
     private static RedisTemplate<String, Object> redisTemplate;
 
