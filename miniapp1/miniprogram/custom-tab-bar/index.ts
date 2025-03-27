@@ -9,20 +9,20 @@ Component({
       {
         "pagePath": "../index/index",
         "text": "首页",
-        "iconPath": "../icon/home-icon.png", 
-        "selectedIconPath": "../icon/home-icon-selected.png" 
+        "iconPath": "http://sunsetchat.top/icon/home-icon.png", 
+        "selectedIconPath": "http://sunsetchat.top/icon/home-icon-selected.png" 
       },
       {
         "pagePath": "../profile/profile",
         "text": "个人资料",
-        "iconPath": "../icon/profile-icon.png", 
-        "selectedIconPath": "../icon/profile-icon-selected.png" 
+        "iconPath": "http://sunsetchat.top/icon/profile-icon.png", 
+        "selectedIconPath": "http://sunsetchat.top/icon/profile-icon-selected.png" 
       },
       {
         "pagePath": "../friends/friends",
         "text": "好友管理",
-        "iconPath": "../icon/mine-icon.png", 
-        "selectedIconPath": "../icon/friends-icon-selected.png" 
+        "iconPath": "http://sunsetchat.top/icon/mine-icon.png", 
+        "selectedIconPath": "http://sunsetchat.top/icon/friends-icon-selected.png" 
       }
     ]
   },

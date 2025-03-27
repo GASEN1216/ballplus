@@ -4,12 +4,15 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gasen.usercenterbackend.mapper.UserEventMapper;
+import com.gasen.usercenterbackend.mapper.UserMapper;
+import com.gasen.usercenterbackend.model.dao.User;
 import com.gasen.usercenterbackend.model.dao.UserEvent;
 import com.gasen.usercenterbackend.service.IUserEventService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,6 +21,9 @@ public class UserEventServiceImpl implements IUserEventService {
 
     @Resource
     private UserEventMapper userEventMapper;
+
+    @Resource
+    private UserMapper userMapper;
 
     @Override
     public Boolean createUserEvent(Integer appId, Long eventId) {
@@ -41,7 +47,33 @@ public class UserEventServiceImpl implements IUserEventService {
     }
 
     @Override
+    public List<User> getEventParticipants(Long eventId) {
+        // 获取参与活动的所有用户ID
+        List<Integer> userIds = getUserIdsByEventId(eventId);
+        if (userIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+        // 通过用户ID列表查询用户信息
+        return userMapper.selectBatchIds(userIds);
+    }
+
+    @Override
     public boolean quitEvent(Integer userId, Long eventId) {
         return userEventMapper.delete(new QueryWrapper<UserEvent>().eq("user_id", userId).eq("event_id", eventId)) > 0;
+    }
+
+    /**
+     * 判断用户是否参与了活动
+     * @param userId 用户ID
+     * @param eventId 活动ID
+     * @return 是否参与
+     */
+    @Override
+    public boolean isUserParticipated(Integer userId, Long eventId) {
+        QueryWrapper<UserEvent> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userId)
+                .eq("event_id", eventId);
+        
+        return userEventMapper.selectOne(queryWrapper) != null;
     }
 }

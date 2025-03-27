@@ -31,15 +31,15 @@
                     <view class="resource-description">{{item.description}}</view>
                     <view class="resource-meta">
                         <view class="meta-item">
-                            <image class="meta-icon" src="/icon/views.png" />
+                            <image class="meta-icon" src="http://sunsetchat.top/icon/views.png" />
                             <text>{{item.views}}</text>
                         </view>
                         <view class="meta-item">
-                            <image class="meta-icon" src="/icon/like.png" />
+                            <image class="meta-icon" src="http://sunsetchat.top/icon/like.png" />
                             <text>{{item.likes}}</text>
                         </view>
                         <view class="favorite-btn" catchtap="toggleFavorite" data-id="{{item.id}}">
-                            <image class="favorite-icon" src="{{item.isFavorite ? '/icon/islikeRes.png' : '/icon/likeRes.png'}}" />
+                            <image class="favorite-icon" src="{{item.isFavorite ? 'http://sunsetchat.top/icon/islikeRes.png' : 'http://sunsetchat.top/icon/likeRes.png'}}" />
                         </view>
                     </view>
                 </view>

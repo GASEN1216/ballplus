@@ -15,5 +15,5 @@ public class WXConfig {
     private String salt;
     private String signUpTemplateId;
     private String startReminderTemplateId;
-
+    private String cancelNotificationTemplateId;
 }

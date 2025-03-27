@@ -42,4 +42,13 @@ public class RabbitMQConfig {
     public Jackson2JsonMessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
+
+    /**
+     * 投诉消息队列
+     */
+    @Bean
+    public Queue complaintQueue() {
+        // durable=true 表示队列持久化
+        return new Queue("complaint.queue", true);
+    }
 }

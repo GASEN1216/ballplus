@@ -21,7 +21,8 @@ public enum ErrorCode {
     MATCH_NO_EVENTS(1012, "没有匹配的活动", ""),
     SEND_NOTIFICATION_FAILED(1013, "发送活动通知失败", ""),
     POST_NOT_FOUND(1014, "找不到帖子", ""),
-    UPDATE_POST_LIKES_FAILED(1015, "更新点赞数失败", "");
+    UPDATE_POST_LIKES_FAILED(1015, "更新点赞数失败", ""),
+    NO_AUTH_ERROR(1016, "无权限", "");
 
 
     private final int code;

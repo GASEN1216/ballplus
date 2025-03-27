@@ -141,32 +141,6 @@
   line-height: 20px;
 }
 
-.get-phone-button {
-  min-width: 120px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background: #f8f9fa;
-  border: 1px solid #e0e3e7;
-  border-radius: 8px;
-  color: #666;
-  font-size: 14px;
-  padding: 0 16px;
-  transition: all 0.3s ease;
-}
-
-.get-phone-button:active {
-  background: #edf5ff;
-  border-color: #4a90e2;
-  color: #4a90e2;
-}
-
-.phone-icon {
-  font-size: 16px;
-}
-
 /* 更多设置区域 */
 .more-settings {
   margin-bottom: 20px;

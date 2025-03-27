@@ -37,6 +37,8 @@ public class Post {
     @TableField(update = "now()")
     private LocalDateTime updateTime;
 
+    private LocalDateTime updateContentTime;
+
     public PostDetail toPostDetail() {
         return new PostDetail()
                 .setId(this.id)
@@ -50,7 +52,8 @@ public class Post {
                 .setComments(this.comments)
                 .setPicture(this.picture)
                 .setCreateTime(this.createTime)
-                .setUpdateTime(this.updateTime);
+                .setUpdateTime(this.updateTime)
+                .setUpdateContentTime(this.updateContentTime);
     }
 
     public PostInfo toPostInfo() {
@@ -66,6 +69,7 @@ public class Post {
                 .setComments(this.comments)
                 .setPicture(this.picture)
                 .setCreateTime(this.createTime)
-                .setUpdateTime(this.updateTime);
+                .setUpdateTime(this.updateTime)
+                .setUpdateContentTime(this.updateContentTime);
     }
 }

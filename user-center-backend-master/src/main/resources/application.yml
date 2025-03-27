@@ -13,6 +13,16 @@ spring:
   rabbitmq:
     host: localhost
     port: 5672
+    virtual-host: /
+    # 消费者配置
+    listener:
+      simple:
+        # 自动确认
+        acknowledge-mode: auto
+        # 最小消费者数量
+        concurrency: 1
+        # 最大消费者数量
+        max-concurrency: 5
 
 like:
   exchange: likeExchange
@@ -31,6 +41,7 @@ wx:
   appsecret: 59e91abc334dfc64b8a6536db57df38b
   signUpTemplateId: 0y74iVIHCLCJJeS-zFL1Q90cFJNjNqQv8TzjMw-cuIQ
   startReminderTemplateId: LVVo1OQ_oe6-hFSJ1yZtsB8odWdA4B8Qg5OdwBVVYWc
+  cancelNotificationTemplateId: HDfFvsUk1yKMyiqouzGoigEoIQ9aGzJ7dned5iowXoU
   salt: asdcaefevlnshgvihwoieunoviwVEDFXBNDHSDFdfsfsegsefasgaefaf
 
 qiniu:
@@ -41,3 +52,5 @@ qiniu:
 gd:
   key: 6509cb9d83b3c18f50d9d6a55a205997
 
+deepseek:
+  key: sk-92f7d87ae526490e9b0c7deedd5164d3

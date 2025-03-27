@@ -84,7 +84,7 @@ Page({
                     welcomeSlide,
                     {
                         url: 'http://sunsetchat.top/index/post.png',
-                        link: `../../pages/postDetail/postDetail?id=${topPost.id}`,
+                        link: `/forumPackage/pages/postDetail/postDetail?id=${topPost.id}`,
                         title: topPost.title
                     },
                     {
@@ -150,7 +150,7 @@ Page({
     onCarouselItemClick(e: any) {
         const index = e.currentTarget.dataset.index;
         const item = this.data.carouselImages[index];
-        
+
         if (item.isWelcome) {
             // 显示欢迎动画
             this.setData({ showWelcomeAnimation: true });
@@ -159,7 +159,7 @@ Page({
             }, 1000); // 3秒后关闭动画
             return;
         }
-        
+
         if (!item.link) {
             wx.showToast({
                 title: '链接无效',
@@ -325,6 +325,16 @@ Page({
                     if (!newActivities || newActivities.length === 0) {
                         return; // 停止后续处理
                     }
+                    // 只显示公开活动（visibility=1），过滤掉私人活动（visibility=0）
+                    newActivities = newActivities.filter((activity: any) => activity.visibility === true);
+
+                    if (newActivities.length === 0) {
+                        this.setData({
+                            activities: [],
+                            filteredActivities: []
+                        });
+                        return; // 如果过滤后没有活动，停止后续处理
+                    }
 
                     // 格式化日期和时间
                     newActivities = newActivities.map((activity: any) => {
@@ -430,10 +440,35 @@ Page({
     // 跳转到学习资源页面
     navigateToResources() {
         if (!this.checkLogin()) return;
-        
+
         wx.navigateTo({
             url: `${this.data.studyPath}/pages/resources/resources`
         });
+    },
+
+    // 分享给朋友
+    onShareAppMessage() {
+        return {
+            title: '邀您一起来参与精彩的活动！',
+            path: '/pages/index/index',
+            imageUrl: this.data.carouselImages.length > 0 ? this.data.carouselImages[0].url : '',
+            success: function () {
+                wx.showToast({
+                    title: '分享成功',
+                    icon: 'success',
+                    duration: 2000
+                });
+            }
+        };
+    },
+
+    // 分享到朋友圈
+    onShareTimeline() {
+        return {
+            title: '邀您一起来参与精彩的活动！',
+            query: '',
+            imageUrl: this.data.carouselImages.length > 0 ? this.data.carouselImages[0].url : ''
+        };
     },
 
 });

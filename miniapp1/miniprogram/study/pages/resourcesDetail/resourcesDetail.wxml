@@ -13,16 +13,16 @@
       <view class="interaction">
         <view class="stats">
           <view class="stat-item">
-            <image class="icon" src="/icon/views.png" />
+            <image class="icon" src="http://sunsetchat.top/icon/views.png" />
             <text>{{resource.views}}</text>
           </view>
           <view class="stat-item" bindtap="likeResource">
-            <image class="icon" src="/icon/like.png" />
+            <image class="icon" src="http://sunsetchat.top/icon/like.png" />
             <text>{{resource.likes}}</text>
           </view>
         </view>
         <view class="favorite-btn {{resource.isFavorite ? 'active' : ''}}" bindtap="toggleFavorite">
-          <image class="icon" src="{{resource.isFavorite ? '/icon/islikeRes.png' : '/icon/likeRes.png'}}" />
+          <image class="icon" src="{{resource.isFavorite ? 'http://sunsetchat.top/icon/islikeRes.png' : 'http://sunsetchat.top/icon/likeRes.png'}}" />
         </view>
       </view>
     </view>

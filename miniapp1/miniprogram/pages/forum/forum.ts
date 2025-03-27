@@ -122,7 +122,7 @@ Page({
 
         const postId = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: `/pages/postDetail/postDetail?id=${postId}`
+            url: `/forumPackage/pages/postDetail/postDetail?id=${postId}`
         });
     },
 
@@ -164,7 +164,7 @@ Page({
 
         // 跳转到独立的发帖页面
         wx.navigateTo({
-            url: '/pages/createPost/createPost'
+            url: '/forumPackage/pages/createPost/createPost'
         });
     },
 
@@ -310,11 +310,34 @@ Page({
 
     // 修改跳转到用户信息的方法
     goToInfo(e: any) {
-        if (!this.checkLogin()) return;
-
-        const userId = e.currentTarget.dataset.userid;
+        const userId = e.currentTarget.dataset.userid; // 获取传递的id
         wx.navigateTo({
             url: `../profile/profile?userId=${userId}`,
         });
     },
+
+    // 分享给朋友
+    onShareAppMessage() {
+        return {
+            title: '来球坛畅所欲言，分享你的热爱！',
+            path: '/pages/forum/forum',
+            imageUrl: this.data.posts.length > 0 && this.data.posts[0].image ? this.data.posts[0].image : '',
+            success: function () {
+                wx.showToast({
+                    title: '分享成功',
+                    icon: 'success',
+                    duration: 2000
+                });
+            }
+        };
+    },
+
+    // 分享到朋友圈
+    onShareTimeline() {
+        return {
+            title: '来球坛畅所欲言，分享你的热爱！',
+            query: '',
+            imageUrl: this.data.posts.length > 0 && this.data.posts[0].image ? this.data.posts[0].image : ''
+        };
+    }
 });

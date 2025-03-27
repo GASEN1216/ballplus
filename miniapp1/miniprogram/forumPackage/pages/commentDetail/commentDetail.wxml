@@ -1,0 +1,72 @@
+<view class="comment-detail-container" bindtap="closeReplyPopup">
+
+  <!-- 主评论 -->
+  <view class="main-comment" catchtap="preventBubble">
+    <image class="main-avatar" src="{{mainComment.avatar}}" mode="aspectFill" />
+    <view class="main-info">
+      <view class="main-header">
+        <text class="main-name">{{mainComment.appName}}</text>
+        <text class="level-text">LV.{{mainComment.grade}}</text>
+      </view>
+      <text class="main-time">{{mainComment.createTime}}</text>
+      <text class="main-content">{{mainComment.content}}</text>
+    </view>
+  </view>
+
+  <!-- 分割线 -->
+  <view class="divider"></view>
+
+  <!-- 子评论 -->
+  <view class="sub-comments" catchtap="preventBubble">
+    <text class="sub-comments-title">全部回复 ({{subComments.length}})</text>
+    <block wx:for="{{subComments}}" wx:key="subCommentId">
+      <view class="sub-comment-card {{item.isHighlighted ? 'highlighted' : ''}}" id="sub-comment-{{item.subCommentId}}">
+        <image class="sub-avatar" src="{{item.avatar}}" mode="aspectFill" />
+        <view class="sub-info">
+          <view class="sub-header">
+            <text class="sub-name">{{item.appName}}</text>
+            <text class="level-text">LV.{{item.grade}}</text>
+            <view class="sub-actions">
+              <image class="icon-button-small" 
+                     src="{{item.isLiked ? 'http://sunsetchat.top/icon/islike.png' : 'http://sunsetchat.top/icon/like.png'}}" 
+                     bindtap="likeSubComment" 
+                     data-id="{{item.subCommentId}}" />
+              <text class="likes-count-small">{{item.likes || 0}}</text>
+            </view>
+          </view>
+          <text class="sub-time">{{item.createTime}}</text>
+          <text class="sub-content" bindtap="replyToSubComment" data-name="{{item.appName}}" data-id="{{item.subCommentId}}">{{item.content}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar" catchtap="preventBubble">
+    <!-- 普通状态下：显示评论输入框和操作按钮 -->
+    <view wx:if="{{!showReplyPopup}}" class="bottom-normal">
+      <view class="comment-input" bindtap="handleTapCommentInput">
+        点我发评论
+      </view>
+      <view class="bottom-actions">
+        <view class="action-item">
+          <image class="icon-button" src="{{mainComment.isLiked ? 'http://sunsetchat.top/icon/islike.png' : 'http://sunsetchat.top/icon/like.png'}}" bindtap="likeMainComment" />
+          <text class="action-count">{{mainComment.likes || 0}}</text>
+        </view>
+        <view class="action-item">
+          <image class="icon-button" src="http://sunsetchat.top/icon/reply.png" bindtap="handleTapCommentInput"/>
+          <text class="action-count">{{subComments.length || 0}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 回复状态下：显示回复输入区 -->
+    <view wx:if="{{showReplyPopup}}" class="bottom-reply">
+      <view class="reply-container">
+        <text class="reply-label">{{replyTo ? '回复 ' + replyTo + '：' : '评论'}}</text>
+        <textarea class="reply-input" id="replyInput" value="{{replyContent}}" placeholder="请输入评论..." bindinput="onReplyInput" bindblur="onReplyBlur" bindfocus="onReplyFocus" auto-height></textarea>
+      </view>
+      <view class="submit-custom" bindtap="sendReply">提交</view>
+    </view>
+  </view>
+</view>

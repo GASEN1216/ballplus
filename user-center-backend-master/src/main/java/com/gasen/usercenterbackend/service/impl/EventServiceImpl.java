@@ -209,7 +209,6 @@ public class EventServiceImpl implements IEventService {
         return true;
     }
 
-
     /**
      * 计算用户性别和活动的匹配关系
      *
@@ -239,5 +238,20 @@ public class EventServiceImpl implements IEventService {
         return R * c; // 返回距离（km）
     }
 
+    /**
+     * 判断活动是否已完成
+     * @param eventId 活动ID
+     * @return 是否已完成
+     */
+    @Override
+    public boolean isEventCompleted(Long eventId) {
+        Event event = getById(eventId);
+        if (event == null) {
+            return false;
+        }
+        
+        // 活动状态为1表示已完成
+        return event.getState() == 1;
+    }
 
 }

@@ -1,0 +1,100 @@
+<view class="settings-container">
+  <!-- 个人中心 -->
+  <view class="settings-section">
+    <view class="section-title">个人中心</view>
+    <view class="settings-option" bindtap="goToEditInfo">
+      <view class="option-left">
+        <image class="option-icon" src="http://sunsetchat.top/icon/user.png" mode="aspectFit"></image>
+        <text class="option-text">个人信息</text>
+      </view>
+      <image class="arrow-icon" src="http://sunsetchat.top/icon/arrow-right.png" mode="aspectFit"></image>
+    </view>
+  </view>
+
+  <!-- 社交中心 -->
+  <view class="settings-section">
+    <view class="section-title">社交中心</view>
+    <view class="settings-option" bindtap="goToAddFriend">
+      <view class="option-left">
+        <image class="option-icon" src="http://sunsetchat.top/icon/add-friend.png" mode="aspectFit"></image>
+        <text class="option-text">添加好友</text>
+      </view>
+      <image class="arrow-icon" src="http://sunsetchat.top/icon/arrow-right.png" mode="aspectFit"></image>
+    </view>
+    <view class="settings-option" bindtap="viewFriendRequests">
+      <view class="option-left">
+        <image class="option-icon" src="http://sunsetchat.top/icon/friend-request.png" mode="aspectFit"></image>
+        <text class="option-text">好友申请</text>
+      </view>
+      <image class="arrow-icon" src="http://sunsetchat.top/icon/arrow-right.png" mode="aspectFit"></image>
+    </view>
+  </view>
+
+  <!-- 通用设置 -->
+  <view class="settings-section">
+    <view class="section-title">通用设置</view>
+    <view class="settings-option">
+      <view class="option-left">
+        <image class="option-icon" src="http://sunsetchat.top/icon/message.png" mode="aspectFit"></image>
+        <text class="option-text">消息通知</text>
+      </view>
+      <switch checked="{{notificationsEnabled}}" bindchange="toggleNotifications" color="#1cbbb4"></switch>
+    </view>
+  </view>
+
+  <!-- 显示设置 -->
+  <view class="settings-section">
+    <view class="section-title">显示设置</view>
+    <view class="settings-option">
+      <view class="option-left">
+        <image class="option-icon" src="http://sunsetchat.top/icon/clock.png" mode="aspectFit"></image>
+        <text class="option-text">活动倒计时</text>
+      </view>
+      <switch checked="{{showActivityCountdown}}" bindchange="toggleActivityCountdown" color="#3b87dd" />
+    </view>
+    <view class="settings-option">
+      <view class="option-left">
+        <image class="option-icon" src="http://sunsetchat.top/icon/activity.png" mode="aspectFit"></image>
+        <text class="option-text">活动管理</text>
+      </view>
+      <switch checked="{{showActivityManagement}}" bindchange="toggleActivityManagement" color="#3b87dd" />
+    </view>
+    <view class="settings-option">
+      <view class="option-left">
+        <image class="option-icon" src="http://sunsetchat.top/icon/friends.png" mode="aspectFit"></image>
+        <text class="option-text">好友管理</text>
+      </view>
+      <switch checked="{{showFriendManagement}}" bindchange="toggleFriendManagement" color="#3b87dd" />
+    </view>
+    <view class="settings-option">
+      <view class="option-left">
+        <image class="option-icon" src="http://sunsetchat.top/icon/profile-icon.png" mode="aspectFit"></image>
+        <text class="option-text">球坛管理</text>
+      </view>
+      <switch checked="{{showForumManagement}}" bindchange="toggleForumManagement" color="#3b87dd" />
+    </view>
+  </view>
+
+  <!-- 关于我们 -->
+  <view class="settings-section">
+    <view class="section-title">关于我们</view>
+    <view class="settings-option" bindtap="showAboutUs">
+      <view class="option-left">
+        <image class="option-icon" src="http://sunsetchat.top/icon/about.png" mode="aspectFit"></image>
+        <text class="option-text">关于球Plus</text>
+      </view>
+      <image class="arrow-icon" src="http://sunsetchat.top/icon/arrow-right.png" mode="aspectFit"></image>
+    </view>
+    <button class="settings-option contact-btn" open-type="contact" style="width: 100%; display: flex; box-sizing: border-box; left: 0rpx; top: 0rpx">
+      <view class="option-left">
+        <image class="option-icon" src="http://sunsetchat.top/icon/customer-service.png" mode="aspectFit"></image>
+        <text class="option-text">联系客服</text>
+      </view>
+      <image class="arrow-icon" src="http://sunsetchat.top/icon/arrow-right.png" mode="aspectFit"></image>
+    </button>
+  </view>
+
+  <view class="app-version">
+    <text>版本号 v1.0.0</text>
+  </view>
+</view>

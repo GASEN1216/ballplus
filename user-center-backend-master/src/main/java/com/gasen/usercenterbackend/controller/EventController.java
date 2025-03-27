@@ -15,6 +15,8 @@ import com.gasen.usercenterbackend.model.userIdAndAvatar;
 import com.gasen.usercenterbackend.service.IEventService;
 import com.gasen.usercenterbackend.service.IUserEventService;
 import com.gasen.usercenterbackend.service.IUserService;
+import com.gasen.usercenterbackend.service.IEventCancelRecordService;
+import com.gasen.usercenterbackend.service.ICreditRecordService;
 import com.gasen.usercenterbackend.utils.WechatUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
@@ -31,6 +33,8 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -46,6 +50,12 @@ public class EventController {
     @Resource
     private IUserEventService userEventService;
 
+    @Resource
+    private IEventCancelRecordService eventCancelRecordService;
+
+    @Resource
+    private ICreditRecordService creditRecordService;
+
     @Autowired
     private EventMapper eventMapper;
 
@@ -55,6 +65,9 @@ public class EventController {
     @Resource
     @Qualifier("stringRedisTemplate") // 指定使用名为 longRedisTemplate 的 Bean
     private RedisTemplate<String, String> stringRedisTemplate;
+
+    @Resource
+    private ThreadPoolExecutor threadPoolExecutor;
 
     @Operation(summary = "创建一个新的活动")
     @PostMapping("/createEvent")
@@ -83,14 +96,64 @@ public class EventController {
 
     @Operation(summary = "取消一个活动")
     @PostMapping("/cancelEvent")
-    public BaseResponse cancelEvent(
-            @RequestParam(value = "userId") Integer userId,
-            @RequestParam(value = "eventId") Long eventId){
-        if (userId == null || eventId == null)
+    public BaseResponse cancelEvent(Integer userId, Long eventId, String cancelReason) {
+        if (userId == null || eventId == null) {
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
+        }
+        
+        // 获取活动详情，用于发送通知
+        Event event = eventService.getById(eventId);
+        if (event == null) {
+            return ResultUtils.error(ErrorCode.NO_EVENTS, "活动不存在");
+        }
+        
+        // 验证用户是否是活动创建者
+        if (!event.getAppId().equals(userId)) {
+            return ResultUtils.error(ErrorCode.NO_AUTH_ERROR, "非活动创建者不能取消活动");
+        }
+        
+        // 获取参与活动的所有用户
+        List<User> participants = userEventService.getEventParticipants(eventId);
+        
+        // 保存取消原因
+        eventCancelRecordService.saveEventCancelRecord(eventId.longValue(), cancelReason);
+        
+        // 检查是否在活动开始前半小时内取消，如果是则扣除信誉分
+        boolean deductCredit = false;
+        try {
+            // 获取活动日期和时间
+            LocalDate eventDate = event.getEventDate();
+            String eventTime = String.valueOf(event.getEventTime());
+
+            // 解析活动时间
+            String[] timeParts = eventTime.split(":");
+            int hour = Integer.parseInt(timeParts[0]);
+            int minute = Integer.parseInt(timeParts[1]);
+
+            // 创建活动开始的日期时间
+            LocalDateTime eventStartDateTime = LocalDateTime.of(
+                    eventDate.getYear(),
+                    eventDate.getMonthValue(),
+                    eventDate.getDayOfMonth(),
+                    hour,
+                    minute
+            );
+            
+            // 获取当前时间
+            LocalDateTime now = LocalDateTime.now();
+            
+            // 如果当前时间在活动开始前半小时内，则扣除信誉分
+            if (now.isAfter(eventStartDateTime.minusMinutes(30)) && now.isBefore(eventStartDateTime)) {
+                deductCredit = true;
+            }
+        } catch (Exception e) {
+            log.error("检查活动时间失败", e);
+        }
+        
+        // 取消活动
         if (eventService.cancelEvent(userId, eventId)){
+            // 从Redis中删除活动相关数据
             String redisKey = "ballplus:events:" + eventId;
-            // 先查询redis里有没有这个键名，如果没有就没事，如果有就删除
             if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(redisKey))) {
                 stringRedisTemplate.delete(redisKey);
             }
@@ -98,6 +161,34 @@ public class EventController {
             if (Boolean.TRUE.equals(redisTemplate.hasKey(redisKey2))) {
                 redisTemplate.delete(redisKey2);
             }
+            
+            // 如果在活动开始前半小时内取消，扣除10分信誉分
+            if (deductCredit) {
+                creditRecordService.addCreditRecord(userId, -10, 2, "取消活动", eventId);
+                log.info("用户ID: {} 在活动开始前半小时内取消活动，扣除10分信誉分", userId);
+            }
+            
+            // 异步发送取消通知
+            if (participants != null && !participants.isEmpty()) {
+                threadPoolExecutor.execute(() -> {
+                    try {
+                        List<String> openidList = participants.stream()
+                                .map(User::getOpenId)
+                                .filter(Objects::nonNull)
+                                .collect(Collectors.toList());
+                        
+                        if (!openidList.isEmpty()) {
+                            boolean success = WechatUtil.sendEventCancelNotification(openidList, event, cancelReason);
+                            if (!success) {
+                                log.error("活动ID: {} 的取消通知未全部发送成功", eventId);
+                            }
+                        }
+                    } catch (Exception e) {
+                        log.error("发送活动取消通知失败", e);
+                    }
+                });
+            }
+            
             return ResultUtils.success("取消活动成功！");
         }
         return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"取消活动失败！");
@@ -111,6 +202,45 @@ public class EventController {
             @RequestParam(value = "eventId") Long eventId){
         if (userId == null || eventId == null)
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
+            
+        // 获取活动详情
+        Event event = eventService.getById(eventId);
+        if (event == null) {
+            return ResultUtils.error(ErrorCode.NO_EVENTS, "活动不存在");
+        }
+        
+        // 检查是否在活动开始前半小时内退出，如果是则扣除信誉分
+        boolean deductCredit = false;
+        try {
+            // 获取活动日期和时间
+            LocalDate eventDate = event.getEventDate();
+            String eventTime = String.valueOf(event.getEventTime());
+            
+            // 解析活动时间
+            String[] timeParts = eventTime.split(":");
+            int hour = Integer.parseInt(timeParts[0]);
+            int minute = Integer.parseInt(timeParts[1]);
+            
+            // 创建活动开始的日期时间
+            LocalDateTime eventStartDateTime = LocalDateTime.of(
+                    eventDate.getYear(), 
+                    eventDate.getMonthValue(), 
+                    eventDate.getDayOfMonth(), 
+                    hour, 
+                    minute
+            );
+            
+            // 获取当前时间
+            LocalDateTime now = LocalDateTime.now();
+            
+            // 如果当前时间在活动开始前半小时内，则扣除信誉分
+            if (now.isAfter(eventStartDateTime.minusMinutes(30)) && now.isBefore(eventStartDateTime)) {
+                deductCredit = true;
+            }
+        } catch (Exception e) {
+            log.error("检查活动时间失败", e);
+        }
+        
         if (userEventService.quitEvent(userId, eventId) && eventService.reduceParticipants(eventId)){
             String redisKey = "ballplus:events:" + eventId;
             // 先查询redis里有没有这个键名，如果没有就没事，如果有就删除list里的openid
@@ -118,6 +248,13 @@ public class EventController {
                 String openid = userService.getOpenIdByUserId(userId);
                 stringRedisTemplate.opsForList().remove(redisKey, 0, openid);
             }
+            
+            // 如果在活动开始前半小时内退出，扣除5分信誉分
+            if (deductCredit) {
+                creditRecordService.addCreditRecord(userId, -5, 2, "退出活动", eventId);
+                log.info("用户ID: {} 活动开始前半小时内退出活动，扣除5分信誉分", userId);
+            }
+            
             return ResultUtils.success("退出活动成功！");
         }
         return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"退出活动失败！");

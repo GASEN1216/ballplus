@@ -15,6 +15,7 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -90,7 +91,7 @@ public class PostServiceImpl implements IPostService {
             log.error("更新帖子异常，用户id不匹配");
             return false;
         }
-
+        post.setUpdateContentTime(LocalDateTime.now());
         return postMapper.updateById(post) > 0;
     }
 

@@ -1,7 +1,7 @@
 <view class="activity-detail-container">
   <!-- 活动信息 -->
   <view class="activity-detail">
-    <cover-image src="{{activity.avatar}}" class="activity-cover"></cover-image>
+    <image src="{{activity.avatar}}" class="activity-cover"></image>
     <text class="activity-title">{{activity.name}}</text>
     <text class="activity-meta">📅 {{activity.eventDate}} {{activity.weekDay}} {{activity.eventTime}}-{{activity.eventTimee}}</text>
     <text class="activity-meta">📍 {{activity.location}}</text>
@@ -28,16 +28,94 @@
     <view class="participants-container">
       <block wx:for="{{activity.persons}}" wx:key="index">
         <view class="participant-box">
-          <cover-image src="{{item.avatar}}" class="participant-avatar"  bindtap="goToInfo" data-userid="{{item.userId}}"></cover-image>
+          <image src="{{item.avatar}}" class="participant-avatar"  bindtap="goToInfo" data-userid="{{item.userId}}"></image>
         </view>
       </block>
+    </view>
+  </view>
+  
+  <!-- 投诉记录列表，只在活动已完成时显示 -->
+  <view class="complaints-section" wx:if="{{activity.state === 1}}">
+    <text class="section-title">投诉记录</text>
+    <view class="complaints-container" wx:if="{{complaints.length > 0}}">
+      <view class="complaint-item" wx:for="{{complaints}}" wx:key="id">
+        <view class="complaint-header">
+          <view class="complainer-info">
+            <image src="{{item.complainerAvatar}}" class="complaint-avatar" bindtap="goToInfo" data-userid="{{item.complainerId}}"></image>
+            <text class="complaint-name">{{item.complainerName}}</text>
+          </view>
+          <text class="complaint-time">{{item.createTime}}</text>
+        </view>
+        <view class="complaint-content">
+          <text>投诉了</text>
+          <image src="{{item.complainedAvatar}}" class="complaint-avatar small" bindtap="goToInfo" data-userid="{{item.complainedId}}"></image>
+          <text class="complaint-name">{{item.complainedName}}</text>
+        </view>
+        <view class="complaint-reason">{{item.content}}</view>
+        <view class="complaint-status" wx:if="{{item.status === 1}}">
+          <text class="status-tag valid">有效投诉</text>
+        </view>
+        <view class="complaint-status" wx:elif="{{item.status === 2}}">
+          <text class="status-tag invalid">无效投诉</text>
+          <text class="reject-reason">原因: {{item.rejectReason}}</text>
+        </view>
+        <view class="complaint-status" wx:else>
+          <text></text>
+          <text class="status-tag pending">处理中</text>
+        </view>
+      </view>
+    </view>
+    <view class="no-complaints" wx:else>
+      <text>暂无投诉记录</text>
     </view>
   </view>
 
   <!-- 底部按钮 -->
   <view class="action-buttons" wx:if="{{!isPastEvent && isStateZero && !ifNotification}}">
-    <button wx:if="{{isCreator}}" bindtap="cancelActivity">我要取消</button>
-    <button wx:if="{{!isCreator && isJoined}}" bindtap="exitActivity">我要退出</button>
-    <button wx:if="{{!isCreator && !isJoined}}" bindtap="joinActivity">我要参加</button>
+    <view class="main-buttons">
+      <button wx:if="{{isCreator}}" bindtap="cancelActivity" class="cancel-btn">我要取消</button>
+      <button wx:if="{{!isCreator && isJoined}}" bindtap="exitActivity" class="exit-btn">我要退出</button>
+      <button wx:if="{{!isCreator && !isJoined}}" bindtap="joinActivity" class="join-btn">我要参加</button>
+    </view>
+    <button class="share-button" open-type="share">
+      <image class="share-icon" src="http://sunsetchat.top/icon/share.png"></image>
+    </button>
+  </view>
+  
+  <!-- 活动已完成，显示投诉按钮 -->
+  <view class="action-buttons" wx:if="{{activity.state === 1 && isJoined && canComplaint}}">
+    <view class="main-buttons">
+      <button bindtap="goToComplaint" class="complaint-btn">我要投诉</button>
+    </view>
+  </view>
+  
+  <!-- 取消活动自定义弹窗 -->
+  <view class="modal-mask" wx:if="{{showCancelModal}}" bindtap="closeCancelModal"></view>
+  <view class="modal-dialog" wx:if="{{showCancelModal}}">
+    <view class="modal-title">取消活动</view>
+    <view class="modal-content">
+      <view class="modal-input-container">
+        <textarea class="modal-input" bindinput="onCancelReasonInput" bindfocus="onCancelReasonFocus" value="{{cancelReason}}" placeholder="请输入取消活动的原因..." placeholder-class="modal-placeholder" maxlength="20" auto-focus></textarea>
+        <view class="word-count">{{cancelReason.length}}/20</view>
+      </view>
+      <!-- 常用取消原因按钮 -->
+      <view class="common-reasons">
+        <view class="common-reason-title">常用原因：</view>
+        <view class="common-reason-buttons">
+          <view 
+            wx:for="{{commonReasons}}" 
+            wx:key="index" 
+            class="common-reason-btn" 
+            bindtap="selectCommonReason" 
+            data-index="{{index}}">
+            {{item}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="modal-footer">
+      <view class="modal-btn modal-btn-cancel" bindtap="closeCancelModal">取消</view>
+      <view class="modal-btn modal-btn-confirm" bindtap="confirmCancelActivity">确定</view>
+    </view>
   </view>
 </view>

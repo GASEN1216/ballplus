@@ -87,6 +87,7 @@ Page({
             'event.locationDetail': locationDetail,
             'event.latitude': latitude,
             'event.longitude': longitude,
+            'event.phoneNumber': app.globalData.currentUser.phone,
             fromMap, // 根据 options 判断是否从地图传入
             dateRange,
             participantRange
@@ -145,36 +146,6 @@ Page({
         });
     },
 
-    // 获取手机号
-    handleGetPhoneNumber() {
-        const phone = app.globalData.currentUser.phone;
-
-        if (!phone) {
-            // 未填写手机号资料
-            wx.showModal({
-                title: '提示',
-                content: '请完善手机号资料',
-                success: (res) => {
-                    if (res.confirm) {
-                        wx.navigateTo({
-                            url: '/pages/editProfile/editProfile', // 跳转到编辑信息页面
-                        });
-                    }
-                },
-            });
-        } else {
-            // 已有手机号
-            this.setData({
-                'event.phoneNumber': phone, // 赋值给表单中的联系方式
-            });
-
-            wx.showToast({
-                title: '已获取手机号',
-                icon: 'success',
-            });
-        }
-    },
-
     // 更新表单数据
     handleInputChange(e: WechatMiniprogram.BaseEvent) {
         const { field } = e.currentTarget.dataset;
@@ -189,6 +160,20 @@ Page({
         // 限制备注字数
         if (field === 'remarks' && value.length > 800) {
             wx.showToast({ title: '备注最多800字', icon: 'none' });
+            return;
+        }
+
+        // 处理手机号输入
+        if (field === 'phoneNumber') {
+            // 只允许输入数字
+            const phoneNumber = value.replace(/\D/g, '');
+            // 限制长度为11位
+            if (phoneNumber.length > 11) {
+                return;
+            }
+            this.setData({
+                'event.phoneNumber': phoneNumber
+            });
             return;
         }
 
@@ -351,7 +336,19 @@ Page({
     },
     // 请求订阅消息授权
     requestSubscribeMessage(eventId: Number) {
-        const templateIds = ['0y74iVIHCLCJJeS-zFL1Q90cFJNjNqQv8TzjMw-cuIQ', 'LVVo1OQ_oe6-hFSJ1yZtsB8odWdA4B8Qg5OdwBVVYWc'];
+        const templateIds = [
+            '0y74iVIHCLCJJeS-zFL1Q90cFJNjNqQv8TzjMw-cuIQ', // 报名成功通知
+            'LVVo1OQ_oe6-hFSJ1yZtsB8odWdA4B8Qg5OdwBVVYWc', // 活动开始提醒
+            'HDfFvsUk1yKMyiqouzGoigEoIQ9aGzJ7dned5iowXoU'  // 活动取消通知
+        ];
+
+        // 先检查用户是否开启了通知
+        const notificationsEnabled = wx.getStorageSync('notificationsEnabled');
+        if (notificationsEnabled === false) {
+            console.log('用户已关闭通知设置，不请求订阅消息');
+            return;
+        }
+
         wx.requestSubscribeMessage({
             tmplIds: templateIds,
             success(res) {

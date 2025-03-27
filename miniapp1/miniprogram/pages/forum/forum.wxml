@@ -2,7 +2,7 @@
   <!-- 固定顶部搜索栏及加号按钮 -->
   <view class="header">
     <input class="search-input" placeholder="搜索帖子..." value="{{searchKeyword}}" bindinput="onSearchInput" confirm-type="search" bindconfirm="onSearchConfirm" />
-    <image class="add-button" src="/icon/add.png" bindtap="onAddClick" style="transform: rotate({{addButtonRotate}}deg);" />
+    <image class="add-button" src="http://sunsetchat.top/icon/add.png" bindtap="onAddClick" style="transform: rotate({{addButtonRotate}}deg);" />
   </view>
 
   <!-- 帖子列表区域 -->

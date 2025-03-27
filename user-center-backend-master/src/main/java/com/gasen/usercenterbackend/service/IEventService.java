@@ -34,4 +34,11 @@ public interface IEventService {
     Boolean sendEventStartNotification(Long eventId);
 
     Boolean sendEventInOneHourStartNotification(Event event);
+
+    /**
+     * 判断活动是否已完成
+     * @param eventId 活动ID
+     * @return 是否已完成
+     */
+    boolean isEventCompleted(Long eventId);
 }

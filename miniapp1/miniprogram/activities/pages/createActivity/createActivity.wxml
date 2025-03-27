@@ -67,14 +67,8 @@
 
       <!-- 联系方式 -->
       <view class="form-item contact-item">
-        <text class="form-label">联系方式</text>
-        <view class="phone-container">
-          <text class="phone-number">{{event.phoneNumber || '未设置'}}</text>
-          <button class="get-phone-button" bindtap="handleGetPhoneNumber">
-            <text class="phone-icon">📱</text>
-            <text>获取手机号</text>
-          </button>
-        </view>
+        <text class="form-label">联系方式(手机号)</text>
+        <input class="form-input" type="number" maxlength="11" placeholder="请输入11位手机号" value="{{event.phoneNumber}}" data-field="phoneNumber" bindinput="handleInputChange" />
       </view>
     </view>
 

@@ -102,7 +102,8 @@ public class Event implements Serializable {
                 .setLongitude(longitude)
                 .setParticipants(participants)
                 .setTotalParticipants(totalParticipants)
-                .setRemarks(remarks);
+                .setRemarks(remarks)
+                .setVisibility(visibility);
     }
 
     public indexEventWithState toIndexEventWithState() {

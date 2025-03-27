@@ -27,5 +27,6 @@ public class PostDetail implements Serializable {
     private String picture;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private LocalDateTime updateContentTime;
     private List<CommentDetail> commentsList;
 }

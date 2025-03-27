@@ -219,6 +219,110 @@ public class WechatUtil {
         return true;
     }
 
+    /**
+     * 发送活动取消通知
+     * 
+     * @param openidList 接收通知的用户openid列表
+     * @param event 被取消的活动
+     * @param cancelReason 取消原因
+     * @return 是否全部发送成功
+     */
+    public static boolean sendEventCancelNotification(List<String> openidList, Event event, String cancelReason) {
+        String accessToken = getAccessToken();
+        if (accessToken == null) {
+            log.error("Failed to send cancel notification: access_token is null");
+            return false;
+        }
+
+        String url = WX_SEND_TEMPLATE_URL + accessToken;
+        List<String> failedOpenids = new ArrayList<>(); // 记录发送失败的 openid
+        boolean allSuccess = true; // 是否全部发送成功
+
+        for (String openid : openidList) {
+            boolean success = sendSingleCancelNotification(url, openid, event, cancelReason);
+            if (!success) {
+                failedOpenids.add(openid); // 记录发送失败的 openid
+                allSuccess = false;
+            }
+        }
+
+        // 如果有发送失败的 openid，进行重试
+        if (!failedOpenids.isEmpty()) {
+            log.warn("Retrying failed cancel notifications for openids: {}", failedOpenids);
+            for (int retryCount = 1; retryCount <= MAX_RETRY_COUNT; retryCount++) {
+                log.info("Retry attempt {} for failed openids: {}", retryCount, failedOpenids);
+                List<String> retryFailedOpenids = new ArrayList<>();
+
+                for (String openid : failedOpenids) {
+                    boolean success = sendSingleCancelNotification(url, openid, event, cancelReason);
+                    if (!success) {
+                        retryFailedOpenids.add(openid); // 记录重试失败的 openid
+                    }
+                }
+
+                if (retryFailedOpenids.isEmpty()) {
+                    log.info("All failed cancel notifications succeeded after retry attempt {}", retryCount);
+                    allSuccess = true; // 全部重试成功
+                    break;
+                }
+
+                failedOpenids = retryFailedOpenids; // 更新失败的 openid 列表
+            }
+
+            // 如果重试后仍有失败的 openid，记录错误日志
+            if (!failedOpenids.isEmpty()) {
+                log.error("Failed to send cancel notifications after {} retries for openids: {}", MAX_RETRY_COUNT, failedOpenids);
+                allSuccess = false;
+            }
+        }
+
+        return allSuccess;
+    }
+
+    /**
+     * 发送单个取消活动通知
+     */
+    private static boolean sendSingleCancelNotification(String url, String openid, Event event, String cancelReason) {
+        Map<String, Object> message = new HashMap<>();
+        message.put("touser", openid);
+        message.put("template_id", wxConfig.getCancelNotificationTemplateId());
+        message.put("page", "pages/index/index"); // 取消后跳转到首页
+        message.put("miniprogram_state", "developer");
+
+        // 格式化活动时间
+        LocalDate eventDate = event.getEventDate(); // 获取日期
+        LocalTime eventTime = event.getEventTime(); // 获取时间
+        String formattedDateTime = eventDate.format(DateTimeFormatter.ofPattern("yyyy年M月d日")) + " " +
+                eventTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+
+        // 处理取消原因，确保不超过20个字符
+        if (cancelReason != null && cancelReason.length() > 20) {
+            cancelReason = cancelReason.substring(0, 17) + "...";
+        }
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("thing1", Map.of("value", event.getName()));  // 活动名称
+        data.put("date2", Map.of("value", formattedDateTime));  // 活动时间
+        data.put("thing3", Map.of("value", event.getLocation()));  // 活动地点
+        data.put("thing5", Map.of("value", cancelReason));  // 取消原因
+
+        message.put("data", data);
+
+        Map<String, Object> response = restTemplate.postForObject(url, message, Map.class);
+        if (response == null) {
+            log.error("Failed to send cancel notification to openid: {}, response is null", openid);
+            return false;
+        }
+
+        if (!response.get("errcode").equals(0)) {
+            log.error("Failed to send cancel notification to openid: {}, errcode: {}, errmsg: {}",
+                    openid, response.get("errcode"), response.get("errmsg"));
+            return false;
+        }
+
+        return true;
+    }
+
     public static String getPhoneNumber(String code, String appid, String secret) {
         // Step 1: 获取 Access Token
         String tokenUrl = String.format(

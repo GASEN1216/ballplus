@@ -1,5 +1,6 @@
 package com.gasen.usercenterbackend.model.vo;
 
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -25,4 +26,5 @@ public class indexEvent implements Serializable {
     private Integer participants;
     private Integer totalParticipants;
     private String remarks;
+    private Boolean visibility;
 }

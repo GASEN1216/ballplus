@@ -26,4 +26,5 @@ public class PostInfo implements Serializable {
     private int comments;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
+    private LocalDateTime updateContentTime;
 }

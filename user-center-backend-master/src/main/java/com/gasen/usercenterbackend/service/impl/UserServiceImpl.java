@@ -305,4 +305,5 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if(!b) throw new BusinessExcetion(ErrorCode.SYSTEM_ERROR,"增加经验失败");
     }
 
+
 }

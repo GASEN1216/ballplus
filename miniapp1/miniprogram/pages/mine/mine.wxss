@@ -19,41 +19,104 @@ page {
   border-radius: 0 0 20rpx 20rpx;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 20rpx 40rpx;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
+.header-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
 /* 用户信息 */
 .user-info {
   display: flex;
-  gap: 20rpx;
   align-items: center;
+  gap: 20rpx;
   flex: 1;
 }
 
-/* 用户头像 */
-.avatar {
-  width: 90rpx;
-  height: 90rpx;
-  border-radius: 50%;
-  border: 2rpx solid #f0f0f0;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
-}
-
-/* 用户文本信息（昵称和个人信息） */
-.user-text {
-  width: 30%;
+.avatar-container {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 20rpx;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
-.nickname {
-  font-size: 28rpx;
-  font-weight: 500;
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+}
+
+/* 登录按钮 */
+.login-btn {
+  width: auto;
+  height: auto;
+  line-height: 1;
+  background: none;
   color: #333;
+  font-size: 32rpx;
+  border: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.login-btn::after {
+  border: none;
+}
+
+.user-details {
+  flex: 1;
+}
+
+.nickname {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.level-info {
+  display: flex;
+  align-items: center;
+}
+
+.level {
+  font-size: 24rpx;
+  color: #1cbbb4;
+  background-color: rgba(28, 187, 180, 0.1);
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+  margin-right: 20rpx;
+}
+
+.exp-bar {
+  flex: 1;
+  height: 8rpx;
+  background-color: #f0f0f0;
+  border-radius: 4rpx;
+  margin-right: 20rpx;
+  overflow: hidden;
+}
+
+.exp-progress {
+  height: 100%;
+  background-color: #1cbbb4;
+  border-radius: 4rpx;
+  transition: width 0.3s ease;
+}
+
+.exp-text {
+  font-size: 24rpx;
+  color: #999;
 }
 
 /* 顶部按钮区域 */
@@ -305,19 +368,6 @@ page {
 .empty-text {
   font-size: 26rpx;
   color: #999;
-}
-
-/* 登录按钮 */
-.login-btn {
-  width: 80%;
-  height: 88rpx;
-  line-height: 88rpx;
-  background: linear-gradient(to right, #1cbbb4, #0081ff);
-  color: #fff;
-  font-size: 32rpx;
-  border-radius: 44rpx;
-  margin-top: 60rpx;
-  box-shadow: 0 8rpx 16rpx rgba(0, 129, 255, 0.2);
 }
 
 /* 等级和经验条 */

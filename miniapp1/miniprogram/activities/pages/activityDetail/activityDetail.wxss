@@ -120,14 +120,337 @@
   bottom: 0;
   width: 100%;
   background-color: #fff;
-  padding: 10px 0;
+  padding: 10px 16px;
   display: flex;
-  justify-content: space-around;
-  border-top: 1px solid #ddd;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eee;
+  box-sizing: border-box;
+}
+
+.main-buttons {
+  flex: 1;
+  margin-right: 10px;
 }
 
 .action-buttons button {
+  padding: 20rpx 30rpx;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.08);
+  border: none;
+  color: white;
+  width: 100%;
+}
+
+.join-btn {
+  background-color: #3b87dd; /* 主题蓝色 */
+}
+
+.exit-btn {
+  background-color: #ff9800; /* 橙色 */
+}
+
+.cancel-btn {
+  background-color: #ff7b71; /* 红色 */
+}
+
+.complaint-btn {
+  background-color: #ff7043; /* 橙红色 */
+}
+
+/* 分享按钮样式 */
+.share-button {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5 !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  width: 80rpx !important;
+  height: 80rpx !important;
+  min-height: 0 !important;
+  line-height: 1 !important;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1) !important;
+}
+
+.share-button::after {
+  border: none;
+}
+
+.share-icon {
+  width: 42rpx;
+  height: 42rpx;
+  margin: 0;
+}
+
+/* 模态窗口遮罩层 */
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+}
+
+/* 模态窗口容器 */
+.modal-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 1001;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 模态窗口标题 */
+.modal-title {
+  padding: 20px 24px 10px;
+  font-size: 17px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+/* 模态窗口内容 */
+.modal-content {
+  padding: 0 24px 15px;
+}
+
+/* 输入框容器 */
+.modal-input-container {
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+/* 输入框样式 */
+.modal-input {
+  width: 100%;
+  min-height: 40px;
+  height: auto;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.4;
+  padding: 8px 0;
+}
+
+/* 输入框占位符样式 */
+.modal-placeholder {
+  color: #aaa;
+  font-size: 13px;
+  line-height: 24px;
+}
+
+/* 字数计数器 */
+.word-count {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-size: 12px;
+  color: #999;
+}
+
+/* 常用取消原因区域 */
+.common-reasons {
+  margin-top: 12px;
+  padding: 0 12px;
+}
+
+.common-reason-title {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.common-reason-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.common-reason-btn {
+  padding: 6px 12px;
+  background-color: #f0f0f0;
+  border-radius: 16px;
+  font-size: 12px;
+  color: #666;
+  max-width: fit-content;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.common-reason-btn:active {
+  background-color: #e6e6e6;
+  transform: scale(0.98);
+}
+
+/* 模态窗口底部 */
+.modal-footer {
+  display: flex;
+  border-top: 1px solid #eee;
+}
+
+/* 按钮基础样式 */
+.modal-btn {
   flex: 1;
-  margin: 0 5px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
   font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+/* 取消按钮样式 */
+.modal-btn-cancel {
+  color: #666;
+  border-right: 1px solid #eee;
+}
+
+/* 确认按钮样式 */
+.modal-btn-confirm {
+  color: #3b87dd;
+  font-weight: bold;
+}
+
+/* 按钮按下效果 */
+.modal-btn-cancel:active {
+  background-color: #f2f2f2;
+}
+
+.modal-btn-confirm:active {
+  background-color: #f0f7ff;
+}
+
+/* 投诉记录列表样式 */
+.complaints-section {
+  width: 90%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.complaints-container {
+  width: 100%;
+}
+
+.complaint-item {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.complaint-item:last-child {
+  border-bottom: none;
+}
+
+.complaint-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.complainer-info {
+  display: flex;
+  align-items: center;
+}
+
+.complaint-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.complaint-avatar.small {
+  width: 30px;
+  height: 30px;
+}
+
+.complaint-name {
+  font-size: 14px;
+  color: #333;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.complaint-time {
+  font-size: 12px;
+  color: #999;
+}
+
+.complaint-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.complaint-reason {
+  font-size: 14px;
+  color: #333;
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.complaint-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.status-tag {
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: white;
+}
+
+.status-tag.valid {
+  background-color: #4caf50;
+}
+
+.status-tag.invalid {
+  background-color: #f44336;
+}
+
+.status-tag.pending {
+  background-color: #ff9800;
+}
+
+.reject-reason {
+  font-size: 12px;
+  color: #f44336;
+  margin-left: 8px;
+}
+
+.no-complaints {
+  width: 100%;
+  padding: 30rpx 0;
+  text-align: center;
+  color: #999;
+  font-size: 28rpx;
 }

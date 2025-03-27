@@ -1,0 +1,173 @@
+.container {
+  padding: 30rpx;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+.header {
+  margin-bottom: 40rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.desc {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+/* 参与者头像区域 */
+.participants-section {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.participants-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30rpx;
+}
+
+.participant-box {
+  width: 120rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 10rpx;
+  border-radius: 12rpx;
+  transition: all 0.3s;
+}
+
+.participant-box.selected {
+  background-color: rgba(59, 135, 221, 0.1);
+}
+
+.participant-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-bottom: 10rpx;
+}
+
+.participant-name {
+  font-size: 24rpx;
+  color: #666;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.check-icon {
+  position: absolute;
+  bottom: 10rpx;
+  right: 10rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background-color: #3b87dd;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+}
+
+/* 投诉内容区域 */
+.complaint-content {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.complaint-textarea {
+  width: 100%;
+  height: 240rpx;
+  border: 2rpx solid #e0e3e7;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  font-size: 28rpx;
+  color: #333;
+  background: #f8f9fa;
+  box-sizing: border-box;
+}
+
+.word-count {
+  position: absolute;
+  bottom: 20rpx;
+  right: 30rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 常见投诉原因 */
+.common-reasons {
+  background: white;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 40rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.reason-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.reason-tag {
+  padding: 12rpx 24rpx;
+  background-color: #f2f4f7;
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  color: #666;
+  transition: all 0.3s;
+}
+
+.reason-tag:active {
+  background-color: #e6e9ec;
+  transform: scale(0.98);
+}
+
+/* 提交按钮 */
+.submit-btn {
+  width: 90%;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 45rpx;
+  background: linear-gradient(135deg, #4a90e2, #357abd);
+  color: white;
+  font-size: 32rpx;
+  font-weight: bold;
+  text-align: center;
+  margin: 60rpx auto;
+  box-shadow: 0 8rpx 20rpx rgba(74, 144, 226, 0.3);
+}
+
+.submit-btn[disabled] {
+  background: #cccccc;
+  color: #999999;
+  box-shadow: none;
+} 

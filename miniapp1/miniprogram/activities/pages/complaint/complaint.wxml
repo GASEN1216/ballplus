@@ -1,0 +1,45 @@
+<view class="container">
+  <view class="header">
+    <text class="title">我要投诉</text>
+    <text class="desc">请选择您要投诉的人员，并填写投诉内容</text>
+  </view>
+  
+  <!-- 参与者头像列表 -->
+  <view class="participants-section">
+    <text class="section-title">选择被投诉人</text>
+    <view class="participants-container">
+      <block wx:for="{{participants}}" wx:key="userId">
+        <view class="participant-box {{item.selected ? 'selected' : ''}}" bindtap="toggleSelect" data-index="{{index}}">
+          <image src="{{item.avatar}}" class="participant-avatar"></image>
+          <text class="participant-name">{{item.userName}}</text>
+          <view class="check-icon" wx:if="{{item.selected}}">✓</view>
+        </view>
+      </block>
+    </view>
+  </view>
+  
+  <!-- 投诉内容 -->
+  <view class="complaint-content">
+    <text class="section-title">投诉内容</text>
+    <textarea class="complaint-textarea" bindinput="onContentInput" value="{{content}}" placeholder="请描述投诉原因，如：迟到、爽约、不遵守规则等" maxlength="500"></textarea>
+    <view class="word-count">{{content.length}}/500</view>
+  </view>
+  
+  <!-- 常见投诉原因 -->
+  <view class="common-reasons">
+    <text class="section-title">常见投诉原因</text>
+    <view class="reason-tags">
+      <view 
+        wx:for="{{commonReasons}}" 
+        wx:key="index" 
+        class="reason-tag" 
+        bindtap="selectCommonReason" 
+        data-reason="{{item}}">
+        {{item}}
+      </view>
+    </view>
+  </view>
+  
+  <!-- 提交按钮 -->
+  <button class="submit-btn" bindtap="submitComplaint" disabled="{{!canSubmit}}">提交投诉</button>
+</view> 

@@ -2,43 +2,70 @@
 
   <!-- 顶部固定栏 -->
   <view class="header">
-    <view wx:if="{{isLoggedin}}" class="user-info">
-      <image src="{{profilePic}}" class="avatar" bindtap="goToInfo"></image>
-      <!-- 用户文本信息 -->
-      <view class="user-text">
-        <text class="nickname" bindtap="goToInfo">{{nickname}}</text>
-        <view class="level-exp-container">
-          <!-- 等级 - 小牌子 经验值-->
-          <text class="level-text">LV.{{userData.grade}}</text>
-          <text class="exp-text">{{userData.exp}} / {{userData.grade * 10}}</text>
-        </view>
-        <!-- 经验 - 长条进度条 -->
-        <view class="form-item score-item">
-          <view class="exp-bar-container">
-            <view class="exp-bar">
-              <view class="exp-progress" style="width: {{expWidth}};"></view>
+    <view class="header-left">
+      <view wx:if="{{isLoggedin}}" class="user-info">
+        <image src="{{profilePic}}" class="avatar" bindtap="goToInfo"></image>
+        <!-- 用户文本信息 -->
+        <view class="user-text">
+          <text class="nickname" bindtap="goToInfo">{{nickname}}</text>
+          <view class="level-exp-container">
+            <!-- 等级 - 小牌子 经验值-->
+            <text class="level-text">LV.{{userData.grade}}</text>
+            <text class="exp-text">{{userData.exp}} / {{userData.grade * 10}}</text>
+          </view>
+          <!-- 经验 - 长条进度条 -->
+          <view class="form-item score-item">
+            <view class="exp-bar-container">
+              <view class="exp-bar">
+                <view class="exp-progress" style="width: {{expWidth}};"></view>
+              </view>
             </view>
           </view>
         </view>
       </view>
+      <view wx:else class="user-info">
+        <button class="login-btn" bindtap="onLoginButtonClick">立即登录</button>
+      </view>
     </view>
     <view class="header-btns">
       <button open-type="contact" class="customer-service-btn" style="width: 64rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">
-        <image src="../../icon/customer-service2.png" class="header-icon" mode="aspectFit"></image>
+        <image src="http://sunsetchat.top/icon/customer-service2.png" class="header-icon" mode="aspectFit"></image>
       </button>
       <view class="settings-btn" bindtap="navigateToSettings">
-        <image src="../../icon/settings.png" class="header-icon" mode="aspectFit"></image>
+        <image src="http://sunsetchat.top/icon/settings.png" class="header-icon" mode="aspectFit"></image>
       </view>
     </view>
   </view>
 
   <!-- 主要内容区 -->
   <view class="main-content">
+    <!-- 功能菜单区域 -->
+    <view class="menu-section">
+      <view class="menu-row">
+        <view class="menu-item" bindtap="toGdmap">
+          <image src="http://sunsetchat.top/icon/location.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">地图</text>
+        </view>
+        <view class="menu-item" bindtap="toFriends">
+          <image src="http://sunsetchat.top/icon/friends.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">好友</text>
+        </view>
+        <view class="menu-item" bindtap="toPointsMall">
+          <image src="http://sunsetchat.top/icon/points.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">赛点商城</text>
+        </view>
+        <view class="menu-item" bindtap="goToEditInfo">
+          <image src="http://sunsetchat.top/icon/profile.png" class="menu-icon" mode="aspectFit"></image>
+          <text class="menu-text">资料编辑</text>
+        </view>
+      </view>
+    </view>
+
     <!-- 活动倒计时卡片 - 可折叠 -->
-    <view class="card activity-time-card">
+    <view class="card activity-time-card" wx:if="{{showActivityCountdown}}">
       <view class="card-header">
         <view class="card-title">
-          <image src="../../icon/clock.png" class="card-icon" mode="aspectFit"></image>
+          <image src="http://sunsetchat.top/icon/clock.png" class="card-icon" mode="aspectFit"></image>
           <text>活动倒计时</text>
         </view>
       </view>
@@ -47,11 +74,11 @@
         <text class="activity-remaining-time">{{activities[0].remainingTime}}</text>
         <view class="activity-summary" bindtap="toggleActivityList" data-id="{{activities[0].id}}">
           <view class="activity-summary-text">{{activities[0].name}}</view>
-          <image src="../../icon/arrow-right.png" class="arrow-icon {{showActivityList ? 'arrow-down' : ''}}" mode="aspectFit"></image>
+          <image src="http://sunsetchat.top/icon/arrow-right.png" class="arrow-icon {{showActivityList ? 'arrow-down' : ''}}" mode="aspectFit"></image>
         </view>
       </view>
       <view wx:else class="card-content">
-        <image src="../../icon/quote.png" class="quote-icon" mode="aspectFit"></image>
+        <image src="http://sunsetchat.top/icon/quote.png" class="quote-icon" mode="aspectFit"></image>
         <text class="quote-text">「此刻 青天无片云」</text>
       </view>
       
@@ -78,110 +105,85 @@
         </view>
       </view>
     </view>
-    
-    <!-- 功能菜单区域 -->
-    <view class="menu-section">
-      <view class="menu-row">
-        <view class="menu-item" bindtap="toGdmap">
-          <image src="../../icon/location.png" class="menu-icon" mode="aspectFit"></image>
-          <text class="menu-text">地图</text>
-        </view>
-        <view class="menu-item" bindtap="toFriends">
-          <image src="../../icon/friends.png" class="menu-icon" mode="aspectFit"></image>
-          <text class="menu-text">好友</text>
-        </view>
-        <view class="menu-item" bindtap="toPointsMall">
-          <image src="../../icon/points.png" class="menu-icon" mode="aspectFit"></image>
-          <text class="menu-text">赛点商城</text>
-        </view>
-        <view class="menu-item" bindtap="goToEditInfo">
-          <image src="../../icon/profile.png" class="menu-icon" mode="aspectFit"></image>
-          <text class="menu-text">资料编辑</text>
-        </view>
-      </view>
-    </view>
 
-    <!-- 活动管理卡片 -->
-    <view class="card activity-card">
+    <!-- 活动管理卡片 - 根据设置控制显示 -->
+    <view class="card activity-card" wx:if="{{showActivityManagement}}">
       <view class="card-title">
-        <image src="../../icon/activity.png" class="card-icon" mode="aspectFit"></image>
+        <image src="http://sunsetchat.top/icon/activity.png" class="card-icon" mode="aspectFit"></image>
         <text>活动管理</text>
       </view>
       <view class="menu-row">
         <view class="menu-item" bindtap="goToActivities" data-tab="all">
-          <image src="../../icon/activities.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://sunsetchat.top/icon/activities.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">全部活动</text>
         </view>
         <view class="menu-item" bindtap="goToActivities" data-tab="0">
-          <image src="../../icon/departure.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://sunsetchat.top/icon/departure.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">待出发</text>
         </view>
         <view class="menu-item" bindtap="goToActivities" data-tab="1">
-          <image src="../../icon/review.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://sunsetchat.top/icon/review.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">已完成</text>
         </view>
         <view class="menu-item" bindtap="goToActivities" data-tab="2">
-          <image src="../../icon/cancel.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://sunsetchat.top/icon/cancel.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">已取消</text>
         </view>
       </view>
     </view>
     
-    <!-- 好友管理卡片 -->
-    <view class="card friends-card">
+    <!-- 好友管理卡片 - 根据设置控制显示 -->
+    <view class="card friends-card" wx:if="{{showFriendManagement}}">
       <view class="card-title">
-        <image src="../../icon/friends.png" class="card-icon" mode="aspectFit"></image>
+        <image src="http://sunsetchat.top/icon/friends.png" class="card-icon" mode="aspectFit"></image>
         <text>好友管理</text>
       </view>
       <view class="menu-row">
         <view class="menu-item" bindtap="toFriends">
-          <image src="../../icon/friends.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://sunsetchat.top/icon/friends.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">好友</text>
         </view>
         <view class="menu-item" bindtap="goToAddFriend">
-          <image src="../../icon/add-friend.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://sunsetchat.top/icon/add-friend.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">添加好友</text>
         </view>
         <view class="menu-item" bindtap="viewSentRequests">
-          <image src="../../icon/my-request.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://sunsetchat.top/icon/my-request.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">我的申请</text>
         </view>
         <view class="menu-item" bindtap="viewFriendRequests">
-          <image src="../../icon/friend-request.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://sunsetchat.top/icon/friend-request.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">好友申请</text>
         </view>
       </view>
     </view>
     
-    <!-- 球坛管理卡片 -->
-    <view class="card forum-card">
+    <!-- 球坛管理卡片 - 根据设置控制显示 -->
+    <view class="card forum-card" wx:if="{{showForumManagement}}">
       <view class="card-title">
-        <image src="../../icon/basketball.png" class="card-icon" mode="aspectFit"></image>
+        <image src="http://sunsetchat.top/icon/basketball.png" class="card-icon" mode="aspectFit"></image>
         <text>球坛管理</text>
       </view>
       <view class="menu-row">
         <view class="menu-item" bindtap="goToForum">
-          <image src="../../icon/home-icon.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://sunsetchat.top/icon/home-icon.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">球坛</text>
         </view>
         <view class="menu-item" bindtap="createPost">
-          <image src="../../icon/add.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://sunsetchat.top/icon/add.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">发帖</text>
         </view>
         <view class="menu-item" bindtap="goToMyPosts">
-          <image src="../../icon/profile-icon.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://sunsetchat.top/icon/profile-icon.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">我的帖子</text>
         </view>
         <view class="menu-item" bindtap="goToMyComments">
-          <image src="../../icon/reply.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://sunsetchat.top/icon/reply.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">我的评论</text>
         </view>
       </view>
     </view>
   </view>
-
-  <!-- 登录按钮 -->
-  <button wx:if="{{!isLoggedin}}" class="login-btn" bindtap="onLoginButtonClick">登录</button>
 
   <!-- Token 验证 -->
   <!-- <view wx:if="{{isLoggedin}}">
