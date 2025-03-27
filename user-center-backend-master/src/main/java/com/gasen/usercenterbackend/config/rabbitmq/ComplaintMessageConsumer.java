@@ -1,8 +1,8 @@
-package com.gasen.usercenterbackend.mq;
+package com.gasen.usercenterbackend.config.rabbitmq;
 
 import com.gasen.usercenterbackend.model.dao.Complaint;
 import com.gasen.usercenterbackend.service.IComplaintService;
-import com.gasen.usercenterbackend.service.ICreditRecordService;
+import com.gasen.usercenterbackend.service.IUserService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -17,17 +17,18 @@ public class ComplaintMessageConsumer {
     
     @Resource
     private IComplaintService complaintService;
-    
+
     @Resource
-    private ICreditRecordService creditRecordService;
-    
+    private IUserService userService;
+
     /**
      * 处理投诉消息
+     * 使用自定义的线程池处理消息
      * @param complaintId 投诉ID
      */
-    @RabbitListener(queues = "complaint.queue")
+    @RabbitListener(queues = "complaint.queue", containerFactory = "rabbitListenerContainerFactory")
     public void processComplaint(Long complaintId) {
-        log.info("收到投诉处理消息，投诉ID: {}", complaintId);
+        log.info("收到投诉处理消息，投诉ID: {}, 当前线程: {}", complaintId, Thread.currentThread().getName());
         
         try {
             // 获取投诉记录
@@ -44,10 +45,27 @@ public class ComplaintMessageConsumer {
             }
             
             // 检查投诉内容有效性
-            IComplaintService.ComplaintCheckResult checkResult = complaintService.checkComplaintContent(complaint.getContent());
-            
+            IComplaintService.ComplaintCheckResult result = complaintService.checkComplaintContent(complaint.getContent());
+            if(result==null) {
+                log.error("检查投诉内容有效性失败");
+                return;
+            }
+            if(result.isValid()){
+                boolean res = complaintService.handleValidComplaint(complaintId);
+                // 对用户进行扣分
+                
+                if(!res){
+                    log.error("处理成功的投诉id: {} 消息失败", complaintId);
+                }
+            }else{
+                boolean res = complaintService.handleInvalidComplaint(complaintId, result.rejectReason());
+                if(!res){
+                    log.error("处理失败的投诉id: {} 消息失败", complaintId);
+                }
+            }
+
         } catch (Exception e) {
             log.error("处理投诉消息异常", e);
         }
     }
-} 
+}

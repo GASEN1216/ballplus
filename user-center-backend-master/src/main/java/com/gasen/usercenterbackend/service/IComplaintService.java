@@ -59,7 +59,11 @@ public interface IComplaintService extends IService<Complaint> {
      * @return 投诉ID列表
      */
     List<Long> batchCreateComplaints(List<Complaint> complaints);
-    
+
+    boolean handleValidComplaint(Long complaintId);
+
+    boolean handleInvalidComplaint(Long complaintId, String rejectReason);
+
     /**
      * 投诉内容检查结果
      */

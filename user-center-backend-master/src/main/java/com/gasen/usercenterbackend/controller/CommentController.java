@@ -7,7 +7,6 @@ import com.gasen.usercenterbackend.model.dto.AddComment;
 import com.gasen.usercenterbackend.model.vo.CommentInfo;
 import com.gasen.usercenterbackend.model.dto.UpdateComment;
 import com.gasen.usercenterbackend.model.dao.Comment;
-import com.gasen.usercenterbackend.model.vo.SubCommentDetail;
 import com.gasen.usercenterbackend.model.vo.SubCommentInfo;
 import com.gasen.usercenterbackend.service.ICommentService;
 import com.gasen.usercenterbackend.service.IPostService;
@@ -23,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 import static com.gasen.usercenterbackend.constant.LikeConstant.COMMENT_TYPE;
-import static com.gasen.usercenterbackend.constant.LikeConstant.POST_TYPE;
 
 @Slf4j
 @RestController

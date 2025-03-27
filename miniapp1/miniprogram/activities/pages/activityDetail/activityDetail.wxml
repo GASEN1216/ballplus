@@ -53,6 +53,7 @@
         </view>
         <view class="complaint-reason">{{item.content}}</view>
         <view class="complaint-status" wx:if="{{item.status === 1}}">
+          <text></text>
           <text class="status-tag valid">有效投诉</text>
         </view>
         <view class="complaint-status" wx:elif="{{item.status === 2}}">

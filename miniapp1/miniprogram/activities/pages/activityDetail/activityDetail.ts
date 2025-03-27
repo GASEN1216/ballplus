@@ -19,7 +19,8 @@ Page({
         cancelReason: '',
         canComplaint: false, // 是否可以投诉
         complaints: [], // 投诉记录列表
-        commonReasons: ['人数不足', '场地变更', '天气原因', '临时有事', '个人原因', '时间冲突'] // 常用取消原因
+        commonReasons: ['人数不足', '场地变更', '天气原因', '临时有事', '个人原因', '时间冲突'], // 常用取消原因
+        eventId: null // 保存活动ID，方便后续刷新使用
     },
     // 请求订阅消息授权
     requestSubscribeMessage() {
@@ -74,6 +75,9 @@ Page({
 
     onLoad(options) {
         const { id } = options; // 获取活动ID
+        this.setData({
+            eventId: Number(id) // 保存活动ID，方便后续刷新使用
+        });
         this.fetchActivityDetail(Number(id));
         if (app.globalData.isLoggedin) {
             this.setData({
@@ -86,6 +90,32 @@ Page({
 
         // 获取投诉列表
         this.fetchComplaints(Number(id));
+    },
+
+    // 页面显示时刷新数据
+    onShow() {
+        const { eventId } = this.data;
+        if (eventId) {
+            // 检查是否可以投诉
+            this.checkCanComplaint(eventId);
+            // 获取投诉列表
+            this.fetchComplaints(eventId);
+        }
+    },
+
+    // 下拉刷新
+    onPullDownRefresh() {
+        const { eventId } = this.data;
+        if (eventId) {
+            // 刷新活动详情
+            this.fetchActivityDetail(eventId);
+            // 检查是否可以投诉
+            this.checkCanComplaint(eventId);
+            // 获取投诉列表
+            this.fetchComplaints(eventId);
+        }
+        // 停止下拉刷新动画
+        wx.stopPullDownRefresh();
     },
 
     // 获取活动详情

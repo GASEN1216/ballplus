@@ -176,7 +176,7 @@ Page({
                 } else {
                     wx.showModal({
                         title: '提交失败',
-                        content: res.data.message || '请稍后重试',
+                        content: res.data.detail || '请稍后重试',
                         showCancel: false,
                     });
                 }

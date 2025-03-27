@@ -72,7 +72,7 @@ public class ComplaintController {
         
         // 检查用户是否已经提交过投诉
         if (complaintService.hasComplaint(userId, eventId)) {
-            return ResultUtils.error(ErrorCode.OPERATION_ERROR, "您已经提交过投诉");
+            return ResultUtils.error(ErrorCode.ALREADY_COMPLIANT, "您已经提交过投诉");
         }
         
         // 解析被投诉人ID

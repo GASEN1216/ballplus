@@ -141,8 +141,8 @@ public class ComplaintServiceImpl extends ServiceImpl<ComplaintMapper, Complaint
     /**
      * 检查投诉内容有效性
      * 调用DeepSeek API进行内容审核
+     *
      * @param content 投诉内容
-     * @return 检查结果和拒绝原因
      */
     @Override
     public ComplaintCheckResult checkComplaintContent(String content) {
@@ -200,14 +200,11 @@ public class ComplaintServiceImpl extends ServiceImpl<ComplaintMapper, Complaint
             }
             
             log.error("调用DeepSeek API失败: {}", response);
-            // 调用失败时设置状态为0（待处理），但不通过投诉
-            return new ComplaintCheckResult(false, "内容审核系统暂时不可用，请稍后再试");
-            
+
         } catch (Exception e) {
             log.error("调用DeepSeek API异常", e);
-            // 发生异常时设置状态为0（待处理），但不通过投诉
-            return new ComplaintCheckResult(false, "内容审核系统异常，请稍后再试");
         }
+        return null;
     }
 
     /**
@@ -244,6 +241,7 @@ public class ComplaintServiceImpl extends ServiceImpl<ComplaintMapper, Complaint
      * @param complaintId 投诉ID
      * @return 处理结果
      */
+    @Override
     public boolean handleValidComplaint(Long complaintId) {
         Complaint complaint = getById(complaintId);
         if (complaint == null) {
@@ -275,6 +273,7 @@ public class ComplaintServiceImpl extends ServiceImpl<ComplaintMapper, Complaint
      * @param rejectReason 拒绝原因
      * @return 处理结果
      */
+    @Override
     public boolean handleInvalidComplaint(Long complaintId, String rejectReason) {
         Complaint complaint = getById(complaintId);
         if (complaint == null) {

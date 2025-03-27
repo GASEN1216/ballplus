@@ -28,8 +28,15 @@ public class LikeEventConsumer {
     @Resource
     private ISubCommentService subCommentService;
 
-    @RabbitListener(queues = "likeQueue")
+    /**
+     * 处理点赞事件
+     * 使用自定义的线程池处理消息
+     * @param event 点赞事件
+     */
+    @RabbitListener(queues = "likeQueue", containerFactory = "rabbitListenerContainerFactory")
     public void handleLikeEvent(LikeEvent event) {
+        log.info("收到点赞事件，类型: {}, ID: {}, 当前线程: {}", event.getType(), event.getId(), Thread.currentThread().getName());
+        
         if (event==null)
             throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "点赞事件为空");
 
