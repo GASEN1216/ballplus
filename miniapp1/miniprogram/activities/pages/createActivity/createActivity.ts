@@ -67,6 +67,34 @@ Page({
             timeOptions: timeOptions
         });
 
+        // 计算当前时间接近的半小时时间点的索引
+        const currentHour = today.getHours();
+        const currentMinute = today.getMinutes();
+        const currentTime = currentHour * 60 + currentMinute; // 转换为分钟数
+
+        // 找到第一个大于当前时间的半小时时间点
+        let startTimeIndex = 0;
+        for (let i = 0; i < timeOptions.length; i++) {
+            const time = timeOptions[i];
+            const [hour, minute] = time.split(':').map(Number);
+            const totalMinutes = hour * 60 + minute;
+
+            if (totalMinutes >= currentTime) {
+                startTimeIndex = i;
+                break;
+            }
+        }
+
+        // 计算默认结束时间索引 (开始时间后1小时，最少半小时)
+        let endTimeIndex = startTimeIndex + 2; // 默认加1小时(+2个索引)
+        if (endTimeIndex >= timeOptions.length) {
+            endTimeIndex = timeOptions.length - 1; // 防止超出索引范围
+        }
+
+        // 获取对应的时间字符串
+        const defaultStartTime = timeOptions[startTimeIndex];
+        const defaultEndTime = timeOptions[endTimeIndex];
+
         const dateRange = Array.from({ length: 30 }, (_, i) => {
             const date = new Date(today.getTime() + i * 24 * 60 * 60 * 1000);
             return date.toISOString().slice(0, 10);
@@ -83,6 +111,8 @@ Page({
             'event.appId': app.globalData.currentUser.id,
             'event.avatar': app.globalData.currentUser.avatar,
             'event.eventDate': todayDate, // 默认设置为今天的日期
+            'event.eventTime': defaultStartTime, // 默认开始时间
+            'event.eventTimee': defaultEndTime, // 默认结束时间
             'event.location': location, // 解码参数
             'event.locationDetail': locationDetail,
             'event.latitude': latitude,
@@ -90,7 +120,9 @@ Page({
             'event.phoneNumber': app.globalData.currentUser.phone,
             fromMap, // 根据 options 判断是否从地图传入
             dateRange,
-            participantRange
+            participantRange,
+            startTimeIndex: startTimeIndex, // 存储开始时间索引
+            endTimeIndex: endTimeIndex // 存储结束时间索引
         });
     },
     onShow() {
@@ -306,6 +338,26 @@ Page({
 
         if (endMinutes <= startMinutes) {
             wx.showToast({ title: '结束时间必须大于开始时间', icon: 'none' });
+            return;
+        }
+
+        // 验证开始时间不能早于当前时间
+        const now = new Date();
+        const eventDate = new Date(event.eventDate);
+        const [startHour, startMinute] = event.eventTime.split(':').map(Number);
+
+        // 设置事件开始的日期时间
+        const eventStartDateTime = new Date(
+            eventDate.getFullYear(),
+            eventDate.getMonth(),
+            eventDate.getDate(),
+            startHour,
+            startMinute
+        );
+
+        // 如果活动开始时间早于当前时间，则提示错误
+        if (eventStartDateTime < now) {
+            wx.showToast({ title: '开始时间不能早于当前时间', icon: 'none' });
             return;
         }
 

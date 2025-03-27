@@ -56,7 +56,8 @@
                 "pages/profile/profile",
                 "pages/editProfile/editProfile",
                 "pages/friendRequests/friendRequests",
-                "pages/settings/settings"
+                "pages/settings/settings",
+                "pages/creditDetail/creditDetail"
             ]
         },
         {

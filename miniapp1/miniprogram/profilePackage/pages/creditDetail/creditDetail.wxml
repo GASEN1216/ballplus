@@ -1,0 +1,94 @@
+<view class="credit-detail-container">
+  <!-- 顶部信誉分概览 -->
+  <view class="credit-overview">
+    <view class="credit-score">
+      <text class="score-value">{{creditInfo.credit}}</text>
+      <text class="score-label">信誉分</text>
+    </view>
+    <view class="credit-level">
+      <text class="level-label">信誉等级</text>
+      <text class="level-value">{{creditInfo.levelName}}</text>
+    </view>
+  </view>
+
+  <!-- 信誉分历史记录 -->
+  <view class="credit-history">
+    <view class="section-title">信誉分变动记录</view>
+    <scroll-view class="history-list" scroll-y="true" wx:if="{{creditHistory.length > 0}}">
+      <view class="history-item" wx:for="{{creditHistory}}" wx:key="id">
+        <view class="history-header">
+          <text class="history-title">{{item.title}}</text>
+          <text class="history-time">{{item.createTime}}</text>
+        </view>
+        <view class="history-content">
+          <text class="history-reason">{{item.reason}}</text>
+          <text class="history-change {{item.change > 0 ? 'positive' : 'negative'}}">{{item.change > 0 ? '+' : ''}}{{item.change}}</text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="no-record" wx:else>
+      <text>暂无信誉分变动记录</text>
+    </view>
+  </view>
+
+  <!-- 信誉分等级说明 -->
+  <view class="credit-levels">
+    <view class="section-title">信誉等级</view>
+    <view class="levels-content">
+      <view class="level-item {{creditInfo.level >= 5 ? 'current-level' : ''}}">
+        <view class="level-dot"></view>
+        <view class="level-info">
+          <text class="level-name">优秀球友</text>
+          <text class="level-range">90-100分</text>
+        </view>
+      </view>
+      <view class="level-item {{creditInfo.level == 4 ? 'current-level' : ''}}">
+        <view class="level-dot"></view>
+        <view class="level-info">
+          <text class="level-name">信用良好</text>
+          <text class="level-range">80-89分</text>
+        </view>
+      </view>
+      <view class="level-item {{creditInfo.level == 3 ? 'current-level' : ''}}">
+        <view class="level-dot"></view>
+        <view class="level-info">
+          <text class="level-name">正常信用</text>
+          <text class="level-range">70-79分</text>
+        </view>
+      </view>
+      <view class="level-item {{creditInfo.level == 2 ? 'current-level' : ''}}">
+        <view class="level-dot"></view>
+        <view class="level-info">
+          <text class="level-name">信用一般</text>
+          <text class="level-range">60-69分</text>
+        </view>
+      </view>
+      <view class="level-item {{creditInfo.level == 1 ? 'current-level' : ''}}">
+        <view class="level-dot"></view>
+        <view class="level-info">
+          <text class="level-name">信用较差</text>
+          <text class="level-range">0-59分</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+    <!-- 信誉分说明 -->
+    <view class="credit-explanation">
+    <view class="section-title">信誉分说明</view>
+    <view class="explanation-content">
+      <view class="explanation-item">
+        <view class="item-title">什么是信誉分?</view>
+        <view class="item-content">信誉分是衡量用户在平台上活动表现的重要指标，反映了用户的守信程度和行为规范。满分为100分。</view>
+      </view>
+      <view class="explanation-item">
+        <view class="item-title">如何提高信誉分?</view>
+        <view class="item-content">参加活动并按时出席、遵守活动规则、获得其他用户的好评等都能提高信誉分。</view>
+      </view>
+      <view class="explanation-item">
+        <view class="item-title">信誉分有什么用?</view>
+        <view class="item-content">信誉分高的用户在参与活动时会获得更多信任，同时可以享受平台提供的更多特权。</view>
+      </view>
+    </view>
+  </view>
+</view> 

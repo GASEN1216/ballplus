@@ -264,6 +264,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return userMapper.selectList(new LambdaQueryWrapper<User>().in(User::getId, useridList)).stream().map(User::getOpenId).toList();
     }
 
+    @Override
+    public void updateCredit(Integer userId, int creditChange) {
+        User user = userMapper.selectById(userId);
+        if (user != null) {
+            // 计算新的信誉分，确保不小于0
+            int newCredit = Math.max(0, user.getCredit() + creditChange);
+            user.setCredit(newCredit);
+            // 更新用户信息
+            userMapper.updateById(user);
+            log.info("用户ID: {} 信誉分已从 {} 更新为 {}", userId, user.getCredit() + creditChange, newCredit);
+        }
+    }
+
     /**
      * 判断用户是否合法
      * */

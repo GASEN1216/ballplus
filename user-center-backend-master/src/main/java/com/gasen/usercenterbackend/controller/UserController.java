@@ -11,6 +11,8 @@ import com.gasen.usercenterbackend.common.ResultUtils;
 import com.gasen.usercenterbackend.config.QiniuConfig;
 import com.gasen.usercenterbackend.config.WXConfig;
 import com.gasen.usercenterbackend.mapper.UserMapper;
+import com.gasen.usercenterbackend.model.dto.CreditHistoryDTO;
+import com.gasen.usercenterbackend.model.dto.CreditInfoDTO;
 import com.gasen.usercenterbackend.model.dto.UserBannedDaysRequest;
 import com.gasen.usercenterbackend.model.dto.UserRegisterLoginRequest;
 import com.gasen.usercenterbackend.model.dto.weChatAddItemRequest;
@@ -18,6 +20,7 @@ import com.gasen.usercenterbackend.model.dto.weChatUseItemRequest;
 import com.gasen.usercenterbackend.model.dao.User;
 import com.gasen.usercenterbackend.model.vo.goEasyUser;
 import com.gasen.usercenterbackend.model.vo.wxUser;
+import com.gasen.usercenterbackend.service.CreditService;
 import com.gasen.usercenterbackend.service.IFriendsService;
 import com.gasen.usercenterbackend.service.IItemsService;
 import com.gasen.usercenterbackend.service.IUserService;
@@ -62,6 +65,9 @@ public class UserController {
 
     @Resource
     private IFriendsService friendsService;
+    
+    @Resource
+    private CreditService creditService;
 
     @Resource
     private UserMapper userMapper;
@@ -473,5 +479,41 @@ public class UserController {
     public boolean isAdmin(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute(USER_LOGIN_IN);
         return user != null && user.getState() == ADMIN;
+    }
+
+    /**
+     * 获取用户信誉分详情
+     * @param userId 用户ID
+     * @return 信誉分信息
+     */
+    @Operation(summary = "获取用户信誉分详情")
+    @GetMapping("/wx/getCreditInfo")
+    public BaseResponse getCreditInfo(@RequestParam("userId") Long userId) {
+        if (userId == null) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "用户ID不能为空");
+        }
+        
+        CreditInfoDTO creditInfo = creditService.getCreditInfo(userId);
+        if (creditInfo == null) {
+            return ResultUtils.error(ErrorCode.USER_NOT_EXIST, "用户不存在");
+        }
+        
+        return ResultUtils.success(creditInfo);
+    }
+    
+    /**
+     * 获取用户信誉分变动历史记录
+     * @param userId 用户ID
+     * @return 信誉分变动历史记录列表
+     */
+    @Operation(summary = "获取用户信誉分变动历史记录")
+    @GetMapping("/wx/getCreditHistory")
+    public BaseResponse getCreditHistory(@RequestParam("userId") Long userId) {
+        if (userId == null) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "用户ID不能为空");
+        }
+        
+        List<CreditHistoryDTO> historyList = creditService.getCreditHistory(userId);
+        return ResultUtils.success(historyList);
     }
 }

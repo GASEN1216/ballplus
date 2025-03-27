@@ -44,4 +44,6 @@ public interface IUserService extends IService<User> {
     String getOpenIdByUserId(Integer userId);
 
     List<String> getOpenIdByUserIds(List<Integer> useridList);
+
+    void updateCredit(Integer userId, int creditChange);
 }

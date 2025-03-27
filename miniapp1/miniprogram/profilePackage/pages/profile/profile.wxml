@@ -29,7 +29,10 @@
 
     <view class="info-item">
       <text class="label">⭐ 信誉分</text>
-      <text class="value">{{userData.credit}}</text>
+      <view class="value-container">
+        <text class="value">{{userData.credit}}</text>
+        <view wx:if="{{isSelf}}" class="info-icon" bindtap="navigateToCreditDetail">i</view>
+      </view>
     </view>
 
     <view class="info-item">

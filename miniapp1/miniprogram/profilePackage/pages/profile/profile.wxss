@@ -60,6 +60,26 @@ page {
   color: #666;
 }
 
+.value-container {
+  display: flex;
+  align-items: center;
+}
+
+.info-icon {
+  margin-left: 8px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #4080ff;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+}
+
 /* 新的按钮区域样式 */
 .action-area {
   width: 90%;

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gasen.usercenterbackend.mapper.CreditMapper">
+
+    <resultMap id="BaseResultMap" type="com.gasen.usercenterbackend.model.entity.CreditRecord">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="creditChange" column="credit_change" jdbcType="INTEGER"/>
+        <result property="changeType" column="change_type" jdbcType="TINYINT"/>
+        <result property="changeReason" column="change_reason" jdbcType="VARCHAR"/>
+        <result property="relationId" column="relation_id" jdbcType="BIGINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, user_id, credit_change, change_type, change_reason, relation_id, create_time
+    </sql>
+</mapper> 

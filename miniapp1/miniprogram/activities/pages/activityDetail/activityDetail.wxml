@@ -56,11 +56,14 @@
           <text></text>
           <text class="status-tag valid">有效投诉</text>
         </view>
-        <view class="complaint-status" wx:elif="{{item.status === 2}}">
-          <text class="status-tag invalid">无效投诉</text>
-          <text class="reject-reason">原因: {{item.rejectReason}}</text>
+        <view class="complaint-reason reject-container" wx:elif="{{item.status === 2}}">
+          <text class="reject-reason">{{item.rejectReason}}</text>
         </view>
-        <view class="complaint-status" wx:else>
+        <view class="complaint-status" wx:if="{{item.status === 2}}">
+          <text></text>
+          <text class="status-tag invalid">无效投诉</text>
+        </view>
+        <view class="complaint-status" wx:if="{{item.status === 0}}">
           <text></text>
           <text class="status-tag pending">处理中</text>
         </view>

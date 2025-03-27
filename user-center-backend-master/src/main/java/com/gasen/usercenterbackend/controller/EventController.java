@@ -164,8 +164,11 @@ public class EventController {
             
             // 如果在活动开始前半小时内取消，扣除10分信誉分
             if (deductCredit) {
-                creditRecordService.addCreditRecord(userId, -10, 2, "取消活动", eventId);
-                log.info("用户ID: {} 在活动开始前半小时内取消活动，扣除10分信誉分", userId);
+                creditRecordService.addCreditRecord(userId, -2, 2, "在活动开始前半小时内取消活动", eventId);
+                
+                userService.updateCredit(userId, -2);
+                
+                log.info("用户ID: {} 在活动开始前半小时内取消活动，扣除2分信誉分", userId);
             }
             
             // 异步发送取消通知
@@ -251,8 +254,11 @@ public class EventController {
             
             // 如果在活动开始前半小时内退出，扣除5分信誉分
             if (deductCredit) {
-                creditRecordService.addCreditRecord(userId, -5, 2, "退出活动", eventId);
-                log.info("用户ID: {} 活动开始前半小时内退出活动，扣除5分信誉分", userId);
+                creditRecordService.addCreditRecord(userId, -1, 2, "退出活动", eventId);
+
+                userService.updateCredit(userId, -1);
+
+                log.info("用户ID: {} 活动开始前半小时内退出活动，扣除1分信誉分", userId);
             }
             
             return ResultUtils.success("退出活动成功！");

@@ -284,6 +284,20 @@ Page({
         });
     },
 
+    // 跳转到信誉分详情页面
+    navigateToCreditDetail() {
+        wx.navigateTo({
+            url: '/profilePackage/pages/creditDetail/creditDetail',
+            fail: (err) => {
+                console.error('跳转到信誉分详情页面失败', err);
+                wx.showToast({
+                    title: '跳转失败，请重试',
+                    icon: 'none'
+                });
+            }
+        });
+    },
+
     // 分享功能
     onShareAppMessage() {
         const userData = this.data.userData as any;
