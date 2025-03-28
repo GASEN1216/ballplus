@@ -31,6 +31,7 @@ public class EventStateUpdateTask {
     /**
      * 每分钟运行一次，更新 event 表中 eventDate 早于现在的活动状态
      */
+    // TODO: 优化定时任务，使用线程池+批量处理
     @Scheduled(cron = "0 */1 * * * ?")
     public void updateEventState() {
         int count = eventService.scheduleUpdateEventState();
@@ -43,6 +44,7 @@ public class EventStateUpdateTask {
 
     /**
      * 每半小时运行一次，检查 Redis ZSET 中的活动 ID，发送通知
+     * TODO: key按一个小时进行切片，避免单个 ZSET 过大，每次定时任务查找当前时间点的key，若没有则过若有则删除key并把活动放进kafka，使用线程池并发处理，预计可处理万级消息通知
      */
     @Scheduled(cron = "0 */30 * * * ?")
     public void checkAndSendEventNotifications() {

@@ -47,7 +47,8 @@
         {
             "root": "pointsMall",
             "pages": [
-                "pages/pointsMall/pointsMall"
+                "pages/pointsMall/pointsMall",
+                "pages/scoreHistory/scoreHistory"
             ]
         },
         {

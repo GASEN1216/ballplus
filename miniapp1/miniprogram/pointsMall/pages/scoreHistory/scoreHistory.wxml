@@ -1,0 +1,49 @@
+<view class="page">
+  <!-- 顶部规则卡片 -->
+  <view class="rules-section">
+    <view class="section-header">
+      <text class="section-title">赛点规则</text>
+    </view>
+    <view class="rules-list">
+      <view class="rule-item">• 赛点只增加，不会减少</view>
+      <view class="rule-item">• 每日首次登录 +1 赛点</view>
+      <view class="rule-item">• 活动成功完成，所有参与者 +1 赛点</view>
+      <view class="rule-item">• 活动创建者额外 +1 赛点</view>
+    </view>
+  </view>
+
+  <!-- 赛点记录 -->
+  <view class="history-section">
+    <view class="section-header">
+      <text class="section-title">赛点记录</text>
+    </view>
+    
+    <!-- 加载中 -->
+    <view class="loading-wrapper" wx:if="{{isLoading}}">
+      <view class="spinner"></view>
+    </view>
+    
+    <!-- 历史记录列表 -->
+    <scroll-view wx:else scroll-y="true" class="history-list" enable-back-to-top="true">
+      <block wx:if="{{historyList.length > 0}}">
+        <view class="history-item" wx:for="{{historyList}}" wx:key="id">
+          <view class="history-content">
+            <text class="history-desc">{{item.description}}</text>
+            <text class="history-time">{{item.createdTime}}</text>
+          </view>
+          <view class="history-amount-container">
+            <text class="history-amount">+{{item.changeAmount}}</text>
+          </view>
+        </view>
+      </block>
+      
+      <!-- 无记录 -->
+      <view class="empty-state" wx:else>
+        <view class="empty-icon">
+          <view class="icon-circle"></view>
+        </view>
+        <text class="empty-text">暂无赛点记录</text>
+      </view>
+    </scroll-view>
+  </view>
+</view> 

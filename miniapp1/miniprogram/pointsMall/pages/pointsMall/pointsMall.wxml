@@ -2,22 +2,43 @@
   <!-- 顶部赛点信息 -->
   <view class="header">
     <text class="title">🏆 赛点商城</text>
-    <text class="subtitle">您的当前赛点：{{score}}</text>
+    <view class="score-container">
+      <text class="subtitle">您的当前赛点：{{score}}</text>
+      <view class="info-icon" bindtap="navigateToScoreHistory">
+        <text class="info-circle">i</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载中提示 -->
+  <view class="loading-container" wx:if="{{isLoading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载商品中...</text>
   </view>
 
   <!-- 商品列表 -->
-  <view class="products-grid">
-    <block wx:for="{{products}}" wx:key="id">
-      <view class="product-card {{item.type}}" bindtap="onProductTap" data-id="{{item.id}}">
-        <!-- 显示头像类商品 -->
-        <cover-image wx:if="{{item.type === 'avatar'}}" src="{{item.image}}" class="avatar-image"></cover-image>
+  <view class="products-grid" wx:else>
+    <block wx:if="{{products.length > 0}}">
+      <block wx:for="{{products}}" wx:key="id">
+        <view class="product-card {{item.type}}" bindtap="onProductTap" data-id="{{item.id}}">
+          <!-- 使用中标记（优先显示） -->
+          <text class="status-tag top-left in-use" wx:if="{{item.isInUse}}">使用中</text>
+          <!-- 已拥有标记（仅在未使用时显示） -->
+          <text class="status-tag top-left owned" wx:elif="{{item.isOwned}}">已拥有</text>
+          
+          <!-- 显示头像类商品 -->
+          <cover-image wx:if="{{item.type === 'avatar'}}" src="{{item.image}}" class="avatar-image"></cover-image>
 
-        <!-- 显示非头像商品 -->
-        <image wx:if="{{item.type !== 'avatar'}}" src="{{item.image}}" class="non-avatar-image"></image>
+          <!-- 显示非头像商品 -->
+          <image wx:if="{{item.type !== 'avatar'}}" src="{{item.image}}" class="non-avatar-image"></image>
 
-        <text class="product-name">{{item.name}}</text>
-        <text class="product-price">{{item.price}} 赛点</text>
-      </view>
+          <text class="product-name">{{item.name}}</text>
+          <text class="product-price">{{item.price}} 赛点</text>
+        </view>
+      </block>
     </block>
+    <view class="empty-state" wx:else>
+      <text class="empty-text">暂无商品</text>
+    </view>
   </view>
 </view>

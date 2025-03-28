@@ -11,19 +11,24 @@ import com.gasen.usercenterbackend.common.ResultUtils;
 import com.gasen.usercenterbackend.config.QiniuConfig;
 import com.gasen.usercenterbackend.config.WXConfig;
 import com.gasen.usercenterbackend.mapper.UserMapper;
+import com.gasen.usercenterbackend.model.dao.Product;
+import com.gasen.usercenterbackend.model.dao.User;
 import com.gasen.usercenterbackend.model.dto.CreditHistoryDTO;
 import com.gasen.usercenterbackend.model.dto.CreditInfoDTO;
+import com.gasen.usercenterbackend.model.dto.PurchaseProductRequest;
+import com.gasen.usercenterbackend.model.dto.ScoreHistoryDTO;
 import com.gasen.usercenterbackend.model.dto.UserBannedDaysRequest;
 import com.gasen.usercenterbackend.model.dto.UserRegisterLoginRequest;
 import com.gasen.usercenterbackend.model.dto.weChatAddItemRequest;
 import com.gasen.usercenterbackend.model.dto.weChatUseItemRequest;
-import com.gasen.usercenterbackend.model.dao.User;
 import com.gasen.usercenterbackend.model.vo.goEasyUser;
 import com.gasen.usercenterbackend.model.vo.wxUser;
 import com.gasen.usercenterbackend.service.CreditService;
 import com.gasen.usercenterbackend.service.IFriendsService;
 import com.gasen.usercenterbackend.service.IItemsService;
+import com.gasen.usercenterbackend.service.IProductService;
 import com.gasen.usercenterbackend.service.IUserService;
+import com.gasen.usercenterbackend.service.IScoreService;
 import com.gasen.usercenterbackend.utils.WechatUtil;
 import com.qiniu.util.Auth;
 import io.swagger.v3.oas.annotations.Operation;
@@ -68,9 +73,15 @@ public class UserController {
     
     @Resource
     private CreditService creditService;
+    
+    @Resource
+    private IProductService productService;
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private IScoreService scoreService;
 
     private final WXConfig wxConfig;
 
@@ -125,6 +136,61 @@ public class UserController {
         // 更新用户信息
         userService.updateAvatar(weChatAddItemRequest);
         return ResultUtils.success(SUCCESS);
+    }
+    
+    /**
+     * 从商城购买商品
+     */
+    @Operation(summary = "从商城购买商品")
+    @PostMapping("/wx/purchaseProduct")
+    public BaseResponse purchaseProduct(@RequestBody PurchaseProductRequest request) {
+        if (request == null || request.getUserId() == null || request.getProductId() == null) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "参数不完整");
+        }
+        
+        Integer userId = request.getUserId();
+        Integer productId = request.getProductId();
+        
+        // 查询用户
+        User user = userService.getById(userId);
+        if (user == null) {
+            return ResultUtils.error(ErrorCode.USER_NOT_EXIST, "用户不存在");
+        }
+        
+        // 查询商品
+        Product product = productService.getProductById(productId);
+        if (product == null) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "商品不存在");
+        }
+        
+        // 检查用户是否已拥有该商品
+        List<Integer> userItems = itemsService.getItems(userId);
+        if (userItems.contains(productId)) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "您已拥有该商品");
+        }
+        
+        // 检查用户赛点是否足够
+        if (user.getScore() < product.getPrice()) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "赛点不足，无法购买该商品");
+        }
+        
+        // 扣除用户赛点
+        user.setScore(user.getScore() - product.getPrice());
+        userService.updateById(user);
+        
+        // 添加商品到用户物品列表
+        itemsService.addItem(userId, productId);
+        
+        // 如果是头像类型，直接设置为用户的头像
+        if ("avatar".equals(product.getType())) {
+            weChatAddItemRequest request2 = new weChatAddItemRequest();
+            request2.setUserId(userId);
+            request2.setItemId(productId);
+            request2.setUrl(product.getImage());
+            userService.updateAvatar(request2);
+        }
+        
+        return ResultUtils.success(true);
     }
 
     /**
@@ -229,6 +295,8 @@ public class UserController {
             return ResultUtils.error(ErrorCode.BANNED_USER, user.getUnblockingTime());
         // 加经验
         userService.addExp(user);
+        // 处理每日首次登录加分
+        scoreService.processLoginScore(user);
         // 返回安全用户信息
         wxUser saftyUser = getSaftywxUser(user);
         // 去掉token前面的REDIS_USER_TOKEN字符串，再赋值
@@ -514,6 +582,22 @@ public class UserController {
         }
         
         List<CreditHistoryDTO> historyList = creditService.getCreditHistory(userId);
+        return ResultUtils.success(historyList);
+    }
+
+    /**
+     * 获取用户赛点历史
+     * @param userId 用户ID
+     * @return 赛点历史记录列表
+     */
+    @Operation(summary = "获取用户赛点历史")
+    @GetMapping("/wx/getScoreHistory")
+    public BaseResponse getScoreHistory(@RequestParam("userId") Long userId) {
+        if (userId == null) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "用户ID不能为空");
+        }
+        
+        List<ScoreHistoryDTO> historyList = scoreService.getUserScoreHistory(userId);
         return ResultUtils.success(historyList);
     }
 }
