@@ -40,12 +40,12 @@ public class Complaint implements Serializable {
     /**
      * 投诉人ID
      */
-    private Integer complainerId;
+    private Long complainerId;
 
     /**
      * 被投诉人ID
      */
-    private Integer complainedId;
+    private Long complainedId;
 
     /**
      * 投诉内容

@@ -8,7 +8,8 @@ Page({
         pageSize: 10,
         loading: false,
         loadAll: false,
-        userId: ''
+        userId: '',
+        nextCursor: ''
     },
 
     onLoad() {
@@ -20,43 +21,32 @@ Page({
 
     // 刷新页面
     onPullDownRefresh() {
-        // 保存当前数据
-        const currentPosts = this.data.posts;
-        
-        // 先设置 loading 状态，但不清空数据
         this.setData({
-            currentPage: 1,
+            posts: [],
+            loading: true,
             loadAll: false,
-            loading: true
+            nextCursor: null // 重置游标
         });
-
-        // 添加延时，让刷新动画持续时间更合理
-        setTimeout(() => {
-            this.fetchMyPosts((newPosts: any[]) => {
-                // 如果获取新数据失败，恢复原来的数据
-                if (!newPosts || newPosts.length === 0) {
-                    this.setData({
-                        posts: currentPosts
-                    });
-                }
-                wx.stopPullDownRefresh();
-            });
-        }, 500);
+        this.fetchMyPosts(() => {
+            wx.stopPullDownRefresh();
+        });
     },
 
     // 加载更多帖子
     loadMorePosts() {
         if (!this.data.loadAll && !this.data.loading) {
             this.setData({
-                currentPage: this.data.currentPage + 1
+                loading: true
             });
+            // 使用nextCursor加载更多
             this.fetchMyPosts();
         }
     },
 
     // 获取我的帖子列表
     fetchMyPosts(callback?: Function) {
-        const { userId, currentPage, pageSize } = this.data;
+        const { userId, pageSize, nextCursor } = this.data;
+        const isFirstLoad = !nextCursor;
 
         if (!userId) {
             wx.showToast({
@@ -66,21 +56,37 @@ Page({
             return;
         }
 
+        // 构建请求参数
+        const requestData: {
+            userId: number;
+            pageSize: number;
+            cursor?: string;
+            asc?: boolean;
+        } = {
+            userId: Number(userId),
+            pageSize: pageSize,
+            asc: false // 默认降序
+        };
+
+        // 如果有游标且不是首次加载，添加游标参数
+        if (nextCursor && !isFirstLoad) {
+            requestData.cursor = nextCursor;
+        }
+
         wx.request({
-            url: `${myPostsApp.globalData.url}/user/wx/getMyPosts`,
+            url: `${myPostsApp.globalData.url}/user/wx/getMyPostsWithCursor`,
             method: 'POST',
             header: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'X-Token': myPostsApp.globalData.currentUser.token
             },
-            data: {
-                userId: userId,
-                pageNum: currentPage,
-                pageSize: pageSize
-            },
+            data: requestData,
             success: (res: any) => {
                 if (res.statusCode === 200 && res.data.code === 0) {
-                    const newPosts = res.data.data.posts || [];
+                    const responseData = res.data.data;
+                    const newPosts = responseData.records || [];
+                    const hasMore = responseData.hasMore;
+                    const newCursor = responseData.nextCursor;
 
                     // 处理时间格式和其他数据
                     const processedPosts = newPosts.map((post: any) => ({
@@ -89,15 +95,17 @@ Page({
                         createTime: this.formatTime(post.createTime)
                     }));
 
-                    if (currentPage === 1) {
+                    if (isFirstLoad) {
                         this.setData({
                             posts: processedPosts,
-                            loadAll: processedPosts.length < pageSize
+                            loadAll: !hasMore,
+                            nextCursor: newCursor
                         });
                     } else {
                         this.setData({
                             posts: [...this.data.posts, ...processedPosts],
-                            loadAll: processedPosts.length < pageSize
+                            loadAll: !hasMore,
+                            nextCursor: newCursor
                         });
                     }
 
@@ -131,14 +139,14 @@ Page({
     goToPostDetail(e: any) {
         const postId = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: `/pages/postDetail/postDetail?id=${postId}`
+            url: `../postDetail/postDetail?id=${postId}`
         });
     },
 
     // 去创建帖子
     goToCreatePost() {
         wx.navigateTo({
-            url: '/pages/createPost/createPost'
+            url: '../createPost/createPost'
         });
     },
 

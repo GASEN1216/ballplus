@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gasen.usercenterbackend.common.BaseResponse;
 import com.gasen.usercenterbackend.common.ErrorCode;
 import com.gasen.usercenterbackend.common.ResultUtils;
+import com.gasen.usercenterbackend.model.dto.CursorPageRequest;
 import com.gasen.usercenterbackend.model.dto.ResourceQueryRequest;
 import com.gasen.usercenterbackend.model.dto.ResourceVO;
+import com.gasen.usercenterbackend.model.vo.CursorPageResponse;
 import com.gasen.usercenterbackend.service.ResourceService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -151,5 +153,74 @@ public class ResourceController {
         }
         boolean result = resourceService.removeFavorite(userId, id);
         return ResultUtils.success(result);
+    }
+
+    /**
+     * 获取资源列表（游标分页）
+     */
+    @PostMapping("/listWithCursor")
+    public BaseResponse listResourcesWithCursor(@RequestBody Map<String, Object> requestMap) {
+        ResourceQueryRequest request = null;
+        CursorPageRequest cursorRequest = null;
+        
+        try {
+            // 从Map中提取请求参数
+            if (requestMap.containsKey("request")) {
+                // 将request部分转换为ResourceQueryRequest对象
+                Map<String, Object> requestData = (Map<String, Object>) requestMap.get("request");
+                request = new ResourceQueryRequest();
+                
+                if (requestData.containsKey("type")) {
+                    request.setType((Integer) requestData.get("type"));
+                }
+                if (requestData.containsKey("keyword")) {
+                    request.setKeyword((String) requestData.get("keyword"));
+                }
+                if (requestData.containsKey("categoryId")) {
+                    request.setCategoryId(Long.valueOf(requestData.get("categoryId").toString()));
+                }
+            }
+            
+            if (requestMap.containsKey("cursorRequest")) {
+                // 将cursorRequest部分转换为CursorPageRequest对象
+                Map<String, Object> cursorData = (Map<String, Object>) requestMap.get("cursorRequest");
+                cursorRequest = new CursorPageRequest();
+                
+                if (cursorData.containsKey("cursor")) {
+                    cursorRequest.setCursor((String) cursorData.get("cursor"));
+                }
+                if (cursorData.containsKey("pageSize")) {
+                    cursorRequest.setPageSize((Integer) cursorData.get("pageSize"));
+                }
+                if (cursorData.containsKey("asc")) {
+                    cursorRequest.setAsc((Boolean) cursorData.get("asc"));
+                }
+            }
+        } catch (Exception e) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "参数解析错误");
+        }
+        
+        if (request == null) {
+            request = new ResourceQueryRequest();
+        }
+        if (cursorRequest == null) {
+            cursorRequest = new CursorPageRequest();
+        }
+        
+        CursorPageResponse<ResourceVO> response = resourceService.listResourcesWithCursor(request, cursorRequest);
+        return ResultUtils.success(response);
+    }
+
+    /**
+     * 获取用户收藏列表（游标分页）
+     */
+    @PostMapping("/favoritesWithCursor")
+    public BaseResponse listFavoritesWithCursor(@RequestParam Long userId, @RequestBody CursorPageRequest cursorRequest) {
+        if (userId == null || userId <= 0) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "用户ID不能为空或非法");
+        }
+        
+        CursorPageResponse<ResourceVO> response = resourceService.listFavoritesWithCursor(userId, cursorRequest);
+        return ResultUtils.success(response);
     }
 } 

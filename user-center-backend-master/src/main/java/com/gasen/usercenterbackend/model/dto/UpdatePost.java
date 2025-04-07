@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class UpdatePost  implements Serializable {
     // 根据 postId 查找帖子，修改内容前需校验传入的 userId 与帖子的 appId 是否一致
     private Long postId;
-    private Integer userId;
+    private Long userId;
     private String content;
 
     public Post toPost() {

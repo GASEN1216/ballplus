@@ -82,7 +82,7 @@
       <button wx:if="{{!isCreator && !isJoined}}" bindtap="joinActivity" class="join-btn">我要参加</button>
     </view>
     <button class="share-button" open-type="share">
-      <image class="share-icon" src="http://sunsetchat.top/icon/share.png"></image>
+      <image class="share-icon" src="http://ballplus.asia/icon/share.png"></image>
     </button>
   </view>
   

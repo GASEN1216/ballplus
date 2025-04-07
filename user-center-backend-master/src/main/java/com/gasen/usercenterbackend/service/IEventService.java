@@ -10,16 +10,16 @@ public interface IEventService {
 
     List<Event> listByIds(List<Long> eventIdLists);
 
-    List<Event> findTemplates(Integer userId);
+    List<Event> findTemplates(Long userId);
 
 
     Event getNearestEvent(List<Long> eventIds);
 
-    Boolean deleteTemplateByPer(Integer userId, Integer templateId);
+    Boolean deleteTemplateByPer(Long userId, Long templateId);
 
     Event getById(Long eventId);
 
-    boolean cancelEvent(Integer userId, Long eventId);
+    boolean cancelEvent(Long userId, Long eventId);
 
     boolean reduceParticipants(Long eventId);
 

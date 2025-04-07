@@ -4,9 +4,13 @@ import com.gasen.usercenterbackend.common.BaseResponse;
 import com.gasen.usercenterbackend.common.ErrorCode;
 import com.gasen.usercenterbackend.common.ResultUtils;
 import com.gasen.usercenterbackend.model.dto.AddComment;
-import com.gasen.usercenterbackend.model.vo.CommentInfo;
+import com.gasen.usercenterbackend.model.dto.CursorPageRequest;
+import com.gasen.usercenterbackend.model.dto.CursorPageRequestWrapper;
 import com.gasen.usercenterbackend.model.dto.UpdateComment;
 import com.gasen.usercenterbackend.model.dao.Comment;
+import com.gasen.usercenterbackend.model.vo.CommentDetail;
+import com.gasen.usercenterbackend.model.vo.CommentInfo;
+import com.gasen.usercenterbackend.model.vo.CursorPageResponse;
 import com.gasen.usercenterbackend.model.vo.SubCommentInfo;
 import com.gasen.usercenterbackend.service.ICommentService;
 import com.gasen.usercenterbackend.service.IPostService;
@@ -72,7 +76,7 @@ public class CommentController {
     @PostMapping("/deleteComment")
     @Transactional
     public BaseResponse deleteComment(@RequestParam Long postId, @RequestParam Long commentId,
-            @RequestParam Integer userId) {
+            @RequestParam Long userId) {
         try {
             if (commentId == null || userId == null) {
                 return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "参数为空！");
@@ -170,7 +174,7 @@ public class CommentController {
      */
     @PostMapping("/getMyPostComments")
     public BaseResponse getMyPostComments(
-            @RequestParam Integer userId,
+            @RequestParam Long userId,
             @RequestParam(defaultValue = "1") Integer pageNum,
             @RequestParam(defaultValue = "10") Integer pageSize) {
         try {
@@ -206,7 +210,7 @@ public class CommentController {
      */
     @PostMapping("/getMyCommentReplies")
     public BaseResponse getMyCommentReplies(
-            @RequestParam Integer userId,
+            @RequestParam Long userId,
             @RequestParam(defaultValue = "1") Integer pageNum,
             @RequestParam(defaultValue = "10") Integer pageSize) {
         try {
@@ -229,6 +233,56 @@ public class CommentController {
         } catch (Exception e) {
             log.error("获取用户评论回复列表异常", e);
             return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "获取用户评论回复列表失败！");
+        }
+    }
+
+    /**
+     * 获取用户评论收到的回复列表（游标分页）
+     * 
+     * @param wrapper 包含用户ID和游标分页请求的包装对象
+     * @return 回复列表及分页信息
+     */
+    @PostMapping("/getMyCommentRepliesWithCursor")
+    public BaseResponse getMyCommentRepliesWithCursor(
+            @RequestBody CursorPageRequestWrapper wrapper) {
+        try {
+            if (wrapper == null || wrapper.getUserId() == null) {
+                return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "用户ID不能为空！");
+            }
+
+            // 获取用户评论收到的回复
+            CursorPageResponse<SubCommentInfo> repliesResponse = 
+                subCommentService.getRepliesByCommentUserIdWithCursor(wrapper.getUserId(), wrapper.getRequestData());
+
+            return ResultUtils.success(repliesResponse);
+        } catch (Exception e) {
+            log.error("获取用户评论回复列表异常", e);
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "获取用户评论回复列表失败！");
+        }
+    }
+
+    /**
+     * 获取用户发布的帖子收到的评论列表（游标分页）
+     * 
+     * @param wrapper 包含用户ID和游标分页请求的包装对象
+     * @return 评论列表及分页信息
+     */
+    @PostMapping("/getMyPostCommentsWithCursor")
+    public BaseResponse getMyPostCommentsWithCursor(
+            @RequestBody CursorPageRequestWrapper wrapper) {
+        try {
+            if (wrapper == null || wrapper.getUserId() == null) {
+                return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "用户ID不能为空！");
+            }
+
+            // 获取用户发帖的评论
+            CursorPageResponse<CommentInfo> commentsResponse = 
+                commentService.getCommentsByPostUserIdWithCursor(wrapper.getUserId(), wrapper.getRequestData());
+
+            return ResultUtils.success(commentsResponse);
+        } catch (Exception e) {
+            log.error("获取用户帖子评论列表异常", e);
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "获取用户帖子评论列表失败！");
         }
     }
 }

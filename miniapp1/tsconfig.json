@@ -25,7 +25,7 @@
   "include": [
     "./**/*.ts", "miniprogram/utils/util.ts",],
   "exclude": [
-    "node_modules",
+    "miniprogram/node_modules",
     "dist"
   ]
 }

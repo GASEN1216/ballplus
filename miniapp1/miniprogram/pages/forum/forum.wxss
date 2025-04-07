@@ -1,7 +1,13 @@
 /* 整体容器 */
 .container {
+  /* 确保容器不限制高度，如果有限制需要移除或调整 */
+  height: 100vh; 
+  display: flex; /* 使用 flex 布局方便头部固定，列表滚动 */
+  flex-direction: column;
   background-color: #F8F8F8;
   padding-bottom: 20rpx;
+  padding-top: 110rpx; /* Add padding for the fixed header */
+  box-sizing: border-box; /* Include padding in height calculation */
 }
 
 /* 固定头部：搜索栏与加号按钮 */
@@ -17,6 +23,7 @@
   padding: 20rpx;
   box-shadow: 0 2rpx 5rpx rgba(0, 0, 0, 0.1);
   z-index: 100;
+  flex-shrink: 0; /* 防止头部被压缩 */
 }
 .search-input {
   flex: 1;
@@ -34,9 +41,26 @@
 
 /* 帖子列表区 */
 .post-list {
-  width: 97%;
-  margin-top: -90rpx; /* 顶部预留空间 */
-  padding: 0 20rpx;
+  flex-grow: 1; /* 占据剩余空间 */
+  /* 移除 margin-top，因为 header 是 fixed 或 flex item */
+  /* width: 100%; */ /* recycle-view 默认宽度 100% */
+  /* height: calc(100vh - 90rpx); */ /* 不再需要固定高度计算，使用 flex 布局 */
+  overflow-y: auto; /* 允许自身滚动 */
+  -webkit-overflow-scrolling: touch; /* iOS 滚动优化 */
+}
+
+/* recycle-view 默认撑满父容器，无需额外设置宽高 */
+/* recycle-view {
+  width: 100%;
+  height: 100%;
+} */
+
+/* recycle-item 是列表项的直接容器 */
+recycle-item {
+  width: 100%; /* 确保占满整个宽度 */
+  padding: 0 20rpx; /* 左右内边距，保持与原 post-item 一致 */
+  box-sizing: border-box;
+  /* 移除或注释掉 post-item 的 margin-bottom，因为 item 间距由 recycle-view 控制或内部元素处理 */
 }
 
 /* 帖子项 */
@@ -44,7 +68,7 @@
   background-color: #fff;
   border-radius: 10rpx;
   padding: 20rpx;
-  margin-bottom: 20rpx;
+  margin-bottom: 20rpx; /* 保留或移到 recycle-item 的 padding-bottom */
   box-shadow: 0 2rpx 5rpx rgba(0, 0, 0, 0.05);
 }
 
@@ -209,4 +233,22 @@
   margin-top: 10rpx;
   border: 1rpx solid #ddd;
   border-radius: 8rpx;
+}
+
+/* 加载提示样式 */
+.loading-indicator {
+  padding: 30rpx 20rpx; /* 增加上下边距 */
+  text-align: center;
+  color: #999;
+  font-size: 24rpx;
+  flex-shrink: 0; /* 防止被压缩 */
+}
+
+.loading-indicator.no-more {
+  /* 可以添加特定样式，例如减小字体 */
+}
+
+.loading-indicator.no-posts {
+  color: #ccc; /* 颜色更浅一些 */
+  padding-top: 100rpx; /* 增加一些上边距 */
 }

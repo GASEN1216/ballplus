@@ -19,7 +19,7 @@ public class CreditRecord implements Serializable {
     /**
      * 用户ID
      */
-    private Integer userId;
+    private Long userId;
     
     /**
      * 信誉分变动值（正数为增加，负数为减少）

@@ -18,12 +18,12 @@ public class FriendsRequestServiceImpl implements IFriendsRequestService {
 
 
     @Override
-    public List<FriendsRequest> findAppUser(int userId) {
+    public List<FriendsRequest> findAppUser(Long userId) {
         return friendsRequestMapper.selectList(new LambdaQueryWrapper<FriendsRequest>().eq(FriendsRequest::getFriendId, userId));
     }
 
     @Override
-    public List<FriendsRequest> findFriUser(int userId) {
+    public List<FriendsRequest> findFriUser(Long userId) {
         return friendsRequestMapper.selectList(new LambdaQueryWrapper<FriendsRequest>().eq(FriendsRequest::getAppId, userId));
     }
 
@@ -33,7 +33,7 @@ public class FriendsRequestServiceImpl implements IFriendsRequestService {
     }
 
     @Override
-    public boolean ifExists(int userId, Integer id) {
+    public boolean ifExists(Long userId, Long id) {
         return friendsRequestMapper.selectOne(new LambdaQueryWrapper<FriendsRequest>().eq(FriendsRequest::getAppId, userId).eq(FriendsRequest::getFriendId, id)) != null;
     }
 }

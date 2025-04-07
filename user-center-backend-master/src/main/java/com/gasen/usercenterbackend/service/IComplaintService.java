@@ -34,7 +34,7 @@ public interface IComplaintService extends IService<Complaint> {
      * @param eventId 活动ID
      * @return 是否存在投诉
      */
-    boolean hasComplaint(Integer userId, Long eventId);
+    boolean hasComplaint(Long userId, Long eventId);
     
     /**
      * 获取活动的投诉记录
@@ -51,7 +51,7 @@ public interface IComplaintService extends IService<Complaint> {
      * @param complainedIds 被投诉人ID列表
      * @return CompletableFuture<List<Long>> 投诉ID列表的Future
      */
-    CompletableFuture<List<Long>> processComplaintsAsync(Integer userId, Long eventId, String content, List<Integer> complainedIds);
+    CompletableFuture<List<Long>> processComplaintsAsync(Long userId, Long eventId, String content, List<Long> complainedIds);
     
     /**
      * 批量创建投诉记录

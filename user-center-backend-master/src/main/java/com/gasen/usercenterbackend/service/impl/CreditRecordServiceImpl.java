@@ -27,7 +27,7 @@ public class CreditRecordServiceImpl extends ServiceImpl<CreditRecordMapper, Cre
      * @return 是否成功
      */
     @Override
-    public boolean addCreditRecord(Integer userId, Integer creditChange, Integer changeType, String changeReason, Long relationId) {
+    public boolean addCreditRecord(Long userId, Integer creditChange, Integer changeType, String changeReason, Long relationId) {
         CreditRecord record = new CreditRecord()
                 .setUserId(userId)
                 .setCreditChange(creditChange)
@@ -52,7 +52,7 @@ public class CreditRecordServiceImpl extends ServiceImpl<CreditRecordMapper, Cre
      * @return 当前信誉分
      */
     @Override
-    public int calculateUserCredit(Integer userId) {
+    public int calculateUserCredit(Long userId) {
         // 默认初始信誉分为100
         int baseCredit = 100;
         

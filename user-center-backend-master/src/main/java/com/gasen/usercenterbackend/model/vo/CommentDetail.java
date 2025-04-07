@@ -22,7 +22,7 @@ public class CommentDetail implements Serializable {
     // 所属帖子ID
     private Long postId;
     // 发布评论的用户ID
-    private Integer appId;
+    private Long appId;
     // 用户名
     private String appName;
     // 用户头像

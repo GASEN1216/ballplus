@@ -29,10 +29,10 @@
     </view>
     <view class="header-btns">
       <button open-type="contact" class="customer-service-btn" style="width: 64rpx; display: block; box-sizing: border-box; left: 0rpx; top: 0rpx">
-        <image src="http://sunsetchat.top/icon/customer-service2.png" class="header-icon" mode="aspectFit"></image>
+        <image src="http://ballplus.asia/icon/customer-service2.png" class="header-icon" mode="aspectFit"></image>
       </button>
       <view class="settings-btn" bindtap="navigateToSettings">
-        <image src="http://sunsetchat.top/icon/settings.png" class="header-icon" mode="aspectFit"></image>
+        <image src="http://ballplus.asia/icon/settings.png" class="header-icon" mode="aspectFit"></image>
       </view>
     </view>
   </view>
@@ -43,19 +43,19 @@
     <view class="menu-section">
       <view class="menu-row">
         <view class="menu-item" bindtap="toGdmap">
-          <image src="http://sunsetchat.top/icon/location.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/location.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">地图</text>
         </view>
         <view class="menu-item" bindtap="toFriends">
-          <image src="http://sunsetchat.top/icon/friends.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/friends.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">好友</text>
         </view>
         <view class="menu-item" bindtap="toPointsMall">
-          <image src="http://sunsetchat.top/icon/points.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/points.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">赛点商城</text>
         </view>
         <view class="menu-item" bindtap="goToEditInfo">
-          <image src="http://sunsetchat.top/icon/profile.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/profile.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">资料编辑</text>
         </view>
       </view>
@@ -65,7 +65,7 @@
     <view class="card activity-time-card" wx:if="{{showActivityCountdown}}">
       <view class="card-header">
         <view class="card-title">
-          <image src="http://sunsetchat.top/icon/clock.png" class="card-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/clock.png" class="card-icon" mode="aspectFit"></image>
           <text>活动倒计时</text>
         </view>
       </view>
@@ -74,11 +74,11 @@
         <text class="activity-remaining-time">{{activities[0].remainingTime}}</text>
         <view class="activity-summary" bindtap="toggleActivityList" data-id="{{activities[0].id}}">
           <view class="activity-summary-text">{{activities[0].name}}</view>
-          <image src="http://sunsetchat.top/icon/arrow-right.png" class="arrow-icon {{showActivityList ? 'arrow-down' : ''}}" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/arrow-right.png" class="arrow-icon {{showActivityList ? 'arrow-down' : ''}}" mode="aspectFit"></image>
         </view>
       </view>
       <view wx:else class="card-content">
-        <image src="http://sunsetchat.top/icon/quote.png" class="quote-icon" mode="aspectFit"></image>
+        <image src="http://ballplus.asia/icon/quote.png" class="quote-icon" mode="aspectFit"></image>
         <text class="quote-text">「此刻 青天无片云」</text>
       </view>
       
@@ -109,24 +109,24 @@
     <!-- 活动管理卡片 - 根据设置控制显示 -->
     <view class="card activity-card" wx:if="{{showActivityManagement}}">
       <view class="card-title">
-        <image src="http://sunsetchat.top/icon/activity.png" class="card-icon" mode="aspectFit"></image>
+        <image src="http://ballplus.asia/icon/activity.png" class="card-icon" mode="aspectFit"></image>
         <text>活动管理</text>
       </view>
       <view class="menu-row">
         <view class="menu-item" bindtap="goToActivities" data-tab="all">
-          <image src="http://sunsetchat.top/icon/activities.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/activities.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">全部活动</text>
         </view>
         <view class="menu-item" bindtap="goToActivities" data-tab="0">
-          <image src="http://sunsetchat.top/icon/departure.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/departure.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">待出发</text>
         </view>
         <view class="menu-item" bindtap="goToActivities" data-tab="1">
-          <image src="http://sunsetchat.top/icon/review.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/review.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">已完成</text>
         </view>
         <view class="menu-item" bindtap="goToActivities" data-tab="2">
-          <image src="http://sunsetchat.top/icon/cancel.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/cancel.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">已取消</text>
         </view>
       </view>
@@ -135,24 +135,24 @@
     <!-- 好友管理卡片 - 根据设置控制显示 -->
     <view class="card friends-card" wx:if="{{showFriendManagement}}">
       <view class="card-title">
-        <image src="http://sunsetchat.top/icon/friends.png" class="card-icon" mode="aspectFit"></image>
+        <image src="http://ballplus.asia/icon/friends.png" class="card-icon" mode="aspectFit"></image>
         <text>好友管理</text>
       </view>
       <view class="menu-row">
         <view class="menu-item" bindtap="toFriends">
-          <image src="http://sunsetchat.top/icon/friends.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/friends.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">好友</text>
         </view>
         <view class="menu-item" bindtap="goToAddFriend">
-          <image src="http://sunsetchat.top/icon/add-friend.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/add-friend.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">添加好友</text>
         </view>
         <view class="menu-item" bindtap="viewSentRequests">
-          <image src="http://sunsetchat.top/icon/my-request.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/my-request.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">我的申请</text>
         </view>
         <view class="menu-item" bindtap="viewFriendRequests">
-          <image src="http://sunsetchat.top/icon/friend-request.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/friend-request.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">好友申请</text>
         </view>
       </view>
@@ -161,24 +161,24 @@
     <!-- 球坛管理卡片 - 根据设置控制显示 -->
     <view class="card forum-card" wx:if="{{showForumManagement}}">
       <view class="card-title">
-        <image src="http://sunsetchat.top/icon/basketball.png" class="card-icon" mode="aspectFit"></image>
+        <image src="http://ballplus.asia/icon/basketball.png" class="card-icon" mode="aspectFit"></image>
         <text>球坛管理</text>
       </view>
       <view class="menu-row">
         <view class="menu-item" bindtap="goToForum">
-          <image src="http://sunsetchat.top/icon/home-icon.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/home-icon.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">球坛</text>
         </view>
         <view class="menu-item" bindtap="createPost">
-          <image src="http://sunsetchat.top/icon/add.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/add.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">发帖</text>
         </view>
         <view class="menu-item" bindtap="goToMyPosts">
-          <image src="http://sunsetchat.top/icon/profile-icon.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/profile-icon.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">我的帖子</text>
         </view>
         <view class="menu-item" bindtap="goToMyComments">
-          <image src="http://sunsetchat.top/icon/reply.png" class="menu-icon" mode="aspectFit"></image>
+          <image src="http://ballplus.asia/icon/reply.png" class="menu-icon" mode="aspectFit"></image>
           <text class="menu-text">我的评论</text>
         </view>
       </view>

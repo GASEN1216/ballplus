@@ -101,15 +101,15 @@ public class UserController {
 
     @Operation(summary = "获取用户的好友列表")
     @PostMapping("/wx/getFriends")
-    public BaseResponse getFriends(@RequestParam(value = "userId") int userId){
-        List<Integer> friendsId = friendsService.getFriends(userId);
+    public BaseResponse getFriends(@RequestParam(value = "userId") Long userId){
+        List<Long> friendsId = friendsService.getFriends(userId);
         List<goEasyUser> friends = userService.getFriends(friendsId);
         return ResultUtils.success(friends);
     }
 
     @Operation(summary = "获取指定用户的物品列表")
     @PostMapping("/wx/getItems")
-    public BaseResponse getItems(@RequestParam(value = "userId") int userId){
+    public BaseResponse getItems(@RequestParam(value = "userId") Long userId){
         List<Integer> items = itemsService.getItems(userId);
         return ResultUtils.success(items);
     }
@@ -147,8 +147,8 @@ public class UserController {
         if (request == null || request.getUserId() == null || request.getProductId() == null) {
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "参数不完整");
         }
-        
-        Integer userId = request.getUserId();
+
+        Long userId = request.getUserId();
         Integer productId = request.getProductId();
         
         // 查询用户
@@ -319,7 +319,7 @@ public class UserController {
         String openid = os.split("\\+")[0].split(":")[3];
         //通过openid查询数据库得到用户的id，再和传过来的id进行比较，如果相同则可以修改，如果不同则不可以修改
         LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        Integer id = userMapper.selectOne(userLambdaQueryWrapper.eq(User::getOpenId, openid)).getId();
+        Long id = userMapper.selectOne(userLambdaQueryWrapper.eq(User::getOpenId, openid)).getId();
 
         //1.是否为管理员 or 是否是自己
         if(isAdmin(request) || id.equals(user.getId())) {

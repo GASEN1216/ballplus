@@ -25,7 +25,7 @@ public class Event implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private Integer appId;
+    private Long appId;
 
     private String avatar;
 

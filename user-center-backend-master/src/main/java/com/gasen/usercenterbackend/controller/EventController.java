@@ -7,6 +7,9 @@ import com.gasen.usercenterbackend.common.ResultUtils;
 import com.gasen.usercenterbackend.mapper.EventMapper;
 import com.gasen.usercenterbackend.model.dao.Event;
 import com.gasen.usercenterbackend.model.dao.User;
+import com.gasen.usercenterbackend.model.dao.UserEvent;
+import com.gasen.usercenterbackend.model.dto.CursorPageRequest;
+import com.gasen.usercenterbackend.model.vo.CursorPageResponse;
 import com.gasen.usercenterbackend.model.vo.detailEvent;
 import com.gasen.usercenterbackend.model.vo.eventTemplates;
 import com.gasen.usercenterbackend.model.vo.indexEvent;
@@ -96,7 +99,7 @@ public class EventController {
 
     @Operation(summary = "取消一个活动")
     @PostMapping("/cancelEvent")
-    public BaseResponse cancelEvent(Integer userId, Long eventId, String cancelReason) {
+    public BaseResponse cancelEvent(Long userId, Long eventId, String cancelReason) {
         if (userId == null || eventId == null) {
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
         }
@@ -201,7 +204,7 @@ public class EventController {
     @PostMapping("/quitEvent")
     @Transactional
     public BaseResponse quitEvent(
-            @RequestParam(value = "userId") Integer userId,
+            @RequestParam(value = "userId") Long userId,
             @RequestParam(value = "eventId") Long eventId){
         if (userId == null || eventId == null)
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
@@ -270,7 +273,7 @@ public class EventController {
     @PostMapping("/joinEvent")
     @Transactional
     public BaseResponse joinEvent(
-            @RequestParam(value = "userId") Integer userId,
+            @RequestParam(value = "userId") Long userId,
             @RequestParam(value = "eventId") Long eventId){
         if (userId == null || eventId == null)
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
@@ -385,7 +388,7 @@ public class EventController {
 
     @Operation(summary = "获取个人活动信息")
     @PostMapping("/getEventByPer")
-    public BaseResponse getEventByPer(@RequestParam(value = "userId") Integer userId){
+    public BaseResponse getEventByPer(@RequestParam(value = "userId") Long userId){
         try {
             if (userId == null)
                 return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
@@ -409,7 +412,7 @@ public class EventController {
 
     @Operation(summary = "获取个人活动模板")
     @PostMapping("/getTemplateByPer")
-    public BaseResponse getTemplateByPer(@RequestParam(value = "userId") Integer userId){
+    public BaseResponse getTemplateByPer(@RequestParam(value = "userId") Long userId){
         if (userId == null)
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
         List<Event> events = eventService.findTemplates(userId);
@@ -422,8 +425,8 @@ public class EventController {
 
     @Operation(summary = "删除个人活动模板")
     @PostMapping("/deleteTemplateByPer")
-    public BaseResponse deleteTemplateByPer(@RequestParam(value = "userId") Integer userId,
-                                            @RequestParam(value = "templateId") Integer templateId){
+    public BaseResponse deleteTemplateByPer(@RequestParam(value = "userId") Long userId,
+                                            @RequestParam(value = "templateId") Long templateId){
         if (userId == null || templateId == null)
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
         Boolean isSuccess = eventService.deleteTemplateByPer(userId, templateId);
@@ -434,7 +437,7 @@ public class EventController {
 
     @Operation(summary = "获取个人最近的一次活动")
     @PostMapping("/getNearestEvent")
-    public BaseResponse getNearestEvent(@RequestParam(value = "userId") Integer userId){
+    public BaseResponse getNearestEvent(@RequestParam(value = "userId") Long userId){
         if (userId == null)
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
 
@@ -454,7 +457,7 @@ public class EventController {
 
     @Operation(summary = "获取自己所有参加的活动")
     @PostMapping("getAllMyEvents")
-    public BaseResponse getAllMyEvents(@RequestParam(value = "userId") Integer userId){
+    public BaseResponse getAllMyEvents(@RequestParam(value = "userId") Long userId){
         if (userId == null)
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
         List<Long> eventIds = userEventService.getAllEventIdsByUserId(userId);
@@ -471,7 +474,7 @@ public class EventController {
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR,"活动不存在！");
         detailEvent res = event.toDetailEvent();
         // 找出所有参加这个活动的人
-        List<Integer> userIds = userEventService.getUserIdsByEventId(eventId);
+        List<Long> userIds = userEventService.getUserIdsByEventId(eventId);
         // 找出他们的头像url
         List<userIdAndAvatar> userIdAndAvatars = userService.getAvatarByUserIds(userIds);
         res.setPersons(userIdAndAvatars);
@@ -500,7 +503,7 @@ public class EventController {
 
     @Operation(summary = "活动报名成功通知")
     @PostMapping("/sendJoinEventNotification")
-    public BaseResponse sendJoinEventNotification(@RequestParam(value = "userId") Integer userId,
+    public BaseResponse sendJoinEventNotification(@RequestParam(value = "userId") Long userId,
                                                   @RequestParam(value = "eventId") Long eventId) {
         if (userId == null || eventId == null)
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR);
@@ -537,7 +540,7 @@ public class EventController {
         if (event == null)
             return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "活动不存在");
 
-        List<Integer> useridList = userEventService.getUserIdsByEventId(eventId);
+        List<Long> useridList = userEventService.getUserIdsByEventId(eventId);
 
         if (useridList.isEmpty())
             return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "数据库错误");
@@ -551,6 +554,19 @@ public class EventController {
         if (isSuccess)
             return ResultUtils.success("活动即将开始通知已发送！");
         return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "通知发送失败");
+    }
+
+    @Operation(summary = "获取自己所有参加的活动（游标分页）")
+    @PostMapping("/getUserEventsWithCursor")
+    public BaseResponse getUserEventsWithCursor(
+            @RequestParam(value = "userId") Long userId,
+            @RequestBody CursorPageRequest cursorRequest) {
+        if (userId == null) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "用户ID不能为空");
+        }
+        
+        CursorPageResponse<UserEvent> response = userEventService.pageByUserIdWithCursor(userId, cursorRequest);
+        return ResultUtils.success(response);
     }
 
 }

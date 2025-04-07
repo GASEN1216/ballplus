@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface IFriendsRequestService {
 
-    List<FriendsRequest> findAppUser(int userId);
+    List<FriendsRequest> findAppUser(Long userId);
 
-    List<FriendsRequest> findFriUser(int userId);
+    List<FriendsRequest> findFriUser(Long userId);
 
     boolean addFriendRequest(FriendsRequest friendsRequest);
 
-    boolean ifExists(int userId, Integer id);
+    boolean ifExists(Long userId, Long id);
 }

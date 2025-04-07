@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class receivedApplicationRes {
-    private Integer id;
+    private Long id;
     private String avatar;
     private String name;
     private Integer state;

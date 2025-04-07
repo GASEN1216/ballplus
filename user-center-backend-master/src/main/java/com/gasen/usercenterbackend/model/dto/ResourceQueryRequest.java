@@ -8,6 +8,16 @@ import lombok.Data;
 @Data
 public class ResourceQueryRequest {
     /**
+     * 类型
+     */
+    private Integer type;
+
+    /**
+     * 分类ID
+     */
+    private Long categoryId;
+
+    /**
      * 分类
      */
     private String category;

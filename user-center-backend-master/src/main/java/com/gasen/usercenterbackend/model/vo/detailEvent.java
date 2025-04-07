@@ -16,7 +16,7 @@ import java.util.List;
 @Accessors(chain = true)
 public class detailEvent implements Serializable {
     private Long id;
-    private Integer appId;
+    private Long appId;
     private String avatar;
     private String name;
     private LocalDate eventDate;

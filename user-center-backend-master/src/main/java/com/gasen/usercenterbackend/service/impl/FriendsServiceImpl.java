@@ -26,19 +26,19 @@ public class FriendsServiceImpl implements IFriendsService {
     private FriendsRequestMapper friendsRequestMapper;
 
     @Override
-    public List<Integer> getFriends(Integer userId) {
+    public List<Long> getFriends(Long userId) {
         List<Friends> friends = friendsMapper.selectList(new LambdaQueryWrapper<Friends>().eq(Friends::getUserId, userId));
-        return friends.stream().map(map-> map.getFriendId().intValue()).toList();
+        return friends.stream().map(Friends::getFriendId).toList();
     }
 
     @Override
-    public boolean ifFriends(int userId, Integer id) {
+    public boolean ifFriends(Long userId, Long id) {
         return friendsMapper.selectCount(new LambdaQueryWrapper<Friends>().eq(Friends::getUserId, userId).eq(Friends::getFriendId, id)) > 0;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean addFriends(int userId, int friendId) {
+    public boolean addFriends(Long userId, Long friendId) {
         try {
             // 插入 userId -> friendId
             int result1 = friendsMapper.insert(new Friends(userId, friendId));

@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 public class FriendsRequest {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
-    private Integer appId;
-    private Integer friendId;
+    private Long appId;
+    private Long friendId;
     private Integer state;
 }

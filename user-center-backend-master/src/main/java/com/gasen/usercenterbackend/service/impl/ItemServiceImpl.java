@@ -24,7 +24,7 @@ public class ItemServiceImpl implements IItemsService {
 
 
     @Override
-    public void addItem(Integer userId, Integer itemId) {
+    public void addItem(Long userId, Integer itemId) {
         if(userId == null || itemId == null)
             throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "userId或itemId参数为空");
 
@@ -42,7 +42,7 @@ public class ItemServiceImpl implements IItemsService {
      * @return
      */
     @Override
-    public List<Integer> getItems(int userId) {
+    public List<Integer> getItems(Long userId) {
         List<Items> items = itemsMapper.selectList(new LambdaQueryWrapper<Items>().eq(Items::getUserId, userId));
         return items.stream().map(Items::getItemId).toList();
     }

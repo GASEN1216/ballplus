@@ -3,9 +3,9 @@ package com.gasen.usercenterbackend.service;
 import java.util.List;
 
 public interface IFriendsService {
-    List<Integer> getFriends(Integer userId);
+    List<Long> getFriends(Long userId);
 
-    boolean ifFriends(int userId, Integer id);
+    boolean ifFriends(Long userId, Long id);
 
-    boolean addFriends(int userId, int friendId);
+    boolean addFriends(Long userId, Long friendId);
 }

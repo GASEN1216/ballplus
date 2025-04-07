@@ -165,7 +165,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public void updateAvatar(weChatAddItemRequest weChatAddItemRequest) {
-        Integer userId = weChatAddItemRequest.getUserId();
+        Long userId = weChatAddItemRequest.getUserId();
         Integer itemId = weChatAddItemRequest.getItemId();
         String url = weChatAddItemRequest.getUrl();
 
@@ -218,7 +218,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      * 获取用户好友
      * */
     @Override
-    public List<goEasyUser> getFriends(List<Integer> friendsId) {
+    public List<goEasyUser> getFriends(List<Long> friendsId) {
         // 检查列表是否为空
         if (friendsId == null || friendsId.isEmpty()) {
             return Collections.emptyList(); // 返回空列表
@@ -228,7 +228,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public List<userIdAndAvatar> getAvatarByUserIds(List<Integer> userIds) {
+    public List<userIdAndAvatar> getAvatarByUserIds(List<Long> userIds) {
         // 查询数据库，获取用户信息
         List<User> users = userMapper.selectList(
                 new LambdaQueryWrapper<User>()
@@ -236,7 +236,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         );
 
         // 将查询结果转换为 Map，方便根据 userId 快速查找
-        Map<Integer, String> userAvatarMap = users.stream()
+        Map<Long, String> userAvatarMap = users.stream()
                 .collect(Collectors.toMap(
                         User::getId, // Key: userId
                         User::getAvatarUrl // Value: avatarUrl
@@ -252,7 +252,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public String getOpenIdByUserId(Integer userId) {
+    public String getOpenIdByUserId(Long userId) {
         User user = userMapper.selectById(userId);
         if (user == null)
             throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "用户不存在");
@@ -260,12 +260,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public List<String> getOpenIdByUserIds(List<Integer> useridList) {
+    public List<String> getOpenIdByUserIds(List<Long> useridList) {
         return userMapper.selectList(new LambdaQueryWrapper<User>().in(User::getId, useridList)).stream().map(User::getOpenId).toList();
     }
 
     @Override
-    public void updateCredit(Integer userId, int creditChange) {
+    public void updateCredit(Long userId, int creditChange) {
         User user = userMapper.selectById(userId);
         if (user != null) {
             // 计算新的信誉分，确保不小于0

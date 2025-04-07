@@ -15,7 +15,7 @@
     <!-- 图片上传区域 -->
     <view class="image-upload-area" wx:if="{{!imageUrl}}" bindtap="chooseImage">
       <view class="image-upload-button">
-        <image class="upload-icon" src="http://sunsetchat.top/icon/image.png" mode="aspectFit" />
+        <image class="upload-icon" src="http://ballplus.asia/icon/image.png" mode="aspectFit" />
         <text class="upload-text">添加图片</text>
       </view>
     </view>

@@ -215,8 +215,8 @@ Page({
     // 加载地图标记
     loadMarkers: function (myAmapFun: any, keywords: string) {
         myAmapFun.getPoiAround({
-            iconPathSelected: 'http://sunsetchat.top/icon/marker_checked.png',
-            iconPath: 'http://sunsetchat.top/icon/marker.png',
+            iconPathSelected: 'http://ballplus.asia/icon/marker_checked.png',
+            iconPath: 'http://ballplus.asia/icon/marker.png',
             querykeywords: keywords,
             success: (data: { markers: Marker[] }) => {
                 markersData = data.markers;
@@ -258,7 +258,7 @@ Page({
     changeMarkerColor: function (data: Marker[], i: number) {
         const markers = data.map((marker, j) => ({
             ...marker,
-            iconPath: j === i ? "http://sunsetchat.top/icon/marker_checked.png" : "http://sunsetchat.top/icon/marker.png"
+            iconPath: j === i ? "http://ballplus.asia/icon/marker_checked.png" : "http://ballplus.asia/icon/marker.png"
         }));
         this.setData({ markers });
     },

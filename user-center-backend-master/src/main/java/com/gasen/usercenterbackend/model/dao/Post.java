@@ -19,7 +19,7 @@ public class Post {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private Integer appId;
+    private Long appId;
     private String appName;
     private String avatar;
     private Integer grade;

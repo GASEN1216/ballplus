@@ -10,7 +10,7 @@ public class AddComment implements Serializable {
     private static final long serialVersionUID = 1L;
     
     // 发表评论时，使用者的ID
-    private Integer userId;
+    private Long userId;
     // 使用者姓名
     private String appName;
     // 使用者头像

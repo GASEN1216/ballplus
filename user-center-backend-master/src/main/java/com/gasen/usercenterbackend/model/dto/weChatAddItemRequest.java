@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Data
 public class weChatAddItemRequest implements Serializable {
     // 用户id
-    private Integer userId;
+    private Long userId;
     // 物品id
     private Integer itemId;
     // url

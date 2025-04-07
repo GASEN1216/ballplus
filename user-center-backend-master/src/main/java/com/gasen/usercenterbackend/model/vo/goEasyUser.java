@@ -10,7 +10,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class goEasyUser implements Serializable {
-    private Integer userId;
+    private Long userId;
 
     private String userName;
 

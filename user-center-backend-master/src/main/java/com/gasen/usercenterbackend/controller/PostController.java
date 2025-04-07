@@ -1,9 +1,12 @@
 package com.gasen.usercenterbackend.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gasen.usercenterbackend.common.BaseResponse;
 import com.gasen.usercenterbackend.common.ErrorCode;
 import com.gasen.usercenterbackend.common.ResultUtils;
 import com.gasen.usercenterbackend.model.dto.AddPost;
+import com.gasen.usercenterbackend.model.dto.CursorPageRequest;
+import com.gasen.usercenterbackend.model.vo.CursorPageResponse;
 import com.gasen.usercenterbackend.model.vo.PostDetail;
 import com.gasen.usercenterbackend.model.vo.PostInfo;
 import com.gasen.usercenterbackend.model.dto.UpdatePost;
@@ -20,6 +23,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.gasen.usercenterbackend.constant.LikeConstant.POST_TYPE;
 import static com.gasen.usercenterbackend.constant.LikeConstant.REDIS_POST_LIKES;
@@ -57,7 +61,7 @@ public class PostController {
     // 2. 删除帖子，根据 postId 与 userId 比较 appId 是否匹配
     @PostMapping("/deletePost")
     @Transactional
-    public BaseResponse deletePost(@RequestParam Long postId, @RequestParam Integer userId) {
+    public BaseResponse deletePost(@RequestParam Long postId, @RequestParam Long userId) {
         try {
             boolean result = postService.deletePost(postId, userId);
             if (result) {
@@ -90,19 +94,68 @@ public class PostController {
         }
     }
 
-    // 4. 查询所有帖子的粗略信息，返回 List<PostInfo>
+    // 4. 查询所有帖子的粗略信息，返回分页数据（传统分页）
     @GetMapping("/getPostList")
-    public BaseResponse getPostList() {
+    @Deprecated
+    public BaseResponse<Page<PostInfo>> getPostList(
+            @RequestParam(defaultValue = "1") long pageNum,
+            @RequestParam(defaultValue = "10") long pageSize,
+            @RequestParam(required = false) String keyword) {
         try {
-            List<Post> postList = postService.getPostList();
-            if (postList == null)
-                return ResultUtils.error(ErrorCode.POST_NOT_FOUND, "查询帖子失败！");
-            List<PostInfo> postInfoList = postList.stream()
-                    .map(Post::toPostInfo)
-                    .toList();
-            return ResultUtils.success(postInfoList);
+            // Pass keyword to service call
+            Page<Post> postPage = postService.getPostList(pageNum, pageSize, keyword);
+
+            // 创建一个新的 Page<PostInfo> 用于返回，复制分页信息
+            Page<PostInfo> postInfoPage = new Page<>(postPage.getCurrent(), postPage.getSize(), postPage.getTotal());
+            postInfoPage.setPages(postPage.getPages()); // 设置总页数
+
+            // 将 List<Post> 转换为 List<PostInfo>
+            List<PostInfo> postInfoList = postPage.getRecords().stream()
+                    .map(Post::toPostInfo) // 使用 Post 类中的转换方法
+                    .collect(Collectors.toList());
+
+            // 设置转换后的记录列表
+            postInfoPage.setRecords(postInfoList);
+
+            // 返回成功响应，包含分页数据
+            return ResultUtils.success(postInfoPage);
         } catch (Exception e) {
-            log.error("查询帖子列表异常", e);
+            log.error("分页查询帖子列表异常", e);
+            // 注意：根据你的 BaseResponse 结构，可能需要调整错误返回方式
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "查询帖子列表失败！");
+        }
+    }
+    
+    // 使用游标分页查询所有帖子
+    @GetMapping("/getPostListWithCursor")
+    public BaseResponse<CursorPageResponse<PostInfo>> getPostListWithCursor(
+            @RequestParam(required = false) String cursor,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "false") Boolean asc,
+            @RequestParam(required = false) String keyword) {
+        try {
+            CursorPageRequest cursorRequest = new CursorPageRequest();
+            cursorRequest.setCursor(cursor);
+            cursorRequest.setPageSize(pageSize);
+            cursorRequest.setAsc(asc);
+            
+            CursorPageResponse<Post> postPage = postService.getPostListWithCursor(cursorRequest, keyword);
+            
+            // 将Post列表转换为PostInfo列表
+            List<PostInfo> postInfoList = postPage.getRecords().stream()
+                    .map(Post::toPostInfo)
+                    .collect(Collectors.toList());
+            
+            // 构建PostInfo的游标分页响应
+            CursorPageResponse<PostInfo> response = CursorPageResponse.build(
+                    postInfoList, 
+                    postPage.getNextCursor(), 
+                    postPage.getHasMore()
+            );
+            
+            return ResultUtils.success(response);
+        } catch (Exception e) {
+            log.error("游标分页查询帖子列表异常", e);
             return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "查询帖子列表失败！");
         }
     }
@@ -161,9 +214,10 @@ public class PostController {
         }
     }
 
-    // 7. 获取用户个人发布的帖子列表，支持分页
+    // 7. 获取用户个人发布的帖子列表，支持分页（传统分页）
     @PostMapping("/getMyPosts")
-    public BaseResponse getMyPosts(@RequestParam Integer userId,
+    @Deprecated
+    public BaseResponse getMyPosts(@RequestParam Long userId,
             @RequestParam(defaultValue = "1") Integer pageNum,
             @RequestParam(defaultValue = "10") Integer pageSize) {
         try {
@@ -185,6 +239,33 @@ public class PostController {
             return ResultUtils.success(result);
         } catch (Exception e) {
             log.error("获取用户帖子列表异常", e);
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "获取用户帖子列表失败！");
+        }
+    }
+    
+    // 使用游标分页获取用户个人发布的帖子列表
+    @PostMapping("/getMyPostsWithCursor")
+    public BaseResponse<CursorPageResponse<PostInfo>> getMyPostsWithCursor(
+            @RequestParam Long userId,
+            @RequestParam(required = false) String cursor,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "false") Boolean asc) {
+        try {
+            if (userId == null) {
+                return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "用户ID不能为空！");
+            }
+
+            CursorPageRequest cursorRequest = new CursorPageRequest();
+            cursorRequest.setCursor(cursor);
+            cursorRequest.setPageSize(pageSize);
+            cursorRequest.setAsc(asc);
+            
+            // 调用service层方法获取用户帖子（游标分页）
+            CursorPageResponse<PostInfo> response = postService.getPostsByUserIdWithCursor(userId, cursorRequest);
+            
+            return ResultUtils.success(response);
+        } catch (Exception e) {
+            log.error("游标分页获取用户帖子列表异常", e);
             return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "获取用户帖子列表失败！");
         }
     }

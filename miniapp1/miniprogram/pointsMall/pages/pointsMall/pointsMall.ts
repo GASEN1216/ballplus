@@ -4,10 +4,10 @@ Page({
   data: {
     score: 0, // 用户当前赛点（初始值）
     products: [
-      { id: 1, name: 'dog1', price: 88, image: 'http://sunsetchat.top/user_avatars/gif/dog.gif', type: 'avatar', isOwned: false, isInUse: false },
-      { id: 2, name: 'dog2', price: 88, image: 'http://sunsetchat.top/user_avatars/gif/dog2.gif', type: 'avatar', isOwned: false, isInUse: false },
-      { id: 3, name: '加载中', price: 88, image: 'http://sunsetchat.top/user_avatars/gif/loading.gif', type: 'avatar', isOwned: false, isInUse: false },
-      { id: 4, name: 'duck', price: 88, image: 'http://sunsetchat.top/user_avatars/gif/duck.gif', type: 'avatar', isOwned: false, isInUse: false },
+      { id: 1, name: 'dog1', price: 88, image: 'http://ballplus.asia/user_avatars/gif/dog.gif', type: 'avatar', isOwned: false, isInUse: false },
+      { id: 2, name: 'dog2', price: 88, image: 'http://ballplus.asia/user_avatars/gif/dog2.gif', type: 'avatar', isOwned: false, isInUse: false },
+      { id: 3, name: '加载中', price: 88, image: 'http://ballplus.asia/user_avatars/gif/loading.gif', type: 'avatar', isOwned: false, isInUse: false },
+      { id: 4, name: 'duck', price: 88, image: 'http://ballplus.asia/user_avatars/gif/duck.gif', type: 'avatar', isOwned: false, isInUse: false },
       // { id: 5, name: '头像边框-金色', price: 150, image: 'https://example.com/gold-border.png', type: 'border' },
       // { id: 6, name: '个人资料背景-蓝色', price: 200, image: 'https://example.com/blue-background.png', type: 'background' },
       // { id: 7, name: '特殊道具-钻石', price: 300, image: 'https://example.com/diamond.png', type: 'item' },

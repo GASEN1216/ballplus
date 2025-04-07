@@ -27,6 +27,8 @@ Page({
 
     onLoad(options) {
         const { id, commentId } = options;
+        console.log(id+ " " + commentId);
+        
         this.setData({
             postId: id,
             targetCommentId: commentId
@@ -83,7 +85,7 @@ Page({
     },
 
     // 添加下拉刷新处理函数
-    async onPullDownRefresh() {
+    onPullDownRefresh() {
         try {
             this.fetchPostDetail();
             wx.stopPullDownRefresh();
@@ -226,7 +228,7 @@ Page({
     goToInfo(e: any) {
         const userId = e.currentTarget.dataset.userid; // 获取传递的id
         wx.navigateTo({
-            url: `../profile/profile?userId=${userId}`,
+            url: `/profilePackage/pages/profile/profile?userId=${userId}`,
         });
     },
 
@@ -234,7 +236,7 @@ Page({
         const commentId = e.currentTarget.dataset.id;
         const comment = e.currentTarget.dataset.comment;
         wx.navigateTo({
-            url: `/pages/commentDetail/commentDetail?id=${commentId}`,
+            url: `../commentDetail/commentDetail?id=${commentId}`,
             success: function (res) {
                 // 将评论数据传递给评论详情页
                 res.eventChannel.emit('acceptDataFromOpenerPage', { comment: comment })

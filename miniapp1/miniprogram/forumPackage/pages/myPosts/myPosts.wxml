@@ -32,11 +32,11 @@
           <view class="post-time">{{item.createTime}}</view>
           <view class="post-stats">
             <view class="stat-item">
-              <image src="http://sunsetchat.top/icon/like.png" class="icon"></image>
+              <image src="http://ballplus.asia/icon/like.png" class="icon"></image>
               <text>{{item.likes || 0}}</text>
             </view>
             <view class="stat-item">
-              <image src="http://sunsetchat.top/icon/comment.png" class="icon"></image>
+              <image src="http://ballplus.asia/icon/comment.png" class="icon"></image>
               <text>{{item.comments || 0}}</text>
             </view>
           </view>
@@ -46,7 +46,7 @@
     
     <!-- 空状态 -->
     <view class="empty-state" wx:if="{{posts.length === 0 && !loading}}">
-      <image src="http://sunsetchat.top/icon/empty.png" class="empty-icon"></image>
+      <image src="http://ballplus.asia/icon/empty.png" class="empty-icon"></image>
       <text class="empty-text">您还没有发表过帖子</text>
       <button class="create-post-btn" bindtap="goToCreatePost">去发布一条</button>
     </view>

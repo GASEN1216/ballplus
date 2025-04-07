@@ -11,10 +11,10 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class userIdAndAvatar {
-    private Integer userId;
+    private Long userId;
     private String avatar;
 
-    public userIdAndAvatar(Integer id, String avatarUrl) {
+    public userIdAndAvatar(Long id, String avatarUrl) {
         this.userId = id;
         this.avatar = avatarUrl;
     }

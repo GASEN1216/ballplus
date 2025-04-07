@@ -24,7 +24,7 @@ public class ComplaintVO {
     /**
      * 投诉人ID
      */
-    private Integer complainerId;
+    private Long complainerId;
     
     /**
      * 投诉人名称
@@ -39,7 +39,7 @@ public class ComplaintVO {
     /**
      * 被投诉人ID
      */
-    private Integer complainedId;
+    private Long complainedId;
     
     /**
      * 被投诉人名称

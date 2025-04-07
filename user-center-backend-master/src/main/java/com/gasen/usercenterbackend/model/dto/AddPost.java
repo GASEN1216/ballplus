@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Data
 public class AddPost implements Serializable {
     // 用于新增帖子的 appId（或参与者 ID）
-    private Integer addId;
+    private Long addId;
     private String appName;
     private String avatar;
     private Integer grade;

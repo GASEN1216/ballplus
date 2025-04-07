@@ -4,8 +4,8 @@ import { IAppOption } from '../typings';
 
 App<IAppOption>({
   globalData: {
-    qnurl: 'http://sunsetchat.top/',// 加个‘/’方便直接加图片名
-    url: 'http://10.45.4.58:8080',
+    qnurl: 'http://ballplus.asia/',// 加个‘/’方便直接加图片名
+    url: 'http://192.168.31.105:8080',
     isLoggedin: false,
     latitude: 23.108649,
     longitude: 113.324646,

@@ -37,13 +37,13 @@ public interface IUserService extends IService<User> {
 
     void onlyUpdateAvatar(weChatUseItemRequest weChatUseItemRequest);
 
-    List<goEasyUser> getFriends(List<Integer> friendsId);
+    List<goEasyUser> getFriends(List<Long> friendsId);
 
-    List<userIdAndAvatar> getAvatarByUserIds(List<Integer> userIds);
+    List<userIdAndAvatar> getAvatarByUserIds(List<Long> userIds);
 
-    String getOpenIdByUserId(Integer userId);
+    String getOpenIdByUserId(Long userId);
 
-    List<String> getOpenIdByUserIds(List<Integer> useridList);
+    List<String> getOpenIdByUserIds(List<Long> useridList);
 
-    void updateCredit(Integer userId, int creditChange);
+    void updateCredit(Long userId, int creditChange);
 }

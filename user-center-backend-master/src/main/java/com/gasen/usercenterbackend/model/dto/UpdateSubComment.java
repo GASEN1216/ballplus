@@ -20,7 +20,7 @@ public class UpdateSubComment implements Serializable {
     // 要修改的评论ID
     private Long subCommentId;
     // 当前操作用户ID，用于权限校验
-    private Integer userId;
+    private Long userId;
     // 修改后的评论内容
     private String content;
 

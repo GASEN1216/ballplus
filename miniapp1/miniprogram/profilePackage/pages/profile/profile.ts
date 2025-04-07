@@ -307,7 +307,7 @@ Page({
             // 分享自己的资料
             return {
                 title: `Hi，我是「${userName}」，一起来约球吧！`,
-                path: `/pages/profile/profile?userId=${this.data.userId}`,
+                path: `/profilePackage/pages/profile/profile?userId=${this.data.userId}`,
                 imageUrl: userData.avatarUrl,
                 success: function () {
                     wx.showToast({
@@ -333,7 +333,7 @@ Page({
 
             return {
                 title: title,
-                path: `/pages/profile/profile?userId=${this.data.userId}`,
+                path: `/profilePackage/pages/profile/profile?userId=${this.data.userId}`,
                 imageUrl: userData.avatarUrl,
                 success: function () {
                     wx.showToast({

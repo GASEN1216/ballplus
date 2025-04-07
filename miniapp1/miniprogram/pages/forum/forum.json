@@ -1,6 +1,10 @@
 {
     "navigationBarTitleText": "球坛",
-    "usingComponents": {},
+    "usingComponents": {
+        "recycle-view": "/miniprogram_npm/miniprogram-recycle-view/recycle-view",
+        "recycle-item": "/miniprogram_npm/miniprogram-recycle-view/recycle-item"
+    },
     "enablePullDownRefresh": true,
-    "backgroundTextStyle": "dark"
+    "backgroundTextStyle": "dark",
+    "disableScroll": true
 }

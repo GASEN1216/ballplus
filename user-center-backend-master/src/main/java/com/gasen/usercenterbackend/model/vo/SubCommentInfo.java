@@ -17,11 +17,11 @@ public class SubCommentInfo {
     // 父评论ID
     private Long commentId;
     // 父评论发布者ID
-    private Integer parentCommentAppId;
+    private Long parentCommentAppId;
     // 用户名
     private String appName;
     // 用户ID
-    private Integer appId;
+    private Long appId;
     // 用户头像
     private String avatar;
     // 用户等级

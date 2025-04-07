@@ -38,7 +38,7 @@ public class FriendsController {
 
     @Operation(summary = "获取用户的好友申请列表")
     @PostMapping("/getFriendsRequest")
-    public BaseResponse getFriendsRequest(@RequestParam(value = "userId") int userId, @RequestParam(value = "type") int type) {
+    public BaseResponse getFriendsRequest(@RequestParam(value = "userId") Long userId, @RequestParam(value = "type") int type) {
         // 新建数组
         List<receivedApplicationRes> resList = new ArrayList<>();
         List<FriendsRequest> friendsRequests;
@@ -75,7 +75,7 @@ public class FriendsController {
 
     @Operation(summary = "添加好友申请")
     @PostMapping("/addFriendsRequest")
-    public BaseResponse addFriendsRequest(@RequestParam(value = "userId") int userId, @RequestParam(value = "ballNumber") String ballNumber) {
+    public BaseResponse addFriendsRequest(@RequestParam(value = "userId") Long userId, @RequestParam(value = "ballNumber") String ballNumber) {
         // 检查ballNumber是否存在
         User user = userService.getOne(new LambdaQueryWrapper<User>().eq(User::getUserName, ballNumber));
         if(user == null) {
@@ -102,7 +102,7 @@ public class FriendsController {
 
     @Operation(summary = "同意好友申请")
     @PostMapping("/agreeFriendsRequest")
-    public BaseResponse agreeFriendsRequest(@RequestParam(value = "userId") int userId, @RequestParam(value = "friendId") int friendId) {
+    public BaseResponse agreeFriendsRequest(@RequestParam(value = "userId") Long userId, @RequestParam(value = "friendId") Long friendId) {
         if(friendsService.addFriends(userId, friendId))
             return ResultUtils.success("添加好友成功");
         return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"添加好友失败");
@@ -110,7 +110,7 @@ public class FriendsController {
     
     @Operation(summary = "检查用户之间的好友关系")
     @PostMapping("/checkFriendship")
-    public BaseResponse checkFriendship(@RequestParam(value = "userId") int userId, @RequestParam(value = "friendId") int friendId) {
+    public BaseResponse checkFriendship(@RequestParam(value = "userId") Long userId, @RequestParam(value = "friendId") Long friendId) {
         try {
             // 调用friendsService中的ifFriends方法检查好友关系
             boolean isFriend = friendsService.ifFriends(userId, friendId);

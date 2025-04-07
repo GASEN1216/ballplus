@@ -13,7 +13,6 @@ import com.gasen.usercenterbackend.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,15 +41,12 @@ public class ComplaintController {
     
     @Resource
     private IUserEventService userEventService;
-    
-    @Resource
-    private RabbitTemplate rabbitTemplate;
-    
+
     @Operation(summary = "提交投诉")
     @PostMapping("/submit")
     @Transactional
     public BaseResponse submitComplaint(
-            @RequestParam(value = "userId") Integer userId,
+            @RequestParam(value = "userId") Long userId,
             @RequestParam(value = "eventId") Long eventId,
             @RequestParam(value = "complainedIds") String complainedIds,
             @RequestParam(value = "content") String content) {
@@ -76,8 +72,8 @@ public class ComplaintController {
         }
         
         // 解析被投诉人ID
-        List<Integer> complainedIdList = Arrays.stream(complainedIds.split(","))
-                .map(Integer::parseInt)
+        List<Long> complainedIdList = Arrays.stream(complainedIds.split(","))
+                .map(Long::parseLong)
                 .collect(Collectors.toList());
         
         if (complainedIdList.isEmpty()) {
@@ -85,7 +81,7 @@ public class ComplaintController {
         }
         
         // 异步处理投诉
-        CompletableFuture<List<Long>> future = complaintService.processComplaintsAsync(userId, eventId, content, complainedIdList);
+        complaintService.processComplaintsAsync(userId, eventId, content, complainedIdList);
         
         // 立即返回成功响应，不等待异步任务完成
         return ResultUtils.success("投诉提交成功，系统正在处理");
@@ -107,7 +103,7 @@ public class ComplaintController {
         }
         
         // 获取涉及的用户ID
-        List<Integer> userIds = new ArrayList<>();
+        List<Long> userIds = new ArrayList<>();
         for (Complaint complaint : complaints) {
             userIds.add(complaint.getComplainerId());
             userIds.add(complaint.getComplainedId());
@@ -115,7 +111,7 @@ public class ComplaintController {
         
         // 批量获取用户信息
         List<User> users = userService.listByIds(userIds);
-        Map<Integer, User> userMap = users.stream()
+        Map<Long, User> userMap = users.stream()
                 .collect(Collectors.toMap(User::getId, user -> user));
         
         // 转换为VO对象
@@ -156,7 +152,7 @@ public class ComplaintController {
     @Operation(summary = "检查用户是否可以提交投诉")
     @GetMapping("/check")
     public BaseResponse checkCanComplaint(
-            @RequestParam(value = "userId") Integer userId,
+            @RequestParam(value = "userId") Long userId,
             @RequestParam(value = "eventId") Long eventId) {
         
         if (userId == null || eventId == null) {
@@ -184,7 +180,7 @@ public class ComplaintController {
     @Operation(summary = "获取活动参与者（除了自己）")
     @GetMapping("/participants")
     public BaseResponse getEventParticipants(
-            @RequestParam(value = "userId") Integer userId,
+            @RequestParam(value = "userId") Long userId,
             @RequestParam(value = "eventId") Long eventId) {
         
         if (userId == null || eventId == null) {
@@ -218,4 +214,4 @@ public class ComplaintController {
         // 查询活动状态，判断是否已完成
         return eventService.isEventCompleted(eventId);
     }
-} 
+}

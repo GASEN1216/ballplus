@@ -17,12 +17,12 @@ public interface ICreditRecordService extends IService<CreditRecord> {
      * @param relationId 关联ID
      * @return 是否成功
      */
-    boolean addCreditRecord(Integer userId, Integer creditChange, Integer changeType, String changeReason, Long relationId);
+    boolean addCreditRecord(Long userId, Integer creditChange, Integer changeType, String changeReason, Long relationId);
     
     /**
      * 计算用户当前信誉分
      * @param userId 用户ID
      * @return 当前信誉分
      */
-    int calculateUserCredit(Integer userId);
+    int calculateUserCredit(Long userId);
 } 

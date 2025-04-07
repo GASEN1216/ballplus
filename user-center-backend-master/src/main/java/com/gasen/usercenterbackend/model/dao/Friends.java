@@ -16,10 +16,10 @@ import lombok.experimental.Accessors;
 public class Friends {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
-    private Integer userId;
-    private Integer friendId;
+    private Long userId;
+    private Long friendId;
 
-    public Friends(int userId, int friendId) {
+    public Friends(long userId, long friendId) {
         this.userId = userId;
         this.friendId = friendId;
     }

@@ -44,9 +44,9 @@
               <text class="comment-name">{{item.appName}}</text>
               <text class="level-text">LV.{{item.grade}}</text>
               <view class="comment-actions">
-                <image class="icon-button" src="{{item.isLiked ? 'http://sunsetchat.top/icon/islike.png' : 'http://sunsetchat.top/icon/like.png'}}" bindtap="likeComment" data-id="{{item.commentId}}" />
+                <image class="icon-button" src="{{item.isLiked ? 'http://ballplus.asia/icon/islike.png' : 'http://ballplus.asia/icon/like.png'}}" bindtap="likeComment" data-id="{{item.commentId}}" />
                 <text class="likes-count">{{item.likes || 0}}</text>
-                <image class="icon-button" src="http://sunsetchat.top/icon/reply.png" catchtap="openReplyPopup" data-id="{{item.commentId}}" data-name="{{item.appName}}" />
+                <image class="icon-button" src="http://ballplus.asia/icon/reply.png" catchtap="openReplyPopup" data-id="{{item.commentId}}" data-name="{{item.appName}}" />
               </view>
             </view>
             <text class="post-time">{{item.createTime}}</text>
@@ -80,16 +80,16 @@
       </view>
       <view class="bottom-actions">
         <view class="action-item">
-          <image class="icon-button" src="{{ islike ? 'http://sunsetchat.top/icon/islike.png' : 'http://sunsetchat.top/icon/like.png' }}" bindtap="handleLikePost" />
+          <image class="icon-button" src="{{ islike ? 'http://ballplus.asia/icon/islike.png' : 'http://ballplus.asia/icon/like.png' }}" bindtap="handleLikePost" />
           <text class="action-count">{{post.likes || 0}}</text>
         </view>
         <view class="action-item">
-          <image class="icon-button" src="http://sunsetchat.top/icon/reply.png" bindtap="handleTapCommentInput"/>
+          <image class="icon-button" src="http://ballplus.asia/icon/reply.png" bindtap="handleTapCommentInput"/>
           <text class="action-count">{{post.comments || 0}}</text>
         </view>
         <view class="action-item">
           <button class="share-button" open-type="share">
-            <image class="icon-button" src="http://sunsetchat.top/icon/share.png"/>
+            <image class="icon-button" src="http://ballplus.asia/icon/share.png"/>
           </button>
         </view>
       </view>

@@ -21,7 +21,7 @@
       <view class="comment-item" wx:for="{{postComments}}" wx:key="commentId">
         <view class="comment-main" bindtap="goToPostComment" data-post-id="{{item.postId}}" data-comment-id="{{item.commentId}}">
           <view class="user-avatar">
-            <image src="{{item.avatar || 'http://sunsetchat.top/icon/default-avatar.png'}}" mode="aspectFill"></image>
+            <image src="{{item.avatar || 'http://ballplus.asia/icon/default-avatar.png'}}" mode="aspectFill"></image>
           </view>
           
           <view class="comment-content">
@@ -43,7 +43,7 @@
               <view class="post-time">{{item.createTime}}</view>
               <view class="action-btns">
                 <view class="btn {{item.isLiked ? 'liked' : ''}}" catchtap="likeComment" data-id="{{item.commentId}}">
-                  <image src="{{item.isLiked ? 'http://sunsetchat.top/icon/islike.png' : 'http://sunsetchat.top/icon/like.png'}}" class="action-icon"></image>
+                  <image src="{{item.isLiked ? 'http://ballplus.asia/icon/islike.png' : 'http://ballplus.asia/icon/like.png'}}" class="action-icon"></image>
                   <text>{{item.likes || 0}}</text>
                 </view>
               </view>
@@ -63,7 +63,7 @@
       <view class="comment-item" wx:for="{{commentReplies}}" wx:key="subCommentId">
         <view class="comment-main" bindtap="goToCommentDetail" data-comment-id="{{item.commentId}}" data-sub-comment-id="{{item.subCommentId}}">
           <view class="user-avatar">
-            <image src="{{item.avatar || 'http://sunsetchat.top/icon/default-avatar.png'}}" mode="aspectFill"></image>
+            <image src="{{item.avatar || 'http://ballplus.asia/icon/default-avatar.png'}}" mode="aspectFill"></image>
           </view>
           
           <view class="comment-content">
@@ -85,7 +85,7 @@
               <view class="post-time">{{item.createTime}}</view>
               <view class="action-btns">
                 <view class="btn {{item.isLiked ? 'liked' : ''}}" catchtap="likeSubComment" data-id="{{item.subCommentId}}">
-                  <image src="{{item.isLiked ? 'http://sunsetchat.top/icon/islike.png' : 'http://sunsetchat.top/icon/like.png'}}"  class="action-icon"></image>
+                  <image src="{{item.isLiked ? 'http://ballplus.asia/icon/islike.png' : 'http://ballplus.asia/icon/like.png'}}"  class="action-icon"></image>
                   <text>{{item.likes || 0}}</text>
                 </view>
               </view>
@@ -102,7 +102,7 @@
     
     <!-- 空状态 -->
     <view class="empty-state" wx:if="{{(activeTab === 'post' && postComments.length === 0 || activeTab === 'comment' && commentReplies.length === 0) && !loading}}">
-      <image src="http://sunsetchat.top/icon/empty.png" class="empty-icon"></image>
+      <image src="http://ballplus.asia/icon/empty.png" class="empty-icon"></image>
       <text class="empty-text">暂无{{activeTab === 'post' ? '帖子评论' : '评论回复'}}</text>
     </view>
     

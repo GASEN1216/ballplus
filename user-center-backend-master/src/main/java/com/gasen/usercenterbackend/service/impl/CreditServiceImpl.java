@@ -114,7 +114,7 @@ public class CreditServiceImpl extends ServiceImpl<CreditMapper, CreditRecord> i
         
         // 添加信誉分变动记录
         CreditRecord record = new CreditRecord();
-        record.setUserId(userId.intValue());
+        record.setUserId(userId);
         record.setChangeType(changeType);
         record.setChangeReason(reason);
         record.setCreditChange(points);
@@ -143,7 +143,7 @@ public class CreditServiceImpl extends ServiceImpl<CreditMapper, CreditRecord> i
         
         // 添加信誉分变动记录
         CreditRecord record = new CreditRecord();
-        record.setUserId(userId.intValue());
+        record.setUserId(userId);
         record.setChangeType(changeType);
         record.setChangeReason(reason);
         record.setCreditChange(-points);  // 减少信誉分记录为负数

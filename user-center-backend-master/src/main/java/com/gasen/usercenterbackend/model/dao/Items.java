@@ -12,10 +12,10 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("items")
 public class Items {
-    private Integer userId;
+    private Long userId;
     private Integer itemId;
 
-    public Items(Integer userId, Integer itemId) {
+    public Items(Long userId, Integer itemId) {
         this.userId = userId;
         this.itemId = itemId;
     }

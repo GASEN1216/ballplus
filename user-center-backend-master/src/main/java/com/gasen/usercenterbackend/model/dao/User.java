@@ -37,7 +37,7 @@ public class User implements Serializable {
      * 用户id
      */
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     /**
      * 微信开放平台id

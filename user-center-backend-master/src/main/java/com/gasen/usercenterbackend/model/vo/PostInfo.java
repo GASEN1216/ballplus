@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class PostInfo implements Serializable {
     // 帖子列表粗略信息：帖子ID、appId、头像、截取后的内容、图片、点赞数、评论数
     private Long postId;
-    private Integer appId;
+    private Long appId;
     private String appName;
     private String avatar;
     private Integer grade;

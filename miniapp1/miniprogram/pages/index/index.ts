@@ -71,7 +71,7 @@ Page({
     initCarousel() {
         // 第一张固定为欢迎图
         const welcomeSlide = {
-            url: 'http://sunsetchat.top/index/logo.png',
+            url: 'http://ballplus.asia/index/logo.png',
             link: '',
             title: '欢迎来到球Plus！',
             isWelcome: true
@@ -83,12 +83,12 @@ Page({
                 const carouselImages = [
                     welcomeSlide,
                     {
-                        url: 'http://sunsetchat.top/index/post.png',
+                        url: 'http://ballplus.asia/index/post.png',
                         link: `/forumPackage/pages/postDetail/postDetail?id=${topPost.id}`,
                         title: topPost.title
                     },
                     {
-                        url: 'http://sunsetchat.top/index/resource.png',
+                        url: 'http://ballplus.asia/index/resource.png',
                         link: `../../study/pages/resourcesDetail/resourcesDetail?id=${topResource.id}`,
                         title: topResource.title
                     }

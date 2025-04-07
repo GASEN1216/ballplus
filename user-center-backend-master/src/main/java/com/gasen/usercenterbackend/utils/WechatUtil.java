@@ -8,6 +8,7 @@ import com.gasen.usercenterbackend.model.dto.wxNotificationRequest;
 import com.gasen.usercenterbackend.model.TemplateData;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -412,7 +413,7 @@ public class WechatUtil {
                 .setClaims(claims)
                 .setIssuedAt(issuedAt)
                 .setExpiration(expiration)
-                .signWith(SignatureAlgorithm.HS256, secret)
+                .signWith(Keys.hmacShaKeyFor(secret.getBytes()), SignatureAlgorithm.HS256)
                 .compact();
     }
 }

@@ -1,7 +1,9 @@
 package com.gasen.usercenterbackend.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.gasen.usercenterbackend.model.dto.CursorPageRequest;
 import com.gasen.usercenterbackend.model.dto.ResourceQueryRequest;
+import com.gasen.usercenterbackend.model.vo.CursorPageResponse;
 import com.gasen.usercenterbackend.model.dto.ResourceVO;
 
 /**
@@ -13,8 +15,19 @@ public interface ResourceService {
      *
      * @param request 查询请求
      * @return 资源列表
+     * @deprecated 使用 listResourcesWithCursor 替代
      */
+    @Deprecated
     Page<ResourceVO> listResources(ResourceQueryRequest request);
+    
+    /**
+     * 游标分页查询资源列表
+     *
+     * @param request 查询请求
+     * @param cursorRequest 游标分页请求
+     * @return 游标分页资源列表
+     */
+    CursorPageResponse<ResourceVO> listResourcesWithCursor(ResourceQueryRequest request, CursorPageRequest cursorRequest);
 
     /**
      * 获取资源详情
@@ -37,8 +50,19 @@ public interface ResourceService {
      *
      * @param userId 用户ID
      * @return 收藏列表
+     * @deprecated 使用 listFavoritesWithCursor 替代
      */
+    @Deprecated
     Page<ResourceVO> listFavorites(Long userId, Integer page, Integer size);
+    
+    /**
+     * 游标分页获取用户收藏列表
+     *
+     * @param userId 用户ID
+     * @param cursorRequest 游标分页请求
+     * @return 游标分页收藏列表
+     */
+    CursorPageResponse<ResourceVO> listFavoritesWithCursor(Long userId, CursorPageRequest cursorRequest);
 
     /**
      * 添加收藏

@@ -28,7 +28,7 @@
             <text class="level-text">LV.{{item.grade}}</text>
             <view class="sub-actions">
               <image class="icon-button-small" 
-                     src="{{item.isLiked ? 'http://sunsetchat.top/icon/islike.png' : 'http://sunsetchat.top/icon/like.png'}}" 
+                     src="{{item.isLiked ? 'http://ballplus.asia/icon/islike.png' : 'http://ballplus.asia/icon/like.png'}}" 
                      bindtap="likeSubComment" 
                      data-id="{{item.subCommentId}}" />
               <text class="likes-count-small">{{item.likes || 0}}</text>
@@ -50,11 +50,11 @@
       </view>
       <view class="bottom-actions">
         <view class="action-item">
-          <image class="icon-button" src="{{mainComment.isLiked ? 'http://sunsetchat.top/icon/islike.png' : 'http://sunsetchat.top/icon/like.png'}}" bindtap="likeMainComment" />
+          <image class="icon-button" src="{{mainComment.isLiked ? 'http://ballplus.asia/icon/islike.png' : 'http://ballplus.asia/icon/like.png'}}" bindtap="likeMainComment" />
           <text class="action-count">{{mainComment.likes || 0}}</text>
         </view>
         <view class="action-item">
-          <image class="icon-button" src="http://sunsetchat.top/icon/reply.png" bindtap="handleTapCommentInput"/>
+          <image class="icon-button" src="http://ballplus.asia/icon/reply.png" bindtap="handleTapCommentInput"/>
           <text class="action-count">{{subComments.length || 0}}</text>
         </view>
       </view>

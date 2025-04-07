@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class PurchaseProductRequest {
-    private Integer userId;
+    private Long userId;
     private Integer productId;
 } 

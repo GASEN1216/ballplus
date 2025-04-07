@@ -18,7 +18,7 @@ public class UserEvent implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private Integer userId;
+    private Long userId;
 
     private Long eventId;
 
@@ -39,7 +39,7 @@ public class UserEvent implements Serializable {
     @TableField(update = "now()")
     private LocalDateTime updateTime;
 
-    public UserEvent(Integer appId, Long eventId) {
+    public UserEvent(Long appId, Long eventId) {
         this.userId = appId;
         this.eventId = eventId;
     }

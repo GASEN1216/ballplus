@@ -12,7 +12,10 @@ Page({
         loadAll: false,
         userId: -1,
         likedComments: [] as string[], // 记录已点赞的评论
-        likedSubComments: [] as string[] // 记录已点赞的子评论
+        likedSubComments: [] as string[], // 记录已点赞的子评论
+        nextCursorPost: null, // 帖子评论游标
+        nextCursorComment: null, // 评论回复游标
+        targetCommentId: 0 // 添加目标评论ID初始值
     },
 
     onLoad() {
@@ -76,33 +79,47 @@ Page({
 
     // 切换选项卡
     switchTab(e: any) {
-        const tabType = e.currentTarget.dataset.type;
-        if (this.data.activeTab !== tabType) {
-            this.setData({
-                activeTab: tabType,
-                currentPage: 1,
-                loadAll: false
-            });
+        const tab = e.currentTarget.dataset.type; // 修改这里，使用type而不是tab
+        if (tab === this.data.activeTab) return;
 
-            // 如果当前选项卡没有数据，则加载
-            if ((tabType === 'post' && this.data.postComments.length === 0) ||
-                (tabType === 'comment' && this.data.commentReplies.length === 0)) {
-                this.fetchMyComments();
+        this.setData({
+            activeTab: tab,
+            loadAll: false,
+            loading: false
+        });
+
+        // 如果切换的选项卡没有数据，则重置游标并加载
+        if ((tab === 'post' && this.data.postComments.length === 0) ||
+            (tab === 'comment' && this.data.commentReplies.length === 0)) {
+
+            if (tab === 'post') {
+                this.setData({ nextCursorPost: null });
+            } else {
+                this.setData({ nextCursorComment: null });
             }
+
+            this.fetchMyComments();
         }
     },
 
-    // 刷新页面
+    // 下拉刷新
     onPullDownRefresh() {
         this.setData({
-            currentPage: 1,
+            loading: true,
             loadAll: false
         });
 
+        // 根据当前选项卡重置对应的游标
         if (this.data.activeTab === 'post') {
-            this.setData({ postComments: [] });
+            this.setData({
+                postComments: [],
+                nextCursorPost: null
+            });
         } else {
-            this.setData({ commentReplies: [] });
+            this.setData({
+                commentReplies: [],
+                nextCursorComment: null
+            });
         }
 
         this.fetchMyComments(() => {
@@ -114,7 +131,7 @@ Page({
     loadMoreComments() {
         if (!this.data.loadAll && !this.data.loading) {
             this.setData({
-                currentPage: this.data.currentPage + 1
+                loading: true
             });
             this.fetchMyComments();
         }
@@ -122,7 +139,10 @@ Page({
 
     // 获取我的评论列表
     fetchMyComments(callback?: Function) {
-        const { userId, currentPage, pageSize, activeTab } = this.data;
+        const { userId, pageSize, activeTab } = this.data;
+        // 根据当前选项卡获取对应的游标
+        const nextCursor = activeTab === 'post' ? this.data.nextCursorPost : this.data.nextCursorComment;
+        const isFirstLoad = !nextCursor;
 
         if (!userId) {
             wx.showToast({
@@ -136,27 +156,42 @@ Page({
 
         // API 路径根据选项卡类型不同
         const apiUrl = activeTab === 'post'
-            ? `${myCommentsApp.globalData.url}/user/wx/getMyPostComments`
-            : `${myCommentsApp.globalData.url}/user/wx/getMyCommentReplies`;
+            ? `${myCommentsApp.globalData.url}/user/wx/getMyPostCommentsWithCursor`
+            : `${myCommentsApp.globalData.url}/user/wx/getMyCommentRepliesWithCursor`;
+
+        // 构建请求参数
+        const requestData: {
+            cursor?: string;
+            pageSize?: number;
+            asc?: boolean;
+        } = {
+            pageSize: pageSize,
+            asc: false // 默认降序
+        };
+
+        // 如果有游标且不是首次加载，添加游标参数
+        if (nextCursor && !isFirstLoad) {
+            requestData.cursor = nextCursor;
+        }
 
         wx.request({
             url: apiUrl,
             method: 'POST',
             header: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Type': 'application/json',
                 'X-Token': myCommentsApp.globalData.currentUser.token
             },
             data: {
-                userId: userId,
-                pageNum: currentPage,
-                pageSize: pageSize
+                userId,
+                requestData,
             },
             success: (res: any) => {
+
                 if (res.statusCode === 200 && res.data.code === 0) {
-                    // 根据不同的Tab获取不同的数据字段
-                    const newComments = activeTab === 'post'
-                        ? res.data.data.comments || []
-                        : res.data.data.replies || [];
+                    const responseData = res.data.data;
+                    const newComments = responseData.records || [];
+                    const hasMore = responseData.hasMore;
+                    const newCursor = responseData.nextCursor;
 
                     // 处理时间格式和其他数据
                     const processedComments = newComments.map((comment: any) => {
@@ -164,7 +199,7 @@ Page({
                             ...comment,
                             createTime: this.formatTime(comment.createTime),
                             // 添加点赞状态
-                            isLiked: activeTab === 'post' 
+                            isLiked: activeTab === 'post'
                                 ? this.data.likedComments.includes(comment.commentId)
                                 : this.data.likedSubComments.includes(comment.subCommentId)
                         };
@@ -178,27 +213,31 @@ Page({
                     });
 
                     if (activeTab === 'post') {
-                        if (currentPage === 1) {
+                        if (isFirstLoad) {
                             this.setData({
                                 postComments: processedComments,
-                                loadAll: processedComments.length < pageSize
+                                loadAll: !hasMore,
+                                nextCursorPost: newCursor
                             });
                         } else {
                             this.setData({
                                 postComments: [...this.data.postComments, ...processedComments],
-                                loadAll: processedComments.length < pageSize
+                                loadAll: !hasMore,
+                                nextCursorPost: newCursor
                             });
                         }
                     } else {
-                        if (currentPage === 1) {
+                        if (isFirstLoad) {
                             this.setData({
                                 commentReplies: processedComments,
-                                loadAll: processedComments.length < pageSize
+                                loadAll: !hasMore,
+                                nextCursorComment: newCursor
                             });
                         } else {
                             this.setData({
                                 commentReplies: [...this.data.commentReplies, ...processedComments],
-                                loadAll: processedComments.length < pageSize
+                                loadAll: !hasMore,
+                                nextCursorComment: newCursor
                             });
                         }
                     }
@@ -230,7 +269,7 @@ Page({
 
         // 跳转到帖子详情页并定位到评论位置
         wx.navigateTo({
-            url: `/pages/postDetail/postDetail?id=${postId}&commentId=${commentId}`
+            url: `../postDetail/postDetail?id=${postId}&commentId=${commentId}`
         });
     },
 
@@ -238,7 +277,7 @@ Page({
     goToPostDetail(e: any) {
         const postId = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: `/pages/postDetail/postDetail?id=${postId}`
+            url: `../postDetail/postDetail?id=${postId}`
         });
     },
 
@@ -259,12 +298,12 @@ Page({
             success: (res: any) => {
                 if (res.statusCode === 200 && res.data.code === 0) {
                     const comment = res.data.data;
-                    
+
                     // 格式化评论数据中的时间
                     const formattedComment = {
                         ...comment,
                         createTime: this.formatTime(comment.createTime),
-                        subComments: comment.subComments ? comment.subComments.map(subComment => ({
+                        subComments: comment.subComments ? comment.subComments.map((subComment: any) => ({
                             ...subComment,
                             createTime: this.formatTime(subComment.createTime)
                         })) : []
@@ -272,7 +311,7 @@ Page({
 
                     // 跳转到评论详情页
                     wx.navigateTo({
-                        url: `/pages/commentDetail/commentDetail?subCommentId=${subCommentId}`,
+                        url: `../commentDetail/commentDetail?subCommentId=${subCommentId}`,
                         success: function (res) {
                             // 将格式化后的评论数据传递给评论详情页
                             res.eventChannel.emit('acceptDataFromOpenerPage', { comment: formattedComment });
@@ -298,7 +337,7 @@ Page({
     // 查看原评论
     viewOriginalComment(e: any) {
         const commentId = e.currentTarget.dataset.commentId;
-        
+
         // 直接查看评论详情
         this.goToCommentDetail(e);
     },
@@ -306,7 +345,7 @@ Page({
     // 点赞评论
     likeComment(e: any) {
         const commentId = e.currentTarget.dataset.id;
-        
+
         // 检查是否已经点赞
         if (this.data.likedComments.includes(commentId)) {
             wx.showToast({
@@ -339,18 +378,18 @@ Page({
                         }
                         return comment;
                     });
-                    
+
                     // 更新点赞记录
                     const newLikedComments = [...this.data.likedComments, commentId];
-                    
+
                     this.setData({
                         postComments: updatedComments,
                         likedComments: newLikedComments
                     });
-                    
+
                     // 保存到本地存储
                     this.saveLikedRecords();
-                    
+
                     wx.showToast({
                         title: '点赞成功',
                         icon: 'success'
@@ -363,7 +402,7 @@ Page({
     // 点赞子评论
     likeSubComment(e: any) {
         const subCommentId = e.currentTarget.dataset.id;
-        
+
         // 检查是否已经点赞
         if (this.data.likedSubComments.includes(subCommentId)) {
             wx.showToast({
@@ -396,18 +435,18 @@ Page({
                         }
                         return reply;
                     });
-                    
+
                     // 更新点赞记录
                     const newLikedSubComments = [...this.data.likedSubComments, subCommentId];
-                    
+
                     this.setData({
                         commentReplies: updatedReplies,
                         likedSubComments: newLikedSubComments
                     });
-                    
+
                     // 保存到本地存储
                     this.saveLikedRecords();
-                    
+
                     wx.showToast({
                         title: '点赞成功',
                         icon: 'success'

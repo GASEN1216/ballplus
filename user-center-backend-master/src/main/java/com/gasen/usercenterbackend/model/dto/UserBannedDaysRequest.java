@@ -14,7 +14,7 @@ public class UserBannedDaysRequest implements Serializable {
     /**
      * 封禁用户id
      * */
-    private int id;
+    private long id;
 
     /**
      * 封禁天数days

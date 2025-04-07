@@ -53,7 +53,7 @@ public class EventServiceImpl implements IEventService {
     }
 
     @Override
-    public List<Event> findTemplates(Integer userId) {
+    public List<Event> findTemplates(Long userId) {
         return eventMapper.selectList(new QueryWrapper<Event>().eq("app_id", userId).eq("is_template", 1));
     }
 
@@ -65,7 +65,7 @@ public class EventServiceImpl implements IEventService {
     }
 
     @Override
-    public Boolean deleteTemplateByPer(Integer userId, Integer templateId) {
+    public Boolean deleteTemplateByPer(Long userId, Long templateId) {
         return eventMapper.update(new Event().setIsTemplate(false), new QueryWrapper<Event>().eq("app_id", userId).eq("id", templateId)) > 0;
     }
 
@@ -75,7 +75,7 @@ public class EventServiceImpl implements IEventService {
     }
 
     @Override
-    public boolean cancelEvent(Integer userId, Long eventId) {
+    public boolean cancelEvent(Long userId, Long eventId) {
         return eventMapper.update(new Event().setState((byte) 2), new QueryWrapper<Event>().eq("app_id", userId).eq("id", eventId)) > 0;
     }
 

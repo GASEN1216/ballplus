@@ -16,7 +16,7 @@ public class wxUser implements Serializable {
     /**
      * 用户id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 球号

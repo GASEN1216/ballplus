@@ -107,7 +107,7 @@ public class ComplaintServiceImpl extends ServiceImpl<ComplaintMapper, Complaint
      */
     @Override
     @Async("asyncTaskExecutor")
-    public CompletableFuture<List<Long>> processComplaintsAsync(Integer userId, Long eventId, String content, List<Integer> complainedIds) {
+    public CompletableFuture<List<Long>> processComplaintsAsync(Long userId, Long eventId, String content, List<Long> complainedIds) {
         log.info("开始异步处理投诉，投诉人：{}，活动：{}，被投诉人数：{}", userId, eventId, complainedIds.size());
         
         // 创建投诉对象列表
@@ -214,7 +214,7 @@ public class ComplaintServiceImpl extends ServiceImpl<ComplaintMapper, Complaint
      * @return 是否存在投诉
      */
     @Override
-    public boolean hasComplaint(Integer userId, Long eventId) {
+    public boolean hasComplaint(Long userId, Long eventId) {
         QueryWrapper<Complaint> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("complainer_id", userId)
                 .eq("event_id", eventId);
@@ -254,7 +254,7 @@ public class ComplaintServiceImpl extends ServiceImpl<ComplaintMapper, Complaint
         updateById(complaint);
         
         // 记录信誉分变动并扣除被投诉人信誉分
-        Integer complainedId = complaint.getComplainedId();
+        Long complainedId = complaint.getComplainedId();
         creditRecordService.addCreditRecord(
                 complainedId,
                 -1, // 扣除1分

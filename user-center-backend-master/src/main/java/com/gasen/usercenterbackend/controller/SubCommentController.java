@@ -66,7 +66,7 @@ public class SubCommentController {
     @PostMapping("/deleteSubComment")
     @Transactional
     public BaseResponse deleteSubComment(@RequestParam Long commentId, @RequestParam Long subCommentId,
-            @RequestParam Integer userId) {
+            @RequestParam Long userId) {
         try {
             if (subCommentId == null || userId == null) {
                 return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "参数为空！");

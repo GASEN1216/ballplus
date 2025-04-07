@@ -2,12 +2,13 @@
   <!-- 固定顶部搜索栏及加号按钮 -->
   <view class="header">
     <input class="search-input" placeholder="搜索帖子..." value="{{searchKeyword}}" bindinput="onSearchInput" confirm-type="search" bindconfirm="onSearchConfirm" />
-    <image class="add-button" src="http://sunsetchat.top/icon/add.png" bindtap="onAddClick" style="transform: rotate({{addButtonRotate}}deg);" />
+    <image class="add-button" src="http://ballplus.asia/icon/add.png" bindtap="onAddClick" style="transform: rotate({{addButtonRotate}}deg);" />
   </view>
 
   <!-- 帖子列表区域 -->
-  <view class="post-list">
-    <block wx:for="{{filteredPosts}}" wx:key="id">
+  <!-- <view class="post-list"> --> <!-- 原列表容器注释掉或删除 -->
+  <recycle-view class="post-list" batch="{{batchSetRecycleData}}" id="recycleView" bindscrolltolower="bindscrolltolower">
+    <recycle-item wx:for="{{recycleList}}" wx:key="id" id="item{{index}}">
       <view class="post-item" bindtap="goToPostDetail" data-id="{{item.id}}">
         <!-- 帖子头部：头像、标题、时间 -->
         <view class="post-header">
@@ -19,8 +20,7 @@
         </view>
         <!-- 帖子主体：作者、内容 -->
         <view class="post-body">
-          <text class="post-title">{{item.title}}
-          </text>
+          <text class="post-title">{{item.title}}</text>
           <text class="post-content">{{item.content}}</text>
         </view>
         <!-- 帖子图片的容器，用于截取图片的一部分 -->
@@ -34,7 +34,19 @@
           <view class="action-item">💬 {{item.comments}}</view>
         </view>
       </view>
-    </block>
+    </recycle-item>
+  </recycle-view>
+  <!-- </view> --> <!-- 原列表容器注释掉或删除 -->
+
+  <!-- 加载提示 -->
+  <view class="loading-indicator" wx:if="{{isLoading && currentPage > 1}}">
+    正在加载...
+  </view>
+  <view class="loading-indicator no-more" wx:if="{{!isLoading && !hasMore && posts.length > 0}}">
+    --- 没有更多了 ---
+  </view>
+  <view class="loading-indicator no-posts" wx:if="{{!isLoading && !hasMore && posts.length === 0 && !isLoading}}">
+    暂无帖子
   </view>
 
   <!-- 向上返回按钮 -->
