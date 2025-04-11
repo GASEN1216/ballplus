@@ -32,13 +32,15 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(LoggingInterceptor)
                 .addPathPatterns("/user/**");
         //全局请求拦截器
-        registry.addInterceptor(new GlobalRequestInterceptor())
-                .addPathPatterns("/user/**")
-                .excludePathPatterns("/user/login", "/user/register", "/user/current", "/user/receiveCode", "/user/wx/**"); // 排除不需要检查session的路径
+//        registry.addInterceptor(new GlobalRequestInterceptor())
+//                .addPathPatterns("/user/**")
+//                .excludePathPatterns("/user/login", "/user/register", "/user/current", "/user/receiveCode", "/user/wx/**"); // 排除不需要检查session的路径
         //微信请求拦截器
         registry.addInterceptor(getWeChatRequestInterceptor)
                 .addPathPatterns("/user/wx/**")
                 .excludePathPatterns(
+                        "/user/wx/complaint/admin/**",
+                        "/user/wx/admin/**",
                         "/user/wx/login",
                         "/user/wx/token",
                         "/user/wx/uptoken",
@@ -48,7 +50,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "/user/wx/getPostListWithCursor",// getPostList避免球探首页空白
                         "/user/wx/getEventDetailById",//getEventDetailById避免点开通知空白
                         "/user/wx/posts/top",//post/top避免帖子详情空白
-                        "/user/wx/resources/top");//resource/top避免资源详情空白
+                        "/user/wx/resources/**");//resource/top避免资源详情空白
     }
 
 }

@@ -409,7 +409,7 @@ public class UserController {
      */
     @GetMapping("/all")
     public BaseResponse getAllUser(HttpServletRequest request) {
-        if(isAdmin(request)) {
+        //if(isAdmin(request)) {
             log.info("请求获取所有用户信息");
             List<User> users = userService.usersList();
             // 使用 Java 8 Stream API 来处理用户列表并生成新的安全用户列表
@@ -417,7 +417,7 @@ public class UserController {
                     .map(UserController::getSaftyUser) // 对每个用户应用安全处理
                     .toList(); // 收集处理后的用户到新的列表中
             return ResultUtils.success(safeUsers);
-        }else return ResultUtils.error(ErrorCode.USER_NOT_LOGIN_OR_NOT_ADMIN);
+        //}else return ResultUtils.error(ErrorCode.USER_NOT_LOGIN_OR_NOT_ADMIN);
     }
 
 
@@ -471,11 +471,16 @@ public class UserController {
      * */
     @PostMapping("/banned")
     public BaseResponse banned(@RequestBody UserBannedDaysRequest userBannedDaysRequest, HttpServletRequest request) {
-        if(!isAdmin(request)) return ResultUtils.error(ErrorCode.USER_NOT_LOGIN_OR_NOT_ADMIN);
+        //if(!isAdmin(request)) return ResultUtils.error(ErrorCode.USER_NOT_LOGIN_OR_NOT_ADMIN);
         if(userBannedDaysRequest ==null) return ResultUtils.error(ErrorCode.PARAMETER_ERROR,"参数为空");
         log.info("ID为"+userBannedDaysRequest.getId()+"的用户被封禁"+userBannedDaysRequest.getDays()+"天");
         Boolean banned = userService.userBannedDays(userBannedDaysRequest);
         return ResultUtils.success(banned);
+    }
+
+    @PostMapping("/unbanned")
+    public BaseResponse unbanned() {
+        return ResultUtils.success("ok");
     }
 
     @Operation(summary = "通过用户id获取用户展示信息")

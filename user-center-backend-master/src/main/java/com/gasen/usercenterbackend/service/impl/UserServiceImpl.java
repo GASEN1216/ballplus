@@ -128,7 +128,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      * */
     @Override
     public List<User> usersList() {
-        return baseMapper.selectList(null);
+        // 只拿数据库里的前10个
+        return lambdaQuery().last("limit 10").list();
     }
 
     /**
@@ -282,7 +283,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      * */
     public void inspectUser(String userAccount, String password) {
         if(StringUtils.isAnyBlank(userAccount, password)) throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR,"用户名或密码为空");
-        if(userAccount.length() < 6 || password.length() < 6) throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "用户名或密码少于6位");
+        if(userAccount.length() < 2 || password.length() < 6) throw new BusinessExcetion(ErrorCode.PARAMETER_ERROR, "用户名或密码少于6位");
         // 账户不能包含特殊字符
         String validPattern = "[`~!@#$%^&*()+=|{}':;',\\\\[\\\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
         Matcher matcher = Pattern.compile(validPattern).matcher(userAccount);

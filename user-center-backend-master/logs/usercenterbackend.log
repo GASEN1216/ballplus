@@ -1,87 +1,65 @@
-2025-04-07 17:08:56,048 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 11252 (D:\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in D:\wx-miniprogram\user-center-backend-master)
-2025-04-07 17:08:56,052 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
-2025-04-07 17:08:56,889 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-07 17:08:56,892 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-07 17:08:56,927 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 18 ms. Found 0 Redis repository interfaces.
-2025-04-07 17:08:57,490 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
-2025-04-07 17:08:57,500 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
-2025-04-07 17:08:57,501 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
-2025-04-07 17:08:57,502 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
-2025-04-07 17:08:57,559 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
-2025-04-07 17:08:57,559 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1468 ms
-2025-04-07 17:08:58,178 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.dao.Items".
-2025-04-07 17:08:58,179 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.dao.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2025-04-07 17:08:59,316 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
-2025-04-07 17:08:59,331 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
-2025-04-07 17:08:59,699 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:650] Attempting to connect to: [localhost:5672]
-2025-04-07 17:08:59,747 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:592] Created new connection: rabbitConnectionFactory#fb2c2f3:0/SimpleConnection@c194c4e [delegate=amqp://guest@127.0.0.1:5672/, localPort=57949]
-2025-04-07 17:08:59,797 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 4.212 seconds (process running for 5.31)
-2025-04-07 17:09:00,058 INFO [scheduling-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
-2025-04-07 17:09:00,268 INFO [scheduling-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5016026d
-2025-04-07 17:09:00,270 INFO [scheduling-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
-2025-04-07 17:09:00,295 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 17:09:02,175 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:657] Waiting for workers to finish.
-2025-04-07 17:09:02,176 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:657] Waiting for workers to finish.
-2025-04-07 17:09:02,798 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:661] Successfully waited for workers to finish.
-2025-04-07 17:09:02,810 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:661] Successfully waited for workers to finish.
-2025-04-07 17:09:02,953 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
-2025-04-07 17:09:02,959 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
-2025-04-07 17:29:51,810 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 15756 (D:\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in D:\wx-miniprogram\user-center-backend-master)
-2025-04-07 17:29:51,811 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
-2025-04-07 17:29:52,501 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-07 17:29:52,503 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-07 17:29:52,532 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
-2025-04-07 17:29:53,007 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
-2025-04-07 17:29:53,015 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
-2025-04-07 17:29:53,016 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
-2025-04-07 17:29:53,016 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
-2025-04-07 17:29:53,073 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
-2025-04-07 17:29:53,073 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1225 ms
-2025-04-07 17:29:53,580 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.dao.Items".
-2025-04-07 17:29:53,581 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.dao.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2025-04-07 17:29:54,571 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
-2025-04-07 17:29:54,588 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
-2025-04-07 17:29:54,935 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:650] Attempting to connect to: [localhost:5672]
-2025-04-07 17:29:54,967 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:592] Created new connection: rabbitConnectionFactory#5a63fa71:0/SimpleConnection@238c63df [delegate=amqp://guest@127.0.0.1:5672/, localPort=62079]
-2025-04-07 17:29:55,014 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 3.639 seconds (process running for 4.131)
-2025-04-07 17:29:57,897 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:657] Waiting for workers to finish.
-2025-04-07 17:29:57,898 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:657] Waiting for workers to finish.
-2025-04-07 17:29:58,032 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:661] Successfully waited for workers to finish.
-2025-04-07 17:29:58,032 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:661] Successfully waited for workers to finish.
-2025-04-07 18:25:34,686 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 16428 (D:\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in D:\wx-miniprogram\user-center-backend-master)
-2025-04-07 18:25:34,687 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
-2025-04-07 18:25:35,442 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-07 18:25:35,443 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-07 18:25:35,473 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
-2025-04-07 18:25:35,997 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
-2025-04-07 18:25:36,005 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
-2025-04-07 18:25:36,006 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
-2025-04-07 18:25:36,008 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
-2025-04-07 18:25:36,079 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
-2025-04-07 18:25:36,080 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1353 ms
-2025-04-07 18:25:36,650 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.dao.Items".
-2025-04-07 18:25:36,651 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.dao.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2025-04-07 18:25:37,759 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
-2025-04-07 18:25:37,775 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
-2025-04-07 18:25:38,112 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:650] Attempting to connect to: [localhost:5672]
-2025-04-07 18:25:38,145 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:592] Created new connection: rabbitConnectionFactory#1791e231:0/SimpleConnection@372e972d [delegate=amqp://guest@127.0.0.1:5672/, localPort=55658]
-2025-04-07 18:25:38,196 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 3.98 seconds (process running for 5.007)
-2025-04-07 18:26:00,085 INFO [scheduling-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
-2025-04-07 18:26:00,334 INFO [scheduling-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@526023b8
-2025-04-07 18:26:00,335 INFO [scheduling-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
-2025-04-07 18:26:00,365 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:26:47,717 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-07 18:26:47,717 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
-2025-04-07 18:26:47,719 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 2 ms
-2025-04-07 18:26:47,747 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:21:50,198 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 6344 (D:\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in D:\wx-miniprogram\user-center-backend-master)
+2025-04-11 02:21:50,201 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
+2025-04-11 02:21:51,130 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
+2025-04-11 02:21:51,133 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-04-11 02:21:51,166 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
+2025-04-11 02:21:51,745 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
+2025-04-11 02:21:51,753 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
+2025-04-11 02:21:51,754 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
+2025-04-11 02:21:51,756 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2025-04-11 02:21:51,816 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
+2025-04-11 02:21:51,816 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1572 ms
+2025-04-11 02:21:52,418 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.dao.Items".
+2025-04-11 02:21:52,418 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.dao.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
+2025-04-11 02:21:53,622 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
+2025-04-11 02:21:53,640 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
+2025-04-11 02:21:54,016 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:650] Attempting to connect to: [localhost:5672]
+2025-04-11 02:21:54,086 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:592] Created new connection: rabbitConnectionFactory#8ee03f5:0/SimpleConnection@49faf815 [delegate=amqp://guest@127.0.0.1:5672/, localPort=57559]
+2025-04-11 02:21:54,146 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 4.416 seconds (process running for 6.064)
+2025-04-11 02:22:00,075 INFO [scheduling-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariCP - Starting...
+2025-04-11 02:22:00,368 INFO [scheduling-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariCP - Added connection com.mysql.cj.jdbc.ConnectionImpl@6db44b2a
+2025-04-11 02:22:00,373 INFO [scheduling-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariCP - Start completed.
+2025-04-11 02:22:00,438 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:39] 更新了 10 条活动状态
+2025-04-11 02:22:13,238 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-11 02:22:13,238 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
+2025-04-11 02:22:13,239 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
+2025-04-11 02:22:13,268 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/posts/top
+Method: GET
+Class: PostController
+Method: getTopPost
+Client IP: 192.168.31.105
+
+2025-04-11 02:22:13,268 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:22:13,369 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/login
 Method: POST
 Class: UserController
 Method: user_login
-Param: code=0d1a3o1w3AXVH43egi4w38mngn1a3o1j
+Param: code=0b1V61ll2SDXnf4tnJml24M8h83V61l3
 Client IP: 192.168.31.105
 
-2025-04-07 18:26:48,835 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:22:14,081 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/resources/top
+Method: GET
+Class: ResourceController
+Method: getTopResource
+Client IP: 192.168.31.105
+
+2025-04-11 02:22:14,318 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:22:17,273 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/getAllMyEvents
 Method: POST
 Class: EventController
@@ -89,76 +67,14 @@ Method: getAllMyEvents
 Param: userId=1
 Client IP: 192.168.31.105
 
-2025-04-07 18:26:48,838 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 18:26:51,271 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getUserInfoByUserId
-Method: POST
-Class: UserController
-Method: getUserInfoByUserId
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 18:26:54,072 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCreditInfo
-Method: GET
-Class: UserController
-Method: getCreditInfo
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 18:26:54,073 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCreditHistory
-Method: GET
-Class: UserController
-Method: getCreditHistory
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 18:27:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:27:02,961 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 18:27:04,593 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:22:17,275 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/getEvent
 Method: GET
 Class: EventController
 Method: getEvent
 Client IP: 192.168.31.105
 
-2025-04-07 18:27:04,595 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/posts/top
-Method: GET
-Class: PostController
-Method: getTopPost
-Client IP: 192.168.31.105
-
-2025-04-07 18:27:04,602 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 18:27:05,340 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/resources/top
-Method: GET
-Class: ResourceController
-Method: getTopResource
-Client IP: 192.168.31.105
-
-2025-04-07 18:27:13,746 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:22:38,420 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/getTemplateByPer
 Method: POST
 Class: EventController
@@ -166,141 +82,233 @@ Method: getTemplateByPer
 Param: userId=1
 Client IP: 192.168.31.105
 
-2025-04-07 18:27:16,100 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:22:46,310 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/createEvent
 Method: POST
 Class: EventController
 Method: createEvent
 Client IP: 192.168.31.105
 
-2025-04-07 18:27:16,222 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:22:46,432 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/getEvent
 Method: GET
 Class: EventController
 Method: getEvent
 Client IP: 192.168.31.105
 
-2025-04-07 18:27:17,964 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:22:49,091 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/sendJoinEventNotification
 Method: POST
 Class: EventController
 Method: sendJoinEventNotification
 Param: userId=1
-Param: eventId=58
+Param: eventId=59
 Client IP: 192.168.31.105
 
-2025-04-07 18:28:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:28:31,589 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostListWithCursor
-Method: GET
-Class: PostController
-Method: getPostListWithCursor
-Param: pageSize=10
-Param: asc=false
-Client IP: 192.168.31.105
-
-2025-04-07 18:28:31,589 ERROR [http-nio-8080-exec-10] c.g.u.c.i.WeChatRequestInterceptor [WeChatRequestInterceptor.java:100] Request body is empty
-2025-04-07 18:29:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:29:34,867 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:657] Waiting for workers to finish.
-2025-04-07 18:29:34,869 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:657] Waiting for workers to finish.
-2025-04-07 18:29:35,402 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:661] Successfully waited for workers to finish.
-2025-04-07 18:29:35,417 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:661] Successfully waited for workers to finish.
-2025-04-07 18:29:35,548 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
-2025-04-07 18:29:35,554 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
-2025-04-07 18:29:39,301 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 12020 (D:\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in D:\wx-miniprogram\user-center-backend-master)
-2025-04-07 18:29:39,303 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
-2025-04-07 18:29:40,101 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-07 18:29:40,103 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-07 18:29:40,135 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 18 ms. Found 0 Redis repository interfaces.
-2025-04-07 18:29:40,658 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
-2025-04-07 18:29:40,666 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
-2025-04-07 18:29:40,667 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
-2025-04-07 18:29:40,668 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
-2025-04-07 18:29:40,731 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
-2025-04-07 18:29:40,733 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1382 ms
-2025-04-07 18:29:41,302 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.dao.Items".
-2025-04-07 18:29:41,302 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.dao.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2025-04-07 18:29:42,434 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
-2025-04-07 18:29:42,450 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
-2025-04-07 18:29:42,818 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:650] Attempting to connect to: [localhost:5672]
-2025-04-07 18:29:42,853 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:592] Created new connection: rabbitConnectionFactory#75aa7703:0/SimpleConnection@3a678e40 [delegate=amqp://guest@127.0.0.1:5672/, localPort=61390]
-2025-04-07 18:29:42,907 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 4.093 seconds (process running for 4.637)
-2025-04-07 18:29:47,371 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-07 18:29:47,372 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
-2025-04-07 18:29:47,372 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 0 ms
-2025-04-07 18:29:47,384 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:23:00,017 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:23:30,661 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/getEvent
 Method: GET
 Class: EventController
 Method: getEvent
 Client IP: 192.168.31.105
 
-2025-04-07 18:29:47,439 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
-2025-04-07 18:29:47,634 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5b3b00ba
-2025-04-07 18:29:47,637 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
-2025-04-07 18:29:58,974 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:23:30,892 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/getEvent
 Method: GET
 Class: EventController
 Method: getEvent
 Client IP: 192.168.31.105
 
-2025-04-07 18:29:58,974 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/posts/top
-Method: GET
-Class: PostController
-Method: getTopPost
-Client IP: 192.168.31.105
-
-2025-04-07 18:29:59,338 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0c1ffo1w3TcWH438X70w3nT1wT2ffo1c
-Client IP: 192.168.31.105
-
-2025-04-07 18:29:59,527 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/resources/top
-Method: GET
-Class: ResourceController
-Method: getTopResource
-Client IP: 192.168.31.105
-
-2025-04-07 18:29:59,706 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 18:30:00,021 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:30:00,088 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getAllMyEvents
+2025-04-11 02:23:40,183 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getTemplateByPer
 Method: POST
 Class: EventController
-Method: getAllMyEvents
+Method: getTemplateByPer
 Param: userId=1
 Client IP: 192.168.31.105
 
-2025-04-07 18:30:00,091 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:23:42,126 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:23:42,204 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/getEvent
 Method: GET
 Class: EventController
 Method: getEvent
 Client IP: 192.168.31.105
 
-2025-04-07 18:30:00,524 ERROR [pool-4-thread-1] c.g.u.u.WechatUtil [WechatUtil.java:215] Failed to send notification to openid: oEthG5Cxc1PyEuGbxF2RBuMaM8gQ, errcode: 43101, errmsg: user refuse to accept the msg rid: 67f3a927-2691bb93-05c1b703
-2025-04-07 18:30:00,524 WARN [pool-4-thread-1] c.g.u.u.WechatUtil [WechatUtil.java:159] Retrying failed notifications for openids: [oEthG5Cxc1PyEuGbxF2RBuMaM8gQ]
-2025-04-07 18:30:00,524 INFO [pool-4-thread-1] c.g.u.u.WechatUtil [WechatUtil.java:161] Retry attempt 1 for failed openids: [oEthG5Cxc1PyEuGbxF2RBuMaM8gQ]
-2025-04-07 18:30:00,822 ERROR [pool-4-thread-1] c.g.u.u.WechatUtil [WechatUtil.java:215] Failed to send notification to openid: oEthG5Cxc1PyEuGbxF2RBuMaM8gQ, errcode: 43101, errmsg: user refuse to accept the msg rid: 67f3a927-1188b1ef-0b795d54
-2025-04-07 18:30:00,822 INFO [pool-4-thread-1] c.g.u.u.WechatUtil [WechatUtil.java:161] Retry attempt 2 for failed openids: [oEthG5Cxc1PyEuGbxF2RBuMaM8gQ]
-2025-04-07 18:30:01,099 ERROR [pool-4-thread-1] c.g.u.u.WechatUtil [WechatUtil.java:215] Failed to send notification to openid: oEthG5Cxc1PyEuGbxF2RBuMaM8gQ, errcode: 43101, errmsg: user refuse to accept the msg rid: 67f3a927-5a66843a-78f4e806
-2025-04-07 18:30:01,100 INFO [pool-4-thread-1] c.g.u.u.WechatUtil [WechatUtil.java:161] Retry attempt 3 for failed openids: [oEthG5Cxc1PyEuGbxF2RBuMaM8gQ]
-2025-04-07 18:30:01,333 ERROR [pool-4-thread-1] c.g.u.u.WechatUtil [WechatUtil.java:215] Failed to send notification to openid: oEthG5Cxc1PyEuGbxF2RBuMaM8gQ, errcode: 43101, errmsg: user refuse to accept the msg rid: 67f3a928-5424b483-4fe45e00
-2025-04-07 18:30:01,333 ERROR [pool-4-thread-1] c.g.u.u.WechatUtil [WechatUtil.java:182] Failed to send notifications after 3 retries for openids: [oEthG5Cxc1PyEuGbxF2RBuMaM8gQ]
-2025-04-07 18:30:01,333 ERROR [pool-4-thread-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:95] eventId: 58 的活动开始通知未全部发送
-2025-04-07 18:30:04,974 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:23:43,473 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/sendJoinEventNotification
+Method: POST
+Class: EventController
+Method: sendJoinEventNotification
+Param: userId=1
+Param: eventId=61
+Client IP: 192.168.31.105
+
+2025-04-11 02:23:50,496 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:23:53,939 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getTemplateByPer
+Method: POST
+Class: EventController
+Method: getTemplateByPer
+Param: userId=1
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:00,002 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:24:12,279 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/createEvent
+Method: POST
+Class: EventController
+Method: createEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:12,359 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:14,314 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/sendJoinEventNotification
+Method: POST
+Class: EventController
+Method: sendJoinEventNotification
+Param: userId=1
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:19,752 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/matchEvent
+Method: POST
+Class: EventController
+Method: matchEvent
+Param: userId=1
+Param: latitude=22.78851
+Param: longitude=114.45646
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:20,152 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEventDetailById
+Method: GET
+Class: EventController
+Method: getEventDetailById
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:20,155 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/check
+Method: GET
+Class: ComplaintController
+Method: checkCanComplaint
+Param: userId=1
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:20,155 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/list
+Method: GET
+Class: ComplaintController
+Method: getComplaintList
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:20,161 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/check
+Method: GET
+Class: ComplaintController
+Method: checkCanComplaint
+Param: userId=1
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:20,177 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/list
+Method: GET
+Class: ComplaintController
+Method: getComplaintList
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:22,035 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:23,885 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/matchEvent
+Method: POST
+Class: EventController
+Method: matchEvent
+Param: userId=1
+Param: latitude=22.78851
+Param: longitude=114.45646
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:24,150 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/list
+Method: GET
+Class: ComplaintController
+Method: getComplaintList
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:24,149 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEventDetailById
+Method: GET
+Class: EventController
+Method: getEventDetailById
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:24,149 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/check
+Method: GET
+Class: ComplaintController
+Method: checkCanComplaint
+Param: userId=1
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:24,164 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/list
+Method: GET
+Class: ComplaintController
+Method: getComplaintList
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:24,175 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/check
+Method: GET
+Class: ComplaintController
+Method: checkCanComplaint
+Param: userId=1
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:25,257 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:24:28,543 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/getPostListWithCursor
 Method: GET
 Class: PostController
@@ -309,112 +317,23 @@ Param: pageSize=10
 Param: asc=false
 Client IP: 192.168.31.105
 
-2025-04-07 18:30:16,634 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostListWithCursor
-Method: GET
-Class: PostController
-Method: getPostListWithCursor
-Param: pageSize=10
-Param: cursor=2025-04-01T00:50:17
-Param: asc=false
+2025-04-11 02:25:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:25:01,684 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/uptoken
+Method: POST
+Class: UserController
+Method: testupToken
+Param: token=eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiUUhJOVJudG16ZGFGcFFQUUVXQjBCQT09Iiwib3BlbmlkIjoib0V0aEc1Q3hjMVB5RXVHYnhGMlJCdU1hTThnUSIsImlhdCI6MTc0NDMwOTMzNiwiZXhwIjoxNzQ0Mzk1NzM2fQ.jII7aupuRXou5k046DiAPTf33t2bAOtshHywWyeR-UQ
 Client IP: 192.168.31.105
 
-2025-04-07 18:31:00,023 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:39] 更新了 1 条活动状态
-2025-04-07 18:31:33,034 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostListWithCursor
-Method: GET
-Class: PostController
-Method: getPostListWithCursor
-Param: pageSize=10
-Param: cursor=2025-04-01T00:50:16
-Param: asc=false
-Client IP: 192.168.31.105
-
-2025-04-07 18:31:35,458 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostListWithCursor
-Method: GET
-Class: PostController
-Method: getPostListWithCursor
-Param: pageSize=10
-Param: cursor=2025-04-01T00:50:15
-Param: asc=false
-Client IP: 192.168.31.105
-
-2025-04-07 18:31:36,942 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostListWithCursor
-Method: GET
-Class: PostController
-Method: getPostListWithCursor
-Param: pageSize=10
-Param: cursor=2025-04-01T00:50:14
-Param: asc=false
-Client IP: 192.168.31.105
-
-2025-04-07 18:31:38,549 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostListWithCursor
-Method: GET
-Class: PostController
-Method: getPostListWithCursor
-Param: pageSize=10
-Param: cursor=2025-04-01T00:50:13
-Param: asc=false
-Client IP: 192.168.31.105
-
-2025-04-07 18:31:39,774 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostListWithCursor
-Method: GET
-Class: PostController
-Method: getPostListWithCursor
-Param: pageSize=10
-Param: cursor=2025-04-01T00:50:12
-Param: asc=false
-Client IP: 192.168.31.105
-
-2025-04-07 18:31:41,296 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostListWithCursor
-Method: GET
-Class: PostController
-Method: getPostListWithCursor
-Param: pageSize=10
-Param: cursor=2025-04-01T00:50:11
-Param: asc=false
-Client IP: 192.168.31.105
-
-2025-04-07 18:31:42,533 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostListWithCursor
-Method: GET
-Class: PostController
-Method: getPostListWithCursor
-Param: pageSize=10
-Param: cursor=2025-04-01T00:50:10
-Param: asc=false
-Client IP: 192.168.31.105
-
-2025-04-07 18:31:45,074 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
+2025-04-11 02:25:08,194 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/addPost
 Method: POST
 Class: PostController
-Method: getPostDetail
-Param: postId=19542
+Method: addPost
 Client IP: 192.168.31.105
 
-2025-04-07 18:31:47,896 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=19543
-Client IP: 192.168.31.105
-
-2025-04-07 18:31:50,600 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=7909
-Client IP: 192.168.31.105
-
-2025-04-07 18:31:58,330 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:25:12,682 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/getPostListWithCursor
 Method: GET
 Class: PostController
@@ -423,8 +342,7 @@ Param: pageSize=10
 Param: asc=false
 Client IP: 192.168.31.105
 
-2025-04-07 18:32:00,017 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:32:01,085 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:25:27,648 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/getPostDetail
 Method: POST
 Class: PostController
@@ -432,299 +350,626 @@ Method: getPostDetail
 Param: postId=100008
 Client IP: 192.168.31.105
 
-2025-04-07 18:32:11,996 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
+2025-04-11 02:25:31,413 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/addComment
 Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
+Class: CommentController
+Method: addComment
 Client IP: 192.168.31.105
 
-2025-04-07 18:32:11,999 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 18:32:15,337 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
+2025-04-11 02:25:34,516 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPostListWithCursor
 Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 18:32:16,607 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 18:32:16,974 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 18:32:17,439 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 18:32:20,259 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostsWithCursor
-Method: POST
 Class: PostController
-Method: getMyPostsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 18:32:20,264 WARN [http-nio-8080-exec-1] o.s.w.s.m.s.DefaultHandlerExceptionResolver [AbstractHandlerExceptionResolver.java:247] Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'userId' for method parameter type Long is not present]
-2025-04-07 18:33:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:34:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:34:27,068 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostsWithCursor
-Method: POST
-Class: PostController
-Method: getMyPostsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 18:34:27,070 WARN [http-nio-8080-exec-3] o.s.w.s.m.s.DefaultHandlerExceptionResolver [AbstractHandlerExceptionResolver.java:247] Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'userId' for method parameter type Long is not present]
-2025-04-07 18:34:56,576 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostsWithCursor
-Method: POST
-Class: PostController
-Method: getMyPostsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 18:34:56,579 WARN [http-nio-8080-exec-5] o.s.w.s.m.s.DefaultHandlerExceptionResolver [AbstractHandlerExceptionResolver.java:247] Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'userId' for method parameter type Long is not present]
-2025-04-07 18:35:00,017 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:36:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:36:25,264 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostsWithCursor
-Method: POST
-Class: PostController
-Method: getMyPostsWithCursor
-Param: userId=1
+Method: getPostListWithCursor
 Param: pageSize=10
 Param: asc=false
 Client IP: 192.168.31.105
 
-2025-04-07 18:36:29,976 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostsWithCursor
+2025-04-11 02:25:52,783 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/addPost
 Method: POST
 Class: PostController
-Method: getMyPostsWithCursor
-Param: userId=1
+Method: addPost
+Client IP: 192.168.31.105
+
+2025-04-11 02:25:56,377 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPostListWithCursor
+Method: GET
+Class: PostController
+Method: getPostListWithCursor
 Param: pageSize=10
 Param: asc=false
 Client IP: 192.168.31.105
 
-2025-04-07 18:37:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:37:05,844 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostsWithCursor
-Method: POST
-Class: PostController
-Method: getMyPostsWithCursor
-Param: userId=1
-Param: pageSize=10
-Param: asc=false
-Client IP: 192.168.31.105
-
-2025-04-07 18:37:08,079 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:26:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:26:00,573 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/getPostDetail
 Method: POST
 Class: PostController
 Method: getPostDetail
-Param: postId=6
+Param: postId=100010
 Client IP: 192.168.31.105
 
-2025-04-07 18:37:21,481 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/likeComment
+2025-04-11 02:26:01,588 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/likePost
+Method: POST
+Class: PostController
+Method: likePost
+Param: postId=100010
+Client IP: 192.168.31.105
+
+2025-04-11 02:26:03,184 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] c.g.u.c.r.LikeEventConsumer [LikeEventConsumer.java:38] 收到点赞事件，类型: 0, ID: 100010, 当前线程: org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1
+2025-04-11 02:26:03,190 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] c.g.u.c.r.LikeEventConsumer [LikeEventConsumer.java:53] 成功处理点赞事件，type: 0, id: 100010, likes: 1
+2025-04-11 02:26:03,906 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPostListWithCursor
+Method: GET
+Class: PostController
+Method: getPostListWithCursor
+Param: pageSize=10
+Param: asc=false
+Client IP: 192.168.31.105
+
+2025-04-11 02:26:05,859 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getNearestEvent
+Method: POST
+Class: EventController
+Method: getNearestEvent
+Param: userId=1
+Client IP: 192.168.31.105
+
+2025-04-11 02:26:05,861 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getNearestEvent
+Method: POST
+Class: EventController
+Method: getNearestEvent
+Param: userId=1
+Client IP: 192.168.31.105
+
+2025-04-11 02:26:09,222 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:27:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:28:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:29:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:30:00,018 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:59] 没有即将开始的活动需要通知
+2025-04-11 02:30:00,021 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:30:33,000 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:30:33,001 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/posts/top
+Method: GET
+Class: PostController
+Method: getTopPost
+Client IP: 192.168.31.105
+
+2025-04-11 02:30:33,167 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/resources/top
+Method: GET
+Class: ResourceController
+Method: getTopResource
+Client IP: 192.168.31.105
+
+2025-04-11 02:30:33,458 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0a1SgrFa1BxKnJ0qCzHa1hDVLp4SgrFI
+Client IP: 192.168.31.105
+
+2025-04-11 02:30:33,824 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:30:36,849 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getAllMyEvents
+Method: POST
+Class: EventController
+Method: getAllMyEvents
+Param: userId=1
+Client IP: 192.168.31.105
+
+2025-04-11 02:30:36,852 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getNearestEvent
+Method: POST
+Class: EventController
+Method: getNearestEvent
+Param: userId=1
+Client IP: 192.168.31.105
+
+2025-04-11 02:30:38,243 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:30:39,334 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEventDetailById
+Method: GET
+Class: EventController
+Method: getEventDetailById
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:30:39,334 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/check
+Method: GET
+Class: ComplaintController
+Method: checkCanComplaint
+Param: userId=1
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:30:39,334 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/list
+Method: GET
+Class: ComplaintController
+Method: getComplaintList
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:30:39,347 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/list
+Method: GET
+Class: ComplaintController
+Method: getComplaintList
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:30:39,347 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/check
+Method: GET
+Class: ComplaintController
+Method: checkCanComplaint
+Param: userId=1
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:31:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:32:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:33:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:34:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:34:33,886 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:34:35,354 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPostListWithCursor
+Method: GET
+Class: PostController
+Method: getPostListWithCursor
+Param: pageSize=10
+Param: asc=false
+Client IP: 192.168.31.105
+
+2025-04-11 02:34:42,245 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPostListWithCursor
+Method: GET
+Class: PostController
+Method: getPostListWithCursor
+Param: pageSize=10
+Param: asc=false
+Param: keyword=学习
+Client IP: 192.168.31.105
+
+2025-04-11 02:34:54,675 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPostListWithCursor
+Method: GET
+Class: PostController
+Method: getPostListWithCursor
+Param: pageSize=10
+Param: asc=false
+Param: keyword=云
+Client IP: 192.168.31.105
+
+2025-04-11 02:34:58,158 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPostListWithCursor
+Method: GET
+Class: PostController
+Method: getPostListWithCursor
+Param: pageSize=10
+Param: asc=false
+Param: keyword=学习
+Client IP: 192.168.31.105
+
+2025-04-11 02:35:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:35:37,687 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPostDetail
+Method: POST
+Class: PostController
+Method: getPostDetail
+Param: postId=100008
+Client IP: 192.168.31.105
+
+2025-04-11 02:36:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:37:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:38:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:39:00,018 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:39:24,751 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/uptoken
+Method: POST
+Class: UserController
+Method: testupToken
+Param: token=eyJhbGciOiJIUzI1NiJ9.eyJzZXNzaW9uS2V5IjoiUUhJOVJudG16ZGFGcFFQUUVXQjBCQT09Iiwib3BlbmlkIjoib0V0aEc1Q3hjMVB5RXVHYnhGMlJCdU1hTThnUSIsImlhdCI6MTc0NDMwOTMzNiwiZXhwIjoxNzQ0Mzk1NzM2fQ.jII7aupuRXou5k046DiAPTf33t2bAOtshHywWyeR-UQ
+Client IP: 192.168.31.105
+
+2025-04-11 02:40:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:40:09,289 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/addPost
+Method: POST
+Class: PostController
+Method: addPost
+Client IP: 192.168.31.105
+
+2025-04-11 02:40:12,946 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPostListWithCursor
+Method: GET
+Class: PostController
+Method: getPostListWithCursor
+Param: pageSize=10
+Param: asc=false
+Param: keyword=学习
+Client IP: 192.168.31.105
+
+2025-04-11 02:40:15,940 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPostListWithCursor
+Method: GET
+Class: PostController
+Method: getPostListWithCursor
+Param: pageSize=10
+Param: asc=false
+Client IP: 192.168.31.105
+
+2025-04-11 02:40:43,718 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPostDetail
+Method: POST
+Class: PostController
+Method: getPostDetail
+Param: postId=100011
+Client IP: 192.168.31.105
+
+2025-04-11 02:41:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:42:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:42:38,364 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getNearestEvent
+Method: POST
+Class: EventController
+Method: getNearestEvent
+Param: userId=1
+Client IP: 192.168.31.105
+
+2025-04-11 02:42:41,783 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getMyPostsWithCursor
+Method: POST
+Class: PostController
+Method: getMyPostsWithCursor
+Param: userId=1
+Param: pageSize=10
+Param: asc=false
+Client IP: 192.168.31.105
+
+2025-04-11 02:42:43,554 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getMyPostsWithCursor
+Method: POST
+Class: PostController
+Method: getMyPostsWithCursor
+Param: userId=1
+Param: pageSize=10
+Param: asc=false
+Client IP: 192.168.31.105
+
+2025-04-11 02:43:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:44:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:44:33,713 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPostDetail
+Method: POST
+Class: PostController
+Method: getPostDetail
+Param: postId=100011
+Client IP: 192.168.31.105
+
+2025-04-11 02:44:43,396 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/addComment
 Method: POST
 Class: CommentController
-Method: likeComment
-Param: commentId=15
+Method: addComment
 Client IP: 192.168.31.105
 
-2025-04-07 18:37:22,617 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] c.g.u.c.r.LikeEventConsumer [LikeEventConsumer.java:38] 收到点赞事件，类型: 1, ID: 15, 当前线程: org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1
-2025-04-07 18:37:22,621 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] c.g.u.c.r.LikeEventConsumer [LikeEventConsumer.java:53] 成功处理点赞事件，type: 1, id: 15, likes: 3
-2025-04-07 18:37:27,967 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:45:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:45:51,302 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/addSubComment
 Method: POST
 Class: SubCommentController
 Method: addComment
 Client IP: 192.168.31.105
 
-2025-04-07 18:37:28,107 ERROR [http-nio-8080-exec-10] c.g.u.c.SubCommentController [SubCommentController.java:60] 添加评论异常
-org.springframework.jdbc.BadSqlGrammarException: 
-### Error updating database.  Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE is_delete=0     AND (id = 15 AND is_delete = 0) SET comments = comments + ' at line 1
-### The error may exist in com/gasen/usercenterbackend/mapper/CommentMapper.java (best guess)
-### The error may involve com.gasen.usercenterbackend.mapper.CommentMapper.update-Inline
-### The error occurred while setting parameters
-### SQL: UPDATE comment     WHERE is_delete=0     AND (id = ? AND is_delete = ?) SET comments = comments + 1
-### Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE is_delete=0     AND (id = 15 AND is_delete = 0) SET comments = comments + ' at line 1
-; bad SQL grammar []
-	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:246)
-	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107)
-	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:92)
-	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:439)
-	at jdk.proxy2/jdk.proxy2.$Proxy96.update(Unknown Source)
-	at org.mybatis.spring.SqlSessionTemplate.update(SqlSessionTemplate.java:288)
-	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:64)
-	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:152)
-	at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)
-	at jdk.proxy2/jdk.proxy2.$Proxy105.update(Unknown Source)
-	at com.gasen.usercenterbackend.service.impl.CommentServiceImpl.addComments(CommentServiceImpl.java:160)
-	at com.gasen.usercenterbackend.controller.SubCommentController.addComment(SubCommentController.java:51)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:351)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
-	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
-	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:385)
-	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
-	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
-	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
-	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
-	at com.gasen.usercenterbackend.controller.SubCommentController$$SpringCGLIB$$0.addComment(<generated>)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:261)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:189)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.base/java.lang.Thread.run(Thread.java:840)
-Caused by: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE is_delete=0     AND (id = 15 AND is_delete = 0) SET comments = comments + ' at line 1
-	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
-	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:912)
-	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:354)
-	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)
-	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)
-	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
-	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:61)
-	at jdk.proxy2/jdk.proxy2.$Proxy158.update(Unknown Source)
-	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
-	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
-	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49)
-	at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:106)
-	at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:59)
-	at jdk.proxy2/jdk.proxy2.$Proxy157.update(Unknown Source)
-	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)
-	... 73 common frames omitted
-2025-04-07 18:38:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:39:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:40:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:41:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:42:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:43:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:44:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:44:56,011 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:657] Waiting for workers to finish.
-2025-04-07 18:44:56,013 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:657] Waiting for workers to finish.
-2025-04-07 18:44:56,463 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:661] Successfully waited for workers to finish.
-2025-04-07 18:44:56,525 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:661] Successfully waited for workers to finish.
-2025-04-07 18:44:56,656 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
-2025-04-07 18:44:56,663 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
-2025-04-07 18:45:01,493 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 21612 (D:\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in D:\wx-miniprogram\user-center-backend-master)
-2025-04-07 18:45:01,494 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
-2025-04-07 18:45:02,196 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-07 18:45:02,198 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-07 18:45:02,227 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 16 ms. Found 0 Redis repository interfaces.
-2025-04-07 18:45:02,718 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
-2025-04-07 18:45:02,726 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
-2025-04-07 18:45:02,728 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
-2025-04-07 18:45:02,728 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
-2025-04-07 18:45:02,784 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
-2025-04-07 18:45:02,784 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1251 ms
-2025-04-07 18:45:03,307 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.dao.Items".
-2025-04-07 18:45:03,307 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.dao.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2025-04-07 18:45:04,329 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
-2025-04-07 18:45:04,350 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
-2025-04-07 18:45:04,697 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:650] Attempting to connect to: [localhost:5672]
-2025-04-07 18:45:04,728 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:592] Created new connection: rabbitConnectionFactory#3395c2a7:0/SimpleConnection@27b84c9a [delegate=amqp://guest@127.0.0.1:5672/, localPort=58860]
-2025-04-07 18:45:04,777 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 3.715 seconds (process running for 4.212)
-2025-04-07 18:45:29,264 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-07 18:45:29,264 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
-2025-04-07 18:45:29,265 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
-2025-04-07 18:45:29,277 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/addSubComment
+2025-04-11 02:46:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:47:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:47:00,135 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getNearestEvent
 Method: POST
-Class: SubCommentController
-Method: addComment
+Class: EventController
+Method: getNearestEvent
+Param: userId=1
 Client IP: 192.168.31.105
 
-2025-04-07 18:45:29,355 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
-2025-04-07 18:45:29,566 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5c972354
-2025-04-07 18:45:29,567 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
-2025-04-07 18:45:33,699 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+2025-04-11 02:47:00,786 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:47:51,045 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getTemplateByPer
+Method: POST
+Class: EventController
+Method: getTemplateByPer
+Param: userId=1
+Client IP: 192.168.31.105
+
+2025-04-11 02:48:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:48:25,801 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:48:29,225 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEventDetailById
+Method: GET
+Class: EventController
+Method: getEventDetailById
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:48:29,225 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/check
+Method: GET
+Class: ComplaintController
+Method: checkCanComplaint
+Param: userId=1
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:48:29,225 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/list
+Method: GET
+Class: ComplaintController
+Method: getComplaintList
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:48:29,231 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/check
+Method: GET
+Class: ComplaintController
+Method: checkCanComplaint
+Param: userId=1
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:48:29,232 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/list
+Method: GET
+Class: ComplaintController
+Method: getComplaintList
+Param: eventId=62
+Client IP: 192.168.31.105
+
+2025-04-11 02:49:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:49:22,823 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/posts/top
+Method: GET
+Class: PostController
+Method: getTopPost
+Client IP: 192.168.31.100
+
+2025-04-11 02:49:22,823 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.100
+
+2025-04-11 02:49:22,944 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/resources/top
+Method: GET
+Class: ResourceController
+Method: getTopResource
+Client IP: 192.168.31.100
+
+2025-04-11 02:49:23,036 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/login
+Method: POST
+Class: UserController
+Method: user_login
+Param: code=0c3x79000yZ53U1JmI0006K87G0x790w
+Client IP: 192.168.31.100
+
+2025-04-11 02:49:23,687 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.100
+
+2025-04-11 02:49:25,966 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getAllMyEvents
+Method: POST
+Class: EventController
+Method: getAllMyEvents
+Param: userId=5
+Client IP: 192.168.31.100
+
+2025-04-11 02:49:25,968 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.100
+
+2025-04-11 02:49:26,943 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEventDetailById
+Method: GET
+Class: EventController
+Method: getEventDetailById
+Param: eventId=59
+Client IP: 192.168.31.100
+
+2025-04-11 02:49:26,946 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/check
+Method: GET
+Class: ComplaintController
+Method: checkCanComplaint
+Param: userId=5
+Param: eventId=59
+Client IP: 192.168.31.100
+
+2025-04-11 02:49:26,953 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/list
+Method: GET
+Class: ComplaintController
+Method: getComplaintList
+Param: eventId=59
+Client IP: 192.168.31.100
+
+2025-04-11 02:49:26,955 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/check
+Method: GET
+Class: ComplaintController
+Method: checkCanComplaint
+Param: userId=5
+Param: eventId=59
+Client IP: 192.168.31.100
+
+2025-04-11 02:49:26,955 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/list
+Method: GET
+Class: ComplaintController
+Method: getComplaintList
+Param: eventId=59
+Client IP: 192.168.31.100
+
+2025-04-11 02:49:33,275 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:49:37,199 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/joinEvent
+Method: POST
+Class: EventController
+Method: joinEvent
+Param: eventId=59
+Param: userId=5
+Client IP: 192.168.31.100
+
+2025-04-11 02:49:37,249 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.100
+
+2025-04-11 02:50:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:51:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:51:20,256 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getNearestEvent
+Method: POST
+Class: EventController
+Method: getNearestEvent
+Param: userId=1
+Client IP: 192.168.31.105
+
+2025-04-11 02:52:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:53:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:53:03,745 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getNearestEvent
+Method: POST
+Class: EventController
+Method: getNearestEvent
+Param: userId=1
+Client IP: 192.168.31.105
+
+2025-04-11 02:53:19,696 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEvent
+Method: GET
+Class: EventController
+Method: getEvent
+Client IP: 192.168.31.105
+
+2025-04-11 02:53:22,241 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEventDetailById
+Method: GET
+Class: EventController
+Method: getEventDetailById
+Param: eventId=59
+Client IP: 192.168.31.105
+
+2025-04-11 02:53:22,242 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/check
+Method: GET
+Class: ComplaintController
+Method: checkCanComplaint
+Param: userId=1
+Param: eventId=59
+Client IP: 192.168.31.105
+
+2025-04-11 02:53:22,243 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/list
+Method: GET
+Class: ComplaintController
+Method: getComplaintList
+Param: eventId=59
+Client IP: 192.168.31.105
+
+2025-04-11 02:53:22,248 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/check
+Method: GET
+Class: ComplaintController
+Method: checkCanComplaint
+Param: userId=1
+Param: eventId=59
+Client IP: 192.168.31.105
+
+2025-04-11 02:53:22,249 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/list
+Method: GET
+Class: ComplaintController
+Method: getComplaintList
+Param: eventId=59
+Client IP: 192.168.31.105
+
+2025-04-11 02:53:24,385 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getUserInfoByUserId
+Method: POST
+Class: UserController
+Method: getUserInfoByUserId
+Param: userId=5
+Client IP: 192.168.31.105
+
+2025-04-11 02:53:24,385 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
 Request URL: /user/wx/checkFriendship
 Method: POST
 Class: FriendsController
@@ -733,1880 +978,219 @@ Param: userId=1
 Param: friendId=5
 Client IP: 192.168.31.105
 
-2025-04-07 18:45:33,699 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getUserInfoByUserId
+2025-04-11 02:54:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:55:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:56:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:56:13,502 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/login
 Method: POST
 Class: UserController
-Method: getUserInfoByUserId
-Param: userId=5
-Client IP: 192.168.31.105
+Method: login
+Client IP: 0:0:0:0:0:0:0:1
 
-2025-04-07 18:45:38,880 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getUserInfoByUserId
+2025-04-11 02:56:13,504 INFO [http-nio-8080-exec-9] c.g.u.c.UserController [UserController.java:502] 用户乐观的猪鲨登录：UserRegisterLoginRequest(userAccount=乐观的猪鲨, password=12345678)
+2025-04-11 02:56:59,704 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/all
+Method: GET
+Class: UserController
+Method: getAllUser
+Client IP: 0:0:0:0:0:0:0:1
+
+2025-04-11 02:56:59,704 INFO [http-nio-8080-exec-1] c.g.u.c.UserController [UserController.java:413] 请求获取所有用户信息
+2025-04-11 02:57:00,018 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:57:48,839 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/banned
 Method: POST
 Class: UserController
-Method: getUserInfoByUserId
-Param: userId=1
-Client IP: 192.168.31.105
+Method: banned
+Client IP: 0:0:0:0:0:0:0:1
 
-2025-04-07 18:45:46,111 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getUserInfoByUserId
-Method: POST
+2025-04-11 02:57:48,842 INFO [http-nio-8080-exec-6] c.g.u.c.UserController [UserController.java:476] ID为10的用户被封禁7天
+2025-04-11 02:57:48,891 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/all
+Method: GET
 Class: UserController
-Method: getUserInfoByUserId
-Param: userId=1
-Client IP: 192.168.31.105
+Method: getAllUser
+Client IP: 0:0:0:0:0:0:0:1
 
-2025-04-07 18:45:52,936 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
+2025-04-11 02:57:48,892 INFO [http-nio-8080-exec-4] c.g.u.c.UserController [UserController.java:413] 请求获取所有用户信息
+2025-04-11 02:58:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 02:58:35,810 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/admin/getEvent
+Method: GET
 Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
+Method: admingetEvent
+Client IP: 0:0:0:0:0:0:0:1
 
-2025-04-07 18:45:55,128 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 18:45:55,133 WARN [http-nio-8080-exec-7] o.s.w.s.m.s.DefaultHandlerExceptionResolver [AbstractHandlerExceptionResolver.java:247] Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'userId' for method parameter type Long is not present]
-2025-04-07 18:46:00,023 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:46:18,862 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Param: userId=1
+2025-04-11 02:58:38,862 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPostListWithCursor
+Method: GET
+Class: PostController
+Method: getPostListWithCursor
 Param: pageSize=10
 Param: asc=false
-Client IP: 192.168.31.105
+Param: keyword=
+Client IP: 0:0:0:0:0:0:0:1
 
-2025-04-07 18:46:18,865 WARN [http-nio-8080-exec-8] o.s.w.s.m.s.DefaultHandlerExceptionResolver [AbstractHandlerExceptionResolver.java:247] Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content-Type 'application/x-www-form-urlencoded;charset=UTF-8' is not supported]
-2025-04-07 18:46:46,447 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Param: userId=1
+2025-04-11 02:58:40,875 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getPostListWithCursor
+Method: GET
+Class: PostController
+Method: getPostListWithCursor
+Param: cursor=2025-04-03T10:52:39
 Param: pageSize=10
 Param: asc=false
-Client IP: 192.168.31.105
+Param: keyword=
+Client IP: 0:0:0:0:0:0:0:1
 
-2025-04-07 18:46:46,449 WARN [http-nio-8080-exec-9] o.s.w.s.m.s.DefaultHandlerExceptionResolver [AbstractHandlerExceptionResolver.java:247] Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content-Type 'application/x-www-form-urlencoded;charset=UTF-8' is not supported]
-2025-04-07 18:47:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:47:37,572 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
+2025-04-11 02:59:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:00:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:59] 没有即将开始的活动需要通知
+2025-04-11 03:00:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:00:31,344 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/admin/getEvent
+Method: GET
 Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
+Method: admingetEvent
+Client IP: 0:0:0:0:0:0:0:1
 
-2025-04-07 18:47:38,853 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Param: userId=1
+2025-04-11 03:01:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:02:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:02:28,505 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/getEventDetailById
+Method: GET
+Class: EventController
+Method: getEventDetailById
+Param: eventId=59
+Client IP: 0:0:0:0:0:0:0:1
+
+2025-04-11 03:03:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:03:24,785 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
+Request URL: /user/wx/complaint/admin/complaint/list
+Method: GET
+Class: ComplaintController
+Method: getAllComplaintsAdmin
+Param: pageNum=1
 Param: pageSize=10
-Param: asc=false
-Client IP: 192.168.31.105
-
-2025-04-07 18:47:38,856 WARN [http-nio-8080-exec-1] o.s.w.s.m.s.DefaultHandlerExceptionResolver [AbstractHandlerExceptionResolver.java:247] Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content-Type 'application/x-www-form-urlencoded;charset=UTF-8' is not supported]
-2025-04-07 18:48:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:49:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:50:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:51:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:51:51,536 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 18:51:51,538 WARN [http-nio-8080-exec-2] o.s.w.s.m.s.DefaultHandlerExceptionResolver [AbstractHandlerExceptionResolver.java:247] Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'userId' for method parameter type Long is not present]
-2025-04-07 18:52:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:52:31,177 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 18:52:31,180 WARN [http-nio-8080-exec-4] o.s.w.s.m.s.DefaultHandlerExceptionResolver [AbstractHandlerExceptionResolver.java:247] Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'userId' for method parameter type Long is not present]
-2025-04-07 18:52:46,598 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 18:52:46,601 WARN [http-nio-8080-exec-5] o.s.w.s.m.s.DefaultHandlerExceptionResolver [AbstractHandlerExceptionResolver.java:247] Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'userId' for method parameter type Long is not present]
-2025-04-07 18:53:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:54:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:55:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:56:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:56:50,536 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:657] Waiting for workers to finish.
-2025-04-07 18:56:50,537 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:657] Waiting for workers to finish.
-2025-04-07 18:56:51,367 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:661] Successfully waited for workers to finish.
-2025-04-07 18:56:51,382 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:661] Successfully waited for workers to finish.
-2025-04-07 18:56:51,512 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
-2025-04-07 18:56:51,518 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
-2025-04-07 18:56:55,561 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 19392 (D:\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in D:\wx-miniprogram\user-center-backend-master)
-2025-04-07 18:56:55,563 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
-2025-04-07 18:56:56,259 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-07 18:56:56,262 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-07 18:56:56,293 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 18 ms. Found 0 Redis repository interfaces.
-2025-04-07 18:56:56,879 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
-2025-04-07 18:56:56,887 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
-2025-04-07 18:56:56,889 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
-2025-04-07 18:56:56,889 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
-2025-04-07 18:56:56,943 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
-2025-04-07 18:56:56,944 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1342 ms
-2025-04-07 18:56:57,513 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.dao.Items".
-2025-04-07 18:56:57,513 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.dao.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2025-04-07 18:56:58,616 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
-2025-04-07 18:56:58,635 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
-2025-04-07 18:56:59,009 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:650] Attempting to connect to: [localhost:5672]
-2025-04-07 18:56:59,046 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:592] Created new connection: rabbitConnectionFactory#75aa7703:0/SimpleConnection@3a678e40 [delegate=amqp://guest@127.0.0.1:5672/, localPort=58190]
-2025-04-07 18:56:59,094 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 3.951 seconds (process running for 4.426)
-2025-04-07 18:57:00,060 INFO [scheduling-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
-2025-04-07 18:57:00,272 INFO [scheduling-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1a1e93bc
-2025-04-07 18:57:00,274 INFO [scheduling-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
-2025-04-07 18:57:00,301 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:57:03,098 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-07 18:57:03,098 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
-2025-04-07 18:57:03,099 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 1 ms
-2025-04-07 18:57:03,115 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 18:57:08,316 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostsWithCursor
-Method: POST
-Class: PostController
-Method: getMyPostsWithCursor
-Param: userId=1
-Param: pageSize=10
-Param: asc=false
-Client IP: 192.168.31.105
-
-2025-04-07 18:57:09,367 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 18:57:10,242 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 18:57:11,980 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 18:57:13,684 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/likeComment
-Method: POST
-Class: CommentController
-Method: likeComment
-Param: commentId=15
-Client IP: 192.168.31.105
-
-2025-04-07 18:57:14,787 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] c.g.u.c.r.LikeEventConsumer [LikeEventConsumer.java:38] 收到点赞事件，类型: 1, ID: 15, 当前线程: org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1
-2025-04-07 18:57:14,799 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] c.g.u.c.r.LikeEventConsumer [LikeEventConsumer.java:53] 成功处理点赞事件，type: 1, id: 15, likes: 4
-2025-04-07 18:57:29,804 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyCommentRepliesWithCursor
-Method: POST
-Class: CommentController
-Method: getMyCommentRepliesWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 18:57:31,549 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyCommentRepliesWithCursor
-Method: POST
-Class: CommentController
-Method: getMyCommentRepliesWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 18:58:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:58:13,689 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 18:58:14,947 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 18:58:22,116 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 18:58:28,505 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 18:58:34,602 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 18:59:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 18:59:34,520 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:00:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:00:00,033 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:59] 没有即将开始的活动需要通知
-2025-04-07 19:01:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:02:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:02:51,638 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:03:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:03:00,167 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:03:26,057 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyCommentRepliesWithCursor
-Method: POST
-Class: CommentController
-Method: getMyCommentRepliesWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:03:41,200 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:03:41,200 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/posts/top
-Method: GET
-Class: PostController
-Method: getTopPost
-Client IP: 192.168.31.105
-
-2025-04-07 19:03:41,455 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/resources/top
-Method: GET
-Class: ResourceController
-Method: getTopResource
-Client IP: 192.168.31.105
-
-2025-04-07 19:03:41,551 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0a1GlH1w3kqEH43mjf4w34agE40GlH1C
-Client IP: 192.168.31.105
-
-2025-04-07 19:03:42,011 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:03:42,230 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getAllMyEvents
-Method: POST
-Class: EventController
-Method: getAllMyEvents
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:03:42,236 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:03:43,676 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:03:45,728 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:03:51,436 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyCommentRepliesWithCursor
-Method: POST
-Class: CommentController
-Method: getMyCommentRepliesWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:03:55,162 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyCommentRepliesWithCursor
-Method: POST
-Class: CommentController
-Method: getMyCommentRepliesWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:03:58,968 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:00,004 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:04:00,444 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:00,585 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:00,753 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:00,902 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:01,304 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:01,453 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:01,801 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:01,962 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:02,347 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:02,494 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:02,643 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:02,789 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:02,940 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:03,468 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/likeSubComment
-Method: POST
-Class: SubCommentController
-Method: likeSubComment
-Param: subCommentId=25
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:03,867 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:04,020 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:04,169 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:04,335 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:05,032 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] c.g.u.c.r.LikeEventConsumer [LikeEventConsumer.java:38] 收到点赞事件，类型: 2, ID: 25, 当前线程: org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2
-2025-04-07 19:04:05,038 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] c.g.u.c.r.LikeEventConsumer [LikeEventConsumer.java:53] 成功处理点赞事件，type: 2, id: 25, likes: 1
-2025-04-07 19:04:05,128 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:05,274 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:05,429 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:05,582 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:05,736 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:07,830 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyCommentRepliesWithCursor
-Method: POST
-Class: CommentController
-Method: getMyCommentRepliesWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:08,753 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:08,894 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:09,044 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:09,212 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:04:12,559 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:05:00,017 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:06:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:07:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:08:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:09:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:10:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:11:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:12:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:12:23,297 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:13:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:14:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:15:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:15:21,757 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:657] Waiting for workers to finish.
-2025-04-07 19:15:21,758 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:657] Waiting for workers to finish.
-2025-04-07 19:15:22,214 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:661] Successfully waited for workers to finish.
-2025-04-07 19:15:22,755 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:661] Successfully waited for workers to finish.
-2025-04-07 19:15:22,887 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariPool-1 - Shutdown initiated...
-2025-04-07 19:15:22,893 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariPool-1 - Shutdown completed.
-2025-04-07 19:15:27,241 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:50] Starting UserCenterBackendApplication using Java 17.0.13 with PID 14660 (D:\wx-miniprogram\user-center-backend-master\target\classes started by GASEN in D:\wx-miniprogram\user-center-backend-master)
-2025-04-07 19:15:27,242 INFO [main] c.g.u.UserCenterBackendApplication [SpringApplication.java:654] No active profile set, falling back to 1 default profile: "default"
-2025-04-07 19:15:27,972 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:292] Multiple Spring Data modules found, entering strict repository configuration mode
-2025-04-07 19:15:27,974 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:139] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-04-07 19:15:28,005 INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate [RepositoryConfigurationDelegate.java:208] Finished Spring Data repository scanning in 18 ms. Found 0 Redis repository interfaces.
-2025-04-07 19:15:28,519 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:109] Tomcat initialized with port 8080 (http)
-2025-04-07 19:15:28,527 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Initializing ProtocolHandler ["http-nio-8080"]
-2025-04-07 19:15:28,528 INFO [main] o.a.c.c.StandardService [DirectJDKLog.java:173] Starting service [Tomcat]
-2025-04-07 19:15:28,528 INFO [main] o.a.c.c.StandardEngine [DirectJDKLog.java:173] Starting Servlet engine: [Apache Tomcat/10.1.18]
-2025-04-07 19:15:28,592 INFO [main] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring embedded WebApplicationContext
-2025-04-07 19:15:28,593 INFO [main] o.s.b.w.s.c.ServletWebServerApplicationContext [ServletWebServerApplicationContext.java:296] Root WebApplicationContext: initialization completed in 1308 ms
-2025-04-07 19:15:29,147 WARN [main] c.b.m.c.m.TableInfoHelper [TableInfoHelper.java:376] Can not find table primary key in Class: "com.gasen.usercenterbackend.model.dao.Items".
-2025-04-07 19:15:29,148 WARN [main] c.b.m.c.i.DefaultSqlInjector [DefaultSqlInjector.java:52] class com.gasen.usercenterbackend.model.dao.Items ,Not found @TableId annotation, Cannot use Mybatis-Plus 'xxById' Method.
-2025-04-07 19:15:30,233 INFO [main] o.a.c.h.Http11NioProtocol [DirectJDKLog.java:173] Starting ProtocolHandler ["http-nio-8080"]
-2025-04-07 19:15:30,250 INFO [main] o.s.b.w.e.t.TomcatWebServer [TomcatWebServer.java:241] Tomcat started on port 8080 (http) with context path ''
-2025-04-07 19:15:30,626 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:650] Attempting to connect to: [localhost:5672]
-2025-04-07 19:15:30,659 INFO [main] o.s.a.r.c.CachingConnectionFactory [AbstractConnectionFactory.java:592] Created new connection: rabbitConnectionFactory#b56d8a7:0/SimpleConnection@47d0195b [delegate=amqp://guest@127.0.0.1:5672/, localPort=62001]
-2025-04-07 19:15:30,712 INFO [main] c.g.u.UserCenterBackendApplication [StartupInfoLogger.java:56] Started UserCenterBackendApplication in 3.931 seconds (process running for 4.451)
-2025-04-07 19:15:49,269 INFO [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] [DirectJDKLog.java:173] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-04-07 19:15:49,269 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:532] Initializing Servlet 'dispatcherServlet'
-2025-04-07 19:15:49,271 INFO [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet [FrameworkServlet.java:554] Completed initialization in 2 ms
-2025-04-07 19:15:49,286 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:15:49,424 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:110] HikariPool-1 - Starting...
-2025-04-07 19:15:49,629 INFO [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:565] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6242b3ef
-2025-04-07 19:15:49,631 INFO [http-nio-8080-exec-1] c.z.h.HikariDataSource [HikariDataSource.java:123] HikariPool-1 - Start completed.
-2025-04-07 19:16:00,024 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:16:59,481 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:17:00,320 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:17,812 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:19,182 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:36,060 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:38,091 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:42,045 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:44,609 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:50,443 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:50,444 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/posts/top
-Method: GET
-Class: PostController
-Method: getTopPost
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:50,732 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/resources/top
-Method: GET
-Class: ResourceController
-Method: getTopResource
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:50,878 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0e12qZFa1NFUlJ0abEIa1MtKMu02qZF8
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:51,189 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:51,608 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getAllMyEvents
-Method: POST
-Class: EventController
-Method: getAllMyEvents
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:51,608 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:51,864 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:51,867 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:53,543 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:55,909 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:17:57,316 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:18:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:18:09,054 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:18:22,056 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:19:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:20:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:21:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:21:12,050 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0e1MgT0w3bogG43p9F0w38UKzw4MgT0n
-Client IP: 192.168.31.105
-
-2025-04-07 19:21:12,421 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getAllMyEvents
-Method: POST
-Class: EventController
-Method: getAllMyEvents
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:21:14,466 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:21:14,470 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/posts/top
-Method: GET
-Class: PostController
-Method: getTopPost
-Client IP: 192.168.31.105
-
-2025-04-07 19:21:14,471 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:21:14,792 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/resources/top
-Method: GET
-Class: ResourceController
-Method: getTopResource
-Client IP: 192.168.31.105
-
-2025-04-07 19:21:15,475 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:21:15,475 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:21:17,198 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:21:19,549 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:21:59,198 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:22:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:22:00,860 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:22:32,405 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:22:32,405 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/posts/top
-Method: GET
-Class: PostController
-Method: getTopPost
-Client IP: 192.168.31.105
-
-2025-04-07 19:22:32,710 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0e1hX1ll2cs7mf4e5xnl2HYiLJ3hX1lq
-Client IP: 192.168.31.105
-
-2025-04-07 19:22:32,754 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/resources/top
-Method: GET
-Class: ResourceController
-Method: getTopResource
-Client IP: 192.168.31.105
-
-2025-04-07 19:22:33,111 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getAllMyEvents
-Method: POST
-Class: EventController
-Method: getAllMyEvents
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:22:33,112 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:22:33,223 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:22:34,760 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:22:36,526 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:22:46,819 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:22:47,683 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:22:57,637 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:23:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:23:34,629 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:23:35,630 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:23:58,578 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:23:58,579 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/posts/top
-Method: GET
-Class: PostController
-Method: getTopPost
-Client IP: 192.168.31.105
-
-2025-04-07 19:23:58,895 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/resources/top
-Method: GET
-Class: ResourceController
-Method: getTopResource
-Client IP: 192.168.31.105
-
-2025-04-07 19:23:58,906 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0b1qDZ1w3BomH43uey2w30oLEA3qDZ1W
-Client IP: 192.168.31.105
-
-2025-04-07 19:23:59,279 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getAllMyEvents
-Method: POST
-Class: EventController
-Method: getAllMyEvents
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:23:59,279 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:23:59,284 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:23:59,375 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:23:59,388 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:24:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:24:01,170 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:24:05,633 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:25:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:25:06,060 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:26:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:26:21,815 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:26:32,780 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=undefined
-Client IP: 192.168.31.105
-
-2025-04-07 19:26:32,783 ERROR [http-nio-8080-exec-2] c.g.u.e.GlobalExceptionHandler [GlobalExceptionHandler.java:20] 运行时异常：
-org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "undefined"
-	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.convertIfNecessary(AbstractNamedValueMethodArgumentResolver.java:293)
-	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:135)
-	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:122)
-	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:225)
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:178)
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.base/java.lang.Thread.run(Thread.java:840)
-Caused by: java.lang.NumberFormatException: For input string: "undefined"
-	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
-	at java.base/java.lang.Long.parseLong(Long.java:711)
-	at java.base/java.lang.Long.valueOf(Long.java:1163)
-	at org.springframework.util.NumberUtils.parseNumber(NumberUtils.java:206)
-	at org.springframework.beans.propertyeditors.CustomNumberEditor.setAsText(CustomNumberEditor.java:115)
-	at org.springframework.beans.TypeConverterDelegate.doConvertTextValue(TypeConverterDelegate.java:439)
-	at org.springframework.beans.TypeConverterDelegate.doConvertValue(TypeConverterDelegate.java:412)
-	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:161)
-	at org.springframework.beans.TypeConverterSupport.convertIfNecessary(TypeConverterSupport.java:80)
-	at org.springframework.beans.TypeConverterSupport.convertIfNecessary(TypeConverterSupport.java:53)
-	at org.springframework.validation.DataBinder.convertIfNecessary(DataBinder.java:860)
-	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.convertIfNecessary(AbstractNamedValueMethodArgumentResolver.java:285)
-	... 48 common frames omitted
-2025-04-07 19:27:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:27:09,471 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:27:18,251 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:27:20,373 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyCommentRepliesWithCursor
-Method: POST
-Class: CommentController
-Method: getMyCommentRepliesWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:27:21,053 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:27:21,747 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:27:22,171 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:27:22,306 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:27:44,344 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:27:44,763 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:27:44,937 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:28:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:28:03,935 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:28:05,367 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:28:07,197 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyCommentRepliesWithCursor
-Method: POST
-Class: CommentController
-Method: getMyCommentRepliesWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:28:07,748 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:28:08,882 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getSubCommentList
-Method: POST
-Class: SubCommentController
-Method: getSubCommentList
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:28:15,682 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:28:18,104 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:28:48,204 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:28:51,965 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:29:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:29:16,108 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:29:26,233 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:29:27,267 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:30:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:30:00,024 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:59] 没有即将开始的活动需要通知
-2025-04-07 19:30:29,800 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:30:30,350 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:30:48,477 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:31:00,019 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:31:17,491 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:32:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:33:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:34:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:35:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:36:00,002 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:37:00,017 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:38:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:38:23,600 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:38:54,019 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:39:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:39:01,966 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:39:01,967 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/posts/top
-Method: GET
-Class: PostController
-Method: getTopPost
-Client IP: 192.168.31.105
-
-2025-04-07 19:39:02,287 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/resources/top
-Method: GET
-Class: ResourceController
-Method: getTopResource
-Client IP: 192.168.31.105
-
-2025-04-07 19:39:02,376 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0a1PfHml2Quvmf4i9Zkl2zdbq93PfHmJ
-Client IP: 192.168.31.105
-
-2025-04-07 19:39:02,833 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getAllMyEvents
-Method: POST
-Class: EventController
-Method: getAllMyEvents
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:39:02,833 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:39:02,838 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:39:11,138 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:39:11,138 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:39:12,290 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:39:14,356 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:39:53,065 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:40:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:40:20,426 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:40:36,388 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:40:48,077 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:41:03,938 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:05,477 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:08,020 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:10,690 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:13,884 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getPostDetail
-Method: POST
-Class: PostController
-Method: getPostDetail
-Param: postId=6
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:16,960 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyCommentRepliesWithCursor
-Method: POST
-Class: CommentController
-Method: getMyCommentRepliesWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:18,028 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:18,893 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getSubCommentList
-Method: POST
-Class: SubCommentController
-Method: getSubCommentList
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:22,577 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:26,279 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:37,276 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:38,521 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:39,384 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyCommentRepliesWithCursor
-Method: POST
-Class: CommentController
-Method: getMyCommentRepliesWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:40,741 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:41,549 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getSubCommentList
-Method: POST
-Class: SubCommentController
-Method: getSubCommentList
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:46,165 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:41:47,087 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getSubCommentList
-Method: POST
-Class: SubCommentController
-Method: getSubCommentList
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:42:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:42:11,746 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyPostCommentsWithCursor
-Method: POST
-Class: CommentController
-Method: getMyPostCommentsWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:42:12,202 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/likeComment
-Method: POST
-Class: CommentController
-Method: likeComment
-Param: commentId=14
-Client IP: 192.168.31.105
-
-2025-04-07 19:42:13,310 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] c.g.u.c.r.LikeEventConsumer [LikeEventConsumer.java:38] 收到点赞事件，类型: 1, ID: 14, 当前线程: org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1
-2025-04-07 19:42:13,322 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-1] c.g.u.c.r.LikeEventConsumer [LikeEventConsumer.java:53] 成功处理点赞事件，type: 1, id: 14, likes: 2
-2025-04-07 19:42:13,646 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyCommentRepliesWithCursor
-Method: POST
-Class: CommentController
-Method: getMyCommentRepliesWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:42:14,564 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/likeSubComment
-Method: POST
-Class: SubCommentController
-Method: likeSubComment
-Param: subCommentId=24
-Client IP: 192.168.31.105
-
-2025-04-07 19:42:15,755 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getCommentDetail
-Method: POST
-Class: CommentController
-Method: getCommentDetail
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:42:15,900 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] c.g.u.c.r.LikeEventConsumer [LikeEventConsumer.java:38] 收到点赞事件，类型: 2, ID: 24, 当前线程: org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2
-2025-04-07 19:42:15,911 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-2] c.g.u.c.r.LikeEventConsumer [LikeEventConsumer.java:53] 成功处理点赞事件，type: 2, id: 24, likes: 2
-2025-04-07 19:42:16,744 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getSubCommentList
-Method: POST
-Class: SubCommentController
-Method: getSubCommentList
-Param: commentId=16
-Client IP: 192.168.31.105
-
-2025-04-07 19:42:19,285 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getMyCommentRepliesWithCursor
-Method: POST
-Class: CommentController
-Method: getMyCommentRepliesWithCursor
-Client IP: 192.168.31.105
-
-2025-04-07 19:42:22,254 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:42:40,619 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getItems
-Method: POST
-Class: UserController
-Method: getItems
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:43:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:43:35,576 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getScoreHistory
-Method: GET
-Class: UserController
-Method: getScoreHistory
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:44:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:44:10,995 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:44:10,996 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/posts/top
-Method: GET
-Class: PostController
-Method: getTopPost
-Client IP: 192.168.31.105
-
-2025-04-07 19:44:11,352 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/resources/top
-Method: GET
-Class: ResourceController
-Method: getTopResource
-Client IP: 192.168.31.105
-
-2025-04-07 19:44:11,402 INFO [http-nio-8080-exec-1] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/login
-Method: POST
-Class: UserController
-Method: user_login
-Param: code=0e1yVsFa1CYhmJ0Lv2Ha1skMfb2yVsFf
-Client IP: 192.168.31.105
-
-2025-04-07 19:44:11,716 INFO [http-nio-8080-exec-10] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:44:11,819 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getAllMyEvents
-Method: POST
-Class: EventController
-Method: getAllMyEvents
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:44:11,821 INFO [http-nio-8080-exec-5] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:44:13,334 INFO [http-nio-8080-exec-4] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getItems
-Method: POST
-Class: UserController
-Method: getItems
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:44:14,874 INFO [http-nio-8080-exec-3] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getScoreHistory
-Method: GET
-Class: UserController
-Method: getScoreHistory
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:44:26,229 INFO [http-nio-8080-exec-7] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:44:35,074 INFO [http-nio-8080-exec-6] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:44:39,749 INFO [http-nio-8080-exec-9] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:44:40,504 INFO [http-nio-8080-exec-8] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getEvent
-Method: GET
-Class: EventController
-Method: getEvent
-Client IP: 192.168.31.105
-
-2025-04-07 19:45:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:45:49,040 INFO [http-nio-8080-exec-2] c.g.u.c.i.LoggingInterceptor [LoggingInterceptor.java:63] 
-Request URL: /user/wx/getNearestEvent
-Method: POST
-Class: EventController
-Method: getNearestEvent
-Param: userId=1
-Client IP: 192.168.31.105
-
-2025-04-07 19:46:00,002 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:47:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
-2025-04-07 19:48:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+Client IP: 0:0:0:0:0:0:0:1
+
+2025-04-11 03:04:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:05:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:06:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:07:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:08:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:09:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:10:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:11:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:12:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:13:00,017 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:14:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:15:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:16:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:17:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:18:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:19:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:20:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:21:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:22:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:23:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:24:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:25:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:26:00,002 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:27:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:28:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:29:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:30:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:30:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:59] 没有即将开始的活动需要通知
+2025-04-11 03:31:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:32:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:33:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:34:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:35:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:36:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:37:00,017 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:38:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:39:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:40:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:41:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:42:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:43:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:44:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:45:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:46:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:47:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:48:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:49:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:50:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:51:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:52:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:53:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:54:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:55:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:56:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:57:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:58:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 03:59:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:00:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:59] 没有即将开始的活动需要通知
+2025-04-11 04:00:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:01:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:02:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:03:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:04:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:05:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:06:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:07:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:08:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:09:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:10:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:11:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:12:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:13:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:14:00,012 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:15:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:16:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:17:00,017 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:18:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:19:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:20:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:21:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:22:00,000 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:23:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:24:00,000 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:25:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:26:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:27:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:28:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:29:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:30:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:59] 没有即将开始的活动需要通知
+2025-04-11 04:30:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:31:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:32:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:33:00,008 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:34:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:35:00,018 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:36:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:37:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:38:00,003 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:39:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:40:00,011 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:41:00,016 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:42:00,015 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:43:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:44:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:45:00,005 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:46:00,004 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:47:00,007 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:48:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:49:00,002 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:50:00,013 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:51:00,009 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:52:00,014 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:53:00,018 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:54:00,010 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:55:00,006 INFO [scheduling-1] c.g.u.s.EventStateUpdateTask [EventStateUpdateTask.java:41] 没有活动需要更新
+2025-04-11 04:55:13,714 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:657] Waiting for workers to finish.
+2025-04-11 04:55:13,716 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:657] Waiting for workers to finish.
+2025-04-11 04:55:14,203 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#1-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:661] Successfully waited for workers to finish.
+2025-04-11 04:55:14,274 INFO [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] o.s.a.r.l.SimpleMessageListenerContainer [SimpleMessageListenerContainer.java:661] Successfully waited for workers to finish.
+2025-04-11 04:55:14,437 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:350] HikariCP - Shutdown initiated...
+2025-04-11 04:55:14,439 INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource [HikariDataSource.java:352] HikariCP - Shutdown completed.

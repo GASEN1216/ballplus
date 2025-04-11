@@ -3,11 +3,13 @@ package com.gasen.usercenterbackend.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gasen.usercenterbackend.common.ErrorCode;
 import com.gasen.usercenterbackend.exception.BusinessExcetion;
 import com.gasen.usercenterbackend.mapper.CommentMapper;
 import com.gasen.usercenterbackend.mapper.PostMapper;
 import com.gasen.usercenterbackend.model.dao.Post;
+import com.gasen.usercenterbackend.model.dao.User;
 import com.gasen.usercenterbackend.model.dto.AddComment;
 import com.gasen.usercenterbackend.model.dto.CursorPageRequest;
 import com.gasen.usercenterbackend.model.dto.UpdateComment;
@@ -16,23 +18,36 @@ import com.gasen.usercenterbackend.model.vo.CommentDetail;
 import com.gasen.usercenterbackend.model.vo.CommentInfo;
 import com.gasen.usercenterbackend.model.vo.CursorPageResponse;
 import com.gasen.usercenterbackend.service.ICommentService;
+import com.gasen.usercenterbackend.service.IPostService;
+import com.gasen.usercenterbackend.service.IUserService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
-public class CommentServiceImpl implements ICommentService {
+public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> implements ICommentService {
     @Resource
     private CommentMapper commentMapper;
 
     @Resource
+    private IUserService userService;
+
+    @Resource
     private PostMapper postMapper;
+
+    @Lazy
+    @Resource
+    private IPostService postService;
 
     @Override
     public Long addComment(AddComment addComment) {
@@ -339,5 +354,78 @@ public class CommentServiceImpl implements ICommentService {
             log.error("游标分页获取用户帖子评论列表异常", e);
             throw new BusinessExcetion(ErrorCode.SYSTEM_ERROR, "查询用户帖子评论列表失败");
         }
+    }
+        @Override
+    public Page<CommentInfo> getAllCommentsAdmin(long pageNum, long pageSize) {
+        // 1. 创建分页对象
+        Page<Comment> commentPage = new Page<>(pageNum, pageSize);
+
+        // 2. 执行分页查询 (ServiceImpl 提供了 page 方法)
+        //    可以根据需要添加排序等
+        page(commentPage); // 现在应该能找到 page 方法
+
+        List<Comment> records = commentPage.getRecords();
+        if (records.isEmpty()) {
+            return new Page<>(commentPage.getCurrent(), commentPage.getSize(), 0);
+        }
+
+        // 3. 获取评论关联的用户ID列表 (使用 appId)
+        Set<Long> userIds = records.stream().map(Comment::getAppId).collect(Collectors.toSet()); // 使用 getAppId
+
+        // 4. 查询用户信息
+        Map<Long, User> userMap = userService.listByIds(userIds).stream()
+                .collect(Collectors.toMap(User::getId, user -> user));
+
+        // 5. 组装 CommentInfo 列表
+        List<CommentInfo> commentInfoList = records.stream().map(comment -> {
+            // 调用 toCommentInfo() 方法进行转换
+            CommentInfo commentInfo = comment.toCommentInfo();
+
+            // 获取关联的 User 对象 (可能 toCommentInfo 内部会用到，或者未来扩展用)
+            User user = userMap.get(comment.getAppId());
+
+            // 不再需要 setUser, 假设 toCommentInfo 已处理好 CommentInfo 中的字段
+            // if (user != null) {
+            //     commentInfo.setUser(user);
+            // }
+
+            // 按需填充其他 toCommentInfo 未处理的字段 (如果需要)
+            // 例如，如果 CommentInfo 需要 postTitle 而 Comment 没有此字段:
+            // Post post = postMap.get(comment.getPostId()); // 需要先查询 postMap
+            // if (post != null) { commentInfo.setPostTitle(post.getTitle()); }
+
+            return commentInfo;
+        }).collect(Collectors.toList());
+
+        // 6. 创建并返回 CommentInfo 的分页结果
+        Page<CommentInfo> finalPage = new Page<>(commentPage.getCurrent(), commentPage.getSize(), commentPage.getTotal());
+        finalPage.setRecords(commentInfoList);
+        return finalPage;
+    }
+
+    @Override
+    @Transactional // 添加事务注解
+    public boolean deleteCommentAdminById(Long commentId) {
+        if (commentId == null || commentId <= 0) {
+            return false;
+        }
+        // 1. 查找评论 (ServiceImpl 提供了 getById 方法)
+        Comment comment = this.getById(commentId); // 现在应该能找到 getById
+        if (comment == null) {
+            return false;
+        }
+
+        // 2. 执行删除操作 (ServiceImpl 提供了 removeById 方法)
+        boolean deleted = this.removeById(commentId); // 现在应该能找到 removeById
+
+        // 3. 如果删除成功，更新帖子评论数
+        if (deleted && comment.getPostId() != null) {
+            boolean countUpdated = postService.reduceComments(comment.getPostId()); // 现在应该能找到 postService
+            if (!countUpdated) {
+                log.warn("Failed to reduce comment count for post {} after deleting comment {}", comment.getPostId(), commentId);
+            }
+        }
+
+        return deleted;
     }
 }

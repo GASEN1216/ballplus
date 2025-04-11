@@ -1,5 +1,6 @@
 package com.gasen.usercenterbackend.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gasen.usercenterbackend.common.BaseResponse;
 import com.gasen.usercenterbackend.common.ErrorCode;
 import com.gasen.usercenterbackend.common.ResultUtils;
@@ -14,6 +15,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -213,5 +215,71 @@ public class ComplaintController {
     private boolean isEventCompletedAndValid(Long eventId) {
         // 查询活动状态，判断是否已完成
         return eventService.isEventCompleted(eventId);
+    }
+
+    /**
+     * 获取所有投诉列表 (Admin)
+     * 需要管理员权限
+     * @param pageNum 页码
+     * @param pageSize 每页数量
+     * @param status 状态过滤 (可选)
+     * @return 投诉分页列表
+     */
+    @GetMapping("/admin/complaint/list") // 假设的管理端路径
+    public BaseResponse<Page<ComplaintVO>> getAllComplaintsAdmin(
+            @RequestParam(defaultValue = "1") long pageNum,
+            @RequestParam(defaultValue = "10") long pageSize,
+            @RequestParam(required = false) Integer status) { // 接收状态参数
+        try {
+            Page<ComplaintVO> complaintPage = complaintService.getAllComplaintsAdmin(pageNum, pageSize, status);
+            return ResultUtils.success(complaintPage);
+        } catch (Exception e) {
+            log.error("管理员获取投诉列表异常", e);
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "获取投诉列表失败！");
+        }
+    }
+
+    /**
+     * 处理投诉 (Admin)
+     * 需要管理员权限
+     * @param complaintId 投诉ID
+     * @param status      处理状态 (1=通过, 2=拒绝)
+     * @param rejectReason 拒绝原因 (当status=2时需要)
+     * @return 操作结果
+     */
+    @PostMapping("/admin/complaint/handle") // 假设的管理端路径
+    public BaseResponse handleComplaintAdmin(
+            @RequestParam Long complaintId,
+            @RequestParam Byte status, // 使用 Byte 匹配 ServiceImpl 和数据库
+            @RequestParam(required = false) String rejectReason) {
+        try {
+            if (complaintId == null || complaintId <= 0) {
+                return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "投诉ID无效！");
+            }
+            if (status == null || (status != 1 && status != 2)) {
+                return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "处理状态无效！");
+            }
+
+            boolean result;
+            if (status == 1) {
+                // 通过投诉
+                result = complaintService.handleValidComplaint(complaintId);
+            } else {
+                // 拒绝投诉
+                if (!StringUtils.hasText(rejectReason)) { // 使用 StringUtils.hasText 检查
+                    return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "拒绝原因不能为空！");
+                }
+                result = complaintService.handleInvalidComplaint(complaintId, rejectReason);
+            }
+
+            if (result) {
+                return ResultUtils.success("处理投诉成功！");
+            } else {
+                return ResultUtils.error(ErrorCode.OPERATION_ERROR, "处理投诉失败！");
+            }
+        } catch (Exception e) {
+            log.error("管理员处理投诉异常", e);
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "处理投诉失败！");
+        }
     }
 }

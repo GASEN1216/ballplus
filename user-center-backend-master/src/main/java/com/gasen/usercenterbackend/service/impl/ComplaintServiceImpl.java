@@ -1,10 +1,13 @@
 package com.gasen.usercenterbackend.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gasen.usercenterbackend.config.DeepSeekConfig;
 import com.gasen.usercenterbackend.mapper.ComplaintMapper;
 import com.gasen.usercenterbackend.model.dao.Complaint;
+import com.gasen.usercenterbackend.model.dao.User;
+import com.gasen.usercenterbackend.model.vo.ComplaintVO;
 import com.gasen.usercenterbackend.service.IComplaintService;
 import com.gasen.usercenterbackend.service.ICreditRecordService;
 import com.gasen.usercenterbackend.service.IUserEventService;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -286,5 +290,70 @@ public class ComplaintServiceImpl extends ServiceImpl<ComplaintMapper, Complaint
         complaint.setRejectReason(rejectReason);
         
         return updateById(complaint);
+    }
+
+    @Override
+    public Page<ComplaintVO> getAllComplaintsAdmin(long pageNum, long pageSize, Integer status) {
+        // 1. 创建分页对象
+        Page<Complaint> complaintPage = new Page<>(pageNum, pageSize);
+
+        // 2. 构建查询条件
+        QueryWrapper<Complaint> queryWrapper = new QueryWrapper<>();
+        if (status != null) {
+            queryWrapper.eq("status", status); // 添加状态过滤
+        }
+        queryWrapper.orderByDesc("create_time"); // 按创建时间降序
+
+        // 3. 执行分页查询
+        page(complaintPage, queryWrapper);
+
+        List<Complaint> records = complaintPage.getRecords();
+        if (records.isEmpty()) {
+            return new Page<>(complaintPage.getCurrent(), complaintPage.getSize(), 0); // 返回空的分页结果
+        }
+
+        // 4. 获取关联的用户ID (投诉人和被投诉人)
+        Set<Long> userIds = records.stream()
+                .map(Complaint::getComplainerId)
+                .collect(Collectors.toSet());
+        userIds.addAll(records.stream()
+                .map(Complaint::getComplainedId)
+                .collect(Collectors.toSet()));
+
+        // 5. 查询用户信息
+        Map<Long, User> userMap = userService.listByIds(userIds).stream()
+                .collect(Collectors.toMap(User::getId, user -> user));
+
+        // 6. 组装 ComplaintVO 列表
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        List<ComplaintVO> complaintVOList = records.stream().map(complaint -> {
+            ComplaintVO vo = new ComplaintVO();
+            vo.setId(complaint.getId());
+            vo.setEventId(complaint.getEventId());
+            vo.setComplainerId(complaint.getComplainerId());
+            vo.setComplainedId(complaint.getComplainedId());
+            vo.setContent(complaint.getContent());
+            vo.setStatus(complaint.getStatus()); // 假设状态类型匹配
+            vo.setRejectReason(complaint.getRejectReason());
+            vo.setCreateTime(complaint.getCreateTime().format(formatter)); // 格式化时间
+
+            User complainer = userMap.get(complaint.getComplainerId());
+            if (complainer != null) {
+                vo.setComplainerName(complainer.getUserAccount()); // 使用 userAccount
+                vo.setComplainerAvatar(complainer.getAvatarUrl());
+            }
+
+            User complained = userMap.get(complaint.getComplainedId());
+            if (complained != null) {
+                vo.setComplainedName(complained.getUserAccount()); // 使用 userAccount
+                vo.setComplainedAvatar(complained.getAvatarUrl());
+            }
+            return vo;
+        }).collect(Collectors.toList());
+
+        // 7. 创建并返回 ComplaintVO 的分页结果
+        Page<ComplaintVO> resultPage = new Page<>(complaintPage.getCurrent(), complaintPage.getSize(), complaintPage.getTotal());
+        resultPage.setRecords(complaintVOList);
+        return resultPage;
     }
 } 

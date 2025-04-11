@@ -1,7 +1,9 @@
 package com.gasen.usercenterbackend.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.gasen.usercenterbackend.model.dao.Complaint;
+import com.gasen.usercenterbackend.model.vo.ComplaintVO;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -63,6 +65,17 @@ public interface IComplaintService extends IService<Complaint> {
     boolean handleValidComplaint(Long complaintId);
 
     boolean handleInvalidComplaint(Long complaintId, String rejectReason);
+
+    /**
+     * 获取所有投诉列表（管理员分页）
+     *
+     * @param pageNum 页码
+     * @param pageSize 每页数量
+     * @param status 状态过滤 (可选, 0=待处理, 1=通过, 2=拒绝)
+     * @return 投诉视图对象分页结果
+     */
+    Page<ComplaintVO> getAllComplaintsAdmin(long pageNum, long pageSize, Integer status);
+
 
     /**
      * 投诉内容检查结果

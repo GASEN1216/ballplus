@@ -1,15 +1,38 @@
 package com.gasen.usercenterbackend.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import com.gasen.usercenterbackend.model.dto.CursorPageRequest;
 import com.gasen.usercenterbackend.model.dto.ResourceQueryRequest;
-import com.gasen.usercenterbackend.model.vo.CursorPageResponse;
 import com.gasen.usercenterbackend.model.dto.ResourceVO;
+import com.gasen.usercenterbackend.model.entity.Resource;
+import com.gasen.usercenterbackend.model.vo.CursorPageResponse;
 
 /**
  * 资源服务接口
  */
 public interface ResourceService {
+    /**
+     * 创建资源
+     * @param resource 资源信息
+     * @return 资源ID
+     */
+    Long createResource(Resource resource);
+
+    /**
+     * 更新资源
+     * @param resource 资源信息
+     * @return 是否成功
+     */
+    boolean updateResource(Resource resource);
+
+    /**
+     * 删除资源
+     * @param id 资源ID
+     * @return 是否成功
+     */
+    boolean deleteResource(Long id);
+
     /**
      * 分页查询资源列表
      *

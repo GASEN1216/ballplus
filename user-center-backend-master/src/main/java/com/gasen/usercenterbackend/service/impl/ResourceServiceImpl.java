@@ -2,6 +2,7 @@ package com.gasen.usercenterbackend.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.gasen.usercenterbackend.mapper.ResourceMapper;
 import com.gasen.usercenterbackend.mapper.UserFavoriteMapper;
 import com.gasen.usercenterbackend.model.dto.CursorPageRequest;
@@ -11,6 +12,7 @@ import com.gasen.usercenterbackend.model.entity.Resource;
 import com.gasen.usercenterbackend.model.entity.UserFavorite;
 import com.gasen.usercenterbackend.model.vo.CursorPageResponse;
 import com.gasen.usercenterbackend.service.ResourceService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +30,7 @@ import org.springframework.util.StringUtils;
  * 资源服务实现类
  */
 @Service
-public class ResourceServiceImpl implements ResourceService {
+public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements ResourceService {
 
     @Autowired
     private ResourceMapper resourceMapper;
@@ -426,5 +428,37 @@ public class ResourceServiceImpl implements ResourceService {
         
         // 构建游标分页响应
         return new CursorPageResponse<>(voList, nextCursor, hasMore);
+    }
+
+    @Override
+    @Transactional
+    public Long createResource(Resource resource) {
+        // 设置创建时间
+        resource.setCreateTime(LocalDateTime.now());
+        // 设置更新时间
+        resource.setUpdateTime(LocalDateTime.now());
+        // 设置初始浏览量
+        resource.setViews(0);
+        // 设置初始收藏数
+        resource.setLikes(0);
+        // 保存资源
+        save(resource);
+        return resource.getId();
+    }
+
+    @Override
+    @Transactional
+    public boolean updateResource(Resource resource) {
+        // 设置更新时间
+        resource.setUpdateTime(LocalDateTime.now());
+        // 更新资源
+        return updateById(resource);
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteResource(Long id) {
+        // 删除资源
+        return removeById(id);
     }
 } 

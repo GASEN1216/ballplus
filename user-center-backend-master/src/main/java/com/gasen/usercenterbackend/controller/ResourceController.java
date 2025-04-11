@@ -7,6 +7,7 @@ import com.gasen.usercenterbackend.common.ResultUtils;
 import com.gasen.usercenterbackend.model.dto.CursorPageRequest;
 import com.gasen.usercenterbackend.model.dto.ResourceQueryRequest;
 import com.gasen.usercenterbackend.model.dto.ResourceVO;
+import com.gasen.usercenterbackend.model.entity.Resource;
 import com.gasen.usercenterbackend.model.vo.CursorPageResponse;
 import com.gasen.usercenterbackend.service.ResourceService;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,60 @@ public class ResourceController {
 
     @Autowired
     private ResourceService resourceService;
+
+    /**
+     * 创建资源
+     */
+    @PostMapping("/")
+    public BaseResponse<Long> createResource(@RequestBody Resource resource) {
+        if (resource == null) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "资源信息不能为空");
+        }
+        if (resource.getTitle() == null || resource.getTitle().trim().isEmpty()) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "资源标题不能为空");
+        }
+        if (resource.getContent() == null || resource.getContent().trim().isEmpty()) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "资源内容不能为空");
+        }
+        if (resource.getType() == null) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "资源类型不能为空");
+        }
+        
+        Long resourceId = resourceService.createResource(resource);
+        return ResultUtils.success(resourceId);
+    }
+
+    /**
+     * 更新资源
+     */
+    @PutMapping("/{id}")
+    public BaseResponse<Boolean> updateResource(@PathVariable Long id, @RequestBody Resource resource) {
+        if (id == null || id <= 0) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "资源ID不能为空或非法");
+        }
+        if (resource == null) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "资源信息不能为空");
+        }
+        if (!id.equals(resource.getId())) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "资源ID不匹配");
+        }
+        
+        boolean result = resourceService.updateResource(resource);
+        return ResultUtils.success(result);
+    }
+
+    /**
+     * 删除资源
+     */
+    @DeleteMapping("/{id}")
+    public BaseResponse<Boolean> deleteResource(@PathVariable Long id) {
+        if (id == null || id <= 0) {
+            return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "资源ID不能为空或非法");
+        }
+        
+        boolean result = resourceService.deleteResource(id);
+        return ResultUtils.success(result);
+    }
 
     /**
      * 获取资源列表

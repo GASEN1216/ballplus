@@ -1,5 +1,6 @@
 package com.gasen.usercenterbackend.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.gasen.usercenterbackend.common.BaseResponse;
 import com.gasen.usercenterbackend.common.ErrorCode;
 import com.gasen.usercenterbackend.common.ResultUtils;
@@ -283,6 +284,68 @@ public class CommentController {
         } catch (Exception e) {
             log.error("获取用户帖子评论列表异常", e);
             return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "获取用户帖子评论列表失败！");
+        }
+    }
+
+        /**
+     * 获取所有评论列表 (Admin)
+     * 需要管理员权限
+     *
+     * @param pageNum  页码
+     * @param pageSize 每页数量
+     * @return 评论分页列表
+     */
+    @GetMapping("/admin/comment/list") // 注意路径，确保与前端 API 匹配
+    public BaseResponse<Page<CommentInfo>> getAllCommentsAdmin(
+            @RequestParam(defaultValue = "1") long pageNum,
+            @RequestParam(defaultValue = "10") long pageSize) {
+        try {
+            Page<CommentInfo> commentPage = commentService.getAllCommentsAdmin(pageNum, pageSize);
+            return ResultUtils.success(commentPage);
+        } catch (Exception e) {
+            log.error("管理员获取评论列表异常", e);
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "获取评论列表失败！");
+        }
+    }
+
+    /**
+     * 删除评论 (Admin)
+     * 需要管理员权限
+     *
+     * @param commentId 要删除的评论ID
+     * @return 操作结果
+     */
+    @PostMapping("/admin/comment/delete") // 注意路径，确保与前端 API 匹配
+    @Transactional // 如果 Service 层没加事务，Controller 层也可以加
+    public BaseResponse deleteCommentAdmin(@RequestParam Long commentId) {
+        try {
+            if (commentId == null || commentId <= 0) {
+                return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "评论ID无效！");
+            }
+            boolean result = commentService.deleteCommentAdminById(commentId);
+            if (result) {
+                return ResultUtils.success("删除评论成功！");
+            } else {
+                // 可能因为评论不存在或删除失败
+                return ResultUtils.error(ErrorCode.OPERATION_ERROR, "删除评论失败！");
+            }
+        } catch (Exception e) {
+            log.error("管理员删除评论异常", e);
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "删除评论失败！");
+        }
+    }
+
+    @PostMapping("/admin/getCommentDetail")
+    public BaseResponse admingetCommentDetail(@RequestParam Long commentId) {
+        try {
+            if (commentId == null) {
+                return ResultUtils.error(ErrorCode.PARAMETER_ERROR, "参数为空！");
+            }
+            Comment comment = commentService.getComment(commentId);
+            return ResultUtils.success(comment.toCommentDetail());
+        } catch (Exception e) {
+            log.error("查询评论详情异常", e);
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR, "查询评论详情失败！");
         }
     }
 }

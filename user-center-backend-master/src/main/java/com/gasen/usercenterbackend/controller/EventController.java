@@ -326,6 +326,19 @@ public class EventController {
         }
     }
 
+    @Operation(summary = "管理员列表模式获取全部活动信息")
+    @GetMapping("/admin/getEvent")
+    public BaseResponse admingetEvent() {
+        try {
+            List<Event> events = eventService.getAllEvents();
+
+            return ResultUtils.success(events);
+        } catch (Exception e) {
+            log.error("获取活动信息失败: {}", e.getMessage(), e);
+            return ResultUtils.error(ErrorCode.SYSTEM_ERROR,"获取活动信息失败，请稍后重试！");
+        }
+    }
+
     @Operation(summary = "地图模式获取活动信息")
     @PostMapping("/getEventByMap")
     public BaseResponse getEventByMap(@RequestParam(value = "location") String location) {

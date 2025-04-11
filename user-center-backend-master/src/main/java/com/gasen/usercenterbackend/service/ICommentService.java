@@ -58,4 +58,21 @@ public interface ICommentService extends ILikesService {
      * @return 游标分页响应
      */
     CursorPageResponse<CommentInfo> getCommentsByPostUserIdWithCursor(Long userId, CursorPageRequest cursorRequest);
+
+        /**
+     * 获取所有评论列表（管理员分页）
+     *
+     * @param pageNum 页码
+     * @param pageSize 每页数量
+     * @return 评论信息分页结果
+     */
+    Page<CommentInfo> getAllCommentsAdmin(long pageNum, long pageSize); // 返回值类型可能需要根据你的分页实现调整
+
+    /**
+     * 管理员删除评论
+     *
+     * @param commentId 要删除的评论ID
+     * @return 是否删除成功
+     */
+    boolean deleteCommentAdminById(Long commentId);
 }
