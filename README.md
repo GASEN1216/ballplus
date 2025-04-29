@@ -1,11 +1,11 @@
 # 球plus 项目
 
-## Overview
+## 概述
 
 一个包含后端服务、微信小程序用户端和管理后台的全栈应用。
 旨在提供 [**请在此处根据项目实际情况补充具体业务描述**，例如：球类活动（篮球、足球等）的组织、查找场地、匹配队友、记录成绩等] 功能。
 
-## Architecture Overview
+## 结构概述
 
 本项目由以下三个主要部分组成：
 
@@ -15,7 +15,7 @@
 
 微信小程序和管理后台通过调用后端提供的 RESTful API 进行数据交互和业务操作。
 
-## Components
+## 组成
 
 ### 后端服务 (Backend - `user-center-backend-master`)
 
@@ -71,7 +71,7 @@
     ```
     *   **注意**: 管理后台同样需要后端服务正在运行。请确保后端服务已启动，并在管理后台代码中配置了正确的后端 API 地址（检查 `admin-panel/.env` 文件、`admin-panel/src/config/` 或 `admin-panel/src/api/` 等目录下的相关配置）。
 
-## Project Structure
+## 项目结构
 
 ```
 /D:/wx-miniprogram/  (项目根目录)
@@ -81,11 +81,11 @@
 └── README.md                    # 本说明文件
 ```
 
-## Contributing
+## 贡献
 
 *   欢迎为此项目做出贡献！请遵循标准的 Fork & Pull Request 流程。
 *   如有 Bug 反馈或功能建议，请提交 Issue。
 
-## License
+## 许可证
 
-*   [**请指定许可证**，例如：MIT License]
+*   MIT License
